@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class DataController : MonoBehaviour
 {
@@ -11,24 +13,28 @@ public class DataController : MonoBehaviour
         if (instance == null)
             instance = this;
         else
-            Destroy(this); 
+            Destroy(this);
         DontDestroyOnLoad(gameObject);
     }
     #endregion
 
-    [SerializeField] private PlayerStats _playerStats;
 
-    public void GetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); }
-    public void SetPlayerStats(PlayerStats playerStats) { JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("PlayerStats"), playerStats); }
+    public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); }
+    public void GetPlayerStats(PlayerStats playerStats) { JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("PlayerStats"), playerStats); }
 
 
 
     public void LoadGame()
     {
-        SetPlayerStats(_playerStats);
+
     }
-    public void SaveGame()
+    private void SaveGame()
     {
-        GetPlayerStats(_playerStats);
+
+    }
+    private void DeleteGame()
+    {
+        PlayerPrefs.DeleteAll();
+        GameManager.Instance.player.playerStats = new PlayerStats(0,100,0,100,1,1,1,1,0,new List<Item>());
     }
 }

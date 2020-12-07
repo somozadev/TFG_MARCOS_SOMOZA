@@ -6,5 +6,11 @@ using UnityEngine;
 public class SceneItem : MonoBehaviour
 {
     public Item item; 
+
+    private void Awake() 
+    {
+        item.transform = this.transform;
+    }
+    
     
 }

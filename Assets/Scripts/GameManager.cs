@@ -12,13 +12,16 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
         else
-            Destroy(this); 
+            Destroy(this);
         DontDestroyOnLoad(gameObject);
     }
     #endregion
 
     public Player player;
 
-
+    private void Start()
+    {
+        // DataController.Instance.SetPlayerStats(player.playerStats);
+    }
 
 }
