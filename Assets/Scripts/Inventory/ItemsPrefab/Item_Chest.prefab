@@ -161,7 +161,7 @@ MonoBehaviour:
     type: 4
     action: 1
     transform: {fileID: 0}
-  PopUpCanvas: {fileID: 0}
+  PopUpCanvas: {fileID: 938639581150259045}
 --- !u!1001 &1831397792338227921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,3 +224,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7484396932393798611, guid: 3fea954f233de5849b4eb68079ce0b0e, type: 3}
   m_PrefabInstance: {fileID: 1831397792338227921}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &938639581150259045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1471789974403945908, guid: 3fea954f233de5849b4eb68079ce0b0e, type: 3}
+  m_PrefabInstance: {fileID: 1831397792338227921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c015d6dc5a309f1448a44fa27af35caf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

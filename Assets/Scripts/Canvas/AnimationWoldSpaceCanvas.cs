@@ -6,21 +6,12 @@ public class AnimationWoldSpaceCanvas : MonoBehaviour, IAnimable
 {
     [Range(0, 100)]
     [SerializeField] int speed = 50;
+    [SerializeField] bool open;
+    [Range(0.1f, 1)]
+    [SerializeField] private float duration;
+    [SerializeField] private Vector3 finalScale;
     [SerializeField] private AnimationCurve curve;
     private Quaternion initialRotation;
-
-
-    private void OnEnable()
-    {
-        Activate();
-        initialRotation = transform.rotation;
-    }
-
-    private void OnDisable()
-    {
-        Deactivate();
-        transform.rotation = initialRotation;
-    }
 
 
     private void Update()
@@ -32,17 +23,26 @@ public class AnimationWoldSpaceCanvas : MonoBehaviour, IAnimable
 
 
     #region IAnimable
-    public float duration { get; set; }
-    public Vector3 finalScale { get; set; }
+
+
+
+    public float Duration { get { return duration; } set { duration = value; } }
+    public Vector3 FinalScale { get { return finalScale; } set { finalScale = value; } }
+    public bool Open { get { return open; } set { open = value; } }
     public void Activate()
     {
-        finalScale = transform.localScale;
+        open = true;
+        gameObject.SetActive(true);
+        initialRotation = transform.rotation;
+        finalScale = Vector3.one;
         transform.localScale = Vector3.zero;
         StartCoroutine(LerpAnim());
     }
 
     public void Deactivate()
     {
+        open = false;
+        transform.localScale = Vector3.one;
         finalScale = Vector3.zero;
         StartCoroutine(LerpAnim());
     }
@@ -56,6 +56,11 @@ public class AnimationWoldSpaceCanvas : MonoBehaviour, IAnimable
             yield return null;
         }
         transform.localScale = finalScale;
+        if (!open)
+        {
+            transform.rotation = initialRotation;
+            gameObject.SetActive(false);
+        }
     }
     #endregion
 }

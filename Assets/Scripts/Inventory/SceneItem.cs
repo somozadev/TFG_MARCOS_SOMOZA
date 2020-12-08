@@ -6,11 +6,12 @@ using UnityEngine;
 public class SceneItem : MonoBehaviour
 {
     public Item item;
-    [SerializeField] private GameObject PopUpCanvas;
+    [SerializeField] private AnimationWoldSpaceCanvas PopUpCanvas;
 
     private void Awake()
     {
         item.transform = this.transform;
+        PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
     }
 
     public void Contact()
@@ -33,8 +34,8 @@ public class SceneItem : MonoBehaviour
         DisablePopUpInteract();
     }
 
-    private void EnablePopUpInteract() => PopUpCanvas.SetActive(true);
-    private void DisablePopUpInteract() => PopUpCanvas.SetActive(false);
+    private void EnablePopUpInteract() => PopUpCanvas.Activate();
+    private void DisablePopUpInteract() => PopUpCanvas.Deactivate();
 
 
 
