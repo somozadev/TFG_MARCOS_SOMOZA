@@ -20,7 +20,7 @@ public class PlayerStats
     [SerializeField] private List<Item> inventory;
 
 
-    #region Getters
+    #region GETTERS
     public int Level { get { return level; } }
     public int Xp { get { return xp; } }
     public int CurrentXp { get { return currentXp; } }
@@ -34,7 +34,7 @@ public class PlayerStats
     public List<Item> Inventory { get { return inventory; } }
     #endregion
 
-    //constructor
+    #region CONSTRUCTOR
     public PlayerStats(int level, int currentHp, int currentXp, int hp, float dmg, float spd, float def, float attspd, int soulCoins, List<Item> inventory)
     {
         this.level = level;
@@ -48,8 +48,9 @@ public class PlayerStats
         this.soulCoins = soulCoins;
         this.inventory = inventory;
     }
+    #endregion
 
-
+    #region METODOS
     public void LevelUp() { level++; this.currentXp = 0; }
     public void AddItem(Item item) => inventory.Add(item);
 
@@ -58,7 +59,7 @@ public class PlayerStats
 
     public void AddXp(int currentXp) => this.currentXp += currentXp;
     public void AddMaxXp(int xp) => this.xp += xp;
-
+    #endregion
 
 
 

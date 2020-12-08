@@ -14,6 +14,7 @@ public class Item
     public Transform transform;
     //[SerializeField] ParticleSystem particlePick;
     public int Id { get { return id; } }
+    public ItemAction Action  { get { return action; } }
 
 
     public Item(int id, int cuantity, bool isUnlocked, ItemType type, ItemAction action, Transform transform)
@@ -26,21 +27,13 @@ public class Item
         this.transform = transform;
     }
 
-    public void TriggerAction()
+    public void InteractAction()
     {
-        switch (action)
-        {
-            case ItemAction.PICK:
-                CheckItemPickType();
-                break;
-            case ItemAction.INTERACT:
-                break;
-        }
 
-        GameManager.Instance.player.statsCanvasController.UpdateCanvas();
     }
 
-    private void CheckItemPickType()
+
+    public void PickAction()
     {
         switch (type)
         {
@@ -93,7 +86,7 @@ public class Item
         Debug.Log("MaxHP:" + GameManager.Instance.player.playerStats.Hp);
 
         if (GameManager.Instance.player.playerStats.CurrentHp < GameManager.Instance.player.playerStats.Hp)
-            GameManager.Instance.player.playerStats.AddHp(this.cuantity); Debug.Log("cuantity:" + this.cuantity);
+            GameManager.Instance.player.playerStats.AddHp(this.cuantity); 
     }
     ///<summary> Comprueba si la xp actual del jugador es menor que la máxima posible. Si lo es, se añade xp. Si no, se sube de nivel y se resetea el current xp/></summary>
     private void AddXp()

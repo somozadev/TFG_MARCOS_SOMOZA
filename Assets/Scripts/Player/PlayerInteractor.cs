@@ -17,8 +17,7 @@ public class PlayerInteractor : MonoBehaviour
             if (col.CompareTag("Interactable"))
             {
                 interactedObj = col.transform.gameObject;
-                col.GetComponent<SceneItem>().item.TriggerAction();
-                Destroy(col.gameObject);
+                col.GetComponent<SceneItem>().Contact();
                 EnableGlowInteractable();
 
             }
@@ -35,19 +34,18 @@ public class PlayerInteractor : MonoBehaviour
             }
         }
     }
-
     private void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("Interactable"))
         {
             interactedObj = col.transform.gameObject;
+                col.GetComponent<SceneItem>().Leave();
             DisableGlowInteractable();
             interacting = false;
         }
 
     }
-
-
+    
     private void EnableGlowInteractable()
     {
 

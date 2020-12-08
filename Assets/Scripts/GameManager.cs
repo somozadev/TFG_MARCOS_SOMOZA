@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public GameObject mainCamera;
     public Player player;
 
     private void Start()

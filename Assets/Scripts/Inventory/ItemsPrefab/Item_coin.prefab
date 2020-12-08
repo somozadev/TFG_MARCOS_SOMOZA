@@ -115,6 +115,8 @@ MonoBehaviour:
     isUnlocked: 1
     type: 0
     action: 0
+    transform: {fileID: 0}
+  PopUpCanvas: {fileID: 0}
 --- !u!1 &5043573475272762955
 GameObject:
   m_ObjectHideFlags: 0
