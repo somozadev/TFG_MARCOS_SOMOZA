@@ -16,7 +16,7 @@ public class StatsCanvasController : MonoBehaviour
         AssignKeys();
     }
     
-    public void AssignCoins() => soulCoins.text = GameManager.Instance.player.playerStats.SoulCoins.ToString();
-    public void AssignKeys() => keys.text = GameManager.Instance.player.playerStats.Inventory.Exists(x => x.Id == 3).ToString();
+    public void AssignCoins() => soulCoins.text = GameManager.Instance.player.playerStats.SoulCoins.ToString("000");
+    public void AssignKeys() => keys.text = GameManager.Instance.player.playerStats.Inventory.Find(x => x.Id == 3).Cuantity.ToString("000");
     
 }

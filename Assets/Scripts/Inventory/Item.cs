@@ -14,6 +14,7 @@ public class Item
     public Transform transform;
     //[SerializeField] ParticleSystem particlePick;
     public int Id { get { return id; } }
+    public int Cuantity { get { return cuantity; } }
     public ItemAction Action  { get { return action; } }
 
 
@@ -29,7 +30,7 @@ public class Item
 
     public void InteractAction()
     {
-
+        Debug.Log("Interacted");
     }
 
 
@@ -39,9 +40,11 @@ public class Item
         {
             case ItemType.SOULCOIN:
                 AddSoulCoin();
+                GameManager.Instance.statsCanvas.AssignCoins();
                 break;
             case ItemType.KEY:
                 CheckIfExistsOnInventory();
+                GameManager.Instance.statsCanvas.AssignKeys();
                 break;
             case ItemType.HEALTH:
                 CheckIfNeedsHeal();

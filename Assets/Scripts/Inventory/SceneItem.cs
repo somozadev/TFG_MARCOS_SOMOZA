@@ -6,19 +6,23 @@ using UnityEngine;
 public class SceneItem : MonoBehaviour
 {
     public Item item;
-    [SerializeField] private AnimationWoldSpaceCanvas PopUpCanvas;
+    private AnimationWoldSpaceCanvas PopUpCanvas;
 
     private void Awake()
     {
         item.transform = this.transform;
-        PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
+        if (item.Action.Equals(ItemAction.INTERACT))
+            PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
     }
 
     public void Contact()
     {
         if (item.Action.Equals(ItemAction.PICK))
+        {
             item.PickAction();
-        else
+            Destroy(gameObject);
+        }
+        else if (item.Action.Equals(ItemAction.INTERACT))
             EnablePopUpInteract();
     }
     public void Use()
@@ -31,7 +35,10 @@ public class SceneItem : MonoBehaviour
     }
     public void Leave()
     {
-        DisablePopUpInteract();
+        if (item.Action.Equals(ItemAction.INTERACT))
+        {
+            DisablePopUpInteract();
+        }
     }
 
     private void EnablePopUpInteract() => PopUpCanvas.Activate();

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public StatsCanvasController statsCanvas;
     public GameObject mainCamera;
     public Player player;
 

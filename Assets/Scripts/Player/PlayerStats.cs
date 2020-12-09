@@ -23,9 +23,9 @@ public class PlayerStats
     #region GETTERS
     public int Level { get { return level; } }
     public int Xp { get { return xp; } }
-    public int CurrentXp { get { return currentXp; } }
+    public int CurrentXp { get { return currentXp; }  set { currentXp = value;} }
     public int Hp { get { return hp; } }
-    public int CurrentHp { get { return currentHp; } }
+    public int CurrentHp { get { return currentHp; }  set { currentHp = value;} }
     public float Dmg { get { return dmg; } }
     public float Spd { get { return spd; } }
     public float Def { get { return def; } }

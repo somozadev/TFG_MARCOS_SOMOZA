@@ -7,7 +7,7 @@ public class PlayerInteractor : MonoBehaviour
 
     public bool interacting;
     [SerializeField] private GameObject interactedObj;
-
+    public GameObject InteractedObject { get { return interactedObj; } }
 
 
     private void OnTriggerEnter(Collider col)
@@ -39,13 +39,13 @@ public class PlayerInteractor : MonoBehaviour
         if (col.CompareTag("Interactable"))
         {
             interactedObj = col.transform.gameObject;
-                col.GetComponent<SceneItem>().Leave();
+            col.GetComponent<SceneItem>().Leave();
             DisableGlowInteractable();
             interacting = false;
         }
 
     }
-    
+
     private void EnableGlowInteractable()
     {
 
