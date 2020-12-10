@@ -35,6 +35,6 @@ public class DataController : MonoBehaviour
     private void DeleteGame()
     {
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.player.playerStats = new PlayerStats(0,100,0,100,1,1,1,1,0,new List<Item>());
+        GameManager.Instance.player.playerStats = new PlayerStats(0,100,0,100,1,1,1,1,1,0,new List<Item>());
     }
 }

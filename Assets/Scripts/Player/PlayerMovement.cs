@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,20 +11,24 @@ public class PlayerMovement : MonoBehaviour
     [Header("Interact")]
     [SerializeField] private bool isInteracting;
     [Header("Movement")]
-    [Range(1, 10)]
-    [SerializeField] private int speed;
+    private int speed;
     [SerializeField] private bool isMoving;
     private Vector3 moveDirection, forward, right;
     private Rigidbody rb;
     private Vector2 rawInput;
     [Header("Attack")]
     [SerializeField] private bool isAttacking;
+    private float attSpeed;
+    private float attRate;
 
     public PlayerInput PlayerInput { get { return playerInput; } }
+    public bool IsInteracting { get { return isInteracting; } }
 
     private void Awake()
     {
-        speed *= 1000;
+        speed = Convert.ToInt32(GetComponent<Player>().playerStats.Spd * 1000);
+        attRate = GetComponent<Player>().playerStats.Attrate;
+        attSpeed = GetComponent<Player>().playerStats.Attspd;
         playerInput = GetComponentInChildren<PlayerInput>();
         rb = GetComponent<Rigidbody>();
 
@@ -38,14 +43,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isMoving)
             Move(rawInput);
+        if (isAttacking)
+            Attack();
     }
 
 
     #region INPUT_SEND_MESSAGES
     private void OnAttack(InputValue value)
     {
-        isAttacking = value.isPressed;
-        Attack();
+        isAttacking = !isAttacking;
     }
     private void OnMove(InputValue value)
     {
@@ -57,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnInteract(InputValue value)
     {
-        isInteracting = value.isPressed;
+        isInteracting = !isInteracting;
         if (isInteracting)
             Interact();
     }

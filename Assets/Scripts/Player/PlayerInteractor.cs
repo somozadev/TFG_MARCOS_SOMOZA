@@ -26,19 +26,26 @@ public class PlayerInteractor : MonoBehaviour
     }
     private void OnTriggerStay(Collider col)
     {
+        interacting = GetComponentInParent<PlayerMovement>().IsInteracting;
         if (!interacting)
         {
             if (col.CompareTag("Interactable"))
             {
                 interactedObj = col.transform.gameObject;
+                if (interactedObj != null)
+                {
+                    if(interacting)
+                        GetComponentInChildren<PlayerInteractor>().InteractedObject.GetComponent<SceneItem>().item.InteractAction();
+                }
             }
         }
     }
     private void OnTriggerExit(Collider col)
     {
+        interacting = false;
         if (col.CompareTag("Interactable"))
         {
-            interactedObj = col.transform.gameObject;
+            interactedObj = null;
             col.GetComponent<SceneItem>().Leave();
             DisableGlowInteractable();
             interacting = false;
