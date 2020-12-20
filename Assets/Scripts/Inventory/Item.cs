@@ -15,7 +15,8 @@ public class Item
     //[SerializeField] ParticleSystem particlePick;
     public int Id { get { return id; } }
     public int Cuantity { get { return cuantity; } }
-    public ItemAction Action  { get { return action; } }
+    public ItemAction Action { get { return action; } }
+    public ItemType Type { get { return type; } }
 
 
     public Item(int id, int cuantity, bool isUnlocked, ItemType type, ItemAction action, Transform transform)
@@ -30,6 +31,14 @@ public class Item
 
     public void InteractAction()
     {
+        switch (type)
+        {
+            case ItemType.CHEST:
+                break;
+            case ItemType.DOOR:
+            OpenDoor();
+            break;
+        }
         Debug.Log("Interacted");
     }
 
@@ -54,8 +63,6 @@ public class Item
                 AddXp();
                 GameManager.Instance.statsCanvas.AssignXp();
                 break;
-            case ItemType.CHEST:
-                break;
 
         }
     }
@@ -71,8 +78,15 @@ public class Item
     }
 
 
-
-
+    #region INTERACT_METHODS
+    
+    private void OpenDoor()
+    {
+        GameManager.Instance.player.playerInteractor.InteractedObject.GetComponent<Animator>().SetTrigger("Open");
+        //start coroutine to change stance
+    }
+    
+    #endregion
 
     #region PICK_METHODS
     ///<summary> Comprueba si existe un item con el mismo id en el inventario, si sí, añade la canditad de this.
@@ -91,7 +105,7 @@ public class Item
         Debug.Log("MaxHP:" + GameManager.Instance.player.playerStats.Hp);
 
         if (GameManager.Instance.player.playerStats.CurrentHp < GameManager.Instance.player.playerStats.Hp)
-            GameManager.Instance.player.playerStats.AddHp(this.cuantity); 
+            GameManager.Instance.player.playerStats.AddHp(this.cuantity);
     }
     ///<summary> Comprueba si la xp actual del jugador es menor que la máxima posible. Si lo es, se añade xp. Si no, se sube de nivel y se resetea el current xp/></summary>
     private void AddXp()
@@ -124,6 +138,7 @@ public enum ItemType
     HEALTH,
     XP,
     CHEST,
+    DOOR,
     //BOOSSITEM 
 }
 

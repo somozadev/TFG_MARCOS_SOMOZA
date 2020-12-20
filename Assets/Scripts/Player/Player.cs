@@ -11,6 +11,13 @@ public class Player : MonoBehaviour
     [Header("Player movement")]
     public PlayerMovement playerMovement; 
 
-
+    private void Start() 
+    {
+        DataController.Instance.GetPlayerStats(playerStats);    
+    }
+    private void OnApplicationQuit() 
+    {
+        DataController.Instance.SetPlayerStats(playerStats);   
+    }
 
 }

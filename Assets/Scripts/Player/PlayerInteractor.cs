@@ -6,6 +6,9 @@ public class PlayerInteractor : MonoBehaviour
 {
 
     public bool interacting;
+    public bool contact;
+    public bool stay;
+    public bool leave;
     [SerializeField] private GameObject interactedObj;
     public GameObject InteractedObject { get { return interactedObj; } }
 
@@ -16,10 +19,13 @@ public class PlayerInteractor : MonoBehaviour
         {
             if (col.CompareTag("Interactable"))
             {
+                contact = true;
+                leave = false;
+                stay = false;
                 interactedObj = col.transform.gameObject;
                 col.GetComponent<SceneItem>().Contact();
                 EnableGlowInteractable();
-
+                interacting = true;
             }
         }
 
@@ -27,15 +33,19 @@ public class PlayerInteractor : MonoBehaviour
     private void OnTriggerStay(Collider col)
     {
         interacting = GetComponentInParent<PlayerMovement>().IsInteracting;
-        if (!interacting)
+        if (interacting)
         {
             if (col.CompareTag("Interactable"))
             {
+                contact = false;
+                leave = false;
+                stay = true;
                 interactedObj = col.transform.gameObject;
                 if (interactedObj != null)
                 {
-                    if(interacting)
-                        GetComponentInChildren<PlayerInteractor>().InteractedObject.GetComponent<SceneItem>().item.InteractAction();
+                        InteractedObject.GetComponent<SceneItem>().Use();
+                       InteractedObject.GetComponent<SceneItem>().canInteract = false;
+
                 }
             }
         }
@@ -45,6 +55,9 @@ public class PlayerInteractor : MonoBehaviour
         interacting = false;
         if (col.CompareTag("Interactable"))
         {
+            contact = false;
+            leave = true;
+            stay = false;
             interactedObj = null;
             col.GetComponent<SceneItem>().Leave();
             DisableGlowInteractable();

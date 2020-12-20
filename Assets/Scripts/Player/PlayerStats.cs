@@ -39,9 +39,10 @@ public class PlayerStats
     #endregion
 
     #region CONSTRUCTOR
-    public PlayerStats(int level, int currentHp, int currentXp, int hp, float dmg, float spd, float def, float attspd,float attrate, int soulCoins, List<Item> inventory)
+    public PlayerStats(int level, int currentHp, int currentXp, int hp, int xp, float dmg, float spd, float def, float attspd,float attrate, int soulCoins, List<Item> inventory)
     {
         this.level = level;
+        this.xp = xp;
         this.currentHp = currentHp;
         this.currentXp = currentXp;
         this.hp = hp;
@@ -56,7 +57,7 @@ public class PlayerStats
     #endregion
 
     #region METODOS
-    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level,1.5f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; }
+    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level,2f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; }
     public void AddItem(Item item) => inventory.Add(item);
 
     public void AddHp(int currentHp) => this.currentHp += currentHp;

@@ -20,7 +20,11 @@ public class DataController : MonoBehaviour
 
 
     public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); }
-    public void GetPlayerStats(PlayerStats playerStats) { JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("PlayerStats"), playerStats); }
+    public void GetPlayerStats(PlayerStats playerStats)
+    {
+        PlayerStats stats = new PlayerStats(0,100,0,100,50,1,5,1,1,1,0,new List<Item>());
+        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("PlayerStats",JsonUtility.ToJson(stats)), playerStats);
+    }
 
 
 
@@ -32,9 +36,9 @@ public class DataController : MonoBehaviour
     {
 
     }
-    private void DeleteGame()
+    public void DeleteGame()
     {
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.player.playerStats = new PlayerStats(0,100,0,100,1,1,1,1,1,0,new List<Item>());
+        GameManager.Instance.player.playerStats = new PlayerStats(0,100,0,100,50,1,5,1,1,1,0,new List<Item>());
     }
 }

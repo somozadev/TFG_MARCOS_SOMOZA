@@ -5,39 +5,55 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class SceneItem : MonoBehaviour
 {
+    public bool canInteract;
     public Item item;
     private AnimationWoldSpaceCanvas PopUpCanvas;
-
+    private void Start()
+    {
+        canInteract = true;
+    }
     private void Awake()
     {
         item.transform = this.transform;
         if (item.Action.Equals(ItemAction.INTERACT))
             PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
+        if (item.Type.Equals(ItemType.XP))
+            XpScaler();
     }
 
     public void Contact()
     {
-        if (item.Action.Equals(ItemAction.PICK))
+        if (canInteract)
         {
-            item.PickAction();
-            Destroy(gameObject);
+            if (item.Action.Equals(ItemAction.PICK))
+            {
+                item.PickAction();
+                Destroy(gameObject);
+            }
+            else if (item.Action.Equals(ItemAction.INTERACT))
+                EnablePopUpInteract();
         }
-        else if (item.Action.Equals(ItemAction.INTERACT))
-            EnablePopUpInteract();
     }
     public void Use()
     {
-        if (item.Action.Equals(ItemAction.INTERACT))
+        if (canInteract)
         {
-            item.InteractAction();
-            DisablePopUpInteract();
+            if (item.Action.Equals(ItemAction.INTERACT))
+            {
+                item.InteractAction();
+                DisablePopUpInteract();
+                // GameManager.Instance.player.playerInteractor.InteractedObject.gameObject.tag = "Untagged";
+            }
         }
     }
     public void Leave()
     {
-        if (item.Action.Equals(ItemAction.INTERACT))
+        if (canInteract)
         {
-            DisablePopUpInteract();
+            if (item.Action.Equals(ItemAction.INTERACT))
+            {
+                DisablePopUpInteract();
+            }
         }
     }
 
@@ -45,5 +61,16 @@ public class SceneItem : MonoBehaviour
     private void DisablePopUpInteract() => PopUpCanvas.Deactivate();
 
 
+
+    private void XpScaler()
+    {
+        Vector3 aux = (new Vector3(1, 1, 1) * item.Cuantity) / 100;
+        if (aux.magnitude >= new Vector3(0.1f, 0.1f, 0.1f).magnitude)
+            item.transform.localScale = aux;
+        else
+            item.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        item.transform.GetComponent<SphereCollider>().radius = (item.transform.GetComponent<SphereCollider>().radius * item.transform.localScale.x) / 0.1f;
+    }
 
 }

@@ -16,14 +16,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
-
+    [SerializeField] bool deleteGame;
     public StatsCanvasController statsCanvas;
     public GameObject mainCamera;
     public Player player;
 
     private void Start()
     {
-        // DataController.Instance.SetPlayerStats(player.playerStats);
+        if(deleteGame) DataController.Instance.DeleteGame();
     }
 
 }

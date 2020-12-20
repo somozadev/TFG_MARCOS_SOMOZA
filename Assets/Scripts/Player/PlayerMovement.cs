@@ -76,11 +76,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Interact()
     {
-        if (GetComponentInChildren<PlayerInteractor>().InteractedObject != null)
-        {
-            GetComponentInChildren<PlayerInteractor>().interacting = true;
-            GetComponentInChildren<PlayerInteractor>().InteractedObject.GetComponent<SceneItem>().item.InteractAction();
-        }
+            GetComponentInChildren<PlayerInteractor>().interacting = false;
+        
     }
 
     private void Move(Vector2 input)
