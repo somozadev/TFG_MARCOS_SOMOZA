@@ -48,9 +48,11 @@ public class Item
                 break;
             case ItemType.HEALTH:
                 CheckIfNeedsHeal();
+                GameManager.Instance.statsCanvas.AssignHp();
                 break;
             case ItemType.XP:
                 AddXp();
+                GameManager.Instance.statsCanvas.AssignXp();
                 break;
             case ItemType.CHEST:
                 break;
@@ -94,7 +96,7 @@ public class Item
     ///<summary> Comprueba si la xp actual del jugador es menor que la máxima posible. Si lo es, se añade xp. Si no, se sube de nivel y se resetea el current xp/></summary>
     private void AddXp()
     {
-        if (GameManager.Instance.player.playerStats.CurrentXp >= GameManager.Instance.player.playerStats.Xp)
+        if (GameManager.Instance.player.playerStats.ShouldAddXp(this.cuantity))
             GameManager.Instance.player.playerStats.LevelUp();
         else
             GameManager.Instance.player.playerStats.AddXp(this.cuantity);

@@ -56,12 +56,13 @@ public class PlayerStats
     #endregion
 
     #region METODOS
-    public void LevelUp() { level++; this.currentXp = 0; }
+    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level,1.5f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; }
     public void AddItem(Item item) => inventory.Add(item);
 
     public void AddHp(int currentHp) => this.currentHp += currentHp;
     public void AddMaxHp(int hp) => this.hp += hp;
 
+    public bool ShouldAddXp(int currentXp) => this.currentXp + currentXp >= this.xp ? true : false;
     public void AddXp(int currentXp) => this.currentXp += currentXp;
     public void AddMaxXp(int xp) => this.xp += xp;
     #endregion
