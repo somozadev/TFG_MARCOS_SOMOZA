@@ -32,8 +32,9 @@ public class ShopItem : ScriptableObject
 
 public enum ItemGenre
 {
+    ANY,
     CONSUMIBLE,
     STATS_MODIFIER,
     WEAPON,
-    
+
 }

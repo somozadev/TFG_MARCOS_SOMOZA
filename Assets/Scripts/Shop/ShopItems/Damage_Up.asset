@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
-  m_Name: Alas_de_Hermes
+  m_Name: Damage_Up
   m_EditorClassIdentifier: 
-  itemName: Alas_de_Hermes
-  genre: 3
+  itemName: Damage_Up
+  genre: 2
   item:
-    id: 100
+    id: 102
     cuantity: 1
     isUnlocked: 1
     type: 6
