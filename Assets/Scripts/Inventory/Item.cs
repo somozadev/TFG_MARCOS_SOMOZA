@@ -78,15 +78,6 @@ public class Item
     }
 
 
-    #region INTERACT_METHODS
-    
-    private void OpenDoor()
-    {
-        GameManager.Instance.player.playerInteractor.InteractedObject.GetComponent<Animator>().SetTrigger("Open");
-        //start coroutine to change stance
-    }
-    
-    #endregion
 
     #region PICK_METHODS
     ///<summary> Comprueba si existe un item con el mismo id en el inventario, si sí, añade la canditad de this.
@@ -124,6 +115,11 @@ public class Item
     private void OpenChest()
     {
 
+    }   
+    private void OpenDoor()
+    {
+        GameManager.Instance.player.playerInteractor.InteractedObject.GetComponent<Animator>().SetTrigger("Open");
+        //start coroutine to change stance
     }
     #endregion
 
@@ -139,6 +135,7 @@ public enum ItemType
     XP,
     CHEST,
     DOOR,
+    ITEM,
     //BOOSSITEM 
 }
 
