@@ -7,6 +7,7 @@ using UnityEditor;
 public class ShopEditor : Editor
 {
     private Shop shop;
+    private string itemsAssetDatabasePath = "Assets/Scripts/Shop/ShopItems";
 
     public override void OnInspectorGUI()
     {
@@ -28,21 +29,44 @@ public class ShopEditor : Editor
             ShowElements(list,false);
         }
         GUILayout.Space(20);
-        if (GUILayout.Button("Add Random Item",GUILayout.Height(70)))
+        if (GUILayout.Button("Add Empty Item",GUILayout.Height(70)))
         {
             if (!list.isExpanded)
                 list.isExpanded = true;
            
-            ShopItem randomShopItem = ScriptableObject.CreateInstance<ShopItem>();
+            ShopItem emptyShopItem = ScriptableObject.CreateInstance<ShopItem>();
+            emptyShopItem.name = emptyShopItem.ItemName;
+            shop.shopItems.Add(emptyShopItem);
+            AssetDatabase.AddObjectToAsset(emptyShopItem, shop);
+            AssetDatabase.SaveAssets();
+        }
+        if (GUILayout.Button("Add Random Item",GUILayout.Height(70)))
+        {
+            if (!list.isExpanded)
+                list.isExpanded = true;
+            
+            string path = GetRandomItem(); 
+            ShopItem auxRandomShopItem = (ShopItem)AssetDatabase.LoadAssetAtPath(path,(typeof(ShopItem))) as ShopItem;
+            ShopItem randomShopItem = Object.Instantiate(auxRandomShopItem);
             randomShopItem.name = randomShopItem.ItemName;
             shop.shopItems.Add(randomShopItem);
             AssetDatabase.AddObjectToAsset(randomShopItem, shop);
             AssetDatabase.SaveAssets();
+           
         }
 
 
     }
-
+    private string[] GetAllItems()
+    {
+        string[] allItems = AssetDatabase.FindAssets("t:ShopItem",new[] {itemsAssetDatabasePath});
+        return allItems;
+    }
+    private string GetRandomItem()
+    {
+        int index = Random.Range(0,GetAllItems().Length);
+        return AssetDatabase.GUIDToAssetPath(GetAllItems()[index]);
+    }
     private void ShowElements(SerializedProperty list, bool showItemsLabels = true)
     {
         for (int i = 0; i < list.arraySize; i++)

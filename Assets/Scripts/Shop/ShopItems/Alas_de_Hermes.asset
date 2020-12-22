@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
   m_Name: Alas_de_Hermes
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Alas_de_Hermes
+  genre: 1
   item:
-    id: 100
-    cuantity: 1
-    isUnlocked: 1
-    type: 6
+    id: 0
+    cuantity: 0
+    isUnlocked: 0
+    type: 0
     action: 0
     transform: {fileID: 0}
