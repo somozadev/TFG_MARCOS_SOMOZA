@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
+  - ShopItem
   layers:
   - Default
   - TransparentFX

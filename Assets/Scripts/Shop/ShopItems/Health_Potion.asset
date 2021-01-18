@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
   m_Name: Health_Potion
   m_EditorClassIdentifier: 
-  itemName: 'Health_Potion '
+  itemName: Health_Potion
   genre: 1
   item:
     id: 101
@@ -21,3 +21,4 @@ MonoBehaviour:
     type: 2
     action: 0
     transform: {fileID: 0}
+  prefab: {fileID: 4108393641918863056, guid: 26119095202c83f48ac73f88bc390820, type: 3}

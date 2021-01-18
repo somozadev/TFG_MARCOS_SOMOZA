@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     private void Start() 
     {
-        DataController.Instance.GetPlayerStats(playerStats);    
+        // DataController.Instance.GetPlayerStats(playerStats);    
     }
     private void OnApplicationQuit() 
     {

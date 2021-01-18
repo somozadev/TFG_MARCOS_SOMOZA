@@ -21,3 +21,4 @@ MonoBehaviour:
     type: 6
     action: 0
     transform: {fileID: 0}
+  prefab: {fileID: 7901626040871378299, guid: 72c36534524866849a4e7601fe6d61b4, type: 3}
