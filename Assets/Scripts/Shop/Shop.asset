@@ -23,6 +23,29 @@ MonoBehaviour:
     action: 0
     transform: {fileID: 0}
   prefab: {fileID: 7901626040871378299, guid: 72c36534524866849a4e7601fe6d61b4, type: 3}
+--- !u!114 &-3516809157540070142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
+  m_Name: Alas_de_Hermes(Clone)
+  m_EditorClassIdentifier: 
+  itemName: Alas_de_Hermes(Clone)
+  price: 0
+  genre: 3
+  item:
+    id: 100
+    cuantity: 1
+    isUnlocked: 1
+    type: 6
+    action: 0
+    transform: {fileID: 0}
+  prefab: {fileID: 100000, guid: fa3d80007c805e84f853b7c5b7455930, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,6 +61,7 @@ MonoBehaviour:
   shopItems:
   - {fileID: 7181668087189186859}
   - {fileID: -8479115697457684521}
+  - {fileID: -3516809157540070142}
 --- !u!114 &7181668087189186859
 MonoBehaviour:
   m_ObjectHideFlags: 0

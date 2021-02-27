@@ -11,11 +11,11 @@ public class ShopComponent : MonoBehaviour
 
     private void Start() 
     {   
-        var aa = GetComponentsInChildren<Transform>();
-        foreach(Transform a in aa)
+        var spots = GetComponentsInChildren<Transform>();
+        foreach(Transform spot in spots)
         {
-            if(!a.Equals(gameObject.transform))
-            itemSpots.Add(a);
+            if(!spot.Equals(gameObject.transform))
+            itemSpots.Add(spot);
         }
         InitializeShop();
     }
