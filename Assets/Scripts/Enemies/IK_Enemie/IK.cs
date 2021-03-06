@@ -1,35 +1,24 @@
 ﻿using UnityEngine;
 
-    /// <summary>
-    /// Fabrik IK Solver
-    /// </summary>
+    /// https://www.youtube.com/watch?v=UNoX65PRehA FABRIK
     public class IK : MonoBehaviour
     {
-        /// <summary>
+        
         /// Chain length of bones
-        /// </summary>
         public int ChainLength = 2;
 
-        /// <summary>
         /// Target the chain should bent to
-        /// </summary>
         public Transform Target;
         public Transform Pole;
 
-        /// <summary>
         /// Solver iterations per update
-        /// </summary>
         [Header("Solver Parameters")]
         public int Iterations = 10;
 
-        /// <summary>
         /// Distance when the solver stops
-        /// </summary>
         public float Delta = 0.001f;
 
-        /// <summary>
         /// Strength of going back to the start position.
-        /// </summary>
         [Range(0, 1)]
         public float SnapBackStrength = 1f;
 
@@ -119,11 +108,6 @@
             if (BonesLength.Length != ChainLength)
                 Init();
 
-            //Fabric
-
-            //  root
-            //  (bone0) (bonelen 0) (bone1) (bonelen 1) (bone2)...
-            //   x--------------------x--------------------x---...
 
             //get position
             for (int i = 0; i < Bones.Length; i++)
@@ -148,7 +132,7 @@
 
                 for (int iteration = 0; iteration < Iterations; iteration++)
                 {
-                    //https://www.youtube.com/watch?v=UNoX65PRehA
+                    
                     //back
                     for (int i = Positions.Length - 1; i > 0; i--)
                     {
