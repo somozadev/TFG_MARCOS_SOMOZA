@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+
+    private IkCharacter ikParent;
+    public Side side;
+
+
     [SerializeField] float maxDistance = 1f;
 
     [SerializeField] Vector3 lastPos;
     [SerializeField] Vector3 defaultPos;
-    [SerializeField] bool isMoving = false;
+    [SerializeField] bool canMove = false;
     [SerializeField] private bool isLerping = false;
+    public bool changeSide = false;
 
     [SerializeField] Transform asociatedEnd;
     [SerializeField] Transform movingTarget;
 
     [SerializeField] LayerMask layer;
     RaycastHit hit;
-    
+
     [SerializeField] public float CheckDistance { get { return Vector3.Distance(movingTarget.position, transform.position); } }
 
-    [Range(0, 4)]
+    [Range(1, 8)]
     [SerializeField] float speed = 2f;
     private float t = 0f;
     [SerializeField] float stepHeightMultiplier = 0.025f;
@@ -28,8 +34,12 @@ public class Target : MonoBehaviour
     [SerializeField] AnimationCurve curveStep;
 
 
+    public bool CanMove { get { return canMove; } set { canMove = value; } }
 
-
+    private void Awake()
+    {
+        ikParent = GetComponentInParent<IkCharacter>();
+    }
     private void Start()
     {
         lastPos = transform.position;
@@ -62,29 +72,37 @@ public class Target : MonoBehaviour
     private void Move()
     {
 
-
+        changeSide = false;
         lastPos = Vector3.Lerp(lastPos, movingTarget.position, speed * Time.deltaTime) + ((new Vector3(0, 1f, 0) * curveStep.Evaluate(t)) * stepHeightMultiplier);
 
         t = Mathf.Lerp(t, 1f, speed * Time.deltaTime);
         if (t >= .99f)
         {
+            changeSide = true;
             isLerping = false;
+            canMove = false;
             animationTime = 0;
             t = 0;
+
+            ikParent.MoveNextLeg(ikParent.legs.IndexOf(this));
+
+
         }
 
-        Debug.Log("t:" + t);
-        Debug.Log("t_evaluate:" + curveStep.Evaluate(t));
+        // Debug.Log("t:" + t);
+        // Debug.Log("t_evaluate:" + curveStep.Evaluate(t));
     }
     private void FixedUpdate()
     {
-        if (!isMoving)
-            transform.position = lastPos;
-        if (CheckOutOfRange() || isLerping)
-            Move();
+        transform.position = lastPos;
+        if (canMove)
+        {
+            if (CheckOutOfRange() || isLerping)
+                Move();
 
-        else
-            Fix2Ground();
+            else
+                Fix2Ground();
+        }
 
     }
 
@@ -101,4 +119,10 @@ public class Target : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, movingTarget.position);
     }
+}
+
+
+public enum Side
+{
+    LEFT, RIGHT
 }
