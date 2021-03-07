@@ -47,10 +47,12 @@ public class Target : MonoBehaviour
     }
 
 
+    //giving some errors => revisar
     private void Fix2Ground()
     {
         Vector3 from = new Vector3(movingTarget.position.x, movingTarget.position.y + 1f, movingTarget.position.z);
-        if (Physics.Raycast(from, Vector3.down, out hit, Mathf.Infinity, layer))
+        if (Physics.SphereCast(from, 0.4f, Vector3.down, out hit, Mathf.Infinity, layer))
+        // if (Physics.Raycast(from, Vector3.down, out hit, Mathf.Infinity, layer))
         {
             Debug.DrawRay(from, Vector3.down * hit.distance, Color.yellow);
 
@@ -69,6 +71,7 @@ public class Target : MonoBehaviour
 
     }
 
+    //maybe too slow... check with higher speed
     private void Move()
     {
 
@@ -108,6 +111,10 @@ public class Target : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.yellow;
+        Vector3 from = new Vector3(movingTarget.position.x, movingTarget.position.y + 1f, movingTarget.position.z);
+        Debug.DrawRay(from, Vector3.down * hit.distance, Color.yellow);
+        Gizmos.DrawWireSphere(from, 0.1f);
         Gizmos.color = Color.black;
         Gizmos.DrawSphere(hit.point, 0.2f);
         Gizmos.color = Color.blue;
