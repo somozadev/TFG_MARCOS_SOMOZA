@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public class CentipedeController : IkCharacter
 {
-    [Range(0f, 3f)]
+    [Range(3f, 9f)]
     [SerializeField] float speed = 1f;
     [Range(10f, 30f)]
     [SerializeField] float angularSpeed = 15f;
     [SerializeField] GameObject head;
+    public float rotationPercentaje = 30f;
+    public bool positive;
     override public void Start()
     {
         base.Start();
@@ -20,27 +22,34 @@ public class CentipedeController : IkCharacter
     {
         if (Keyboard.current.qKey.isPressed)
         {
-            head.transform.Rotate(0,-angularSpeed * Time.deltaTime * 4, 0);
+            positive = false;
+            head.GetComponent<IkBody>().RotateSelf(0, -angularSpeed * Time.deltaTime * 4, 0, rotationPercentaje, positive);
+            // head.transform.Rotate(0,-angularSpeed * Time.deltaTime * 4, 0);
         }
         if (Keyboard.current.eKey.isPressed)
         {
-            head.transform.Rotate(0, angularSpeed * Time.deltaTime * 4, 0);
+            positive = true;
+            head.GetComponent<IkBody>().RotateSelf(0, angularSpeed * Time.deltaTime * 4, 0, rotationPercentaje, positive);
+            // head.transform.Rotate(0, angularSpeed * Time.deltaTime * 4, 0);
         }
         if (Keyboard.current.aKey.isPressed)
         {
-            head.transform.Translate(speed * Time.deltaTime, 0, 0);
+            head.transform.Translate(-transform.right * speed * Time.deltaTime);
+            // head.transform.Translate(-speed * Time.deltaTime, 0, 0);s
         }
         if (Keyboard.current.dKey.isPressed)
         {
-            head.transform.Translate(-speed * Time.deltaTime, 0, 0);
+            head.transform.Translate(transform.right * speed * Time.deltaTime);
         }
         if (Keyboard.current.wKey.isPressed)
         {
-            head.transform.Translate(0, 0, -speed * Time.deltaTime);
+            head.transform.Translate(transform.forward * speed * Time.deltaTime);
+            // head.transform.Translate(0, 0, -speed * Time.deltaTime);
         }
         if (Keyboard.current.sKey.isPressed)
         {
-            head.transform.Translate(0, 0, speed * Time.deltaTime);
+            head.transform.Translate(-transform.forward * speed * Time.deltaTime);
+            // head.transform.Translate(0, 0, speed * Time.deltaTime);
         }
 
     }

@@ -10,6 +10,7 @@ public class Target : MonoBehaviour
 
 
     [SerializeField] float maxDistance = 1f;
+    [SerializeField] float rayOffset = 5f;
 
     [SerializeField] Vector3 lastPos;
     [SerializeField] Vector3 defaultPos;
@@ -23,9 +24,10 @@ public class Target : MonoBehaviour
     [SerializeField] LayerMask layer;
     RaycastHit hit;
 
+
     [SerializeField] public float CheckDistance { get { return Vector3.Distance(movingTarget.position, transform.position); } }
 
-    [Range(1, 8)]
+    [Range(8, 20)]
     [SerializeField] float speed = 2f;
     private float t = 0f;
     [SerializeField] float stepHeightMultiplier = 0.025f;
@@ -50,13 +52,15 @@ public class Target : MonoBehaviour
     //giving some errors => revisar
     private void Fix2Ground()
     {
-        Vector3 from = new Vector3(movingTarget.position.x, movingTarget.position.y + 1f, movingTarget.position.z);
-        if (Physics.SphereCast(from, 0.4f, Vector3.down, out hit, Mathf.Infinity, layer))
-        // if (Physics.Raycast(from, Vector3.down, out hit, Mathf.Infinity, layer))
+        Vector3 from = new Vector3(movingTarget.position.x, movingTarget.position.y + rayOffset, movingTarget.position.z);
+            
+        // if (Physics.SphereCast(from, 0.6f, Vector3.down, out hit, Mathf.Infinity, layer))
+        if (Physics.Raycast(from, Vector3.down, out hit, Mathf.Infinity, layer))
         {
             Debug.DrawRay(from, Vector3.down * hit.distance, Color.yellow);
 
             movingTarget.position = hit.point;
+
         }
     }
     private bool CheckOutOfRange()
@@ -95,6 +99,11 @@ public class Target : MonoBehaviour
         // Debug.Log("t:" + t);
         // Debug.Log("t_evaluate:" + curveStep.Evaluate(t));
     }
+    private void Update()
+    {
+        if (Vector3.Distance(transform.position, asociatedEnd.position) > (maxDistance + .5f))
+            Move(); Fix2Ground();
+    }
     private void FixedUpdate()
     {
         transform.position = lastPos;
@@ -106,13 +115,19 @@ public class Target : MonoBehaviour
             else
                 Fix2Ground();
         }
+        else
+        {
+            if (CheckOutOfRange())
+                Move();
+            Fix2Ground();
+        }
 
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Vector3 from = new Vector3(movingTarget.position.x, movingTarget.position.y + 1f, movingTarget.position.z);
+        Vector3 from = new Vector3(movingTarget.position.x, movingTarget.position.y + rayOffset, movingTarget.position.z);
         Debug.DrawRay(from, Vector3.down * hit.distance, Color.yellow);
         Gizmos.DrawWireSphere(from, 0.1f);
         Gizmos.color = Color.black;
