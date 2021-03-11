@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CentipedeController : IkCharacter
 {
+    [SerializeField] EnemyState state; 
+    [SerializeField] EnemyType type; 
     [Range(3f, 9f)]
     [SerializeField] float speed = 1f;
     [Range(10f, 30f)]
@@ -12,6 +14,12 @@ public class CentipedeController : IkCharacter
     [SerializeField] GameObject head;
     public float rotationPercentaje = 30f;
     public bool positive;
+
+    void Awake()
+    {
+        type = EnemyType.CENTIPEDE;
+        state = EnemyState.IDLE;
+    }
     override public void Start()
     {
         base.Start();
