@@ -5,18 +5,23 @@ using UnityEngine.InputSystem;
 
 public class CentipedeController : IkCharacter
 {
-    [SerializeField] EnemyState state; 
-    [SerializeField] EnemyType type; 
+    [SerializeField] bool isMoving;
+
+    [SerializeField] EnemyState state;
+    [SerializeField] public IkBody[] bodies;
+    [SerializeField] EnemyType type;
     [Range(3f, 9f)]
     [SerializeField] float speed = 1f;
     [Range(10f, 30f)]
     [SerializeField] float angularSpeed = 15f;
     [SerializeField] GameObject head;
+    [SerializeField] GameObject tail;
     public float rotationPercentaje = 30f;
-    public bool positive;
+    public bool forward;
 
     void Awake()
     {
+        bodies = GetComponentsInChildren<IkBody>();
         type = EnemyType.CENTIPEDE;
         state = EnemyState.IDLE;
     }
@@ -30,34 +35,53 @@ public class CentipedeController : IkCharacter
     {
         if (Keyboard.current.qKey.isPressed)
         {
-            positive = false;
-            head.GetComponent<IkBody>().RotateSelf(0, -angularSpeed * Time.deltaTime * 4, 0, rotationPercentaje, positive);
-            // head.transform.Rotate(0,-angularSpeed * Time.deltaTime * 4, 0);
+            if (isMoving == true)
+            {
+                if (forward)
+                    head.transform.Rotate(0, -angularSpeed * Time.deltaTime * 4, 0);
+                else
+                    tail.transform.Rotate(0, -angularSpeed * Time.deltaTime * 4, 0);
+            }
+
         }
         if (Keyboard.current.eKey.isPressed)
         {
-            positive = true;
-            head.GetComponent<IkBody>().RotateSelf(0, angularSpeed * Time.deltaTime * 4, 0, rotationPercentaje, positive);
-            // head.transform.Rotate(0, angularSpeed * Time.deltaTime * 4, 0);
+            if (isMoving == true)
+            {
+                if (forward)
+                    head.transform.Rotate(0, angularSpeed * Time.deltaTime * 4, 0);
+                else
+                    tail.transform.Rotate(0, angularSpeed * Time.deltaTime * 4, 0);
+            }
         }
-        if (Keyboard.current.aKey.isPressed)
-        {
-            head.transform.Translate(-transform.right * speed * Time.deltaTime);
-            // head.transform.Translate(-speed * Time.deltaTime, 0, 0);s
-        }
-        if (Keyboard.current.dKey.isPressed)
-        {
-            head.transform.Translate(transform.right * speed * Time.deltaTime);
-        }
+        // if (Keyboard.current.aKey.isPressed)
+        // {
+        //     isMoving = true;
+        //     forward = true;
+        //     head.transform.Translate(-transform.right * speed * Time.deltaTime);
+        //     head.GetComponent<IkBody>().child.MoveSelf(head.transform, forward);
+        // }
+        // if (Keyboard.current.dKey.isPressed)
+        // {
+        //     isMoving = true;
+        //     forward = true;
+        //     head.transform.Translate(transform.right * speed * Time.deltaTime);
+        //     head.GetComponent<IkBody>().child.MoveSelf(head.transform, forward);
+        // }
+        isMoving = false;
         if (Keyboard.current.wKey.isPressed)
         {
+            isMoving = true;
+            forward = true;
             head.transform.Translate(transform.forward * speed * Time.deltaTime);
-            // head.transform.Translate(0, 0, -speed * Time.deltaTime);
+            head.GetComponent<IkBody>().child.MoveSelf(head.transform, forward);
         }
         if (Keyboard.current.sKey.isPressed)
         {
-            head.transform.Translate(-transform.forward * speed * Time.deltaTime);
-            // head.transform.Translate(0, 0, speed * Time.deltaTime);
+            isMoving = true;
+            forward = false;
+            tail.transform.Translate(-transform.forward * speed * Time.deltaTime);
+            tail.GetComponent<IkBody>().parent.MoveSelf(tail.transform, forward);
         }
 
     }

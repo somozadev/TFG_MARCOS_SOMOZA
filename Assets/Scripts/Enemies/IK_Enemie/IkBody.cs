@@ -5,7 +5,8 @@ using UnityEngine;
 public class IkBody : MonoBehaviour
 {
     [SerializeField] public bool isHead;
-    [SerializeField] IkBody child;
+    [SerializeField] public IkBody child;
+    [SerializeField] public IkBody parent;
     [SerializeField] Target[] targets = new Target[2];
     [SerializeField]
     float legsHeighPercent
@@ -41,6 +42,7 @@ public class IkBody : MonoBehaviour
     RaycastHit hit;
     [SerializeField] float startDistance = -1.747552f;
     [SerializeField] float currentDistance;
+    [SerializeField] float rayOffset = 5f;
 
     private void Start()
     {
@@ -62,47 +64,67 @@ public class IkBody : MonoBehaviour
     private void Update()
     {
         UpdateHeight();
-        GetHeight(); 
-        Debug.DrawRay(transform.position, child.transform.position, Color.green);
+        GetHeight();
 
 
     }
 
 
-    public void RotateSelf(float x, float y, float z, float rotationPercentaje, bool positive)
+    public void MoveSelf(Transform followingBodyPart, bool forward)
     {
-        if (isHead)
-            transform.Rotate(x, y, z);
+        Vector3 newPos = new Vector3();
+        float T = 0;
+
+
+        float distance = Vector3.Distance(followingBodyPart.position, transform.position);
+        newPos = followingBodyPart.position;
+        newPos.y = transform.position.y; Debug.Log(newPos);
+
+        Debug.Log(newPos);
+        T = Time.deltaTime * distance / 1f * speed;
+
+
+        if (T > 0.5f)
+            T = 0.5f;
+        transform.position = Vector3.Slerp(transform.position, newPos, T);
+        transform.rotation = Quaternion.Slerp(transform.rotation, followingBodyPart.rotation, T);
+
+        if (forward)
+        {
+            if (child != null)
+                child.MoveSelf(transform, forward);
+        }
         else
         {
-            if (positive)
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(x, -(y * rotationPercentaje) / 100, z), Time.deltaTime * 15);
-            else
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(x, (y * rotationPercentaje) / 100, z), Time.deltaTime * 15);
-        }
-        if (child != null)
-        {
-            child.RotateSelf(x, y, z, rotationPercentaje, positive);
+            if (parent != null)
+                parent.MoveSelf(transform, forward);
         }
     }
-
-
 
 
 
     private void UpdateHeight()
     {
 
-        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, (baseY + legsHeighPercent) , transform.position.z), speed * Time.deltaTime);
-        // transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, -currentDistance, transform.position.z), speed * Time.deltaTime);
+        // transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x, (baseY + legsHeighPercent), transform.position.z), speed * Time.deltaTime);
+        transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x, -currentDistance, transform.position.z), speed * Time.deltaTime);
 
     }
     private void GetHeight()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layer))
+        if (Physics.Raycast(new Vector3(transform.position.x,transform.position.y + rayOffset, transform.position.z), Vector3.down, out hit, Mathf.Infinity, layer))
         {
-            Debug.DrawRay(transform.position, Vector3.down * hit.distance * 2, Color.red);
-            currentDistance = hit.distance;
+            Debug.DrawRay(transform.position, rayOffset * Vector3.down * hit.distance * 2, Color.red);
+            currentDistance = Vector3.Distance(transform.position , hit.point);
         }
     }
+
+
+ void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x,transform.position.y + rayOffset,transform.position.z), 0.1f);
+    }
+
+
 }

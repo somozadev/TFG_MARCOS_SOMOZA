@@ -27,8 +27,8 @@ public class Target : MonoBehaviour
 
     [SerializeField] public float CheckDistance { get { return Vector3.Distance(movingTarget.position, transform.position); } }
 
-    [Range(8, 20)]
-    [SerializeField] float speed = 2f;
+    [Range(15, 50)]
+    [SerializeField] float speed = 25f;
     private float t = 0f;
     [SerializeField] float stepHeightMultiplier = 0.025f;
     [SerializeField] private float animationTime;
@@ -53,7 +53,7 @@ public class Target : MonoBehaviour
     private void Fix2Ground()
     {
         Vector3 from = new Vector3(movingTarget.position.x, movingTarget.position.y + rayOffset, movingTarget.position.z);
-            
+
         // if (Physics.SphereCast(from, 0.6f, Vector3.down, out hit, Mathf.Infinity, layer))
         if (Physics.Raycast(from, Vector3.down, out hit, Mathf.Infinity, layer))
         {
@@ -75,24 +75,26 @@ public class Target : MonoBehaviour
 
     }
 
+    
     //maybe too slow... check with higher speed
     private void Move()
     {
 
-        changeSide = false;
-        lastPos = Vector3.Lerp(lastPos, movingTarget.position, speed * Time.deltaTime) + ((new Vector3(0, 1f, 0) * curveStep.Evaluate(t)) * stepHeightMultiplier);
+        float timer = speed * Time.deltaTime;
 
-        t = Mathf.Lerp(t, 1f, speed * Time.deltaTime);
-        if (t >= .99f)
+        changeSide = false;
+        lastPos = Vector3.Slerp(lastPos, movingTarget.position, timer) + ((new Vector3(0, 1f, 0) * curveStep.Evaluate(t)) * stepHeightMultiplier);
+
+        t = Mathf.Lerp(t, 1f, timer);
+        if (t >= .99999f)
         {
+            // lastPos = movingTarget.position;
             changeSide = true;
             isLerping = false;
             canMove = false;
             animationTime = 0;
             t = 0;
-
             ikParent.MoveNextLeg(ikParent.legs.IndexOf(this));
-
 
         }
 
@@ -101,27 +103,30 @@ public class Target : MonoBehaviour
     }
     private void Update()
     {
-        if (Vector3.Distance(transform.position, asociatedEnd.position) > (maxDistance + .5f))
+        if (Vector3.Distance(transform.position, asociatedEnd.position) > (maxDistance + 3f))
             Move(); Fix2Ground();
     }
     private void FixedUpdate()
     {
         transform.position = lastPos;
-        if (canMove)
-        {
-            if (CheckOutOfRange() || isLerping)
-                Move();
+        // if (isLerping)
+        //     Move();
+        // if (canMove)
+        // {
+        if (canMove && (CheckOutOfRange() || isLerping))
+            Move();
 
-            else
-                Fix2Ground();
-        }
         else
-        {
-            if (CheckOutOfRange())
-                Move();
             Fix2Ground();
-        }
+        // }
+        // else
+        // {
+        //     if (CheckOutOfRange())
+        //         Move();
+        //     Fix2Ground();
+        // }
 
+        
     }
 
     void OnDrawGizmos()

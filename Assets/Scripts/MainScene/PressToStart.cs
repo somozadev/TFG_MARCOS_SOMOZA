@@ -44,7 +44,12 @@ public class PressToStart : MonoBehaviour
 
     private void SwitchToGamepad()
     {
-        text.text = "PRESS <color=#FFFF00>A</color> TO START";
+        if (Gamepad.current is UnityEngine.InputSystem.XInput.XInputController)
+            text.text = "PRESS <sprite index=1> TO START";
+
+        else if (Gamepad.current is UnityEngine.InputSystem.DualShock.DualShockGamepad)
+            text.text = "PRESS <sprite index=2> TO START";
+
         InputSystem.EnableDevice(Gamepad.current);
         InputSystem.DisableDevice(Keyboard.current);
         InputSystem.DisableDevice(Mouse.current);
@@ -52,7 +57,8 @@ public class PressToStart : MonoBehaviour
     }
     private void StayWithKeyboard()
     {
-        text.text = "PRESS <color=#FFFF00>SPACEBAR</color> TO START";
+        Debug.Log("KEYBOARD");
+        text.text = "PRESS <sprite index=0> TO START";
         InputSystem.EnableDevice(Keyboard.current);
         InputSystem.EnableDevice(Mouse.current);
         if (Gamepad.current != null)

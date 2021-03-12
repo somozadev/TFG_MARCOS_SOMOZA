@@ -5,15 +5,8 @@ using UnityEngine;
 public class IkCharacter : MonoBehaviour
 {
     [SerializeField] public List<Target> legs;
-    private float length;
     private bool switcher = true;
-    private void Awake()
-    {
-        foreach (Target tg in GetComponentsInChildren<Target>())
-        { legs.Add(tg); length++; }
-
-    }
-
+   
     public virtual void Start()
     {
         MoveLegs(true);
@@ -23,13 +16,13 @@ public class IkCharacter : MonoBehaviour
 
         if (legs[current].side == Side.RIGHT)
         {
-            if (current + 1 > length)
+            if (current + 1 > legs.Count)
                 return;
             legs[current + 1].CanMove = true;
         }
         else
         {
-            if (current - 1 > length)
+            if (current - 1 > legs.Count)
                 return;
             legs[current - 1].CanMove = true;
         }
@@ -41,7 +34,7 @@ public class IkCharacter : MonoBehaviour
         if (side) //0XX00XX0
         {
             legs[0].CanMove = true;
-            for (int i = 1; i < length; i++)
+            for (int i = 1; i < legs.Count; i++)
             {
                 if (a == 0 || a == 1)
                     legs[i].CanMove = true;
@@ -61,7 +54,7 @@ public class IkCharacter : MonoBehaviour
         {
             int b = 0;
             legs[0].CanMove = false;
-            for (int i = 1; i < length; i++)
+            for (int i = 1; i < legs.Count; i++)
             {
                 if (b == 0 || b == 1)
                     legs[i].CanMove = true;
