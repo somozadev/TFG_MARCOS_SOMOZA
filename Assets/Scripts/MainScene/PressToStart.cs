@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 
@@ -39,7 +40,9 @@ public class PressToStart : MonoBehaviour
         else
             StayWithKeyboard();
         UpdateCurrentDevices();
+
     }
+
 
 
     private void SwitchToGamepad()
@@ -75,6 +78,7 @@ public class PressToStart : MonoBehaviour
             {
                 Debug.LogWarning("A BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
+                SceneController.Instance.LoadScene("StartScene");
             }
         }
         else
@@ -83,11 +87,13 @@ public class PressToStart : MonoBehaviour
             {
                 Debug.LogWarning("SPACE BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
+                SceneController.Instance.LoadScene("StartScene");
             }
 
         }
 
     }
+
 }
 
 [System.Serializable]
@@ -119,3 +125,65 @@ public class DevicesDictionaryCompound
 
 
 //playerInput.SwitchCurrentActionMap("actionMapName");
+
+#region DEADZONE_TMP
+
+
+/*
+*   SOME TEXT ANIMATION -> works weird with images
+*
+    [SerializeField] Mesh textMesh;
+    [SerializeField] Vector3[] textVertices;
+    [SerializeField] AnimationCurve curve;
+*
+*   private void UpdateTextMesh()
+    {
+        text.ForceMeshUpdate();
+        textMesh = text.mesh;
+        textVertices = textMesh.vertices;
+
+        ApplyWobblePerCharacter(textVertices, textMesh, text);
+    }
+
+    private void ApplyWobblePerCharacter(Vector3[] vertices, Mesh mesh, TMP_Text text)
+    {
+        for (int i = 0; i < text.textInfo.characterCount; i++)
+        {
+            TMP_CharacterInfo c = text.textInfo.characterInfo[i];
+            int index = c.vertexIndex;
+
+            Vector3 offset = Wobble(Time.time + i);
+            vertices[i] += offset;
+            vertices[i + 1] += offset;
+            vertices[i + 2] += offset;
+            vertices[i + 3] += offset;
+        }
+        mesh.vertices = vertices;
+        text.canvasRenderer.SetMesh(mesh);
+    }
+// float offsetY = VertexCurve.Evaluate((float)i / characterCount + loopCount / 50f) * CurveScale; // Random.Range(-0.25f, 0.25f);                    
+
+
+    private void ApplyWobble(Vector3[] vertices, Mesh mesh, TMP_Text text)
+    {
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 offset = Wobble(Time.time + i);
+            vertices[i] += offset;
+        }
+        mesh.vertices = vertices;
+        text.canvasRenderer.SetMesh(mesh);
+    }
+    private Vector2 Wobble(float t) { return new Vector2(Mathf.Sin(t * 3.3f), Mathf.Cos(t * 2.2f)); }
+
+
+
+*   
+*   
+*   
+*   
+*   
+*   
+*/
+
+#endregion

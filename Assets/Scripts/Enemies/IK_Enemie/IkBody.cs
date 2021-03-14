@@ -78,9 +78,8 @@ public class IkBody : MonoBehaviour
 
         float distance = Vector3.Distance(followingBodyPart.position, transform.position);
         newPos = followingBodyPart.position;
-        newPos.y = transform.position.y; Debug.Log(newPos);
+        newPos.y = transform.position.y;
 
-        Debug.Log(newPos);
         T = Time.deltaTime * distance / 1f * speed;
 
 
