@@ -18,8 +18,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 rawInput;
     [Header("Attack")]
     [SerializeField] private bool isAttacking;
-    private float attSpeed;
-    private float attRate;
+    [SerializeField] private bool canAttack = true;
+
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform shootingPoint;
+    [Range(1, 5)]
+    [SerializeField] float attSpeed;
+    [Range(1, 10)]
+    [SerializeField] float attRate;
 
     public PlayerInput PlayerInput { get { return playerInput; } }
     public bool IsInteracting { get { return isInteracting; } }
@@ -31,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         attSpeed = GetComponent<Player>().playerStats.Attspd;
         playerInput = GetComponentInChildren<PlayerInput>();
         rb = GetComponent<Rigidbody>();
-
+        canAttack = true;
     }
 
     void Start()
@@ -72,12 +78,23 @@ public class PlayerMovement : MonoBehaviour
     #region INPUT_METHODS
     private void Attack()
     {
-
+        if (canAttack)
+        {
+            canAttack = false;
+            StartCoroutine(WaitToAttack(attRate / 10));
+        }
+    }
+    private IEnumerator WaitToAttack(float waitTime)
+    {
+        GameObject bullet = GameObject.Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().rb.AddForce(transform.forward * attSpeed, ForceMode.Impulse);
+        yield return new WaitForSeconds(waitTime);
+        canAttack = true;
     }
     private void Interact()
     {
-            GetComponentInChildren<PlayerInteractor>().interacting = false;
-        
+        GetComponentInChildren<PlayerInteractor>().interacting = false;
+
     }
 
     private void Move(Vector2 input)

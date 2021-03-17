@@ -81,6 +81,11 @@ MonoBehaviour:
   isInteracting: 0
   isMoving: 0
   isAttacking: 0
+  canAttack: 1
+  bulletPrefab: {fileID: 0}
+  shootingPoint: {fileID: 0}
+  attSpeed: 0
+  attRate: 0
 --- !u!114 &5511366636991874751
 MonoBehaviour:
   m_ObjectHideFlags: 0
