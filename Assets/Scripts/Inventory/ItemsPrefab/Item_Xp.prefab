@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446d6f0b511592c44ab29194162130a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
   item:
     id: 2
     cuantity: 5
@@ -116,6 +117,7 @@ MonoBehaviour:
     type: 3
     action: 0
     transform: {fileID: 0}
+  colliderObject: {fileID: 733851639387324721}
 --- !u!1 &7161985202844813110
 GameObject:
   m_ObjectHideFlags: 0

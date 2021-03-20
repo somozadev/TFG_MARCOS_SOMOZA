@@ -43,8 +43,9 @@ public class PlayerInteractor : MonoBehaviour
                 interactedObj = col.transform.gameObject;
                 if (interactedObj != null)
                 {
-                        InteractedObject.GetComponent<SceneItem>().Use();
-                       InteractedObject.GetComponent<SceneItem>().canInteract = false;
+                    InteractedObject.GetComponent<SceneItem>().Use();
+                    if (!InteractedObject.GetComponent<SceneItem>().item.Action.Equals(ItemAction.BUY))
+                        InteractedObject.GetComponent<SceneItem>().canInteract = false;
 
                 }
             }

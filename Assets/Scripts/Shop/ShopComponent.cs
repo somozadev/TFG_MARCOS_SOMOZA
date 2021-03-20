@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShopComponent : MonoBehaviour
 {
@@ -9,15 +10,16 @@ public class ShopComponent : MonoBehaviour
     public List<Transform> itemSpots;
 
 
-    private void Start() 
-    {   
-        var spots = GetComponentsInChildren<Transform>();
-        foreach(Transform spot in spots)
-        {
-            if(!spot.Equals(gameObject.transform))
-            itemSpots.Add(spot);
-        }
+    private void Awake()
+    {
+        foreach (ShopSlot slot in GetComponentsInChildren<ShopSlot>())
+            itemSpots.Add(slot.transform);
         InitializeShop();
+
+        foreach (Transform slot in itemSpots)
+        {
+            slot.GetComponent<ShopSlot>().RotateStuff();
+        }
     }
 
 
@@ -25,14 +27,16 @@ public class ShopComponent : MonoBehaviour
     public void InitializeShop()
     {
         int i = 0;
-        foreach(ShopItem item in shop.shopItems)
+        foreach (ShopItem item in shop.shopItems)
         {
-            GameObject aux = Instantiate(item.Prefab,itemSpots[i].position,Quaternion.identity,itemSpots[i].transform);
-            aux.GetComponent<ShopSceneItem>().Price.text = item.Price.ToString();
+            GameObject aux = Instantiate(item.Prefab, itemSpots[i].position, Quaternion.identity, itemSpots[i].transform);
+            aux.GetComponent<SceneItem>().item = item.Item;
+            aux.GetComponent<SceneItem>().item.Price = item.Price;
+            itemSpots[shop.shopItems.IndexOf(item)].GetComponentInChildren<TMP_Text>().text = item.Price.ToString();
             i++;
-
+            itemSpots[i].GetComponent<ShopSlot>().itemToSell = aux;
             //aux.AddComponent<rotacion> addcomponent<ShopLimiter>
-        
+
         }
     }
 

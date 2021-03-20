@@ -119,6 +119,7 @@ MonoBehaviour:
     type: 2
     action: 0
     transform: {fileID: 0}
+  colliderObject: {fileID: 6131943382532822070}
 --- !u!1 &7970735884121182062
 GameObject:
   m_ObjectHideFlags: 0

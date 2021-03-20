@@ -182,16 +182,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7901626040871378299}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 446d6f0b511592c44ab29194162130a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canInteract: 0
+  canInteract: 1
   item:
     id: 0
     cuantity: 0
+    price: 0
     isUnlocked: 0
     type: 0
     action: 0
     transform: {fileID: 0}
+  colliderObject: {fileID: 1604725142133313312}

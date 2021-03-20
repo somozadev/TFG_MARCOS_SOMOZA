@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Damage_Up
   m_EditorClassIdentifier: 
   itemName: Damage_Up
+  price: 50
   genre: 2
   item:
     id: 102
     cuantity: 1
     isUnlocked: 1
     type: 6
-    action: 0
+    action: 2
     transform: {fileID: 0}
-  prefab: {fileID: 7901626040871378299, guid: 72c36534524866849a4e7601fe6d61b4, type: 3}
+  prefab: {fileID: 7901626040871378299, guid: 49f195a0bd137fd44a13c438ac0ea1c5, type: 3}

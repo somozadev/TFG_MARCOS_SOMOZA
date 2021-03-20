@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Alas_de_Hermes
   m_EditorClassIdentifier: 
   itemName: Alas_de_Hermes
+  price: 100
   genre: 3
   item:
     id: 100
     cuantity: 1
     isUnlocked: 1
     type: 6
-    action: 0
+    action: 2
     transform: {fileID: 0}
   prefab: {fileID: 100000, guid: fa3d80007c805e84f853b7c5b7455930, type: 3}

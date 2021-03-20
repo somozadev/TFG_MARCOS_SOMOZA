@@ -4914,7 +4914,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.26699895, g: 0.48119932, b: 0.754717, a: 0.8627451}
+      key0: {r: 0.26699895, g: 0.48119932, b: 0.754717, a: 0.3647059}
       key1: {r: 0.41176474, g: 0.93725497, b: 0.9960785, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4964,7 +4964,7 @@ GameObject:
   - component: {fileID: 5727611756972403308}
   m_Layer: 0
   m_Name: Bullet_Prefab
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

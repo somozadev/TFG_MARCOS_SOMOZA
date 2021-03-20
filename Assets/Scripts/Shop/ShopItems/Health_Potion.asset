@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Health_Potion
   m_EditorClassIdentifier: 
   itemName: Health_Potion
+  price: 20
   genre: 1
   item:
     id: 101
     cuantity: 30
     isUnlocked: 1
     type: 2
-    action: 0
+    action: 2
     transform: {fileID: 0}
-  prefab: {fileID: 4108393641918863056, guid: 26119095202c83f48ac73f88bc390820, type: 3}
+  prefab: {fileID: 4108393641918863056, guid: dd6f68d2eb63e8e4f918ac5969a3fa11, type: 3}

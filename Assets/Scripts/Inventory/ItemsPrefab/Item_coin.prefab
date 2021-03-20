@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3652036988734390028}
   - component: {fileID: 3652036988734390016}
   m_Layer: 0
-  m_Name: Item_coin
+  m_Name: Item_Coin
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446d6f0b511592c44ab29194162130a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
   item:
     id: 0
     cuantity: 1
@@ -116,7 +117,7 @@ MonoBehaviour:
     type: 0
     action: 0
     transform: {fileID: 0}
-  PopUpCanvas: {fileID: 0}
+  colliderObject: {fileID: 3221497530354851916}
 --- !u!1 &5043573475272762955
 GameObject:
   m_ObjectHideFlags: 0

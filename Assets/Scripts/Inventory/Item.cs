@@ -8,6 +8,7 @@ public class Item
 {
     [SerializeField] private int id;
     [SerializeField] private int cuantity;
+    [SerializeField] private int price;
     [SerializeField] private bool isUnlocked;
     [SerializeField] private ItemType type;
     [SerializeField] private ItemAction action;
@@ -15,7 +16,8 @@ public class Item
     //[SerializeField] ParticleSystem particlePick;
     public int Id { get { return id; } }
     public int Cuantity { get { return cuantity; } }
-    public ItemAction Action { get { return action; } }
+    public int Price { get { return price; } set { price = value; } }
+    public ItemAction Action { get { return action; } set { action = value; } }
     public ItemType Type { get { return type; } }
 
 
@@ -36,8 +38,8 @@ public class Item
             case ItemType.CHEST:
                 break;
             case ItemType.DOOR:
-            OpenDoor();
-            break;
+                OpenDoor();
+                break;
         }
         Debug.Log("Interacted");
     }
@@ -66,14 +68,46 @@ public class Item
 
         }
     }
-    private void CheckItemInteractType()
-    {
-        switch (type)
-        {
-            case ItemType.CHEST:
-                OpenChest();
-                break;
 
+    public void BuyAction()
+    {
+        bool ShouldBuy = false;
+
+        if (CanAffordBuy())
+        {
+            Debug.Log("BUY");
+            switch (type)
+            {
+                case ItemType.KEY:
+                    ShouldBuy = true;
+                    CheckIfExistsOnInventory();
+                    GameManager.Instance.statsCanvas.AssignKeys();
+                    break;
+                case ItemType.HEALTH:
+                    if (CheckIfNeedsHeal())
+                    {
+                        ShouldBuy = true;
+                        GameManager.Instance.statsCanvas.AssignHp();
+                    }
+                    break;
+                case ItemType.ITEM:
+                    ShouldBuy = true;
+                    AddItemToInventory(this);
+                    break;
+
+            }
+            if (ShouldBuy)
+            {
+                RetrieveSoulCoins();
+                GameObject.Destroy(GameManager.Instance.player.playerInteractor.InteractedObject.transform.parent.gameObject);
+            }
+
+        }
+        else
+        {
+            
+            GameManager.Instance.player.playerInteractor.InteractedObject.GetComponent<SceneItem>().GetComponentInParent<ShopSlot>().CantAfford();
+            Debug.Log("CANT BUY");
         }
     }
 
@@ -90,14 +124,21 @@ public class Item
             GameManager.Instance.player.playerStats.Inventory.Add(this);
     }
     ///<summary> Comprueba si la vida actual del jugador es menor que la máxima posible. Si lo es, se añade vida./></summary>
-    private void CheckIfNeedsHeal()
+    private bool CheckIfNeedsHeal()
     {
+        bool canHeal = false;
         Debug.Log("CurrentHP:" + GameManager.Instance.player.playerStats.CurrentHp);
         Debug.Log("MaxHP:" + GameManager.Instance.player.playerStats.Hp);
 
         if (GameManager.Instance.player.playerStats.CurrentHp < GameManager.Instance.player.playerStats.Hp)
+        {
             GameManager.Instance.player.playerStats.AddHp(this.cuantity);
+            canHeal = true;
+        }
+
+        return canHeal;
     }
+
     ///<summary> Comprueba si la xp actual del jugador es menor que la máxima posible. Si lo es, se añade xp. Si no, se sube de nivel y se resetea el current xp/></summary>
     private void AddXp()
     {
@@ -115,13 +156,32 @@ public class Item
     private void OpenChest()
     {
 
-    }   
+    }
     private void OpenDoor()
     {
         GameManager.Instance.player.playerInteractor.InteractedObject.GetComponent<Animator>().SetTrigger("Open");
         //start coroutine to change stance
     }
     #endregion
+
+    #region  BUY_METHODS
+
+    private bool CanAffordBuy()
+    {
+        bool canBuy = false;
+        if (GameManager.Instance.player.playerStats.SoulCoins > this.price)
+            canBuy = true;
+
+        return canBuy;
+    }
+    private void RetrieveSoulCoins() => GameManager.Instance.player.playerStats.SoulCoins -= this.Price;
+    private void AddItemToInventory(Item item) => GameManager.Instance.player.playerStats.Inventory.Add(item);
+
+
+
+
+    #endregion
+
 
 }
 
@@ -143,4 +203,5 @@ public enum ItemAction
 {
     PICK,
     INTERACT,
+    BUY,
 }

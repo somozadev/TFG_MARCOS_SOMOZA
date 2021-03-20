@@ -86,7 +86,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator WaitToAttack(float waitTime)
     {
-        GameObject bullet = GameObject.Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        float radius = 0.1f;
+        Vector3 randomPos = new Vector3(shootingPoint.position.x + UnityEngine.Random.Range(-radius,radius),shootingPoint.position.y + UnityEngine.Random.Range(-radius,radius),shootingPoint.position.z);
+        GameObject bullet = GameObject.Instantiate(bulletPrefab, randomPos, Quaternion.identity);
         bullet.GetComponent<Bullet>().rb.AddForce(transform.forward * attSpeed, ForceMode.Impulse);
         yield return new WaitForSeconds(waitTime);
         canAttack = true;

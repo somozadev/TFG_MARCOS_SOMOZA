@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Collider))]
 public class SceneItem : MonoBehaviour
@@ -8,15 +9,19 @@ public class SceneItem : MonoBehaviour
     public bool canInteract;
     public Item item;
     private AnimationWoldSpaceCanvas PopUpCanvas;
+    [SerializeField] Collider colliderObject;
+
+
     private void Start()
     {
         canInteract = true;
-    }
-    private void Awake()
-    {
         item.transform = this.transform;
         if (item.Action.Equals(ItemAction.INTERACT))
             PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
+        if (item.Action.Equals(ItemAction.BUY))
+        {
+            colliderObject.gameObject.SetActive(false);
+        }
         if (item.Type.Equals(ItemType.XP))
             XpScaler();
     }
@@ -32,6 +37,11 @@ public class SceneItem : MonoBehaviour
             }
             else if (item.Action.Equals(ItemAction.INTERACT))
                 EnablePopUpInteract();
+            else if (item.Action.Equals(ItemAction.BUY))
+            {
+                Debug.Log("Shall animate item");
+                GetComponentInParent<ShopSlot>().SelectedItem();
+            }
         }
     }
     public void Use()
@@ -44,6 +54,10 @@ public class SceneItem : MonoBehaviour
                 DisablePopUpInteract();
                 // GameManager.Instance.player.playerInteractor.InteractedObject.gameObject.tag = "Untagged";
             }
+            else if(item.Action.Equals(ItemAction.BUY))
+            {
+                item.BuyAction();
+            }
         }
     }
     public void Leave()
@@ -53,6 +67,12 @@ public class SceneItem : MonoBehaviour
             if (item.Action.Equals(ItemAction.INTERACT))
             {
                 DisablePopUpInteract();
+            }
+            else if (item.Action.Equals(ItemAction.BUY))
+            {
+                GetComponentInParent<ShopSlot>().DeselectedItem();
+                Debug.Log("Shall finish animating item if didnt bought");
+                Debug.Log("Shall finish animating item if bought");
             }
         }
     }

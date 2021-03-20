@@ -15,8 +15,10 @@ public class PlayerStats
     [SerializeField] private float dmg;
     [Range(1, 10)]
     [SerializeField] private float spd;
+
     [SerializeField] private float attspd;
     [SerializeField] private float attrate;
+    [SerializeField] private float range;
 
     [SerializeField] private int soulCoins;
 
@@ -34,12 +36,13 @@ public class PlayerStats
     public float Def { get { return def; } set { def = value; } }
     public float Attspd { get { return attspd; } set { attspd = value; } }
     public float Attrate { get { return attrate; } set { attrate = value; } }
+    public float Range { get { return range; } set { range = value; } }
     public int SoulCoins { get { return soulCoins; } set { soulCoins = value; } }
     public List<Item> Inventory { get { return inventory; } }
     #endregion
 
     #region CONSTRUCTOR
-    public PlayerStats(int level, int currentHp, int currentXp, int hp, int xp, float dmg, float spd, float def, float attspd,float attrate, int soulCoins, List<Item> inventory)
+    public PlayerStats(int level, int currentHp, int currentXp, int hp, int xp, float dmg, float spd, float def, float attspd, float attrate, float range, int soulCoins, List<Item> inventory)
     {
         this.level = level;
         this.xp = xp;
@@ -51,16 +54,22 @@ public class PlayerStats
         this.def = def;
         this.attspd = attspd;
         this.attrate = attrate;
+        this.range = range;
         this.soulCoins = soulCoins;
         this.inventory = inventory;
     }
     #endregion
 
     #region METODOS
-    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level,2f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; }
+    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level, 2f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; }
     public void AddItem(Item item) => inventory.Add(item);
 
-    public void AddHp(int currentHp) => this.currentHp += currentHp;
+    public void AddHp(int currentHp)
+    {
+        this.currentHp += currentHp;
+        if (this.currentHp > this.hp)
+            this.currentHp = this.hp;
+    }
     public void AddMaxHp(int hp) => this.hp += hp;
 
     public bool ShouldAddXp(int currentXp) => this.currentXp + currentXp >= this.xp ? true : false;

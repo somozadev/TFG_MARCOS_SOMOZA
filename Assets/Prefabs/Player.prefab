@@ -61,6 +61,7 @@ MonoBehaviour:
     spd: 5
     attspd: 1
     attrate: 0
+    range: 0
     soulCoins: 0
     inventory: []
   playerInteractor: {fileID: 5511366637439774767}
