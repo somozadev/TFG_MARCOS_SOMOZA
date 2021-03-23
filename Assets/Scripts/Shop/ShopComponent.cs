@@ -32,11 +32,10 @@ public class ShopComponent : MonoBehaviour
             GameObject aux = Instantiate(item.Prefab, itemSpots[i].position, Quaternion.identity, itemSpots[i].transform);
             aux.GetComponent<SceneItem>().item = item.Item;
             aux.GetComponent<SceneItem>().item.Price = item.Price;
+            aux.GetComponent<SceneItem>().Initialize();
             itemSpots[shop.shopItems.IndexOf(item)].GetComponentInChildren<TMP_Text>().text = item.Price.ToString();
             i++;
             itemSpots[i].GetComponent<ShopSlot>().itemToSell = aux;
-            //aux.AddComponent<rotacion> addcomponent<ShopLimiter>
-
         }
     }
 

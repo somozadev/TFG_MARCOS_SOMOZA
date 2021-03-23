@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
-  m_Name: Damage_Up
+  m_Name: Greek_Glasses
   m_EditorClassIdentifier: 
-  itemName: Damage_Up
-  price: 50
-  genre: 2
-  item: {fileID: 11400000, guid: 378bad15ae9a09340bd646e44aa291ad, type: 2}
-  prefab: {fileID: 7901626040871378299, guid: 49f195a0bd137fd44a13c438ac0ea1c5, type: 3}
+  itemName: Greek_Glasses
+  price: 200
+  genre: 3
+  item: {fileID: 11400000, guid: e1c8caf57a3558a4d95c5ff817d66bf5, type: 2}
+  prefab: {fileID: 6433721087174997626, guid: d91278eec6566f444b47cdb263120e2b, type: 3}

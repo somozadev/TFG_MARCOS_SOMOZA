@@ -11,7 +11,7 @@ public class ShopSlot : MonoBehaviour
 
 
     private void Start()
-    {   
+    {
         text = GetComponentInChildren<TMP_Text>();
         speed = Random.Range(7, 16);
         selected = false;
@@ -39,13 +39,14 @@ public class ShopSlot : MonoBehaviour
     {
         StartCoroutine(RotateIt());
     }
-    
+
 
     IEnumerator RotateIt()
     {
         while (true)
         {
-            itemToSell.transform.Rotate(Vector3.up * speed * Time.deltaTime, Space.World);
+            if (itemToSell != null)
+                itemToSell.transform.Rotate(Vector3.up * speed * Time.deltaTime, Space.World);
             yield return new WaitForEndOfFrame();
         }
     }

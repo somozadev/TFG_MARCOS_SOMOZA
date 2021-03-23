@@ -77,6 +77,20 @@ public class PlayerStats
     public void AddMaxXp(int xp) => this.xp += xp;
     #endregion
 
+}
+
+[System.Serializable]
+public class ExtraStats
+{
+    [SerializeField] private int numberOfShots;
 
 
+
+    public int NumberOfShots { get { return numberOfShots; } set { numberOfShots = value; } }
+
+
+    public ExtraStats(int numberOfShots)
+    {
+        this.numberOfShots = numberOfShots;
+    }
 }

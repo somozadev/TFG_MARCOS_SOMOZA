@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
-  m_Name: Damage_Up
+  m_Script: {fileID: 11500000, guid: ee4532d3e11f5864ab42ddb2ecb69350, type: 3}
+  m_Name: DmgUp_Bottle
   m_EditorClassIdentifier: 
-  itemName: Damage_Up
+  id: 1
+  cuantity: 5
   price: 50
-  genre: 2
-  item: {fileID: 11400000, guid: 378bad15ae9a09340bd646e44aa291ad, type: 2}
-  prefab: {fileID: 7901626040871378299, guid: 49f195a0bd137fd44a13c438ac0ea1c5, type: 3}
+  isUnlocked: 1
+  type: 6
+  action: 2
+  itemSprite: {fileID: 184950751378207249, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}

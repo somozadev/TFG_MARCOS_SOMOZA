@@ -14,16 +14,24 @@ public class SceneItem : MonoBehaviour
 
     private void Start()
     {
-        canInteract = true;
-        item.transform = this.transform;
-        if (item.Action.Equals(ItemAction.INTERACT))
-            PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
-        if (item.Action.Equals(ItemAction.BUY))
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        if (item != null)
         {
-            colliderObject.gameObject.SetActive(false);
+            canInteract = true;
+            // item.Transform = this.transform;
+            if (item.Action.Equals(ItemAction.INTERACT))
+                PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
+            if (item.Action.Equals(ItemAction.BUY))
+            {
+                colliderObject.gameObject.SetActive(false);
+            }
+            if (item.Type.Equals(ItemType.XP)) { }
         }
-        if (item.Type.Equals(ItemType.XP))
-            XpScaler();
+        // XpScaler();
     }
 
     public void Contact()
@@ -54,7 +62,7 @@ public class SceneItem : MonoBehaviour
                 DisablePopUpInteract();
                 // GameManager.Instance.player.playerInteractor.InteractedObject.gameObject.tag = "Untagged";
             }
-            else if(item.Action.Equals(ItemAction.BUY))
+            else if (item.Action.Equals(ItemAction.BUY))
             {
                 item.BuyAction();
             }
@@ -82,15 +90,15 @@ public class SceneItem : MonoBehaviour
 
 
 
-    private void XpScaler()
-    {
-        Vector3 aux = (new Vector3(1, 1, 1) * item.Cuantity) / 100;
-        if (aux.magnitude >= new Vector3(0.1f, 0.1f, 0.1f).magnitude)
-            item.transform.localScale = aux;
-        else
-            item.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    // private void XpScaler()
+    // {
+    //     Vector3 aux = (new Vector3(1, 1, 1) * item.Cuantity) / 100;
+    //     if (aux.magnitude >= new Vector3(0.1f, 0.1f, 0.1f).magnitude)
+    //         item.Transform.localScale = aux;
+    //     else
+    //         item.Transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-        item.transform.GetComponent<SphereCollider>().radius = (item.transform.GetComponent<SphereCollider>().radius * item.transform.localScale.x) / 0.1f;
-    }
+    //     item.Transform.GetComponent<SphereCollider>().radius = (item.Transform.GetComponent<SphereCollider>().radius * item.Transform.localScale.x) / 0.1f;
+    // }
 
 }

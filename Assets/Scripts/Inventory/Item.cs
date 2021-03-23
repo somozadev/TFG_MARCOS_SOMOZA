@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Item
+
+[CreateAssetMenu(fileName = "Item", order = 1)]
+[Serializable]
+public class Item : ScriptableObject
 {
     [SerializeField] private int id;
     [SerializeField] private int cuantity;
@@ -12,23 +14,26 @@ public class Item
     [SerializeField] private bool isUnlocked;
     [SerializeField] private ItemType type;
     [SerializeField] private ItemAction action;
-    public Transform transform;
+    [SerializeField] private Sprite itemSprite;
+    // [SerializeField] private Transform transform;
     //[SerializeField] ParticleSystem particlePick;
     public int Id { get { return id; } }
     public int Cuantity { get { return cuantity; } }
+    public Sprite ItemSprite { get { return itemSprite; } }
     public int Price { get { return price; } set { price = value; } }
     public ItemAction Action { get { return action; } set { action = value; } }
+    // public Transform Transform { get { return transform; } set { transform = value; } }
     public ItemType Type { get { return type; } }
 
 
-    public Item(int id, int cuantity, bool isUnlocked, ItemType type, ItemAction action, Transform transform)
+    public Item(int id, int cuantity, bool isUnlocked, ItemType type, ItemAction action)//, Transform transform)
     {
         this.id = id;
         this.cuantity = cuantity;
         this.isUnlocked = isUnlocked;
         this.type = type;
         this.action = action;
-        this.transform = transform;
+        // this.transform = transform;
     }
 
     public void InteractAction()
@@ -93,6 +98,7 @@ public class Item
                 case ItemType.ITEM:
                     ShouldBuy = true;
                     AddItemToInventory(this);
+                    GameManager.Instance.player.currentItemsVisual.AddNewItem(this);
                     break;
 
             }
@@ -100,12 +106,21 @@ public class Item
             {
                 RetrieveSoulCoins();
                 GameObject.Destroy(GameManager.Instance.player.playerInteractor.InteractedObject.transform.parent.gameObject);
+                if (type.Equals(ItemType.ITEM))
+                {
+                    switch (id)
+                    {
+                        case 3:
+                            DoubleShot();
+                        break;
+                    }
+                }
             }
 
         }
         else
         {
-            
+
             GameManager.Instance.player.playerInteractor.InteractedObject.GetComponent<SceneItem>().GetComponentInParent<ShopSlot>().CantAfford();
             Debug.Log("CANT BUY");
         }
@@ -138,7 +153,6 @@ public class Item
 
         return canHeal;
     }
-
     ///<summary> Comprueba si la xp actual del jugador es menor que la máxima posible. Si lo es, se añade xp. Si no, se sube de nivel y se resetea el current xp/></summary>
     private void AddXp()
     {
@@ -147,7 +161,7 @@ public class Item
         else
             GameManager.Instance.player.playerStats.AddXp(this.cuantity);
     }
-
+    ///<summary> Añade la cantidad del this. item a las stats del inventario</summary>
     private void AddSoulCoin() => GameManager.Instance.player.playerStats.SoulCoins += this.cuantity;
 
     #endregion
@@ -177,12 +191,18 @@ public class Item
     private void RetrieveSoulCoins() => GameManager.Instance.player.playerStats.SoulCoins -= this.Price;
     private void AddItemToInventory(Item item) => GameManager.Instance.player.playerStats.Inventory.Add(item);
 
+    #endregion
 
+    #region ITEM_METHODS
+
+    private void DoubleShot()
+    {
+        GameManager.Instance.player.extraStats.NumberOfShots = 2;
+        Debug.Log("Now i double shot!");
+    }
 
 
     #endregion
-
-
 }
 
 
