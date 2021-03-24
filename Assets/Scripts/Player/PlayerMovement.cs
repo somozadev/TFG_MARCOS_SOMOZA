@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     public PlayerInput PlayerInput { get { return playerInput; } }
     public bool IsInteracting { get { return isInteracting; } }
+    public Rigidbody Rb { get { return rb; } }
 
     private void Awake()
     {
@@ -87,8 +88,8 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator WaitToAttack(float waitTime)
     {
         float radius = 0.1f;
-        
-        for(int i = 0; i < GameManager.Instance.player.extraStats.NumberOfShots; i++)
+
+        for (int i = 0; i < GameManager.Instance.player.extraStats.NumberOfShots; i++)
         {
             Vector3 randomPos = new Vector3(shootingPoint.position.x + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.y + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.z);
             GameObject bullet = GameObject.Instantiate(bulletPrefab, randomPos, Quaternion.identity);
@@ -114,6 +115,21 @@ public class PlayerMovement : MonoBehaviour
 
             rb.AddForce(rb.position + (rightMovement + upMovement));
             // rb.MovePosition(rb.position + (rightMovement + upMovement));
+        }
+    }
+    public void Levitate()
+    {
+        StartCoroutine(LevitateCoroutine());
+    }
+    private IEnumerator LevitateCoroutine()
+    {
+        while (true)
+        {
+            if (transform.position.y < 1)
+            {
+                rb.AddForce(new Vector3(0f, Mathf.Abs(Physics.gravity.y) * 9, 0), ForceMode.Acceleration);
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
 

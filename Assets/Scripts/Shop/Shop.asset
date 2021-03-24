@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4806994400521145156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
+  m_Name: Speed_Wings(Clone)
+  m_EditorClassIdentifier: 
+  itemName: Speed_Wings(Clone)
+  price: 200
+  genre: 3
+  item: {fileID: 11400000, guid: abb49935a9d26c14aa06f23bedffa3c3, type: 2}
+  prefab: {fileID: 4785109882649467205, guid: 9a30b5c453675d54da6c35a62fccc239, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,43 +30,9 @@ MonoBehaviour:
   m_Name: Shop
   m_EditorClassIdentifier: 
   shopItems:
-  - {fileID: 4246899416560431635}
-  - {fileID: 1307358225726147255}
   - {fileID: 7752189092573719760}
---- !u!114 &1307358225726147255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
-  m_Name: Damage_Up(Clone)
-  m_EditorClassIdentifier: 
-  itemName: Damage_Up(Clone)
-  price: 50
-  genre: 2
-  item: {fileID: 11400000, guid: 378bad15ae9a09340bd646e44aa291ad, type: 2}
-  prefab: {fileID: 7901626040871378299, guid: 49f195a0bd137fd44a13c438ac0ea1c5, type: 3}
---- !u!114 &4246899416560431635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
-  m_Name: Health_Potion(Clone)
-  m_EditorClassIdentifier: 
-  itemName: Health_Potion(Clone)
-  price: 20
-  genre: 1
-  item: {fileID: 11400000, guid: c61bed0f44db4ce479279a61c5653071, type: 2}
-  prefab: {fileID: 4108393641918863056, guid: dd6f68d2eb63e8e4f918ac5969a3fa11, type: 3}
+  - {fileID: 8618458568934166049}
+  - {fileID: -4806994400521145156}
 --- !u!114 &7752189092573719760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,3 +50,20 @@ MonoBehaviour:
   genre: 3
   item: {fileID: 11400000, guid: e1c8caf57a3558a4d95c5ff817d66bf5, type: 2}
   prefab: {fileID: 6433721087174997626, guid: d91278eec6566f444b47cdb263120e2b, type: 3}
+--- !u!114 &8618458568934166049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
+  m_Name: Range_Bow(Clone)
+  m_EditorClassIdentifier: 
+  itemName: Range_Bow(Clone)
+  price: 200
+  genre: 3
+  item: {fileID: 11400000, guid: a22e39b16054144438a2d367be3c27a4, type: 2}
+  prefab: {fileID: 2048407755461942199, guid: b70bdecb7c4489a45a760a20da059022, type: 3}

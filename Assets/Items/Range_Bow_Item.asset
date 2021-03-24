@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee4532d3e11f5864ab42ddb2ecb69350, type: 3}
-  m_Name: GreekGlasses_Item
+  m_Name: Range_Bow_Item
   m_EditorClassIdentifier: 
-  id: 2
+  id: 4
   cuantity: 1
   price: 200
   isUnlocked: 1
   type: 6
   action: 2
-  itemSprite: {fileID: 1161201145128540330, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}
+  itemSprite: {fileID: 5543941588292853863, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}

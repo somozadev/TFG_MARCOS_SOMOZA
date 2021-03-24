@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4532d3e11f5864ab42ddb2ecb69350, type: 3}
-  m_Name: GreekGlasses_Item
+  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
+  m_Name: Speed_Wings
   m_EditorClassIdentifier: 
-  id: 2
-  cuantity: 1
+  itemName: Speed_Wings
   price: 200
-  isUnlocked: 1
-  type: 6
-  action: 2
-  itemSprite: {fileID: 1161201145128540330, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}
+  genre: 3
+  item: {fileID: 11400000, guid: abb49935a9d26c14aa06f23bedffa3c3, type: 2}
+  prefab: {fileID: 4785109882649467205, guid: 9a30b5c453675d54da6c35a62fccc239, type: 3}

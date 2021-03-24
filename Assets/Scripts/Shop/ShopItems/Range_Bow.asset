@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4532d3e11f5864ab42ddb2ecb69350, type: 3}
-  m_Name: GreekGlasses_Item
+  m_Script: {fileID: 11500000, guid: e38ee3524f7471c468517550a16664b2, type: 3}
+  m_Name: Range_Bow
   m_EditorClassIdentifier: 
-  id: 2
-  cuantity: 1
+  itemName: Range_Bow
   price: 200
-  isUnlocked: 1
-  type: 6
-  action: 2
-  itemSprite: {fileID: 1161201145128540330, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}
+  genre: 3
+  item: {fileID: 11400000, guid: a22e39b16054144438a2d367be3c27a4, type: 2}
+  prefab: {fileID: 2048407755461942199, guid: b70bdecb7c4489a45a760a20da059022, type: 3}

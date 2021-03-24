@@ -110,9 +110,15 @@ public class Item : ScriptableObject
                 {
                     switch (id)
                     {
-                        case 3:
+                        case 2: //Greek glasses
                             DoubleShot();
-                        break;
+                            break;
+                        case 3:// Wings of jisus
+                            AddWings();
+                            break;
+                        case 4:// Speed Bow
+                            AddRange(5f);
+                            break;
                     }
                 }
             }
@@ -198,7 +204,15 @@ public class Item : ScriptableObject
     private void DoubleShot()
     {
         GameManager.Instance.player.extraStats.NumberOfShots = 2;
-        Debug.Log("Now i double shot!");
+    }
+    private void AddRange(float range)
+    {
+        GameManager.Instance.player.playerStats.Range+=range;
+    }
+    private void AddWings()
+    {
+        
+        GameManager.Instance.player.playerMovement.Levitate();
     }
 
 
