@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class SceneController : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class SceneController : MonoBehaviour
 
 
     public void LoadScene(string sceneName) { StartCoroutine(LoadAsync(sceneName)); }
-    
+
     private IEnumerator LoadAsync(string scene)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
@@ -30,4 +32,17 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
     }
+
+    public void LoadSceneAssetReference(AssetReference scene) { StartCoroutine(LoadSceneAssetReferenceAsync(scene)); }
+
+    private IEnumerator LoadSceneAssetReferenceAsync(AssetReference assetReference)
+    {
+        assetReference.LoadSceneAsync(LoadSceneMode.Additive);
+
+        while (!assetReference.IsDone)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
 }
