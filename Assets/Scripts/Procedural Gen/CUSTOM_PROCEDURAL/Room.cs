@@ -8,6 +8,8 @@ public class Room : MonoBehaviour
 
     private bool isLoaded;
     private bool shouldLoad;
+
+    private int numberOfDoors; 
     
     // Start is called before the first frame update
     void Start()
