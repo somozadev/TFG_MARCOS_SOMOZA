@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace EditorTool
 {
     public class GridBase : MonoBehaviour
     {
+        public List<GameObject> gridStuff;
         public GameObject prefab;
         public int x;
         public int z;
@@ -20,7 +22,22 @@ namespace EditorTool
             CreateMouseCollision();
         }
 
-
+        public void DeleteLastGrid()
+        {
+            foreach (GameObject o in gridStuff)
+            {
+                Destroy(o);
+            }
+            gridStuff.Clear();
+        }
+        public void SetX(InputField inputField)
+        {
+            x = System.Convert.ToInt32(inputField.text);
+        }
+        public void SetZ(InputField inputField)
+        {
+            z = System.Convert.ToInt32(inputField.text);
+        }
 
         public void CreateGrid()
         {
@@ -40,11 +57,12 @@ namespace EditorTool
                     nodeObj.z = j;
 
                     Node node = new Node();
-                    node.visualizedObj = aux;
+                    node.floorObj = aux;
                     node.x = i;
                     node.z = j;
 
                     grid[i, j] = node;
+                    gridStuff.Add(aux);
 
                 }
             }
@@ -55,11 +73,16 @@ namespace EditorTool
             GameObject aux = new GameObject();
             aux.AddComponent<BoxCollider>();
             aux.GetComponent<BoxCollider>().size = new Vector3(x * offset, 0.1f, z * offset);
-            aux.transform.position = new Vector3((x * offset) / 2 - 1, 0, (z * offset) / 2 - 1);
+            aux.transform.position = new Vector3(((x * offset) / 2) - 2, 0, ((z * offset) / 2) - 2);
+            gridStuff.Add(aux);
         }
 
         public Node NodeFromWorldPos(Vector3 worldPos)
         {
+
+
+            //MakeNodeGlowHere?? // nor item ?
+
             float worldX = worldPos.x;
             float worldZ = worldPos.z;
             worldX /= offset;
@@ -77,8 +100,12 @@ namespace EditorTool
             if (innerz < 0)
                 innerz = 0;
 
-            return grid[innerx, innerz];
+            if (grid[innerx, innerz] != null)
 
+                return grid[innerx, innerz];
+
+            else
+                return null;
 
         }
 

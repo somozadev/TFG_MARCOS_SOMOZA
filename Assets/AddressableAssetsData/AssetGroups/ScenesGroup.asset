@@ -21,8 +21,15 @@ MonoBehaviour:
     m_Address: Assets/Scripts/Procedural Gen/CUSTOM_PROCEDURAL/Stage0_0.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 102900000, guid: 6419c3dbd03927f4fab88b5b8670a173, type: 3}
-    m_TargetAsset: {fileID: 102900000, guid: 6419c3dbd03927f4fab88b5b8670a173, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 66c05709e04ed42a3a537ad26aca9cb8
+    m_Address: Assets/Packages/polyperfect/Low Poly Ultimate Pack/- Materials/Colors/57
+      BLACK.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d7003938b8a4166429d1721dd9316b6a, type: 2}
   m_SchemaSet:

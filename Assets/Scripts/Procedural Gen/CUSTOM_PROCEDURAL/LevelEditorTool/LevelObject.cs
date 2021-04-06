@@ -17,11 +17,12 @@ namespace EditorTool
         public bool isWall;
         public int rotationDegrees = 90;
 
+
         public void UpdateNode(Node[,] grid)
         {
             Node node = grid[x, z];
 
-            Vector3 worldPos = node.visualizedObj.transform.position;
+            Vector3 worldPos = node.floorObj.transform.position;
             worldPos += posOffset;
             transform.rotation = Quaternion.Euler(rotOffset);
             transform.position = worldPos;
@@ -33,6 +34,18 @@ namespace EditorTool
             eulerAngles += new Vector3(0, rotationDegrees, 0);
             transform.localRotation = Quaternion.Euler(eulerAngles);
         }
+        public void ChangeRotation(float Degree)
+        {
+            Vector3 eulerAngles = transform.eulerAngles;
+            eulerAngles += new Vector3(0, Degree, 0);
+            transform.localRotation = Quaternion.Euler(eulerAngles);
+        }
+
+        public void Hide()
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+
 
         public SaveableObject GetSaveableObject()
         {
@@ -55,11 +68,11 @@ namespace EditorTool
     }
 
     [System.Serializable]
-    public class SaveableObject 
+    public class SaveableObject
     {
-        public string id; 
+        public string id;
         public int posX, posZ;
-        public float rotX,rotY,rotZ;
+        public float rotX, rotY, rotZ;
 
         public bool isWallObj, isStackable;
 
