@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using System.Linq;
 using UnityEngine.InputSystem;
 
@@ -8,6 +10,11 @@ namespace EditorTool
 {
     public class RoomEditorTool : MonoBehaviour
     {
+
+        //UI
+        public Button wallButton;
+
+
         public EditorResources resources;
 
         public Material highLitedMat;
@@ -53,6 +60,8 @@ namespace EditorTool
             // DeleteStackedObject();
             PlaceWall();
             DeleteWalls();
+            if (Mouse.current.middleButton.wasPressedThisFrame)
+                CloseAll();
         }
 
         void UpdateMousePosition()
@@ -160,19 +169,16 @@ namespace EditorTool
         {
             if (placeWallObj)
             {
+                //UPDATES CURRENT NODE 
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
-
-                //* FALTA REVISTAR LO DE MUSHROOMS Y TAL Y PONER LA UI CUQUI PARA EL RESTO DE CONFIGS, SUSTITUIR TIPOS DE WALL? DE SUELO? ÑADIR MOBS CUAN2 ESTEN TB Y LA CAM Y GUARDAD EL OBJ
-
+                //CLEARS OLD NODE VISUALS
                 foreach (Node n in grid.grid)
                 {
                     if (n != current)
                     {
                         Floor f = n.floorObj.GetComponent<Floor>();
-                        f.UnShadeLeftWall();
-                        f.UnShadeRightWall();
-                        f.UnShadeTopWall();
+                        f.UnShadeAll();
                     }
                     else if (rotCount == 0 && n.floorObj.GetComponent<Floor>().topWall == null)
                         n.floorObj.GetComponent<Floor>().ShadeTopWall();
@@ -181,13 +187,11 @@ namespace EditorTool
                     else if (rotCount == 1 && n.floorObj.GetComponent<Floor>().rightWall == null)
                         n.floorObj.GetComponent<Floor>().ShadeRightWall();
                 }
-
+                //CURRENT NODE VARIABLES
                 Floor floor = current.floorObj.GetComponent<Floor>();
-
                 worldPos = current.floorObj.transform.position;
-
                 LineRenderer lr = null;
-                //VISUALIZER
+                //VISUALIZER INSTANTIATION IF NEEDED
                 if (wallCloneObj == null)
                 {
                     rotCount = 0;
@@ -214,7 +218,9 @@ namespace EditorTool
                 }
                 else
                 {
+                    //VISUALIZER POS UPDATER
                     wallCloneObj.transform.position = worldPos;
+                    //VISUALIZER ROTATION UPDATER
                     if (Mouse.current.rightButton.wasPressedThisFrame)
                     {
                         Debug.Log(rotCount);
@@ -261,24 +267,21 @@ namespace EditorTool
                         if (rotCount > 2)
                             rotCount = 0;
                     }
-
-
-
+                    //WALL PLACING UPDATER
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
-
-                        // if ((current.walls != null && current.walls.Count > 2))
-                        // { Debug.Log("maximum walls"); return; }
                         GameObject actualWallPlaced = null;
 
                         switch (rotCount)
                         {
                             case 0: //top
-                                if (floor.topWall != null)
+                                if (floor.topWall != null && floor.topWall.GetComponent<LevelObject>().objectId == wallCloneObj.GetComponent<LevelObject>().objectId)
                                     return;
 
-                                if (floor.topWall == null)
+                                if (floor.topWall == null || floor.topWall.GetComponent<LevelObject>().objectId != wallCloneObj.GetComponent<LevelObject>().objectId)
                                 {
+                                    if (floor.topWall != null)
+                                        Destroy(floor.topWall);
                                     actualWallPlaced = Instantiate(wallObjToPlace, floor.trfTopWall.position, floor.trfTopWall.rotation);
                                     floor.topWall = actualWallPlaced;
                                     floor.UnShadeTopWall();
@@ -287,11 +290,13 @@ namespace EditorTool
                                     return;
                                 break;
                             case 1: //right
-                                if (floor.rightWall != null)
+                                if (floor.rightWall != null && floor.rightWall.GetComponent<LevelObject>().objectId == wallCloneObj.GetComponent<LevelObject>().objectId)
                                     return;
 
-                                if (floor.rightWall == null)
+                                if (floor.rightWall == null || floor.rightWall.GetComponent<LevelObject>().objectId != wallCloneObj.GetComponent<LevelObject>().objectId)
                                 {
+                                    if (floor.rightWall != null)
+                                        Destroy(floor.topWall);
                                     actualWallPlaced = Instantiate(wallObjToPlace, floor.trfRightWall.position, floor.trfRightWall.rotation);
                                     floor.rightWall = actualWallPlaced;
                                     floor.UnShadeRightWall();
@@ -300,11 +305,13 @@ namespace EditorTool
                                     return;
                                 break;
                             case 2: //left
-                                if (floor.leftWall != null)
+                                if (floor.leftWall != null && floor.leftWall.GetComponent<LevelObject>().objectId == wallCloneObj.GetComponent<LevelObject>().objectId)
                                     return;
 
                                 if (current.floorObj.GetComponent<Floor>().leftWall == null)
                                 {
+                                    if (floor.leftWall != null || floor.leftWall.GetComponent<LevelObject>().objectId != wallCloneObj.GetComponent<LevelObject>().objectId)
+                                        Destroy(floor.topWall);
                                     actualWallPlaced = Instantiate(wallObjToPlace, floor.trfLeftWall.position, floor.trfLeftWall.rotation);
                                     floor.leftWall = actualWallPlaced;
                                     floor.UnShadeRightWall();
@@ -329,7 +336,6 @@ namespace EditorTool
 
             }
         }
-
         public void DeleteWall()
         {
             GameObject remove = wallCloneObj;
@@ -363,9 +369,9 @@ namespace EditorTool
                     highLitedMat.SetColor("_EmissionColor", Color.red);
                 }
 
-                foreach(Node node in grid.grid)
+                foreach (Node node in grid.grid)
                 {
-                    if(node != current)
+                    if (node != current)
                     {
                         node.floorObj.GetComponent<Floor>().UnShadeTopWall();
                         node.floorObj.GetComponent<Floor>().UnShadeRightWall();
@@ -477,7 +483,32 @@ namespace EditorTool
         }
 
         #endregion
+        #region  UI
 
+        int wallRotativeCounter = 0;
+        public void RotateWallsResources(bool right)
+        {
+            if (right)
+            {
+                wallRotativeCounter++;
+                if (wallRotativeCounter >= resources.levelWalls.Count)
+                    wallRotativeCounter = 0;
+            }
+            else
+            {
+                wallRotativeCounter--;
+                if (wallRotativeCounter < 0)
+                    wallRotativeCounter = resources.levelWalls.Count - 1;
+            }
+
+            wallButton.GetComponentInChildren<TMP_Text>().text = resources.levelWalls[wallRotativeCounter].id;
+            //Change visual Image instead of cutre txt... save cool image in resources file as well
+
+            wallButton.onClick.RemoveAllListeners();
+            wallButton.onClick.AddListener(() => PassWallToPlace(resources.levelWalls[wallRotativeCounter].id));
+        }
+
+        #endregion
 
         void CloseAll()
         {
@@ -502,11 +533,15 @@ namespace EditorTool
                 stackCloneObj = null;
             }
             // deleteWall = false;
+            foreach (Node n in grid.grid)
+                n.floorObj.GetComponent<Floor>().UnShadeAll();
+
         }
 
     }
 
 
+    #region ORGANIZATIVE_CLASSES
 
     [System.Serializable]
     public class Node
@@ -539,7 +574,6 @@ namespace EditorTool
 
 
     }
-
 
     [System.Serializable]
     public class EditorResources
@@ -582,4 +616,5 @@ namespace EditorTool
         public string id;
         public GameObject prefab;
     }
+    #endregion
 }

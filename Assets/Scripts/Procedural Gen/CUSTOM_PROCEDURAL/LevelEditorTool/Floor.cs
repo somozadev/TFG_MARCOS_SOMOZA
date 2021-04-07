@@ -27,5 +27,11 @@ namespace EditorTool
         public void UnShadeTopWall() => shadeGameojectTop.SetActive(false);
         public void UnShadeLeftWall() => shadeGameojectLeft.SetActive(false);
         public void UnShadeRightWall() => shadeGameojectRight.SetActive(false);
+        public void UnShadeAll()
+        {
+            UnShadeTopWall();
+            UnShadeLeftWall();
+            UnShadeRightWall();
+        }
     }
 }

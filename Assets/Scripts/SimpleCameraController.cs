@@ -85,27 +85,27 @@ namespace UnityTemplateProjects
         Vector3 GetInputTranslationDirection()
         {
             Vector3 direction = new Vector3();
-            if (Input.GetKey(KeyCode.W))
+            if (UnityEngine.InputSystem.Keyboard.current.shiftKey.wasPressedThisFrame)
             {
                 direction += Vector3.forward;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (UnityEngine.InputSystem.Keyboard.current.sKey.wasPressedThisFrame)
             {
                 direction += Vector3.back;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (UnityEngine.InputSystem.Keyboard.current.aKey.wasPressedThisFrame)
             {
                 direction += Vector3.left;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (UnityEngine.InputSystem.Keyboard.current.dKey.wasPressedThisFrame)
             {
                 direction += Vector3.right;
             }
-            if (Input.GetKey(KeyCode.Q))
+            if (UnityEngine.InputSystem.Keyboard.current.qKey.wasPressedThisFrame)
             {
                 direction += Vector3.down;
             }
-            if (Input.GetKey(KeyCode.E))
+            if (UnityEngine.InputSystem.Keyboard.current.eKey.wasPressedThisFrame)
             {
                 direction += Vector3.up;
             }
@@ -118,27 +118,9 @@ namespace UnityTemplateProjects
 
 #if ENABLE_LEGACY_INPUT_MANAGER
 
-            // Exit Sample  
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                Application.Quit();
-				#if UNITY_EDITOR
-				UnityEditor.EditorApplication.isPlaying = false; 
-				#endif
-            }
             // Hide and lock cursor when right mouse button pressed
-            if (Input.GetMouseButtonDown(1))
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
 
-            // Unlock and show cursor when right mouse button released
-            if (Input.GetMouseButtonUp(1))
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-
+           
             // Rotation
             if (Input.GetMouseButton(1))
             {
@@ -154,7 +136,7 @@ namespace UnityTemplateProjects
             translation = GetInputTranslationDirection() * Time.deltaTime;
 
             // Speed up movement when shift key held
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (UnityEngine.InputSystem.Keyboard.current.leftShiftKey.wasPressedThisFrame)
             {
                 translation *= 10.0f;
             }
