@@ -19,6 +19,7 @@ namespace EditorTool
         public GameObject shadeGameojectTop;
         public GameObject shadeGameojectLeft;
         public GameObject shadeGameojectRight;
+        public GameObject shadeFloor;
 
 
         public void ShadeTopWall() => shadeGameojectTop.SetActive(true);
@@ -27,11 +28,16 @@ namespace EditorTool
         public void UnShadeTopWall() => shadeGameojectTop.SetActive(false);
         public void UnShadeLeftWall() => shadeGameojectLeft.SetActive(false);
         public void UnShadeRightWall() => shadeGameojectRight.SetActive(false);
+
+        public void ShadeFloor() => shadeFloor.SetActive(true);
+        public void UnShadeFloor() => shadeFloor.SetActive(false);
+
         public void UnShadeAll()
         {
             UnShadeTopWall();
             UnShadeLeftWall();
             UnShadeRightWall();
+            UnShadeFloor();
         }
     }
 }

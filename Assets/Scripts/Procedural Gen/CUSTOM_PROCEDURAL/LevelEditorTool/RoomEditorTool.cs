@@ -13,6 +13,7 @@ namespace EditorTool
 
         //UI
         public Button wallButton;
+        public Button floorButton;
 
 
         public EditorResources resources;
@@ -28,29 +29,30 @@ namespace EditorTool
         Vector3 mousePos;
         Vector3 worldPos;
 
+
+        //OBJECTS
         bool hasObj;
         GameObject objToPlace;
         GameObject cloneObj;
         LevelObject objProperties;
         bool deleteObj;
-
-        Node previousNode;
-        Quaternion targetRot;
-        Quaternion prevRot;
-
+        //STACK OBJECTS
         bool placeStackObj;
         GameObject stackObjToPlace;
         GameObject stackCloneObj;
         LevelObject stackObjProperties;
         bool deleteStackObj;
-
-
+        //WALLS
         bool placeWallObj;
         GameObject wallObjToPlace;
         GameObject wallCloneObj;
         LevelObject wallProperties;
         bool deleteWallObj;
-
+        //FLOORS    
+        bool placeFloorObj;
+        GameObject floorObjToPlace;
+        GameObject floorCloneObj;
+        bool deleteFloor;
 
         private void Update()
         {
@@ -60,6 +62,8 @@ namespace EditorTool
             // DeleteStackedObject();
             PlaceWall();
             DeleteWalls();
+            PlaceFloor();
+            DeleteFloors();
             if (Mouse.current.middleButton.wasPressedThisFrame)
                 CloseAll();
         }
@@ -196,6 +200,7 @@ namespace EditorTool
                 {
                     rotCount = 0;
                     wallCloneObj = Instantiate(wallObjToPlace, worldPos, Quaternion.Euler(0, -180, 0)) as GameObject;
+
                     GameObject line = new GameObject("Line");
                     lr = line.AddComponent<LineRenderer>();
                     line.transform.SetParent(wallCloneObj.transform);
@@ -203,8 +208,6 @@ namespace EditorTool
                     lr.startColor = Color.green;
                     lr.endColor = Color.blue;
                     lr.SetWidth(0.5f, 0.5f);
-
-
                     lr.SetPosition(0, line.transform.position);
                     lr.SetPosition(1, wallCloneObj.transform.forward);
                     lr.useWorldSpace = false;
@@ -410,6 +413,103 @@ namespace EditorTool
 
         }
         #endregion
+        #region FLOORS
+        public void PassFloorToPlace(string objId)
+        {
+            deleteFloor = false;
+            if (floorCloneObj != null)
+                Destroy(floorCloneObj);
+            CloseAll();
+            floorCloneObj = null;
+            placeFloorObj = true;
+            floorObjToPlace = resources.GetObjectFloor(objId).prefab;
+
+        }
+        private void PlaceFloor()
+        {
+            if (placeFloorObj)
+            {
+                UpdateMousePosition();
+                Node current = grid.NodeFromWorldPos(mousePos);
+                Floor floor = current.floorObj.GetComponent<Floor>();
+                foreach (Node n in grid.grid)
+                {
+                    if (n != current)
+                    {
+                        Floor f = n.floorObj.GetComponent<Floor>();
+                        f.UnShadeAll();
+                    }
+                    else if (n.floorObj.GetComponent<Floor>().floor.GetComponent<LevelObject>().objectId != floorObjToPlace.GetComponent<LevelObject>().objectId)
+                        n.floorObj.GetComponent<Floor>().ShadeFloor();
+                }
+
+
+                if (floorCloneObj == null)
+                {
+                    floorCloneObj = Instantiate(floorObjToPlace, worldPos, Quaternion.identity) as GameObject;
+                    floor.ShadeFloor();
+                    floorCloneObj.transform.position = current.floorObj.transform.position + new Vector3(0,0.5f,0);
+                    floorCloneObj.transform.localScale *= 0.8f;
+                }
+                else
+                {
+                    floorCloneObj.transform.position = current.floorObj.transform.position + new Vector3(0,0.5f,0);
+                    //PLACE (dont destroy node bc should change so many things)
+                    if (Mouse.current.leftButton.wasPressedThisFrame)
+                    {
+                        if (floor.floor.GetComponent<LevelObject>().objectId != floorCloneObj.GetComponent<LevelObject>().objectId)
+                        {
+                            floor.floor.GetComponent<LevelObject>().objectId = floorObjToPlace.GetComponent<LevelObject>().objectId;
+                            floor.floor.GetComponent<MeshFilter>().mesh = floorObjToPlace.GetComponent<MeshFilter>().sharedMesh;
+                            floor.UnShadeFloor();
+                        }
+
+                    }
+                }
+            }
+        }
+
+        public void DeleteFloor()
+        {
+            GameObject remove = floorCloneObj;
+            Destroy(remove);
+            CloseAll();
+            deleteFloor = true;
+        }
+        private void DeleteFloors()
+        {
+            if (deleteFloor)
+            {
+                UpdateMousePosition();
+                Node current = grid.NodeFromWorldPos(mousePos);
+
+                if (current.floorObj.GetComponent<Floor>().floor != null)
+                {
+                    current.floorObj.GetComponent<Floor>().ShadeFloor();
+                    highLitedMat.color = new Color32(255, 0, 0, 16);
+                    highLitedMat.SetColor("_EmissionColor", Color.red);
+                }
+                foreach (Node node in grid.grid)
+                {
+                    if (node != current)
+                        node.floorObj.GetComponent<Floor>().UnShadeFloor();
+                }
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    if (current.floorObj.GetComponent<Floor>().floor != null)
+                    {
+                        // inSceneFloors.Remove(current.floorObj.GetComponent<Floor>().floor);
+                        current.floorObj.GetComponent<Floor>().floor.GetComponent<MeshFilter>().mesh = resources.levelFloors[0].prefab.GetComponent<MeshFilter>().sharedMesh;
+                        current.floorObj.GetComponent<Floor>().floor.GetComponent<LevelObject>().objectId = resources.levelFloors[0].id;
+                        current.floorObj.GetComponent<Floor>().UnShadeFloor();
+                    }
+
+                }
+            }
+
+        }
+        #endregion
+
         #region  STACK_OBJECTS
 
         public void PassStackObjectToPlace(string objId)
@@ -507,6 +607,30 @@ namespace EditorTool
             wallButton.onClick.RemoveAllListeners();
             wallButton.onClick.AddListener(() => PassWallToPlace(resources.levelWalls[wallRotativeCounter].id));
         }
+        int floorRotativeCounter = 0;
+        public void RotateFloorsResources(bool right)
+        {
+            if (right)
+            {
+                floorRotativeCounter++;
+                if (wallRotativeCounter >= resources.levelFloors.Count)
+                    floorRotativeCounter = 0;
+            }
+            else
+            {
+                floorRotativeCounter--;
+                if (floorRotativeCounter < 0)
+                    floorRotativeCounter = resources.levelFloors.Count - 1;
+            }
+
+            floorButton.GetComponentInChildren<TMP_Text>().text = resources.levelFloors[floorRotativeCounter].id;
+            //Change visual Image instead of cutre txt... save cool image in resources file as well
+
+            floorButton.onClick.RemoveAllListeners();
+            floorButton.onClick.AddListener(() => PassFloorToPlace(resources.levelFloors[floorRotativeCounter].id));
+        }
+
+
 
         #endregion
 
@@ -514,9 +638,14 @@ namespace EditorTool
         {
             hasObj = false;
             deleteObj = false;
-            placeWallObj = false;
             deleteStackObj = false;
+
+            placeWallObj = false;
             deleteWallObj = false;
+
+            placeFloorObj = false;
+            deleteFloor = false;
+
             if (cloneObj != null)
             {
                 Destroy(cloneObj);
@@ -526,6 +655,11 @@ namespace EditorTool
             {
                 Destroy(wallCloneObj);
                 wallCloneObj = null;
+            }
+            if (floorCloneObj != null)
+            {
+                Destroy(floorCloneObj);
+                floorCloneObj = null;
             }
             if (stackCloneObj != null)
             {
