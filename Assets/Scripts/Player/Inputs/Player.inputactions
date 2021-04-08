@@ -402,6 +402,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MapEditor_Tool",
+            "id": "c231819a-4551-4275-b75c-1a70dc24b145",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "d85a7577-8178-4c26-9c63-1b27e55286a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "68982863-93eb-4f1d-af5d-6d76463849dd",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

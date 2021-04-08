@@ -75,6 +75,13 @@ namespace EditorTool
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 mousePos = hit.point;
         }
+        public Transform GetCenterNode()
+        {
+            int x = grid.grid.GetLength(0) / 2;
+            int y = grid.grid.GetLength(0) / 2;
+            Node current = grid.grid[x,y];
+            return current.floorObj.transform;
+        }
 
         #region OBJECTS 
         public void PassGameObjectToPlace(string objectId)
@@ -299,7 +306,7 @@ namespace EditorTool
                                 if (floor.rightWall == null || floor.rightWall.GetComponent<LevelObject>().objectId != wallCloneObj.GetComponent<LevelObject>().objectId)
                                 {
                                     if (floor.rightWall != null)
-                                        Destroy(floor.topWall);
+                                        Destroy(floor.rightWall);
                                     actualWallPlaced = Instantiate(wallObjToPlace, floor.trfRightWall.position, floor.trfRightWall.rotation);
                                     floor.rightWall = actualWallPlaced;
                                     floor.UnShadeRightWall();
@@ -311,13 +318,13 @@ namespace EditorTool
                                 if (floor.leftWall != null && floor.leftWall.GetComponent<LevelObject>().objectId == wallCloneObj.GetComponent<LevelObject>().objectId)
                                     return;
 
-                                if (current.floorObj.GetComponent<Floor>().leftWall == null)
+                                if (floor.leftWall == null || floor.leftWall.GetComponent<LevelObject>().objectId != wallCloneObj.GetComponent<LevelObject>().objectId)
                                 {
-                                    if (floor.leftWall != null || floor.leftWall.GetComponent<LevelObject>().objectId != wallCloneObj.GetComponent<LevelObject>().objectId)
-                                        Destroy(floor.topWall);
+                                    if (floor.leftWall != null)
+                                        Destroy(floor.leftWall);
                                     actualWallPlaced = Instantiate(wallObjToPlace, floor.trfLeftWall.position, floor.trfLeftWall.rotation);
                                     floor.leftWall = actualWallPlaced;
-                                    floor.UnShadeRightWall();
+                                    floor.UnShadeLeftWall();
                                 }
                                 else
                                     return;
@@ -448,12 +455,12 @@ namespace EditorTool
                 {
                     floorCloneObj = Instantiate(floorObjToPlace, worldPos, Quaternion.identity) as GameObject;
                     floor.ShadeFloor();
-                    floorCloneObj.transform.position = current.floorObj.transform.position + new Vector3(0,0.5f,0);
+                    floorCloneObj.transform.position = current.floorObj.transform.position + new Vector3(0, 0.5f, 0);
                     floorCloneObj.transform.localScale *= 0.8f;
                 }
                 else
                 {
-                    floorCloneObj.transform.position = current.floorObj.transform.position + new Vector3(0,0.5f,0);
+                    floorCloneObj.transform.position = current.floorObj.transform.position + new Vector3(0, 0.5f, 0);
                     //PLACE (dont destroy node bc should change so many things)
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
@@ -468,7 +475,6 @@ namespace EditorTool
                 }
             }
         }
-
         public void DeleteFloor()
         {
             GameObject remove = floorCloneObj;
@@ -509,7 +515,6 @@ namespace EditorTool
 
         }
         #endregion
-
         #region  STACK_OBJECTS
 
         public void PassStackObjectToPlace(string objId)
@@ -602,6 +607,7 @@ namespace EditorTool
             }
 
             wallButton.GetComponentInChildren<TMP_Text>().text = resources.levelWalls[wallRotativeCounter].id;
+            wallButton.GetComponent<Image>().sprite = resources.levelWalls[wallRotativeCounter].sprite;
             //Change visual Image instead of cutre txt... save cool image in resources file as well
 
             wallButton.onClick.RemoveAllListeners();
@@ -613,7 +619,7 @@ namespace EditorTool
             if (right)
             {
                 floorRotativeCounter++;
-                if (wallRotativeCounter >= resources.levelFloors.Count)
+                if (floorRotativeCounter >= resources.levelFloors.Count)
                     floorRotativeCounter = 0;
             }
             else
@@ -624,6 +630,7 @@ namespace EditorTool
             }
 
             floorButton.GetComponentInChildren<TMP_Text>().text = resources.levelFloors[floorRotativeCounter].id;
+            floorButton.GetComponent<Image>().sprite = resources.levelFloors[floorRotativeCounter].sprite;
             //Change visual Image instead of cutre txt... save cool image in resources file as well
 
             floorButton.onClick.RemoveAllListeners();
@@ -731,24 +738,28 @@ namespace EditorTool
     {
         public string id;
         public GameObject prefab;
+        public Sprite sprite;
     }
     [System.Serializable]
     public class StackedObjectResource
     {
         public string id;
         public GameObject prefab;
+        public Sprite sprite;
     }
     [System.Serializable]
     public class ObjectWall
     {
         public string id;
         public GameObject prefab;
+        public Sprite sprite;
     }
     [System.Serializable]
     public class ObjectFloor
     {
         public string id;
         public GameObject prefab;
+        public Sprite sprite;
     }
     #endregion
 }

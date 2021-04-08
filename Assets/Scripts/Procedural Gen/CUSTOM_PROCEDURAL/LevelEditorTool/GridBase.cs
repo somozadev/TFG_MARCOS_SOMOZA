@@ -75,6 +75,7 @@ namespace EditorTool
             aux.GetComponent<BoxCollider>().size = new Vector3(x * offset, 0.1f, z * offset);
             aux.transform.position = new Vector3(((x * offset) / 2) - 2, 0, ((z * offset) / 2) - 2);
             gridStuff.Add(aux);
+            Camera.main.GetComponent<ToolCameraMovement>().target = aux.transform; 
         }
 
         public Node NodeFromWorldPos(Vector3 worldPos)
