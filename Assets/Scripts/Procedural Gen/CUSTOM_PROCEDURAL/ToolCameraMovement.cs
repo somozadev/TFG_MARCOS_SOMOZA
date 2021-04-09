@@ -5,14 +5,17 @@ using UnityEngine;
 public class ToolCameraMovement : MonoBehaviour
 {
     public Transform target;
+    public Vector3 offset;
 
     public EditorTool.RoomEditorTool tool;
     public float speed = 30f;
     Vector3 p = new Vector3();
-    
+
+    void Start() => offset = target.position; 
+
     private void Update()
     {
-
+        target.position = offset;
         transform.LookAt(target);
         if (Keyboard.current.lKey.isPressed)
             speed = 50f;
@@ -46,5 +49,9 @@ public class ToolCameraMovement : MonoBehaviour
 
     }
 
+    public void MoveOffsetTop(float amount) => offset = new Vector3(offset.x, offset.y, offset.z + amount);
+    public void MoveOffsetBot(float amount) => offset = new Vector3(offset.x, offset.y, offset.z - amount);
+    public void MoveOffsetRight(float amount) => offset = new Vector3(offset.x + amount, offset.y, offset.z);
+    public void MoveOffsetLeft(float amount) => offset = new Vector3(offset.x - amount, offset.y, offset.z);
 
 }

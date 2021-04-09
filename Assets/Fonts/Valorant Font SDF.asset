@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Valorant Font SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_ShaderKeywords: GLOW_ON
+  m_ShaderKeywords: UNDERLAY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -70,7 +70,7 @@ Material:
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8888889
     - _ScaleRatioB: 0.7222222
-    - _ScaleRatioC: 0.7222222
+    - _ScaleRatioC: 0.49774104
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -83,10 +83,10 @@ Material:
     - _StencilWriteMask: 255
     - _TextureHeight: 64
     - _TextureWidth: 64
-    - _UnderlayDilate: 0
+    - _UnderlayDilate: 0.733
     - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
+    - _UnderlayOffsetY: -0.145
+    - _UnderlaySoftness: 0.573
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
     - _WeightBold: 0.75
@@ -1607,6 +1607,7 @@ MonoBehaviour:
   - {fileID: 4738752078832633156}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
+  m_ClearDynamicDataOnBuild: 0
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0

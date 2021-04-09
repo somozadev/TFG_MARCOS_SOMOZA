@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+using UnityEditor;
 
 namespace EditorTool
 {
@@ -18,6 +19,7 @@ namespace EditorTool
         public Button floorButton;
         public Button lightingButton;
         public Button objectsButton;
+        public TMP_InputField inputField;
 
 
 
@@ -54,7 +56,8 @@ namespace EditorTool
         VolumeProfile lightingObjToPlace;
         public GameObject lightVolumeObj;
 
-
+        private void Start() => inputField.text = transform.GetChild(0).name;
+        
         private void Update()
         {
             PlaceObject();
@@ -112,6 +115,17 @@ namespace EditorTool
 
         }
 
+        public void SavePrefab(GameObject parent)
+        {
+            parent.name = inputField.text;
+            string localPath = "Assets/Scenes/Generated_Scenes/" + parent.name + ".prefab";
+            PrefabUtility.SaveAsPrefabAssetAndConnect(parent, localPath, InteractionMode.UserAction);
+            GetComponent<RoomEditorUIHelper>().AssetsPanelObj.GetComponent<Animator>().SetTrigger("Open");
+            PrefabUtility.UnpackPrefabInstance(parent, PrefabUnpackMode.Completely, InteractionMode.UserAction);
+        }
+
+
+
         #region OBJECTS 
         public void PassGameObjectToPlace(string objectId)
         {
@@ -130,6 +144,8 @@ namespace EditorTool
                 highLitedMat.SetColor("_EmissionColor", Color.yellow);
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
                 Floor floor = current.floorObj.GetComponent<Floor>();
                 worldPos = current.floorObj.transform.position;
 
@@ -162,6 +178,7 @@ namespace EditorTool
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
                         GameObject actualObjPlaced = Instantiate(objToPlace, worldPos, cloneObj.transform.rotation);
+                        actualObjPlaced.transform.parent = transform.GetChild(0).transform.GetChild(1).transform;
                         LevelObject placedProp = actualObjPlaced.GetComponent<LevelObject>();
                         placedProp.x = current.x;
                         placedProp.z = current.z;
@@ -202,6 +219,8 @@ namespace EditorTool
             {
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
 
                 current.floorObj.GetComponent<Floor>().ShadeFloor();
 
@@ -252,6 +271,8 @@ namespace EditorTool
                 //UPDATES CURRENT NODE 
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
                 //CLEARS OLD NODE VISUALS
                 foreach (Node n in grid.grid)
                 {
@@ -384,6 +405,7 @@ namespace EditorTool
                         }
 
                         LevelObject placedProp = actualWallPlaced.GetComponent<LevelObject>();
+                        actualWallPlaced.transform.parent = transform.GetChild(0).transform.GetChild(2).transform;
 
                         placedProp.posOffset = wallProperties.posOffset;
                         placedProp.x = current.x;
@@ -413,6 +435,8 @@ namespace EditorTool
             {
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
 
                 if (current.floorObj.GetComponent<Floor>().topWall != null)
                 {
@@ -494,6 +518,8 @@ namespace EditorTool
                 highLitedMat.SetColor("_EmissionColor", Color.yellow);
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
                 Floor floor = current.floorObj.GetComponent<Floor>();
                 foreach (Node n in grid.grid)
                 {
@@ -546,6 +572,8 @@ namespace EditorTool
             {
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
 
                 foreach (Node node in grid.grid)
                 {
