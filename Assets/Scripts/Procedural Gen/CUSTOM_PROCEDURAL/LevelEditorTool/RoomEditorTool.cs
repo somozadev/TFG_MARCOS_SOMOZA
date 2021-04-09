@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 namespace EditorTool
 {
@@ -14,34 +16,29 @@ namespace EditorTool
         //UI
         public Button wallButton;
         public Button floorButton;
+        public Button lightingButton;
+        public Button objectsButton;
 
+
+
+        public Material highLitedMat;
+        public GridBase grid;
 
         public EditorResources resources;
 
-        public Material highLitedMat;
-
-        public GridBase grid;
-
         public List<GameObject> inSceneGameObjects = new List<GameObject>();
         public List<GameObject> inSceneWalls = new List<GameObject>();
-        public List<GameObject> inSceneStackObjects = new List<GameObject>();
 
         Vector3 mousePos;
         Vector3 worldPos;
 
 
         //OBJECTS
-        bool hasObj;
+        bool placeObj;
         GameObject objToPlace;
         GameObject cloneObj;
         LevelObject objProperties;
         bool deleteObj;
-        //STACK OBJECTS
-        bool placeStackObj;
-        GameObject stackObjToPlace;
-        GameObject stackCloneObj;
-        LevelObject stackObjProperties;
-        bool deleteStackObj;
         //WALLS
         bool placeWallObj;
         GameObject wallObjToPlace;
@@ -53,13 +50,15 @@ namespace EditorTool
         GameObject floorObjToPlace;
         GameObject floorCloneObj;
         bool deleteFloor;
+        //LIGHTING    
+        VolumeProfile lightingObjToPlace;
+        public GameObject lightVolumeObj;
+
 
         private void Update()
         {
             PlaceObject();
             DeleteObjects();
-            // PlaceStackedObject();
-            // DeleteStackedObject();
             PlaceWall();
             DeleteWalls();
             PlaceFloor();
@@ -79,8 +78,38 @@ namespace EditorTool
         {
             int x = grid.grid.GetLength(0) / 2;
             int y = grid.grid.GetLength(0) / 2;
-            Node current = grid.grid[x,y];
+            Node current = grid.grid[x, y];
             return current.floorObj.transform;
+        }
+        void CloseAll()
+        {
+            placeObj = false;
+            deleteObj = false;
+
+            placeWallObj = false;
+            deleteWallObj = false;
+
+            placeFloorObj = false;
+            deleteFloor = false;
+
+            if (cloneObj != null)
+            {
+                Destroy(cloneObj);
+                cloneObj = null;
+            }
+            if (wallCloneObj != null)
+            {
+                Destroy(wallCloneObj);
+                wallCloneObj = null;
+            }
+            if (floorCloneObj != null)
+            {
+                Destroy(floorCloneObj);
+                floorCloneObj = null;
+            }
+            foreach (Node n in grid.grid)
+                n.floorObj.GetComponent<Floor>().UnShadeAll();
+
         }
 
         #region OBJECTS 
@@ -89,17 +118,35 @@ namespace EditorTool
             if (cloneObj != null)
                 Destroy(cloneObj);
             CloseAll();
-            hasObj = true;
+            placeObj = true;
             cloneObj = null;
             objToPlace = resources.GetObjectResource(objectId).prefab;
         }
         void PlaceObject()
         {
-            if (hasObj)
+            if (placeObj)
             {
+                highLitedMat.color = new Color32(255, 255, 0, 16);
+                highLitedMat.SetColor("_EmissionColor", Color.yellow);
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+                Floor floor = current.floorObj.GetComponent<Floor>();
                 worldPos = current.floorObj.transform.position;
+
+
+                //UNLIGHT N LIGHT CURRENT NODE FLOOR
+                foreach (Node n in grid.grid)
+                {
+                    if (n != current)
+                    {
+                        Floor f = n.floorObj.GetComponent<Floor>();
+                        f.UnShadeAll();
+                    }
+                    else
+                        n.floorObj.GetComponent<Floor>().ShadeFloor();
+                }
+
+
                 if (cloneObj == null)
                 {
                     cloneObj = Instantiate(objToPlace, worldPos, Quaternion.identity) as GameObject;
@@ -107,22 +154,25 @@ namespace EditorTool
                 }
                 else
                 {
-                    cloneObj.transform.position = worldPos + objProperties.posOffset;
+                    if (cloneObj.GetComponent<LevelObject>().posOffset == Vector3.zero)
+                        cloneObj.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z);
+                    else
+                        cloneObj.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z) + cloneObj.GetComponent<LevelObject>().posOffset;
+
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
-                        if (current.placedObj != null)
-                        {
-                            Destroy(current.placedObj.gameObject);
-                            current.placedObj = null;
-                        }
                         GameObject actualObjPlaced = Instantiate(objToPlace, worldPos, cloneObj.transform.rotation);
                         LevelObject placedProp = actualObjPlaced.GetComponent<LevelObject>();
                         placedProp.x = current.x;
                         placedProp.z = current.z;
-                        placedProp.transform.position = worldPos + placedProp.posOffset;
-                        placedProp.transform.rotation = cloneObj.transform.rotation;
-                        current.placedObj = placedProp.gameObject;
+                        if (placedProp.posOffset == Vector3.zero)
+                            placedProp.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z);
+                        else
+                            placedProp.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z) + placedProp.posOffset;
 
+                        placedProp.transform.rotation = cloneObj.transform.rotation;
+
+                        current.placedObj.Add(actualObjPlaced);
                         inSceneGameObjects.Add(actualObjPlaced);
                     }
                     if (Mouse.current.rightButton.wasPressedThisFrame)
@@ -139,9 +189,10 @@ namespace EditorTool
         }
         public void DeleteObject()
         {
-            GameObject remove = inSceneGameObjects.Last<GameObject>();
-            inSceneGameObjects.Remove(remove);
-            Destroy(remove);
+            highLitedMat.color = new Color32(255, 0, 0, 16);
+            highLitedMat.SetColor("_EmissionColor", Color.red);
+            if (cloneObj != null)
+                Destroy(cloneObj);
             CloseAll();
             deleteObj = true;
         }
@@ -151,14 +202,30 @@ namespace EditorTool
             {
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
+
+                current.floorObj.GetComponent<Floor>().ShadeFloor();
+
+                foreach (Node node in grid.grid)
+                {
+                    if (node != current)
+                        node.floorObj.GetComponent<Floor>().UnShadeFloor();
+                }
+
+
+
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
-                    if (current.placedObj != null)
+                    if (current.placedObj.Count > 0)
                     {
-                        Destroy(current.placedObj.gameObject);
-                        inSceneGameObjects.Remove(current.placedObj);
+                        List<GameObject> aux = current.placedObj;
+                        foreach (GameObject g in current.placedObj)
+                        {
+                            inSceneGameObjects.Remove(g);
+                            Destroy(aux[aux.IndexOf(g)]);
+                        }
+                        current.floorObj.GetComponent<Floor>().UnShadeFloor();
                     }
-                    current.placedObj = null;
+                    current.placedObj.Clear();
                 }
             }
 
@@ -180,6 +247,8 @@ namespace EditorTool
         {
             if (placeWallObj)
             {
+                highLitedMat.color = new Color32(255, 255, 0, 16);
+                highLitedMat.SetColor("_EmissionColor", Color.yellow);
                 //UPDATES CURRENT NODE 
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
@@ -201,24 +270,11 @@ namespace EditorTool
                 //CURRENT NODE VARIABLES
                 Floor floor = current.floorObj.GetComponent<Floor>();
                 worldPos = current.floorObj.transform.position;
-                LineRenderer lr = null;
                 //VISUALIZER INSTANTIATION IF NEEDED
                 if (wallCloneObj == null)
                 {
                     rotCount = 0;
                     wallCloneObj = Instantiate(wallObjToPlace, worldPos, Quaternion.Euler(0, -180, 0)) as GameObject;
-
-                    GameObject line = new GameObject("Line");
-                    lr = line.AddComponent<LineRenderer>();
-                    line.transform.SetParent(wallCloneObj.transform);
-                    lr.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
-                    lr.startColor = Color.green;
-                    lr.endColor = Color.blue;
-                    lr.SetWidth(0.5f, 0.5f);
-                    lr.SetPosition(0, line.transform.position);
-                    lr.SetPosition(1, wallCloneObj.transform.forward);
-                    lr.useWorldSpace = false;
-
                     wallProperties = wallCloneObj.GetComponent<LevelObject>();
 
                     floor.ShadeTopWall();
@@ -269,10 +325,6 @@ namespace EditorTool
 
 
                         rotCount++;
-                        if (lr != null)
-                            lr.transform.rotation = wallCloneObj.transform.rotation;
-
-
 
                         if (rotCount > 2)
                             rotCount = 0;
@@ -348,6 +400,8 @@ namespace EditorTool
         }
         public void DeleteWall()
         {
+            highLitedMat.color = new Color32(255, 0, 0, 16);
+            highLitedMat.SetColor("_EmissionColor", Color.red);
             GameObject remove = wallCloneObj;
             Destroy(remove);
             CloseAll();
@@ -412,11 +466,11 @@ namespace EditorTool
                 }
             }
 
-            else
-            {
-                highLitedMat.color = new Color32(255, 255, 0, 16);
-                highLitedMat.SetColor("_EmissionColor", Color.yellow);
-            }
+            // else
+            // {
+            //     highLitedMat.color = new Color32(255, 255, 0, 16);
+            //     highLitedMat.SetColor("_EmissionColor", Color.yellow);
+            // }
 
         }
         #endregion
@@ -436,6 +490,8 @@ namespace EditorTool
         {
             if (placeFloorObj)
             {
+                highLitedMat.color = new Color32(255, 255, 0, 16);
+                highLitedMat.SetColor("_EmissionColor", Color.yellow);
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
                 Floor floor = current.floorObj.GetComponent<Floor>();
@@ -477,6 +533,8 @@ namespace EditorTool
         }
         public void DeleteFloor()
         {
+            highLitedMat.color = new Color32(255, 0, 0, 16);
+            highLitedMat.SetColor("_EmissionColor", Color.red);
             GameObject remove = floorCloneObj;
             Destroy(remove);
             CloseAll();
@@ -489,12 +547,6 @@ namespace EditorTool
                 UpdateMousePosition();
                 Node current = grid.NodeFromWorldPos(mousePos);
 
-                if (current.floorObj.GetComponent<Floor>().floor != null)
-                {
-                    current.floorObj.GetComponent<Floor>().ShadeFloor();
-                    highLitedMat.color = new Color32(255, 0, 0, 16);
-                    highLitedMat.SetColor("_EmissionColor", Color.red);
-                }
                 foreach (Node node in grid.grid)
                 {
                     if (node != current)
@@ -515,76 +567,12 @@ namespace EditorTool
 
         }
         #endregion
-        #region  STACK_OBJECTS
-
-        public void PassStackObjectToPlace(string objId)
-        {
-            if (stackCloneObj != null)
-                Destroy(stackCloneObj);
-            CloseAll();
-            stackCloneObj = null;
-            placeStackObj = true;
-            stackObjToPlace = resources.GetStackedObjectResource(objId).prefab;
-        }
-
-        void PlaceStackedObject()
-        {
-            if (placeStackObj)
-            {
-                UpdateMousePosition();
-                Node current = grid.NodeFromWorldPos(mousePos);
-                worldPos = current.floorObj.transform.position;
-                if (stackCloneObj == null)
-                {
-                    stackCloneObj = Instantiate(stackObjToPlace, worldPos, Quaternion.identity) as GameObject;
-                    stackObjProperties = cloneObj.GetComponent<LevelObject>();
-                }
-                else
-                {
-                    stackCloneObj.transform.position = worldPos;
-                    if (Mouse.current.leftButton.wasPressedThisFrame)
-                    {
-                        GameObject actualObjPlaced = Instantiate(stackObjToPlace, worldPos, stackCloneObj.transform.rotation);
-                        LevelObject placedProp = actualObjPlaced.GetComponent<LevelObject>();
-                        placedProp.x = current.x;
-                        placedProp.z = current.z;
-                        current.stackedObj.Add(placedProp.gameObject);
-                    }
-                    if (Mouse.current.rightButton.wasPressedThisFrame)
-                        objProperties.ChangeRotation();
-                }
-            }
-            else
-            {
-                if (stackCloneObj != null)
-                    Destroy(stackCloneObj);
-            }
-
-        }
-        public void DeleteStackedObject()
+        #region LIGHTING_OBJECTS
+        public void PassLightingToPlace(string objId)
         {
             CloseAll();
-            deleteStackObj = true;
-        }
-        void DeleteStackedObjects()
-        {
-            if (deleteStackObj)
-            {
-                UpdateMousePosition();
-                Node current = grid.NodeFromWorldPos(mousePos);
-                if (Mouse.current.leftButton.wasPressedThisFrame)
-                {
-                    if (current.stackedObj.Count > 0)
-                    {
-                        foreach (GameObject stackedO in current.stackedObj)
-                        {
-                            current.stackedObj.Remove(stackedO);
-                            Destroy(stackedO);
-                        }
-                    }
-                    current.stackedObj.Clear();
-                }
-            }
+            lightingObjToPlace = resources.GetLightingResource(objId).prefab;
+            lightVolumeObj.GetComponent<Volume>().profile = lightingObjToPlace;
         }
 
         #endregion
@@ -606,10 +594,8 @@ namespace EditorTool
                     wallRotativeCounter = resources.levelWalls.Count - 1;
             }
 
-            wallButton.GetComponentInChildren<TMP_Text>().text = resources.levelWalls[wallRotativeCounter].id;
+            // wallButton.GetComponentInChildren<TMP_Text>().text = resources.levelWalls[wallRotativeCounter].id;
             wallButton.GetComponent<Image>().sprite = resources.levelWalls[wallRotativeCounter].sprite;
-            //Change visual Image instead of cutre txt... save cool image in resources file as well
-
             wallButton.onClick.RemoveAllListeners();
             wallButton.onClick.AddListener(() => PassWallToPlace(resources.levelWalls[wallRotativeCounter].id));
         }
@@ -629,55 +615,58 @@ namespace EditorTool
                     floorRotativeCounter = resources.levelFloors.Count - 1;
             }
 
-            floorButton.GetComponentInChildren<TMP_Text>().text = resources.levelFloors[floorRotativeCounter].id;
+            // floorButton.GetComponentInChildren<TMP_Text>().text = resources.levelFloors[floorRotativeCounter].id;
             floorButton.GetComponent<Image>().sprite = resources.levelFloors[floorRotativeCounter].sprite;
-            //Change visual Image instead of cutre txt... save cool image in resources file as well
-
             floorButton.onClick.RemoveAllListeners();
             floorButton.onClick.AddListener(() => PassFloorToPlace(resources.levelFloors[floorRotativeCounter].id));
         }
-
-
-
-        #endregion
-
-        void CloseAll()
+        int lightingRotativeCounter = 0;
+        public void RotateLightingResources(bool right)
         {
-            hasObj = false;
-            deleteObj = false;
-            deleteStackObj = false;
+            if (right)
+            {
+                lightingRotativeCounter++;
+                if (lightingRotativeCounter >= resources.levelLights.Count)
+                    lightingRotativeCounter = 0;
+            }
+            else
+            {
+                lightingRotativeCounter--;
+                if (lightingRotativeCounter < 0)
+                    lightingRotativeCounter = resources.levelLights.Count - 1;
+            }
 
-            placeWallObj = false;
-            deleteWallObj = false;
+            // lightingButton.GetComponentInChildren<TMP_Text>().text = resources.levelLights[lightingRotativeCounter].id;
 
-            placeFloorObj = false;
-            deleteFloor = false;
-
-            if (cloneObj != null)
-            {
-                Destroy(cloneObj);
-                cloneObj = null;
-            }
-            if (wallCloneObj != null)
-            {
-                Destroy(wallCloneObj);
-                wallCloneObj = null;
-            }
-            if (floorCloneObj != null)
-            {
-                Destroy(floorCloneObj);
-                floorCloneObj = null;
-            }
-            if (stackCloneObj != null)
-            {
-                Destroy(stackCloneObj);
-                stackCloneObj = null;
-            }
-            // deleteWall = false;
-            foreach (Node n in grid.grid)
-                n.floorObj.GetComponent<Floor>().UnShadeAll();
+            if (resources.levelLights[lightingRotativeCounter].prefab.TryGet<ShadowsMidtonesHighlights>(out var shadows))
+                lightingButton.GetComponent<Image>().color = new Vector4(shadows.shadows.value.x, shadows.shadows.value.y, shadows.shadows.value.z, 255);
+            lightingButton.onClick.RemoveAllListeners();
+            lightingButton.onClick.AddListener(() => PassLightingToPlace(resources.levelLights[lightingRotativeCounter].id));
 
         }
+
+        int objectsRotativeCounter = 0;
+        public void RotateObjectsResources(bool right)
+        {
+            if (right)
+            {
+                objectsRotativeCounter++;
+                if (objectsRotativeCounter >= resources.levelObjects.Count)
+                    objectsRotativeCounter = 0;
+            }
+            else
+            {
+                objectsRotativeCounter--;
+                if (objectsRotativeCounter < 0)
+                    objectsRotativeCounter = resources.levelObjects.Count - 1;
+            }
+            objectsButton.GetComponent<Image>().sprite = resources.levelObjects[objectsRotativeCounter].sprite;
+            objectsButton.onClick.RemoveAllListeners();
+            objectsButton.onClick.AddListener(() => PassGameObjectToPlace(resources.levelObjects[objectsRotativeCounter].id));
+
+        }
+
+        #endregion
 
     }
 
@@ -690,8 +679,7 @@ namespace EditorTool
         public int x;
         public int z;
         public GameObject floorObj;
-        public GameObject placedObj;
-        public List<GameObject> stackedObj;
+        public List<GameObject> placedObj = new List<GameObject>();
 
 
 
@@ -720,16 +708,14 @@ namespace EditorTool
     public class EditorResources
     {
         public List<ObjectResource> levelObjects = new List<ObjectResource>();
-        public List<StackedObjectResource> levelStackingObjects = new List<StackedObjectResource>();
-
         public List<ObjectWall> levelWalls = new List<ObjectWall>();
         public List<ObjectFloor> levelFloors = new List<ObjectFloor>();
-
+        public List<LightingResource> levelLights = new List<LightingResource>();
 
         public ObjectResource GetObjectResource(string objectId) { return levelObjects.First(x => x.id == objectId); }
-        public StackedObjectResource GetStackedObjectResource(string objectId) { return levelStackingObjects.First(x => x.id == objectId); }
         public ObjectWall GetObjectWall(string objectId) { return levelWalls.First(x => x.id == objectId); }
         public ObjectFloor GetObjectFloor(string objectId) { return levelFloors.First(x => x.id == objectId); }
+        public LightingResource GetLightingResource(string lightingId) { return levelLights.First(x => x.id == lightingId); }
 
     }
 
@@ -741,11 +727,10 @@ namespace EditorTool
         public Sprite sprite;
     }
     [System.Serializable]
-    public class StackedObjectResource
+    public class LightingResource
     {
         public string id;
-        public GameObject prefab;
-        public Sprite sprite;
+        public VolumeProfile prefab;
     }
     [System.Serializable]
     public class ObjectWall

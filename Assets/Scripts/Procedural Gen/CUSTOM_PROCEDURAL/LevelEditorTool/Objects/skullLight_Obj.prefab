@@ -137,7 +137,7 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0}
   isStackable: 0
   isWall: 0
-  rotationDegrees: 90
+  rotationDegrees: 30
 --- !u!65 &5762712228932860826
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -120,7 +120,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6868282663555404953, guid: 752412aedc7cca642aeb42ebebee07c3, type: 3}
   shootingPoint: {fileID: 1590231841}
   attSpeed: 0
-  attRate: 0
+  attRate: 10
 --- !u!114 &5511366636991874751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,6 +702,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5511366637094917506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856787629533692242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9715fa0d9dfe3b04e8640358f61a9889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconPrefab: {fileID: 1315409292713502002, guid: 7c5644abaec678c4b89da7d6a8b66155, type: 3}
 --- !u!114 &5511366637094917507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,19 +739,6 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &5511366637094917506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5856787629533692242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9715fa0d9dfe3b04e8640358f61a9889, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconPrefab: {fileID: 1315409292713502002, guid: 7c5644abaec678c4b89da7d6a8b66155, type: 3}
 --- !u!1001 &4784033679233351117
 PrefabInstance:
   m_ObjectHideFlags: 0

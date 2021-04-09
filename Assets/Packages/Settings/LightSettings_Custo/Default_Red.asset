@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: SampleSceneProfile
+  m_Name: Default_Red
   m_EditorClassIdentifier: 
   components:
   - {fileID: 849379129802519247}
@@ -134,10 +134,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.34179062, y: 0.580533, z: 1, w: -0.181721}
+    m_Value: {x: 1, y: 0.3648535, z: 0.41569364, w: 0.0500278}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9824415, z: 0.89076287, w: 0.3474079}
+    m_Value: {x: 1, y: 0.6472088, z: 0.6383424, w: 1}
   highlights:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0.8818815}
@@ -173,11 +173,11 @@ MonoBehaviour:
   m_AdvancedMode: 0
   temperature:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 58.6
     min: -100
     max: 100
   tint:
     m_OverrideState: 1
-    m_Value: 29.8
+    m_Value: 32.8
     min: -100
     max: 100
