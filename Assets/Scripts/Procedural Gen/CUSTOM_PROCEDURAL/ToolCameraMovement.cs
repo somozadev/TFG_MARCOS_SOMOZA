@@ -54,17 +54,13 @@ public class ToolCameraMovement : MonoBehaviour
             transform.Translate(p);
         }
         if (Keyboard.current.upArrowKey.isPressed)
-            if (!lockOffsetT)
-                MoveOffsetTop(0.2f);
+            MoveOffsetTop(0.1f);
         if (Keyboard.current.downArrowKey.isPressed)
-            if (!lockOffsetB)
-                MoveOffsetBot(0.2f);
+            MoveOffsetBot(0.1f);
         if (Keyboard.current.leftArrowKey.isPressed)
-            if (!lockOffsetL)
-                MoveOffsetLeft(0.2f);
+            MoveOffsetLeft(0.1f);
         if (Keyboard.current.rightArrowKey.isPressed)
-            if (!lockOffsetR)
-                MoveOffsetRight(0.2f);
+            MoveOffsetRight(0.1f);
 
         LimitTargetToGrid();
 
@@ -94,10 +90,10 @@ public class ToolCameraMovement : MonoBehaviour
         }
     }
 
-    public void MoveOffsetTop(float amount) { offset = new Vector3(offset.x, offset.y, offset.z + amount); lockOffsetB = false; }
-    public void MoveOffsetBot(float amount) { offset = new Vector3(offset.x, offset.y, offset.z - amount); lockOffsetT = false; }
-    public void MoveOffsetRight(float amount) { offset = new Vector3(offset.x + amount, offset.y, offset.z); lockOffsetL = false; }
-    public void MoveOffsetLeft(float amount) { offset = new Vector3(offset.x - amount, offset.y, offset.z); lockOffsetR = false; }
+    public void MoveOffsetTop(float amount) { if (lockOffsetT) return; offset = new Vector3(offset.x, offset.y, offset.z + amount); lockOffsetB = false; }
+    public void MoveOffsetBot(float amount) { if (lockOffsetB) return; offset = new Vector3(offset.x, offset.y, offset.z - amount); lockOffsetT = false; }
+    public void MoveOffsetRight(float amount) { if (lockOffsetR) return; offset = new Vector3(offset.x + amount, offset.y, offset.z); lockOffsetL = false; }
+    public void MoveOffsetLeft(float amount) { if (lockOffsetL) return; offset = new Vector3(offset.x - amount, offset.y, offset.z); lockOffsetR = false; }
     public void MoveOffsetCenter() => offset = startPos;
 
 }

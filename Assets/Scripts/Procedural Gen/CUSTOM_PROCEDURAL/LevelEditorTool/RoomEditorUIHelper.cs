@@ -42,8 +42,11 @@ public class RoomEditorUIHelper : MonoBehaviour
     * TODO : MOVE CAMERA OFFSET WITH ARROWS KEYBOARD AS WELL ***********DONE***********
     * TODO : LIMIT CAMERA TARGET POSITION TO GRID SIZE ***********DONE***********
     * TODO : MAKE TUTORIAL UI AT BEGINNING WITH ALL CONTROLS ***********DONE***********
-    * TODO : DYNAMIC EREASE NODE GRID SLOT (MAYBE HIDE MESH AND RECALCULATE COLLIDER??)
+    * TODO : DYNAMIC EREASE NODE GRID SLOT (MAYBE HIDE MESH AND RECALCULATE COLLIDER??)  ***********DONE***********
+    * TODO : DOORS
+
     * TODO : DROPS (COINS, HPBOTTLES, TINTEDROCKS...) EDITOR
+    * TODO : ENEMIES BY TYPE || ENEMIE POOL SPAWNER
     */
 
     public void CameraTargetOffsetPanel()
@@ -51,11 +54,13 @@ public class RoomEditorUIHelper : MonoBehaviour
         if (openClosecameraTargetPos)
         {
             cameraTargetPosPanel.GetComponent<Animator>().SetTrigger("Open");
+            HideAllOtherButtons(cameraTargetPosButton);
             openClosecameraTargetPos = false;
         }
         else
         {
             cameraTargetPosPanel.GetComponent<Animator>().SetTrigger("Close");
+            ShowllOtherButtons();
             openClosecameraTargetPos = true;
         }
 

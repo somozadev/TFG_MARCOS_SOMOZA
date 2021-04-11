@@ -128,7 +128,7 @@ namespace EditorTool
             aux.GetComponent<BoxCollider>().size = new Vector3(x * offset, 0.1f, z * offset);
             aux.transform.position = new Vector3(((x * offset) / 2) - 2, 0, ((z * offset) / 2) - 2);
             gridStuff.Add(aux);
-            aux.transform.SetParent(transform);
+            aux.transform.SetParent(transform.GetChild(0));
 
             GameObject targeter = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             targeter.transform.position = aux.transform.position;
@@ -142,10 +142,6 @@ namespace EditorTool
 
         public Node NodeFromWorldPos(Vector3 worldPos)
         {
-
-
-            //MakeNodeGlowHere?? // nor item ?
-
             float worldX = worldPos.x;
             float worldZ = worldPos.z;
             worldX /= offset;

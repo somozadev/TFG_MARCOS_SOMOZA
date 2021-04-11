@@ -57,7 +57,7 @@ namespace EditorTool
         public GameObject lightVolumeObj;
 
         private void Start() => inputField.text = transform.GetChild(0).name;
-        
+
         private void Update()
         {
             PlaceObject();
@@ -117,14 +117,18 @@ namespace EditorTool
 
         public void SavePrefab(GameObject parent)
         {
+            StartCoroutine(parent.GetComponent<PrefabCreatorCleaner>().StartClear(parent));
+
+        }
+        public void SavePrefabFinale(GameObject parent)
+        {
             parent.name = inputField.text;
             string localPath = "Assets/Scenes/Generated_Scenes/" + parent.name + ".prefab";
+            // Destroy(transform.GetChild(0).GetComponent<PrefabCreatorCleaner>());
             PrefabUtility.SaveAsPrefabAssetAndConnect(parent, localPath, InteractionMode.UserAction);
             GetComponent<RoomEditorUIHelper>().AssetsPanelObj.GetComponent<Animator>().SetTrigger("Open");
             PrefabUtility.UnpackPrefabInstance(parent, PrefabUnpackMode.Completely, InteractionMode.UserAction);
         }
-
-
 
         #region OBJECTS 
         public void PassGameObjectToPlace(string objectId)
@@ -550,6 +554,7 @@ namespace EditorTool
                         {
                             floor.floor.GetComponent<LevelObject>().objectId = floorObjToPlace.GetComponent<LevelObject>().objectId;
                             floor.floor.GetComponent<MeshFilter>().mesh = floorObjToPlace.GetComponent<MeshFilter>().sharedMesh;
+                            floor.floor.GetComponent<MeshRenderer>().materials = floorObjToPlace.GetComponent<MeshRenderer>().sharedMaterials;
                             floor.UnShadeFloor();
                         }
 
@@ -708,27 +713,6 @@ namespace EditorTool
         public int z;
         public GameObject floorObj;
         public List<GameObject> placedObj = new List<GameObject>();
-
-
-
-        public List<GameObject> walls = new List<GameObject>();
-
-
-
-        public Material defaultMat;
-
-        public void Select(Material selected)
-        {
-            Debug.Log("CURRENT");
-            defaultMat = floorObj.GetComponent<Renderer>().material;
-            floorObj.GetComponent<Renderer>().material = selected;
-        }
-        public void DeSelect()
-        {
-            if (this.floorObj != null)
-                this.floorObj.GetComponent<Renderer>().material = defaultMat;
-        }
-
 
     }
 

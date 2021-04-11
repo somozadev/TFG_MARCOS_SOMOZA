@@ -21,6 +21,10 @@ namespace EditorTool
         public GameObject shadeGameojectRight;
         public GameObject shadeFloor;
 
+        
+        public GameObject colliderL;
+        public GameObject colliderB;
+
 
         public void ShadeTopWall() => shadeGameojectTop.SetActive(true);
         public void ShadeLeftWall() => shadeGameojectLeft.SetActive(true);
@@ -31,6 +35,9 @@ namespace EditorTool
 
         public void ShadeFloor() => shadeFloor.SetActive(true);
         public void UnShadeFloor() => shadeFloor.SetActive(false);
+
+        public void ActivateColliderBot() => colliderB.SetActive(true);
+        public void ActivateColliderLeft() => colliderL.SetActive(true);
 
         public void UnShadeAll()
         {
