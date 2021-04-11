@@ -22,6 +22,8 @@ namespace EditorTool
 
         public Node[,] grid;
 
+        private GameObject targetToDestroy;
+
         public void CreateGridButton()
         {
             x = System.Convert.ToInt32(xInput.text);
@@ -29,6 +31,8 @@ namespace EditorTool
 
             if (gridStuff.Count <= 0)
             {
+                if (targetToDestroy != null)
+                    Destroy(targetToDestroy);
                 CreateGrid();
                 CreateMouseCollision();
                 GetComponent<RoomEditorTool>().enabled = true;
@@ -37,6 +41,7 @@ namespace EditorTool
                 GetComponent<RoomEditorUIHelper>().openClosGrid = true;
                 GetComponent<RoomEditorUIHelper>().AssetsPanelObj.SetActive(true);
                 GetComponent<RoomEditorUIHelper>().AssetButton.gameObject.SetActive(true);
+
             }
             else
             {
@@ -130,8 +135,9 @@ namespace EditorTool
             targeter.transform.rotation = Quaternion.identity;
             targeter.transform.SetParent(transform);
             targeter.GetComponent<MeshRenderer>().material = GetComponent<RoomEditorTool>().highLitedMat;
-
+            targetToDestroy = targeter;
             Camera.main.GetComponent<ToolCameraMovement>().target = targeter.transform;
+            Camera.main.GetComponent<ToolCameraMovement>().startPos = targeter.transform.position;
         }
 
         public Node NodeFromWorldPos(Vector3 worldPos)

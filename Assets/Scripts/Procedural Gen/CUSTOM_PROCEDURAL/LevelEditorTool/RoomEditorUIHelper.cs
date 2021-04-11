@@ -8,13 +8,17 @@ public class RoomEditorUIHelper : MonoBehaviour
     [SerializeField] GameObject gridPanel;
     [SerializeField] Button gridButton;
     public bool openClosGrid = true;
-    
+
+    [SerializeField] GameObject tutorialPanel;
+    [SerializeField] Button tutorialButton;
+    public bool openClosTutorial = true;
+
     [SerializeField] GameObject assetsPanel;
     [SerializeField] Button assetsButton;
     public bool openCloseAssets = true;
-    
+
     [SerializeField] GameObject cameraTargetPosPanel;
-    // [SerializeField] Button cameraTargetPosButton;
+    [SerializeField] Button cameraTargetPosButton;
     public bool openClosecameraTargetPos = true;
 
     [SerializeField] GameObject enemiesPanel;
@@ -34,8 +38,11 @@ public class RoomEditorUIHelper : MonoBehaviour
     * TODO : ADD THE OTHER 3 TYPE OF WALLS AND THE 2 DOORS ***********DONE***********
     * TODO : EXPORT LEVEL FBX ***********DONE***********
     * TODO : DYNAMIC CHANGE GRID SIZE ***********DONE***********
+    * TODO : HIDE OTHER BUTTON PANNELS WHEN ONE IS OPEN ***********DONE***********
+    * TODO : MOVE CAMERA OFFSET WITH ARROWS KEYBOARD AS WELL ***********DONE***********
+    * TODO : LIMIT CAMERA TARGET POSITION TO GRID SIZE ***********DONE***********
+    * TODO : MAKE TUTORIAL UI AT BEGINNING WITH ALL CONTROLS ***********DONE***********
     * TODO : DYNAMIC EREASE NODE GRID SLOT (MAYBE HIDE MESH AND RECALCULATE COLLIDER??)
-    * TODO : HIDE OTHER BUTTON PANNELS WHEN ONE IS OPEN 
     * TODO : DROPS (COINS, HPBOTTLES, TINTEDROCKS...) EDITOR
     */
 
@@ -52,6 +59,21 @@ public class RoomEditorUIHelper : MonoBehaviour
             openClosecameraTargetPos = true;
         }
 
+    }
+    public void TutorialPanel()
+    {
+        if (openClosTutorial)
+        {
+            tutorialPanel.GetComponent<Animator>().SetTrigger("Open");
+            HideAllOtherButtons(tutorialButton);
+            openClosTutorial = false;
+        }
+        else
+        {
+            tutorialPanel.GetComponent<Animator>().SetTrigger("Close");
+            ShowllOtherButtons();
+            openClosTutorial = true;
+        }
     }
     public void GridPanel()
     {
@@ -122,6 +144,10 @@ public class RoomEditorUIHelper : MonoBehaviour
             gridButton.gameObject.SetActive(false);
         if (assetsButton != current)
             assetsButton.gameObject.SetActive(false);
+        if (tutorialButton != current)
+            tutorialButton.gameObject.SetActive(false);
+        if (cameraTargetPosButton != current)
+            cameraTargetPosButton.gameObject.SetActive(false);
         // if(enemiesButton != current)
         //     enemiesButton.gameObject.SetActive(false);
         // if(dropsButton != current)
@@ -131,6 +157,8 @@ public class RoomEditorUIHelper : MonoBehaviour
     {
         gridButton.gameObject.SetActive(true);
         assetsButton.gameObject.SetActive(true);
+        tutorialButton.gameObject.SetActive(true);
+        cameraTargetPosButton.gameObject.SetActive(true);
         // enemiesButton.gameObject.SetActive(true);
         // dropsButton.gameObject.SetActive(true);
     }
