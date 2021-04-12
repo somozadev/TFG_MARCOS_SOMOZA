@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: LevelPrefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: LevelPrefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 999b3843dd102bf449d769ef436785bf
+  m_SerializeEntries:
+  - m_GUID: 0697493078bea21468ba58b60f0a8694
+    m_Address: level_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    m_MainAsset: {fileID: 6878854375236239180, guid: 0697493078bea21468ba58b60f0a8694, type: 3}
+    m_TargetAsset: {fileID: 6878854375236239180, guid: 0697493078bea21468ba58b60f0a8694, type: 3}
+  - m_GUID: d0b2be44a0d581f4399e36340003c592
+    m_Address: level_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: d87a010834e23e44aa5b431fd3903056
+    m_Address: Assets/Scenes/StartScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d7003938b8a4166429d1721dd9316b6a, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 18c30b0d295c0244e8a4fcd7a9f1a1e6, type: 2}
+    - {fileID: 11400000, guid: 1126d31110840e94b95b8cbc529da4c1, type: 2}

@@ -11,17 +11,21 @@ public class Player : MonoBehaviour
     [Header("Player interactor")]
     public PlayerInteractor playerInteractor;
     [Header("Player movement")]
-    public PlayerMovement playerMovement; 
+    public PlayerMovement playerMovement;
     [Header("UI right side for current inventory")]
     public CurrentItemsVisual currentItemsVisual;
 
-    private void Start() 
+    private void Start()
     {
         // DataController.Instance.GetPlayerStats(playerStats);    
     }
-    private void OnApplicationQuit() 
+    private void OnApplicationQuit()
     {
-        DataController.Instance.SetPlayerStats(playerStats);   
+        DataController.Instance.SetPlayerStats(playerStats);
+    }
+    private void OnEnable()
+    {
+        transform.position = Vector3.zero; //get current room initialpos
     }
 
 }

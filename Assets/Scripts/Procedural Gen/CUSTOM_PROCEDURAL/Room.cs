@@ -5,31 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class Room : MonoBehaviour
 {
+    public Transform playerStartPos { get; private set; }
+    public int numberOfRooms { get; private set; }
+    [SerializeField] List<GameObject> enemiesList;
+    [SerializeField] bool hasShop;
+    [SerializeField] bool isCompleted;
+    [SerializeField] bool isDroppingItem;
 
-    private bool isLoaded;
-    private bool shouldLoad;
+    [SerializeField] Room backtrackingRoom;
 
-    private int numberOfDoors; 
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
-        if(SceneManager.sceneCount > 0)
-        {
-            for(int i = 0; i < SceneManager.sceneCount; i++)
-            {
-                Scene scene = SceneManager.GetSceneAt(i);
-                if(scene.name == gameObject.name)
-                {
-                    isLoaded = true;
-                }
-            }
-        }
+        if (GetComponent<EditorTool.PrefabCreatorCleaner>() != null)
+            Destroy(this.GetComponent<EditorTool.PrefabCreatorCleaner>());
+
+        if (isCompleted)
+            return;
+        else
+            Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Initialize()
     {
-        
+
     }
 }

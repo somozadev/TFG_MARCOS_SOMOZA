@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2463077141485860303}
   - component: {fileID: 8140791375834700163}
   - component: {fileID: 6326587073253408215}
+  - component: {fileID: 8099613095080900409}
+  - component: {fileID: 4971874571479941718}
   m_Layer: 0
   m_Name: cellarDoor_EditorTool
   m_TagString: Untagged
@@ -115,5 +117,31 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 2.9999998, z: 0.30000013}
-  m_Center: {x: 0.00000023841858, y: 1.4999996, z: 0.000000067055225}
+  m_Size: {x: 1.4756441, y: 3.0026963, z: 0.32655352}
+  m_Center: {x: 1.263509, y: 1.4986519, z: 0}
+--- !u!65 &8099613095080900409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463077141483662095}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4756441, y: 3.0026963, z: 0.32655352}
+  m_Center: {x: -1.2635086, y: 1.4986519, z: 0}
+--- !u!65 &4971874571479941718
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463077141483662095}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0481157, y: 0.781116, z: 0.32655352}
+  m_Center: {x: 0.0024529696, y: 2.609442, z: 0}

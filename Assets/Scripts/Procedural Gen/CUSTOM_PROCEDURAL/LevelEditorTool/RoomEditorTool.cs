@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,12 +8,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEditor;
+using UnityEditor.AddressableAssets.Settings;
+using UnityEditor.AddressableAssets;
 
 namespace EditorTool
 {
     public class RoomEditorTool : MonoBehaviour
     {
-
+        #region VARIABLES
         //UI
         public Button wallButton;
         public Button floorButton;
@@ -55,9 +57,9 @@ namespace EditorTool
         //LIGHTING    
         VolumeProfile lightingObjToPlace;
         public GameObject lightVolumeObj;
-
+        #endregion
+        #region START_UPDATE
         private void Start() => inputField.text = transform.GetChild(0).name;
-
         private void Update()
         {
             PlaceObject();
@@ -69,7 +71,8 @@ namespace EditorTool
             if (Mouse.current.middleButton.wasPressedThisFrame)
                 CloseAll();
         }
-
+        #endregion 
+        #region USEFULL_METHODS
         void UpdateMousePosition()
         {
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -114,7 +117,8 @@ namespace EditorTool
                 n.floorObj.GetComponent<Floor>().UnShadeAll();
 
         }
-
+        #endregion
+        #region PREFAB_MAKER
         public void SavePrefab(GameObject parent)
         {
             StartCoroutine(parent.GetComponent<PrefabCreatorCleaner>().StartClear(parent));
@@ -122,14 +126,33 @@ namespace EditorTool
         }
         public void SavePrefabFinale(GameObject parent)
         {
+            // CREATING PREFAB
             parent.name = inputField.text;
             string localPath = "Assets/Scenes/Generated_Scenes/" + parent.name + ".prefab";
-            // Destroy(transform.GetChild(0).GetComponent<PrefabCreatorCleaner>());
             PrefabUtility.SaveAsPrefabAssetAndConnect(parent, localPath, InteractionMode.UserAction);
             GetComponent<RoomEditorUIHelper>().AssetsPanelObj.GetComponent<Animator>().SetTrigger("Open");
             PrefabUtility.UnpackPrefabInstance(parent, PrefabUnpackMode.Completely, InteractionMode.UserAction);
-        }
 
+            parent.AddComponent<Room>();
+
+            // MAKING PREFAB ADRESSEABLE
+            var settings = AddressableAssetSettingsDefaultObject.Settings;
+            string labelName = "Stage" + (GetComponent<RoomEditorUIHelper>().GetCurrentToogle());
+            settings.AddLabel(labelName, false);
+            AddressableAssetGroup g = settings.FindGroup("LevelPrefabs");
+            var guid = AssetDatabase.AssetPathToGUID(localPath);
+            var entry = settings.CreateOrMoveEntry(guid, g);
+            entry.labels.Add(labelName);
+            entry.address = parent.name;
+            settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entry, true);
+            AssetDatabase.SaveAssets();
+
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
+        }
+        #endregion
         #region OBJECTS 
         public void PassGameObjectToPlace(string objectId)
         {

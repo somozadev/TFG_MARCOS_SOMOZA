@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: f7b86edd74fda324e997081bf7b9e753
+  m_DefaultGroup: 999b3843dd102bf449d769ef436785bf
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
   m_DisableCatalogUpdateOnStart: 0
@@ -26,6 +26,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: faafaf45e41aaa14eac7a285467a979a, type: 2}
   - {fileID: 11400000, guid: 7c91e6572646fec4db85db2e37298b4b, type: 2}
   - {fileID: 11400000, guid: 6717d77dc3eb0034bb5b6a656c745c47, type: 2}
+  - {fileID: 11400000, guid: 07cfc3c4ecf12c24abb20a745059e812, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -67,6 +68,10 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Stage1
+    - Stage2
+    - Stage3
+    - Stage5
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9bbc5cf235056a043a6590d78592ac2d, type: 2}

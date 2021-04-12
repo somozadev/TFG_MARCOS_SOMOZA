@@ -29,6 +29,8 @@ public class RoomEditorUIHelper : MonoBehaviour
     [SerializeField] Button dropsButton;
     public bool openCloseDrops = true;
 
+    public List<Toggle> toggles;
+
     public GameObject AssetsPanelObj { get { return assetsPanel; } }
     public GameObject GridPanelObj { get { return gridPanel; } }
     public Button AssetButton { get { return assetsButton; } }
@@ -48,7 +50,25 @@ public class RoomEditorUIHelper : MonoBehaviour
     * TODO : DROPS (COINS, HPBOTTLES, TINTEDROCKS...) EDITOR
     * TODO : ENEMIES BY TYPE || ENEMIE POOL SPAWNER
     */
-
+ 
+    public void OnOffTxt(Toggle current)
+    {
+        Debug.Log(current.transform.GetComponentInChildren<TMPro.TMP_Text>(true).gameObject.name);
+        if (current.isOn)
+            current.transform.GetComponentInChildren<TMPro.TMP_Text>(true).gameObject.SetActive(false);
+        else
+            current.transform.GetComponentInChildren<TMPro.TMP_Text>(true).gameObject.SetActive(true);
+    }
+    public int GetCurrentToogle()
+    {
+        int returner = 0;
+        foreach(Toggle t in toggles)
+        {
+            if(t.isOn)
+                returner = System.Convert.ToInt32(t.transform.GetComponentInChildren<TMPro.TMP_Text>(true).text);
+        }
+        return returner;
+    }
     public void CameraTargetOffsetPanel()
     {
         if (openClosecameraTargetPos)
