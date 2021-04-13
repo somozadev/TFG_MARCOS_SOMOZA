@@ -29,8 +29,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 1161294555138887931, guid: 1e99d948a66fe4b418a496df61b7c0b4, type: 3}
+    m_TargetAsset: {fileID: 1161294555138887931, guid: 1e99d948a66fe4b418a496df61b7c0b4, type: 3}
   - m_GUID: 523ab774c0cafce42946f02944853bff
     m_Address: level_40
     m_ReadOnly: 0
