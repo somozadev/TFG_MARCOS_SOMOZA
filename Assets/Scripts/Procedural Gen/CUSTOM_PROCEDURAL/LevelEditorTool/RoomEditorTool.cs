@@ -126,14 +126,15 @@ namespace EditorTool
         }
         public void SavePrefabFinale(GameObject parent)
         {
+            
+            // parent.GetComponent<Room>().enabled = true;
+            // parent.GetComponent<Room>().SetId = DataController.Instance.GenerateId();
             // CREATING PREFAB
             parent.name = inputField.text;
             string localPath = "Assets/Scenes/Generated_Scenes/" + parent.name + ".prefab";
             PrefabUtility.SaveAsPrefabAssetAndConnect(parent, localPath, InteractionMode.UserAction);
             GetComponent<RoomEditorUIHelper>().AssetsPanelObj.GetComponent<Animator>().SetTrigger("Open");
             PrefabUtility.UnpackPrefabInstance(parent, PrefabUnpackMode.Completely, InteractionMode.UserAction);
-
-            parent.AddComponent<Room>();
 
             // MAKING PREFAB ADRESSEABLE
             var settings = AddressableAssetSettingsDefaultObject.Settings;

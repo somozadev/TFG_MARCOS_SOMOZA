@@ -72,6 +72,7 @@ MonoBehaviour:
     - Stage2
     - Stage3
     - Stage5
+    - Stage4
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9bbc5cf235056a043a6590d78592ac2d, type: 2}

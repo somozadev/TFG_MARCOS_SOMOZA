@@ -17,6 +17,8 @@ namespace EditorTool
         public IEnumerator StartClear(GameObject parent)
         {
             yield return StartCoroutine(AsyncClear());
+            parent.GetComponent<Room>().enabled = true;
+            parent.GetComponent<Room>().SetId = DataController.Instance.GenerateId();
             transform.parent.GetComponent<RoomEditorTool>().SavePrefabFinale(parent);
 
         }

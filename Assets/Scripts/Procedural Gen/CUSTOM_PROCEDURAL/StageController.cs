@@ -20,8 +20,9 @@ public class StageController : MonoBehaviour
 
     List<GameObject> instances = new List<GameObject>();
 
-    private void Awake()
+    private void Start()
     {
+        numberOfRooms = SetRandomNumberOfRooms(actualStage); HandleLifeCycle();
         CreateThisRunSeed();
     }
 
@@ -39,21 +40,12 @@ public class StageController : MonoBehaviour
         stages[3] = fourT;
         int fiveT = SetRandomNumberOfRooms(5);
         stages[4] = fiveT;
-
+        StartCoroutine(Waiter(oneT, twoT, threeT, fourT, fiveT));
         //LLENAR LOS SEED GROUPS
-        FillUpSceneGropus(oneT, sceneGroups[0]);
-        // FillUpSceneGropus(twoT, sceneGroups[1]);
-        // FillUpSceneGropus(threeT, sceneGroups[2]);
-        // FillUpSceneGropus(fourT, sceneGroups[3]);
-        // FillUpSceneGropus(fiveT, sceneGroups[4]);
-
     }
 
 
-    void Start()
-    {
-        numberOfRooms = SetRandomNumberOfRooms(actualStage); HandleLifeCycle();
-    }
+
     private int SetRandomNumberOfRooms(int stage)
     {
         int returner = 0;
@@ -84,6 +76,27 @@ public class StageController : MonoBehaviour
     }
 
     #region SCENES_LOADER_FROM_ADRESSEABLES_METHODS
+    private IEnumerator Waiter(int oneT, int twoT, int threeT, int fourT, int fiveT)
+    {
+        yield return StartCoroutine(FillUpAllSceneGroups(oneT, twoT, threeT, fourT, fiveT));
+        DoSeed(oneT, twoT, threeT, fourT, fiveT);
+    }
+    private IEnumerator FillUpAllSceneGroups(int oneT, int twoT, int threeT, int fourT, int fiveT)
+    {
+        FillUpSceneGroups(oneT, sceneGroups[0]);
+        FillUpSceneGroups(twoT, sceneGroups[1]);
+        FillUpSceneGroups(threeT, sceneGroups[2]);
+        FillUpSceneGroups(fourT, sceneGroups[3]);
+        FillUpSceneGroups(fiveT, sceneGroups[4]);
+        yield return new WaitForSeconds(.4f);
+
+    }
+    private void DoSeed(int oneT, int twoT, int threeT, int fourT, int fiveT)
+    {
+        seed = DataController.Instance.SerializeSeed(oneT, twoT, threeT, fourT, fiveT,
+        sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
+        sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
+    }
     IEnumerator LoadAllAssetsByKey(int numberOf, LevelGroup currentGroup)
     {
         //Will load all objects that match the given key.
@@ -91,7 +104,7 @@ public class StageController : MonoBehaviour
         AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + (sceneGroups.IndexOf(currentGroup) + 1), asset =>
             {
                 //Gets called for every loaded asset
-                Debug.Log(asset.name);
+                // Debug.Log(asset.name);
             });
         yield return loadWithSingleKeyHandle;
         IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
@@ -104,11 +117,11 @@ public class StageController : MonoBehaviour
                 Debug.Log("ALREADY IN");
             else
                 currentGroup.LevelGroupScenes.Add(stageAllScenesResult[i]);
-            Debug.Log(stageAllScenesResult[i].name);
+            // Debug.Log(stageAllScenesResult[i].name);
         }
 
     }
-    private void FillUpSceneGropus(int numberOf, LevelGroup currentGroup)
+    private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)
     {
         StartCoroutine(LoadAllAssetsByKey(numberOf, currentGroup));
     }
