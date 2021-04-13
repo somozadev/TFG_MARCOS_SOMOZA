@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DataController : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class DataController : MonoBehaviour
     #endregion
 
     public List<int> ids;
+    public List<GameObject> scenesFloorOne;
+    public List<GameObject> scenesFloorTwo;
+    public List<GameObject> scenesFloorThree;
+    public List<GameObject> scenesFloorFour;
+    public List<GameObject> scenesFloorFive;
 
     public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); }
     public void GetPlayerStats(PlayerStats playerStats)
@@ -109,38 +116,80 @@ public class DataController : MonoBehaviour
         int threeC = ToInt(seed[2]);
         int fourC = ToInt(seed[3]);
         int fiveC = ToInt(seed[4]);
-
+        #region  FloorOne
         string oneL = ToInt(seed[5]).ToString();
         List<int> idsOne = new List<int>();
-        for (int i = 0; i < oneL.Length - 1; i++)
-            idsOne.Add(oneL[i]);
+        for (int i = 0; i < oneL.Length; i++)
+            idsOne.Add(int.Parse(oneL[i].ToString()));
 
-        /*
-        * TODO: COGER LA LISTA idsOne y buscar todos los gameobjects de addresseable(sabemos que son de label Stage1 en este caso)
-        * que coincidan con los ids y guardarnos una lista ordenada igual que los ids con dichos gameobjects (que serian las escenas)
-        */
+        LevelGroup groupLabelOne = new LevelGroup();
+        scenesFloorOne = new List<GameObject>();
+        StartCoroutine(WaitToFillGroup(oneC, groupLabelOne, 1, scenesFloorOne, idsOne));
+        #endregion
+        #region  FloorTwo
         string twoL = ToInt(seed[6]).ToString();
         List<int> idsTwo = new List<int>();
-        for (int i = 0; i < twoL.Length - 1; i++)
-            idsTwo.Add(twoL[i]);
+        for (int i = 0; i < twoL.Length; i++)
+            idsTwo.Add(int.Parse(twoL[i].ToString()));
 
+
+        LevelGroup groupLabelTwo = new LevelGroup();
+        scenesFloorTwo = new List<GameObject>();
+        StartCoroutine(WaitToFillGroup(twoC, groupLabelTwo, 2, scenesFloorTwo, idsTwo));
+        #endregion
+        #region  FloorThree
         string threeL = ToInt(seed[7]).ToString();
         List<int> idsThree = new List<int>();
-        for (int i = 0; i < threeL.Length - 1; i++)
-            idsThree.Add(threeL[i]);
+        for (int i = 0; i < threeL.Length; i++)
+            idsThree.Add(int.Parse(threeL[i].ToString()));
 
+
+        LevelGroup groupLabelThree = new LevelGroup();
+        scenesFloorThree = new List<GameObject>();
+        StartCoroutine(WaitToFillGroup(threeC, groupLabelThree, 3, scenesFloorThree, idsThree));
+        #endregion
+        #region  FloorFour
         string fourL = ToInt(seed[8]).ToString();
         List<int> idsFour = new List<int>();
-        for (int i = 0; i < fourL.Length - 1; i++)
-            idsFour.Add(fourL[i]);
+        for (int i = 0; i < fourL.Length; i++)
+            idsFour.Add(int.Parse(fourL[i].ToString()));
 
+
+        LevelGroup groupLabelFour = new LevelGroup();
+        scenesFloorFour = new List<GameObject>();
+        StartCoroutine(WaitToFillGroup(fourC, groupLabelFour, 4, scenesFloorFour, idsFour));
+        #endregion
+        #region  FloorTwo
         string fiveL = ToInt(seed[9]).ToString();
         List<int> idsFive = new List<int>();
-        for (int i = 0; i < fiveL.Length - 1; i++)
-            idsFive.Add(fiveL[i]);
+        for (int i = 0; i < fiveL.Length; i++)
+            idsFive.Add(int.Parse(fiveL[i].ToString()));
 
 
+        LevelGroup groupLabelFive = new LevelGroup();
+        scenesFloorFive = new List<GameObject>();
+        StartCoroutine(WaitToFillGroup(fiveC, groupLabelFive, 5, scenesFloorFive, idsFive));
+        #endregion
+        
+    }
 
+    IEnumerator WaitToFillGroup(int numberOf, LevelGroup currentGroup, int stageNumber, List<GameObject> floorGameobjects, List<int> ids)
+    {
+        yield return StartCoroutine(LoadAllAssetsByKey(numberOf, currentGroup, stageNumber));
+        DoGameobjectsFillUp(currentGroup, floorGameobjects, ids);
+        Debug.Log(currentGroup.LevelGroupScenes[0]);
+
+    }
+    private void DoGameobjectsFillUp(LevelGroup currentGroup, List<GameObject> floorGameobjects, List<int> ids)
+    {
+        for (int i = 0; i < currentGroup.LevelGroupScenes.Count; i++)
+        {
+            for (int j = 0; j < ids.Count; j++)
+            {
+                if (currentGroup.LevelGroupScenes[i].GetComponent<Room>().GetId == ids[j])
+                    floorGameobjects.Add(currentGroup.LevelGroupScenes[i]);
+            }
+        }
 
     }
 
@@ -157,5 +206,28 @@ public class DataController : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         GameManager.Instance.player.playerStats = new PlayerStats(0, 100, 0, 100, 50, 1, 5, 1, 1, 1, 7, 0, new List<Item>());
+    }
+
+    ///<sumary> 
+    ///Will load all objects that match the given key.If this key is an Addressable label, it will load all assets marked with that label
+    ///</sumary>
+    public IEnumerator LoadAllAssetsByKey(int numberOf, LevelGroup currentGroup, int stageNumber)
+    {
+        AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + stageNumber, asset =>
+           {     //Gets called for every loaded asset
+           });
+        yield return loadWithSingleKeyHandle;
+        IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
+        if (numberOf > stageAllScenesResult.Count)
+            numberOf = stageAllScenesResult.Count;
+        for (int i = 0; i < numberOf; i++)
+        {
+
+            if (currentGroup.LevelGroupScenes.Contains(stageAllScenesResult[i]))
+                Debug.Log("ALREADY IN");
+            else
+                currentGroup.LevelGroupScenes.Add(stageAllScenesResult[i]);
+        }
+
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class StageController : MonoBehaviour
 {
@@ -96,34 +94,11 @@ public class StageController : MonoBehaviour
         seed = DataController.Instance.SerializeSeed(oneT, twoT, threeT, fourT, fiveT,
         sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
         sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
-    }
-    IEnumerator LoadAllAssetsByKey(int numberOf, LevelGroup currentGroup)
-    {
-        //Will load all objects that match the given key.
-        //If this key is an Addressable label, it will load all assets marked with that label
-        AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + (sceneGroups.IndexOf(currentGroup) + 1), asset =>
-            {
-                //Gets called for every loaded asset
-                // Debug.Log(asset.name);
-            });
-        yield return loadWithSingleKeyHandle;
-        IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
-        if (numberOf > stageAllScenesResult.Count)
-            numberOf = stageAllScenesResult.Count;
-        for (int i = 0; i < numberOf; i++)
-        {
-
-            if (currentGroup.LevelGroupScenes.Contains(stageAllScenesResult[i]))
-                Debug.Log("ALREADY IN");
-            else
-                currentGroup.LevelGroupScenes.Add(stageAllScenesResult[i]);
-            // Debug.Log(stageAllScenesResult[i].name);
-        }
-
+        DataController.Instance.DeserializeSeed(seed);
     }
     private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)
     {
-        StartCoroutine(LoadAllAssetsByKey(numberOf, currentGroup));
+        StartCoroutine(DataController.Instance.LoadAllAssetsByKey(numberOf, currentGroup, (sceneGroups.IndexOf(currentGroup) + 1)));
     }
     public void HandleLifeCycle()
     {
@@ -159,4 +134,8 @@ public class LevelGroup
     public string levelName;
     public List<GameObject> LevelGroupScenes; //AssetReference is not supported by loadassetasync<assetreference>, fuck off Unity i dont wanna load Gameobjects
 
+    public LevelGroup()
+    {
+        LevelGroupScenes = new List<GameObject>();
+    }
 }

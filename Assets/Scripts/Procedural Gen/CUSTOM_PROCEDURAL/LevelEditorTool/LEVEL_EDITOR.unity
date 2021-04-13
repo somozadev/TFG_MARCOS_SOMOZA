@@ -12580,7 +12580,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797764901}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37dba13446d8c5445988f250d6db0b6a, type: 3}
   m_Name: 
@@ -14693,7 +14693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2081353363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22259,8 +22259,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2026391036}
         m_TargetAssemblyTypeName: EditorTool.RoomEditorTool, Assembly-CSharp
-        m_MethodName: RotateObjectsResources
-        m_Mode: 6
+        m_MethodName: PassGameObjectToPlace
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
