@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class StageController : MonoBehaviour
 {
-    // [Header("From first stage (1) to last stage (5) ")]
+    /*
+    *PROBABLE NEED TO MARK THIS AS DONTDESTROYONLOAD OR AS SINGLETON
+    */
     [SerializeField] string seed;
     [SerializeField] int actualStage = 1;
     [SerializeField] int numberOfRooms;
@@ -25,22 +27,7 @@ public class StageController : MonoBehaviour
     }
 
 
-    public void CreateThisRunSeed()
-    {
-        //NUMERO DE SALAS POR NIVEL PARA CREAR LA SEED
-        int oneT = SetRandomNumberOfRooms(1);
-        stages[0] = oneT;
-        int twoT = SetRandomNumberOfRooms(2);
-        stages[1] = twoT;
-        int threeT = SetRandomNumberOfRooms(3);
-        stages[2] = threeT;
-        int fourT = SetRandomNumberOfRooms(4);
-        stages[3] = fourT;
-        int fiveT = SetRandomNumberOfRooms(5);
-        stages[4] = fiveT;
-        StartCoroutine(Waiter(oneT, twoT, threeT, fourT, fiveT));
-        //LLENAR LOS SEED GROUPS
-    }
+
 
 
 
@@ -73,7 +60,23 @@ public class StageController : MonoBehaviour
             HandleLifeCycle();
     }
 
-    #region SCENES_LOADER_FROM_ADRESSEABLES_METHODS
+    #region SCENES_LOADER_FROM_ADRESSEABLES_METHODS_&&_SEEDS
+    public void CreateThisRunSeed()
+    {
+        //NUMERO DE SALAS POR NIVEL PARA CREAR LA SEED
+        int oneT = SetRandomNumberOfRooms(1);
+        stages[0] = oneT;
+        int twoT = SetRandomNumberOfRooms(2);
+        stages[1] = twoT;
+        int threeT = SetRandomNumberOfRooms(3);
+        stages[2] = threeT;
+        int fourT = SetRandomNumberOfRooms(4);
+        stages[3] = fourT;
+        int fiveT = SetRandomNumberOfRooms(5);
+        stages[4] = fiveT;
+        StartCoroutine(Waiter(oneT, twoT, threeT, fourT, fiveT));
+        //LLENAR LOS SEED GROUPS
+    }
     private IEnumerator Waiter(int oneT, int twoT, int threeT, int fourT, int fiveT)
     {
         yield return StartCoroutine(FillUpAllSceneGroups(oneT, twoT, threeT, fourT, fiveT));
@@ -94,12 +97,15 @@ public class StageController : MonoBehaviour
         seed = DataController.Instance.SerializeSeed(oneT, twoT, threeT, fourT, fiveT,
         sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
         sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
+
         DataController.Instance.DeserializeSeed(seed);
     }
     private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)
     {
         StartCoroutine(DataController.Instance.LoadAllAssetsByKey(numberOf, currentGroup, (sceneGroups.IndexOf(currentGroup) + 1)));
     }
+
+
     public void HandleLifeCycle()
     {
         bool hasSpawnedInstance = instances.Count > 0 ? true : false;

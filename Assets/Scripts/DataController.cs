@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
+[System.Serializable]
 public class DataController : MonoBehaviour
 {
 
@@ -20,7 +21,7 @@ public class DataController : MonoBehaviour
     }
     #endregion
 
-    public List<int> ids;
+    public Ids ids;
     public List<GameObject> scenesFloorOne;
     public List<GameObject> scenesFloorTwo;
     public List<GameObject> scenesFloorThree;
@@ -35,53 +36,71 @@ public class DataController : MonoBehaviour
     }
 
 
-    //SAVE THIS IDS AS WELL 
+
+
+
+    #region SCENES_SEED_SAVE_LOAD
+    public void SetIds(Ids idsList) { PlayerPrefs.SetString("SceneIds", JsonUtility.ToJson(idsList)); Debug.Log(JsonUtility.ToJson(idsList)); }
+    public void GetIds(Ids idsList) { JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("SceneIds", JsonUtility.ToJson(new Ids(0))), idsList); }
     public int GenerateId()
     {
         int id = 0;
-        if (ids.Count <= 0)
-            ids.Add(0);
+        if (ids.id.Count <= 0)
+            ids.id.Add(0);
         else
         {
-            id = ids[ids.Count - 1] + 1;
-            ids.Add(id);
+            id = ids.id[ids.id.Count - 1] + 1;
+            ids.id.Add(id);
         }
-
+        SetIds(ids);
         return id;
     }
+
+    private char ToChar(long inp) { return System.Convert.ToChar(inp + 65); }
+    private long ToInt(char inp) { return System.Convert.ToInt64(inp - 65); }
     public string SerializeSeed(int one, int two, int three, int four, int five, List<GameObject> oneList, List<GameObject> twoList, List<GameObject> threeList, List<GameObject> fourList, List<GameObject> fiveList)
     {
-
-        int oneL = 0;
+        //System.Numerics.BigInteger igual? 
+        long oneL = -1;
         foreach (GameObject g in oneList)
-            if (oneL.ToString().Length == 1)
-                oneL = int.Parse(g.GetComponent<Room>().GetId.ToString());
+        {
+            if (oneL == -1)
+                oneL = long.Parse(g.GetComponent<Room>().GetId.ToString());
             else
-                oneL = int.Parse(g.GetComponent<Room>().GetId.ToString() + oneL.ToString());
-        int twoL = 0;
+                oneL = long.Parse(oneL.ToString() + g.GetComponent<Room>().GetId.ToString());
+        }
+        long twoL = -1;
         foreach (GameObject g in twoList)
-            if (twoL.ToString().Length == 1)
-                twoL = int.Parse(g.GetComponent<Room>().GetId.ToString());
+        {
+            if (twoL == -1)
+                twoL = long.Parse(g.GetComponent<Room>().GetId.ToString());
             else
-                twoL = int.Parse(g.GetComponent<Room>().GetId.ToString() + twoL.ToString());
-        int threeL = 0;
+                twoL = long.Parse(twoL.ToString() + g.GetComponent<Room>().GetId.ToString());
+        }
+        long threeL = -1;
         foreach (GameObject g in threeList)
-            if (threeL.ToString().Length == 1)
-                threeL = int.Parse(g.GetComponent<Room>().GetId.ToString());
+        {
+            if (threeL == -1)
+                threeL = long.Parse(g.GetComponent<Room>().GetId.ToString());
             else
-                threeL = int.Parse(g.GetComponent<Room>().GetId.ToString() + threeL.ToString());
-        int fourL = 0;
+                threeL = long.Parse(threeL.ToString() + g.GetComponent<Room>().GetId.ToString());
+        }
+        long fourL = -1;
         foreach (GameObject g in fourList)
-            if (fourL.ToString().Length == 1)
-                fourL = int.Parse(g.GetComponent<Room>().GetId.ToString());
+        {
+            if (fourL == -1)
+                fourL = long.Parse(g.GetComponent<Room>().GetId.ToString());
             else
-                fourL = int.Parse(g.GetComponent<Room>().GetId.ToString() + fourL.ToString());
-        int fiveL = 0;
+                fourL = long.Parse(fourL.ToString() + g.GetComponent<Room>().GetId.ToString());
+        }
+        long fiveL = -1;
         foreach (GameObject g in fiveList)
-            if (fiveL.ToString().Length == 1)
-                fiveL = int.Parse(g.GetComponent<Room>().GetId.ToString());
+        {
+            if (fiveL == -1)
+                fiveL = long.Parse(g.GetComponent<Room>().GetId.ToString());
             else
-                fiveL = int.Parse(g.GetComponent<Room>().GetId.ToString() + fiveL.ToString());
+                fiveL = long.Parse(fiveL.ToString() + g.GetComponent<Room>().GetId.ToString());
+        }
 
         char oneC = ToChar(one);
         char twoC = ToChar(two);
@@ -105,17 +124,14 @@ public class DataController : MonoBehaviour
         return seed;
 
     }
-
-    private char ToChar(int inp) { return System.Convert.ToChar(inp + 65); }
-    private int ToInt(char inp) { return System.Convert.ToInt16(inp - 65); }
-
     public void DeserializeSeed(string seed)
     {
-        int oneC = ToInt(seed[0]);
-        int twoC = ToInt(seed[1]);
-        int threeC = ToInt(seed[2]);
-        int fourC = ToInt(seed[3]);
-        int fiveC = ToInt(seed[4]);
+        Debug.Log(seed[0]);
+        long oneC = ToInt(seed[0]);
+        long twoC = ToInt(seed[1]);
+        long threeC = ToInt(seed[2]);
+        long fourC = ToInt(seed[3]);
+        long fiveC = ToInt(seed[4]);
         #region  FloorOne
         string oneL = ToInt(seed[5]).ToString();
         List<int> idsOne = new List<int>();
@@ -170,10 +186,10 @@ public class DataController : MonoBehaviour
         scenesFloorFive = new List<GameObject>();
         StartCoroutine(WaitToFillGroup(fiveC, groupLabelFive, 5, scenesFloorFive, idsFive));
         #endregion
-        
+
     }
 
-    IEnumerator WaitToFillGroup(int numberOf, LevelGroup currentGroup, int stageNumber, List<GameObject> floorGameobjects, List<int> ids)
+    IEnumerator WaitToFillGroup(long numberOf, LevelGroup currentGroup, int stageNumber, List<GameObject> floorGameobjects, List<int> ids)
     {
         yield return StartCoroutine(LoadAllAssetsByKey(numberOf, currentGroup, stageNumber));
         DoGameobjectsFillUp(currentGroup, floorGameobjects, ids);
@@ -192,7 +208,7 @@ public class DataController : MonoBehaviour
         }
 
     }
-
+    #endregion
 
     public void LoadGame()
     {
@@ -207,11 +223,20 @@ public class DataController : MonoBehaviour
         PlayerPrefs.DeleteAll();
         GameManager.Instance.player.playerStats = new PlayerStats(0, 100, 0, 100, 50, 1, 5, 1, 1, 1, 7, 0, new List<Item>());
     }
-
+    private void Start()
+    {
+        GetIds(ids);
+        LoadGame();
+    }
+    private void OnApplicationQuit()
+    {
+        SetIds(ids);
+        SaveGame();
+    }
     ///<sumary> 
     ///Will load all objects that match the given key.If this key is an Addressable label, it will load all assets marked with that label
     ///</sumary>
-    public IEnumerator LoadAllAssetsByKey(int numberOf, LevelGroup currentGroup, int stageNumber)
+    public IEnumerator LoadAllAssetsByKey(long numberOf, LevelGroup currentGroup, int stageNumber)
     {
         AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + stageNumber, asset =>
            {     //Gets called for every loaded asset
@@ -229,5 +254,15 @@ public class DataController : MonoBehaviour
                 currentGroup.LevelGroupScenes.Add(stageAllScenesResult[i]);
         }
 
+    }
+}
+
+[System.Serializable]
+public class Ids
+{
+    public List<int> id = new List<int>();
+    public Ids(int id)
+    {
+        this.id.Add(id);
     }
 }
