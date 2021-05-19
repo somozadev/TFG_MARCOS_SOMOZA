@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class DataController : MonoBehaviour
@@ -20,7 +21,7 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
-
+    public GameData currentGameData;
     public Ids ids;
     public List<GameObject> scenesFloorOne;
     public List<GameObject> scenesFloorTwo;
@@ -56,136 +57,181 @@ public class DataController : MonoBehaviour
         return id;
     }
 
-    private char ToChar(long inp) { return System.Convert.ToChar(inp + 65); }
-    private long ToInt(char inp) { return System.Convert.ToInt64(inp - 65); }
     public string SerializeSeed(int one, int two, int three, int four, int five, List<GameObject> oneList, List<GameObject> twoList, List<GameObject> threeList, List<GameObject> fourList, List<GameObject> fiveList)
     {
-        //System.Numerics.BigInteger igual? 
-        long oneL = -1;
+        string oneL = "-1";
         foreach (GameObject g in oneList)
         {
-            if (oneL == -1)
-                oneL = long.Parse(g.GetComponent<Room>().GetId.ToString());
+            if (oneL == "-1")
+                oneL = g.GetComponent<Room>().GetId.ToString("00");
             else
-                oneL = long.Parse(oneL.ToString() + g.GetComponent<Room>().GetId.ToString());
+                oneL += g.GetComponent<Room>().GetId.ToString("00");
         }
-        long twoL = -1;
+        string twoL = "-1";
         foreach (GameObject g in twoList)
         {
-            if (twoL == -1)
-                twoL = long.Parse(g.GetComponent<Room>().GetId.ToString());
+            if (twoL == "-1")
+                twoL = g.GetComponent<Room>().GetId.ToString("00");
             else
-                twoL = long.Parse(twoL.ToString() + g.GetComponent<Room>().GetId.ToString());
+                twoL += g.GetComponent<Room>().GetId.ToString("00");
         }
-        long threeL = -1;
+        string threeL = "-1";
         foreach (GameObject g in threeList)
         {
-            if (threeL == -1)
-                threeL = long.Parse(g.GetComponent<Room>().GetId.ToString());
+            if (threeL == "-1")
+                threeL = g.GetComponent<Room>().GetId.ToString("00");
             else
-                threeL = long.Parse(threeL.ToString() + g.GetComponent<Room>().GetId.ToString());
+                threeL += g.GetComponent<Room>().GetId.ToString("00");
         }
-        long fourL = -1;
+        string fourL = "-1";
         foreach (GameObject g in fourList)
         {
-            if (fourL == -1)
-                fourL = long.Parse(g.GetComponent<Room>().GetId.ToString());
+            if (fourL == "-1")
+                fourL = g.GetComponent<Room>().GetId.ToString("00");
             else
-                fourL = long.Parse(fourL.ToString() + g.GetComponent<Room>().GetId.ToString());
+                fourL += g.GetComponent<Room>().GetId.ToString("00");
         }
-        long fiveL = -1;
+        string fiveL = "-1";
         foreach (GameObject g in fiveList)
         {
-            if (fiveL == -1)
-                fiveL = long.Parse(g.GetComponent<Room>().GetId.ToString());
+            if (fiveL == "-1")
+                fiveL = g.GetComponent<Room>().GetId.ToString("00");
             else
-                fiveL = long.Parse(fiveL.ToString() + g.GetComponent<Room>().GetId.ToString());
+                fiveL += g.GetComponent<Room>().GetId.ToString("00");
         }
+        if (one > oneList.Count)
+            one = oneList.Count;
+        if (two > twoList.Count)
+            two = twoList.Count;
+        if (three > threeList.Count)
+            three = threeList.Count;
+        if (four > fourList.Count)
+            four = fourList.Count;
+        if (five > fiveList.Count)
+            five = fiveList.Count;
+        string first = (one.ToString("00") + two.ToString("00") + three.ToString("00") + four.ToString("00") + five.ToString("00"));
+        string second = (oneL + twoL + threeL + fourL + fiveL);
 
-        char oneC = ToChar(one);
-        char twoC = ToChar(two);
-        char threeC = ToChar(three);
-        char fourC = ToChar(four);
-        char fiveC = ToChar(five);
+        print("seed:" + first + second);
 
-        char oneListC = ToChar(oneL);
-        char twoListC = ToChar(twoL);
-        char threeListC = ToChar(threeL);
-        char fourListC = ToChar(fourL);
-        char fiveListC = ToChar(fiveL);
-
-
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Append(oneC); sb.Append(twoC); sb.Append(threeC); sb.Append(fourC); sb.Append(fiveC);
-        sb.Append(oneListC); sb.Append(twoListC); sb.Append(threeListC); sb.Append(fourListC); sb.Append(fiveListC);
-
-        string seed = sb.ToString();
-        Debug.Log("seed: " + seed);
-        return seed;
+        return (first + second);
 
     }
     public void DeserializeSeed(string seed)
     {
-        Debug.Log(seed[0]);
-        long oneC = ToInt(seed[0]);
-        long twoC = ToInt(seed[1]);
-        long threeC = ToInt(seed[2]);
-        long fourC = ToInt(seed[3]);
-        long fiveC = ToInt(seed[4]);
-        #region  FloorOne
-        string oneL = ToInt(seed[5]).ToString();
-        List<int> idsOne = new List<int>();
-        for (int i = 0; i < oneL.Length; i++)
-            idsOne.Add(int.Parse(oneL[i].ToString()));
+        string s1 = seed.Substring(0, 2);
+        string s2 = seed.Substring(2, 2);
+        string s3 = seed.Substring(4, 2);
+        string s4 = seed.Substring(6, 2);
+        string s5 = seed.Substring(8, 2);
 
+        seed = seed.Substring(10);
+        string lvl1 = seed.Substring(0, System.Convert.ToInt16(s1) * 2);
+        seed = seed.Substring(System.Convert.ToInt16(s1) * 2);
+        string lvl2 = seed.Substring(0, System.Convert.ToInt16(s2) * 2);
+        seed = seed.Substring(System.Convert.ToInt16(s2) * 2);
+        string lvl3 = seed.Substring(0, System.Convert.ToInt16(s3) * 2);
+        seed = seed.Substring(System.Convert.ToInt16(s3) * 2);
+        string lvl4 = seed.Substring(0, System.Convert.ToInt16(s4) * 2);
+        seed = seed.Substring(System.Convert.ToInt16(s4) * 2);
+        string lvl5 = seed.Substring(0, System.Convert.ToInt16(s5) * 2);
+
+        print(lvl1);
+        print(lvl2);
+        print(lvl3);
+        print(lvl4);
+        print(lvl5);
+
+        List<int> lvl1_int = new List<int>();
+        int internalCounter = 1;
+        int len = lvl1.Length;
+        for (int i = 0; i < len; i++)
+        {
+            if (internalCounter == 2)
+            {   
+                lvl1_int.Add(int.Parse(lvl1.Substring(0, internalCounter)));
+                lvl1 = lvl1.Substring(internalCounter);
+                internalCounter = 0;
+            }
+            internalCounter++;
+        }
         LevelGroup groupLabelOne = new LevelGroup();
         scenesFloorOne = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(oneC, groupLabelOne, 1, scenesFloorOne, idsOne));
-        #endregion
-        #region  FloorTwo
-        string twoL = ToInt(seed[6]).ToString();
-        List<int> idsTwo = new List<int>();
-        for (int i = 0; i < twoL.Length; i++)
-            idsTwo.Add(int.Parse(twoL[i].ToString()));
+        StartCoroutine(WaitToFillGroup(long.Parse(s1), groupLabelOne, 1, scenesFloorOne, lvl1_int));
+        print("lvl1int: " + lvl1_int);
 
-
+        List<int> lvl2_int = new List<int>();
+        internalCounter = 1;
+        len = lvl2.Length;
+        for (int i = 0; i < len; i++)
+        {
+            if (internalCounter == 2)
+            {   
+                lvl2_int.Add(int.Parse(lvl2.Substring(0, internalCounter)));
+                lvl2 = lvl2.Substring(internalCounter);
+                internalCounter = 0;
+            }
+            internalCounter++;
+        }
         LevelGroup groupLabelTwo = new LevelGroup();
         scenesFloorTwo = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(twoC, groupLabelTwo, 2, scenesFloorTwo, idsTwo));
-        #endregion
-        #region  FloorThree
-        string threeL = ToInt(seed[7]).ToString();
-        List<int> idsThree = new List<int>();
-        for (int i = 0; i < threeL.Length; i++)
-            idsThree.Add(int.Parse(threeL[i].ToString()));
+        StartCoroutine(WaitToFillGroup(long.Parse(s2), groupLabelTwo, 2, scenesFloorTwo, lvl2_int));
+        print("lvl2int: " + lvl2_int);
 
-
+        List<int> lvl3_int = new List<int>();
+        internalCounter = 1;
+        len = lvl3.Length;
+        for (int i = 0; i < len; i++)
+        {
+            if (internalCounter == 2)
+            {   
+                lvl3_int.Add(int.Parse(lvl3.Substring(0, internalCounter)));
+                lvl3 = lvl3.Substring(internalCounter);
+                internalCounter = 0;
+            }
+            internalCounter++;
+        }
         LevelGroup groupLabelThree = new LevelGroup();
         scenesFloorThree = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(threeC, groupLabelThree, 3, scenesFloorThree, idsThree));
-        #endregion
-        #region  FloorFour
-        string fourL = ToInt(seed[8]).ToString();
-        List<int> idsFour = new List<int>();
-        for (int i = 0; i < fourL.Length; i++)
-            idsFour.Add(int.Parse(fourL[i].ToString()));
-
-
+        StartCoroutine(WaitToFillGroup(long.Parse(s3), groupLabelThree, 3, scenesFloorThree, lvl3_int));
+        print("lvl3int: " + lvl3_int);
+        
+        List<int> lvl4_int = new List<int>();
+        internalCounter = 1;
+        len = lvl4.Length;
+        for (int i = 0; i < len; i++)
+        {
+            if (internalCounter == 2)
+            {   
+                lvl4_int.Add(int.Parse(lvl4.Substring(0, internalCounter)));
+                lvl4 = lvl4.Substring(internalCounter);
+                internalCounter = 0;
+            }
+            internalCounter++;
+        }
         LevelGroup groupLabelFour = new LevelGroup();
         scenesFloorFour = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(fourC, groupLabelFour, 4, scenesFloorFour, idsFour));
-        #endregion
-        #region  FloorTwo
-        string fiveL = ToInt(seed[9]).ToString();
-        List<int> idsFive = new List<int>();
-        for (int i = 0; i < fiveL.Length; i++)
-            idsFive.Add(int.Parse(fiveL[i].ToString()));
+        StartCoroutine(WaitToFillGroup(long.Parse(s4), groupLabelFour, 4, scenesFloorFour, lvl4_int));
+        print("lvl4int: " + lvl4_int);
 
-
+        List<int> lvl5_int = new List<int>();
+        internalCounter = 1;
+        len = lvl5.Length;
+        for (int i = 0; i < len; i++)
+        {
+            if (internalCounter == 2)
+            {   
+                lvl5_int.Add(int.Parse(lvl5.Substring(0, internalCounter)));
+                lvl5 = lvl5.Substring(internalCounter);
+                internalCounter = 0;
+            }
+            internalCounter++;
+        }
         LevelGroup groupLabelFive = new LevelGroup();
         scenesFloorFive = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(fiveC, groupLabelFive, 5, scenesFloorFive, idsFive));
-        #endregion
+        StartCoroutine(WaitToFillGroup(long.Parse(s5), groupLabelFive, 5, scenesFloorFive, lvl5_int));
+        print("lvl5int: " + lvl5_int);
+
 
     }
 
@@ -198,6 +244,13 @@ public class DataController : MonoBehaviour
     }
     private void DoGameobjectsFillUp(LevelGroup currentGroup, List<GameObject> floorGameobjects, List<int> ids)
     {
+
+        foreach (int id in ids)
+            Debug.LogWarning("ids:" + id);
+        Debug.LogWarning(currentGroup.levelName);
+        foreach (GameObject ob in currentGroup.LevelGroupScenes)
+            Debug.LogWarning("currentGroup.LevelGroupScenes:" + ob);
+
         for (int i = 0; i < currentGroup.LevelGroupScenes.Count; i++)
         {
             for (int j = 0; j < ids.Count; j++)

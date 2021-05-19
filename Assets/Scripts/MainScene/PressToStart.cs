@@ -78,7 +78,7 @@ public class PressToStart : MonoBehaviour
             {
                 Debug.LogWarning("A BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
-                SceneController.Instance.LoadScene("StartScene");
+                SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
             }
         }
         else
@@ -87,7 +87,7 @@ public class PressToStart : MonoBehaviour
             {
                 Debug.LogWarning("SPACE BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
-                SceneController.Instance.LoadScene("StartScene");
+                SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
             }
 
         }

@@ -57,7 +57,10 @@ public class StageController : MonoBehaviour
     private void Update()
     {
         if (UnityEngine.InputSystem.Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            DataController.Instance.DeserializeSeed(seed);
             HandleLifeCycle();
+        }
     }
 
     #region SCENES_LOADER_FROM_ADRESSEABLES_METHODS_&&_SEEDS
@@ -98,7 +101,6 @@ public class StageController : MonoBehaviour
         sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
         sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
 
-        DataController.Instance.DeserializeSeed(seed);
     }
     private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)
     {

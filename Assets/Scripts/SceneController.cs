@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 
 public class SceneController : MonoBehaviour
 {
@@ -19,9 +20,24 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
+    
+    [SerializeField] private AsyncOperationHandle<SceneInstance> handle; //last adresseable scene loaded
 
+
+    private void Start()
+    {
+        LoadAdresseableScene(SceneName.MainScene, false);
+    }
 
     public void LoadScene(string sceneName) { StartCoroutine(LoadAsync(sceneName)); }
+    public void LoadAdresseableScene(string sceneName, bool unloadLastScene){ if(unloadLastScene) Addressables.UnloadSceneAsync(handle, true); 
+                            Addressables.LoadSceneAsync(sceneName, LoadSceneMode.Additive, true).Completed += AdresseableSceneLoadComplete; }
+    public void LoadSceneAssetReference(AssetReference scene) { StartCoroutine(LoadSceneAssetReferenceAsync(scene)); }
+
+
+
+
+
 
     private IEnumerator LoadAsync(string scene)
     {
@@ -32,9 +48,12 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
     }
-
-    public void LoadSceneAssetReference(AssetReference scene) { StartCoroutine(LoadSceneAssetReferenceAsync(scene)); }
-
+    private void AdresseableSceneLoadComplete(AsyncOperationHandle<SceneInstance> obj)
+    {
+        if (obj.Status == AsyncOperationStatus.Succeeded)
+            handle = obj;
+            //Debug.Log(obj.Result.Scene.name + " loaded correctly.");
+    }
     private IEnumerator LoadSceneAssetReferenceAsync(AssetReference assetReference)
     {
         assetReference.LoadSceneAsync(LoadSceneMode.Additive);
@@ -44,5 +63,16 @@ public class SceneController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+}
+
+
+public static class SceneName
+{
+    public const string Essentials = "ESSENTIALS";
+    public const string MainScene = "MainScene";
+    public const string CurrentLevelScene = "CurrentLevelScene";
+    public const string SaveFileScene = "SaveFileScene";
+    public const string MenuScene = "MenuScene";
 
 }

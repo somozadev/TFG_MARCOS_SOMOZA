@@ -17,15 +17,15 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 999b3843dd102bf449d769ef436785bf
   m_SerializeEntries:
-  - m_GUID: 067f847e442fccf47af0c1703793d753
-    m_Address: level_asdasdasdasd
+  - m_GUID: 0697493078bea21468ba58b60f0a8694
+    m_Address: level_01
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: 0697493078bea21468ba58b60f0a8694
-    m_Address: level_01
+  - m_GUID: 19bb2c29f76ca8246aaafff2bb60219c
+    m_Address: Level_Test
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
@@ -50,13 +50,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage4
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: 69b0db1b5f2f26a4bb75179d1a59bafb
-    m_Address: pitotron6000
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Stage1
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: 7ca8580fc0b1eb840a8a0dd52a2f55e6
@@ -85,8 +78,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage2
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 5953260564170777101, guid: f03605286c52fb14991c429e56609b3c, type: 3}
+    m_TargetAsset: {fileID: 5953260564170777101, guid: f03605286c52fb14991c429e56609b3c, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d7003938b8a4166429d1721dd9316b6a, type: 2}
   m_SchemaSet:

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,10 +23,12 @@ public class GameManager : MonoBehaviour
     public StatsCanvasController statsCanvas;
     public GameObject mainCamera;
     public Player player;
+    public EventSystem defaultEventSystem,playerEventSystem;
 
     private void Start()
     {
         if(deleteGame) DataController.Instance.DeleteGame();
+        print("Gamemanager started! ");
     }
 
 }
