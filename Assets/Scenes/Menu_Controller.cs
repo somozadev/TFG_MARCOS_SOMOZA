@@ -16,7 +16,7 @@ public class Menu_Controller : MonoBehaviour
     // Waits untill loaded and check if there is a seed in current savefile. 
     private IEnumerator WaitForSeed()
     {
-        Debug.Log("Waiting for princess to be rescued...");
+        Debug.Log("Waiting for seed...");
         yield return new WaitUntil(() => DataController.Instance != null);
         Debug.Log(DataController.Instance.currentGameData.seed);
         if (DataController.Instance.currentGameData.seed == "null")
@@ -37,6 +37,10 @@ public class Menu_Controller : MonoBehaviour
 
     }
     public void Config()
+    {
+
+    }
+    public void Achievements()
     {
 
     }

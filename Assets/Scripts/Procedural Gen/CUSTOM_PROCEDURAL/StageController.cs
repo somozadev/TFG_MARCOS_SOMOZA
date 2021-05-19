@@ -22,10 +22,20 @@ public class StageController : MonoBehaviour
 
     private void Start()
     {
-        numberOfRooms = SetRandomNumberOfRooms(actualStage); HandleLifeCycle();
-        CreateThisRunSeed();
+        if (DataController.Instance.newRun)
+        {
+            numberOfRooms = SetRandomNumberOfRooms(actualStage);
+            CreateThisRunSeed();
+            // HandleLifeCycle();
+        }
+        else
+        {
+            seed = DataController.Instance.currentGameData.seed;
+            LoadRun(seed);
+        }
     }
 
+    public void LoadRun(string loadedSeed) { DataController.Instance.DeserializeSeed(loadedSeed); }
 
 
 
