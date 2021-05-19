@@ -127,13 +127,15 @@ public class GameDataController : MonoBehaviour
 [System.Serializable]
 public class GameData
 {
+    public string seed; 
     public PlayerStats playerStats;
     public float gameCompletePercentaje;
     public List<bool> itemsUnlocked;
 
-    public GameData() { }
-    public GameData(PlayerStats playerStats, float gameCompletePercentaje, List<bool> itemsUnlocked)
+    public GameData() { seed = "null"; }
+    public GameData(string seed, PlayerStats playerStats, float gameCompletePercentaje, List<bool> itemsUnlocked)
     {
+        this.seed = seed; 
         this.playerStats = playerStats;
         this.gameCompletePercentaje = gameCompletePercentaje;
         this.itemsUnlocked = itemsUnlocked;

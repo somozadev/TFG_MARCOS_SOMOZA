@@ -31,4 +31,9 @@ public class GameManager : MonoBehaviour
         print("Gamemanager started! ");
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 }

@@ -21,6 +21,7 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
+    public bool newRun;
     public GameData currentGameData;
     public Ids ids;
     public List<GameObject> scenesFloorOne;

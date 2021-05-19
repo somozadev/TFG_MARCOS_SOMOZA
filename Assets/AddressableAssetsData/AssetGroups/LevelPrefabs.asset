@@ -78,8 +78,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage2
-    m_MainAsset: {fileID: 5953260564170777101, guid: f03605286c52fb14991c429e56609b3c, type: 3}
-    m_TargetAsset: {fileID: 5953260564170777101, guid: f03605286c52fb14991c429e56609b3c, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d7003938b8a4166429d1721dd9316b6a, type: 2}
   m_SchemaSet:
