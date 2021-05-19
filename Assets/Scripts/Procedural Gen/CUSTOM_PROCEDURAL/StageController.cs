@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class StageController : MonoBehaviour
 {
-    /*
-    *PROBABLE NEED TO MARK THIS AS DONTDESTROYONLOAD OR AS SINGLETON
-    */
     [SerializeField] string seed;
     [SerializeField] int actualStage = 1;
     [SerializeField] int numberOfRooms;
@@ -33,6 +30,12 @@ public class StageController : MonoBehaviour
             seed = DataController.Instance.currentGameData.seed;
             LoadRun(seed);
         }
+
+        GameManager.Instance.player.gameObject.SetActive(true);
+        GameManager.Instance.mainCamera.transform.parent.gameObject.SetActive(true);
+        GameManager.Instance.playerEventSystem.gameObject.SetActive(true);
+        GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
+
     }
 
     public void LoadRun(string loadedSeed) { DataController.Instance.DeserializeSeed(loadedSeed); }
@@ -110,6 +113,7 @@ public class StageController : MonoBehaviour
         seed = DataController.Instance.SerializeSeed(oneT, twoT, threeT, fourT, fiveT,
         sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
         sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
+        Instantiate(sceneGroups[0].LevelGroupScenes[3]);
 
     }
     private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)
