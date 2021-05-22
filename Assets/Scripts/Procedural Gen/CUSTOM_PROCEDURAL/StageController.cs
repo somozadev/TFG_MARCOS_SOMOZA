@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class StageController : MonoBehaviour
 {
@@ -40,7 +42,11 @@ public class StageController : MonoBehaviour
 
     public void LoadRun(string loadedSeed) { DataController.Instance.DeserializeSeed(loadedSeed); }
 
-
+    public void LoadNextScene(int actualStage)
+    {
+        Instantiate(sceneGroups[1].LevelGroupScenes[0], transform);
+        GameManager.Instance.player.transform.position = sceneGroups[1].LevelGroupScenes[0].GetComponent<Room>().playerStartPos.position;
+    }
 
 
 
@@ -67,14 +73,7 @@ public class StageController : MonoBehaviour
         }
         return returner;
     }
-    private void Update()
-    {
-        if (UnityEngine.InputSystem.Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            DataController.Instance.DeserializeSeed(seed);
-            HandleLifeCycle();
-        }
-    }
+    
 
     #region SCENES_LOADER_FROM_ADRESSEABLES_METHODS_&&_SEEDS
     public void CreateThisRunSeed()
@@ -113,7 +112,7 @@ public class StageController : MonoBehaviour
         seed = DataController.Instance.SerializeSeed(oneT, twoT, threeT, fourT, fiveT,
         sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
         sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
-        Instantiate(sceneGroups[0].LevelGroupScenes[3]);
+        LoadNextScene(actualStage);
 
     }
     private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)
@@ -122,30 +121,30 @@ public class StageController : MonoBehaviour
     }
 
 
-    public void HandleLifeCycle()
-    {
-        bool hasSpawnedInstance = instances.Count > 0 ? true : false;
-        // Debug.Log(hasSpawnedInstance);
-        if (hasSpawnedInstance)
-            Despawn();
-        else
-            Spawn();
-    }
-    private void Spawn()
-    {
-        // AsyncOperationHandle<GameObject> asyncOperationHandle = sceneGroups[actualStage - 1].LevelGroupScenes[0].InstantiateAsync(transform.position, Quaternion.identity, transform);
-        // asyncOperationHandle.Completed += handle => instances.Add(handle.Result);
+    // public void HandleLifeCycle()
+    // {
+    //     bool hasSpawnedInstance = instances.Count > 0 ? true : false;
+    //     // Debug.Log(hasSpawnedInstance);
+    //     if (hasSpawnedInstance)
+    //         Despawn();
+    //     else
+    //         Spawn();
+    // }
+    // private void Spawn()
+    // {
+    //     AsyncOperationHandle<GameObject> asyncOperationHandle = sceneGroups[actualStage - 1].LevelGroupScenes[0].InstantiateAsync(transform.position, Quaternion.identity, transform);
+    //     asyncOperationHandle.Completed += handle => instances.Add(handle.Result);
 
-    }
-    private void Despawn()
-    {
-        // foreach (GameObject instance in instances)
-        // {
-        // Addressables.ReleaseInstance(instance);
-        // }
-        // instances.Clear();
-        // HandleLifeCycle();
-    }
+    // }
+    // private void Despawn()
+    // {
+    //     foreach (GameObject instance in instances)
+    //     {
+    //     Addressables.ReleaseInstance(instance);
+    //     }
+    //     instances.Clear();
+    //     HandleLifeCycle();
+    // }
     #endregion
 }
 

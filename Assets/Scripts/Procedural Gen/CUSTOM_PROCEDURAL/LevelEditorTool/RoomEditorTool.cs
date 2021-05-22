@@ -10,6 +10,7 @@ using UnityEngine.Rendering;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets;
+using System.Linq;
 
 namespace EditorTool
 {
@@ -126,7 +127,7 @@ namespace EditorTool
         }
         public void SavePrefabFinale(GameObject parent)
         {
-            
+
             // parent.GetComponent<Room>().enabled = true;
             // parent.GetComponent<Room>().SetId = DataController.Instance.GenerateId();
             // CREATING PREFAB
@@ -157,6 +158,12 @@ namespace EditorTool
         #region OBJECTS 
         public void PassGameObjectToPlace(string objectId)
         {
+            foreach (GameObject obj in inSceneGameObjects)
+            {
+                if (obj.GetComponent<LevelObject>().objectId == "startPos_object")
+                    return;
+            }
+
             if (cloneObj != null)
                 Destroy(cloneObj);
             CloseAll();
@@ -168,10 +175,38 @@ namespace EditorTool
         {
             if (placeObj)
             {
+                Node current = grid.NodeFromWorldPos(mousePos);
+                #region PLAYER_CONDIT
+                //just for player obj.... to limit only 1 can be at a time
+                int cont = 0;
+                foreach (GameObject obj in inSceneGameObjects)
+                {
+                    if (obj.GetComponent<LevelObject>().objectId == "startPos_object")
+                    {
+                        cont++;
+                        if (cont > 1)
+                        {
+
+                            placeObj = false;
+                            if (current.placedObj.Count > 0)
+                            {
+                                List<GameObject> aux = current.placedObj;
+                                foreach (GameObject g in current.placedObj)
+                                {
+                                    inSceneGameObjects.Remove(g);
+                                    Destroy(aux[aux.IndexOf(g)]);
+                                }
+                                current.floorObj.GetComponent<Floor>().UnShadeFloor();
+                            }
+                            current.placedObj.Clear();
+                            return;
+                        }
+                    }
+                }
+                #endregion
                 highLitedMat.color = new Color32(255, 255, 0, 16);
                 highLitedMat.SetColor("_EmissionColor", Color.yellow);
                 UpdateMousePosition();
-                Node current = grid.NodeFromWorldPos(mousePos);
                 if (current == null)
                     return;
                 Floor floor = current.floorObj.GetComponent<Floor>();
@@ -219,6 +254,7 @@ namespace EditorTool
 
                         current.placedObj.Add(actualObjPlaced);
                         inSceneGameObjects.Add(actualObjPlaced);
+
                     }
                     if (Mouse.current.rightButton.wasPressedThisFrame)
                         objProperties.ChangeRotation();

@@ -12475,7 +12475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1797764902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13884,7 +13884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2026391034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13988,6 +13988,9 @@ MonoBehaviour:
     - id: torchWall_object
       prefab: {fileID: 6054497443011325090, guid: bcb48e7b84b25f24cbbbc5d67df44110, type: 3}
       sprite: {fileID: 21300000, guid: 44a7301f0a997b848bcb2340c3b067e4, type: 3}
+    - id: startPos_object
+      prefab: {fileID: 2447892576600657255, guid: 7137be9d7925b7c4a839c4297ef65888, type: 3}
+      sprite: {fileID: 21300000, guid: 60b490c0a9059a840b29f91483ca0e91, type: 3}
     levelWalls:
     - id: wall_default
       prefab: {fileID: 793682766727601028, guid: 245be791dad05484d9b88d88777149bc, type: 3}
@@ -14010,8 +14013,11 @@ MonoBehaviour:
     - id: cellarDoor_default
       prefab: {fileID: 2463077141483662095, guid: c4854ad187ecd8640b825a3a866a59da, type: 3}
       sprite: {fileID: 21300000, guid: dffbbb1a3a1abba43b86b42219cb5cf3, type: 3}
-    - id: door_default
+    - id: holeDoor_default
       prefab: {fileID: 8732579025353680876, guid: 0e29d748b14cc2b4d9d99c0e8992aae7, type: 3}
+      sprite: {fileID: 21300000, guid: 3d09da59bbfc3524fabcc7e548df74ec, type: 3}
+    - id: door_default
+      prefab: {fileID: 172561001153184017, guid: 263bcbf19db049543acabdac0a3017fd, type: 3}
       sprite: {fileID: 21300000, guid: fdf13028e308cac4e9ea9a5c83da00a9, type: 3}
     - id: wall_empty
       prefab: {fileID: 1912479703780247451, guid: b98eb3014c394d040bd3aba0f4a9503d, type: 3}
@@ -14696,7 +14702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2081353363
 MonoBehaviour:
   m_ObjectHideFlags: 0
