@@ -44,6 +44,17 @@ public class StageController : MonoBehaviour
 
     public void LoadNextScene()
     {   
+        if(actualRoom >= stages[actualStage-1])
+        {   
+            actualRoom = 1;
+            actualStage++;
+        }
+        if(actualStage > 5)
+        {
+            //FINISHED GAME
+            print("finished run");
+        }
+
         if(currentRoom!=null)
         {   
             GameManager.Instance.player.gameObject.SetActive(false);
