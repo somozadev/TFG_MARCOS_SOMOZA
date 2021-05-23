@@ -1,13 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Room : MonoBehaviour
 {
     [SerializeField] int RoomId;
-    public Transform playerStartPos { get; private set; }
-    public int numberOfRooms { get; private set; }
+    public Vector3 playerStartPos;
+
+
+    public event Action onRoomCompleted;
+
+
+
     [SerializeField] List<GameObject> enemiesList;
     [SerializeField] bool hasShop;
     [SerializeField] bool isCompleted;
@@ -19,20 +26,47 @@ public class Room : MonoBehaviour
     public int GetId { get { return RoomId; } }
 
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (GetComponent<EditorTool.PrefabCreatorCleaner>() != null)
-            Destroy(this.GetComponent<EditorTool.PrefabCreatorCleaner>());
-
-        if (isCompleted)
-            return;
-        else
-            Initialize();
+        ResetEvent();
     }
 
 
-    private void Initialize()
-    {
+    private void Update() {
+        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            Complete();
+        }
+    }
 
+
+    private void OnEnable()
+    {   
+        if(GetComponentInParent<StageController>() != null)
+            GetComponentInParent<StageController>().currentRoom = this;
+
+        playerStartPos = GetComponent<EditorTool.PrefabCreatorCleaner>().playerPos.position;
+        GetComponent<EditorTool.PrefabCreatorCleaner>().playerPos.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        if (GetComponent<EditorTool.PrefabCreatorCleaner>() != null)
+            Destroy(this.GetComponent<EditorTool.PrefabCreatorCleaner>());
+
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.playerEventSystem.gameObject.SetActive(true);
+
+        GameManager.Instance.player.gameObject.transform.position = new Vector3(playerStartPos.x, GameManager.Instance.player.gameObject.transform.position.y, playerStartPos.z);
+
+        GameManager.Instance.player.gameObject.SetActive(true);
+    }
+
+    public void ResetEvent() => onRoomCompleted = null;
+
+    public void Complete()
+    {
+        isCompleted = true;
+        if (onRoomCompleted != null)
+            onRoomCompleted();
     }
 }

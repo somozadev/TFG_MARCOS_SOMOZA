@@ -13,6 +13,7 @@ namespace EditorTool
         [SerializeField] private List<GameObject> objectsList;
         [SerializeField] private GameObject floors;
         [SerializeField] private List<GameObject> floorsList;
+        [SerializeField] public Transform playerPos;
 
         public IEnumerator StartClear(GameObject parent)
         {
@@ -41,10 +42,16 @@ namespace EditorTool
                     wallsList.Add(wall.gameObject);
             foreach (Transform obj in objects.transform)
                 if (obj.name != "Floors")
-                    objectsList.Add(obj.gameObject);
+                {
+                    if (obj.name == "Player_Obj(Clone)")
+                        playerPos = obj;
+                    else
+                        objectsList.Add(obj.gameObject);
+                }
             foreach (Transform floor in floors.transform)
                 if (floor.parent == floors.transform)
                     floorsList.Add(floor.gameObject);
+
         }
 
         void SetupCollisionWalls()
@@ -105,11 +112,12 @@ namespace EditorTool
         {
             var aux = objectsList;
             foreach (GameObject obj in objectsList)
-            {
+            {   
                 Destroy(obj.GetComponent<LevelObject>());
                 if (obj.GetComponent<Rigidbody>() != null)
                     obj.GetComponent<Rigidbody>().isKinematic = false;
             }
+
         }
 
     }

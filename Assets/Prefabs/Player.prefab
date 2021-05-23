@@ -95,7 +95,7 @@ MonoBehaviour:
     attspd: 1
     attrate: 0
     range: 0
-    soulCoins: 0
+    soulCoins: 600
     inventory: []
   playerInteractor: {fileID: 5511366637439774767}
   playerMovement: {fileID: 5511366636991874748}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 5511366637439774767}
   m_Layer: 0
   m_Name: Interactor_Trigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 5511366638918262669}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

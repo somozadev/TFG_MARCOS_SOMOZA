@@ -6,12 +6,13 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class StageController : MonoBehaviour
 {
+    public Room currentRoom;
+
     [SerializeField] string seed;
     [SerializeField] int actualStage = 1;
+    [SerializeField] int actualRoom = 1;
     [SerializeField] int numberOfRooms;
     [SerializeField] int[] stages = new int[5];
-
-    // [SerializeField] List<Room> stageRooms;
 
     [SerializeField] List<LevelGroup> sceneGroups = new List<LevelGroup>(); // 5 as length
 
@@ -21,6 +22,7 @@ public class StageController : MonoBehaviour
 
     private void Start()
     {
+        SceneController.Instance.stageController = this;
         if (DataController.Instance.newRun)
         {
             numberOfRooms = SetRandomNumberOfRooms(actualStage);
@@ -33,19 +35,22 @@ public class StageController : MonoBehaviour
             LoadRun(seed);
         }
 
-        GameManager.Instance.player.gameObject.SetActive(true);
         GameManager.Instance.mainCamera.transform.parent.gameObject.SetActive(true);
-        GameManager.Instance.playerEventSystem.gameObject.SetActive(true);
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
 
     }
 
     public void LoadRun(string loadedSeed) { DataController.Instance.DeserializeSeed(loadedSeed); }
 
-    public void LoadNextScene(int actualStage)
-    {
-        Instantiate(sceneGroups[1].LevelGroupScenes[0], transform);
-        GameManager.Instance.player.transform.position = sceneGroups[1].LevelGroupScenes[0].GetComponent<Room>().playerStartPos.position;
+    public void LoadNextScene()
+    {   
+        if(currentRoom!=null)
+        {   
+            GameManager.Instance.player.gameObject.SetActive(false);
+            Destroy(currentRoom.gameObject);
+        }
+        Instantiate(sceneGroups[actualStage-1].LevelGroupScenes[actualRoom - 1], transform);
+        actualRoom++;
     }
 
 
@@ -112,7 +117,7 @@ public class StageController : MonoBehaviour
         seed = DataController.Instance.SerializeSeed(oneT, twoT, threeT, fourT, fiveT,
         sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
         sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
-        LoadNextScene(actualStage);
+        LoadNextScene();
 
     }
     private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)

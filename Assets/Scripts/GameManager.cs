@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject mainCamera;
     public Player player;
     public EventSystem defaultEventSystem,playerEventSystem;
+    public StageController stageController;
 
     private void Start()
     {

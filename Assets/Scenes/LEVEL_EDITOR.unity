@@ -560,6 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomId: 0
+  playerStartPos: {x: 0, y: 0, z: 0}
   enemiesList: []
   hasShop: 0
   isCompleted: 0
@@ -12902,6 +12903,7 @@ MonoBehaviour:
   objectsList: []
   floors: {fileID: 640020575}
   floorsList: []
+  playerPos: {fileID: 0}
 --- !u!114 &1894209173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12915,6 +12917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomId: 0
+  playerStartPos: {x: 0, y: 0, z: 0}
   enemiesList: []
   hasShop: 0
   isCompleted: 0

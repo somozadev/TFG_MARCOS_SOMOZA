@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         // DataController.Instance.GetPlayerStats(playerStats);    
+
     }
     private void OnApplicationQuit()
     {
@@ -25,7 +26,8 @@ public class Player : MonoBehaviour
     }
     private void OnEnable()
     {
-        transform.position = Vector3.zero; //get current room initialpos
+        // transform.position = Vector3.zero; //get current room initialpos
+        // transform.position = GameManager.Instance.stageController.currentRoom.playerStartPos;
     }
 
 }

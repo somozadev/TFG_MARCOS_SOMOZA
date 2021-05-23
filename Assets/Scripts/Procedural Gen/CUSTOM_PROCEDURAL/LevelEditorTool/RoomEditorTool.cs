@@ -161,7 +161,8 @@ namespace EditorTool
             foreach (GameObject obj in inSceneGameObjects)
             {
                 if (obj.GetComponent<LevelObject>().objectId == "startPos_object")
-                    return;
+                    if(objectId == "startPos_object")
+                        return;
             }
 
             if (cloneObj != null)

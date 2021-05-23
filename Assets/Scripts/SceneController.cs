@@ -22,7 +22,7 @@ public class SceneController : MonoBehaviour
     #endregion
     
     [SerializeField] private AsyncOperationHandle<SceneInstance> handle; //last adresseable scene loaded
-
+    public StageController stageController;
 
     private void Start()
     {
@@ -35,7 +35,11 @@ public class SceneController : MonoBehaviour
     public void LoadSceneAssetReference(AssetReference scene) { StartCoroutine(LoadSceneAssetReferenceAsync(scene)); }
 
 
-
+    public void LoadNextFloor()
+    {
+        stageController.LoadNextScene();
+        Debug.Log("Next Room");
+    }
 
 
 
