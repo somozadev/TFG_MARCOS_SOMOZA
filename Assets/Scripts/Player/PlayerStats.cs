@@ -75,6 +75,7 @@ public class PlayerStats
     public bool ShouldAddXp(int currentXp) => this.currentXp + currentXp >= this.xp ? true : false;
     public void AddXp(int currentXp) => this.currentXp += currentXp;
     public void AddMaxXp(int xp) => this.xp += xp;
+    public void AddDmg(float dmg) => this.dmg += dmg;
     #endregion
 
 }

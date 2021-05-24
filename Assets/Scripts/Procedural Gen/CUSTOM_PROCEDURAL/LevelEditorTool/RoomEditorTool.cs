@@ -161,7 +161,7 @@ namespace EditorTool
             foreach (GameObject obj in inSceneGameObjects)
             {
                 if (obj.GetComponent<LevelObject>().objectId == "startPos_object")
-                    if(objectId == "startPos_object")
+                    if (objectId == "startPos_object")
                         return;
             }
 
@@ -670,6 +670,10 @@ namespace EditorTool
         }
 
         #endregion
+        #region DROP_ITEMS
+
+        #endregion
+
         #region  UI
 
         int wallRotativeCounter = 0;
@@ -780,18 +784,26 @@ namespace EditorTool
     [System.Serializable]
     public class EditorResources
     {
+        public List<DropItemResource> dropItems = new List<DropItemResource>();
         public List<ObjectResource> levelObjects = new List<ObjectResource>();
         public List<ObjectWall> levelWalls = new List<ObjectWall>();
         public List<ObjectFloor> levelFloors = new List<ObjectFloor>();
         public List<LightingResource> levelLights = new List<LightingResource>();
 
+        public DropItemResource GetDropItemResource(string objectId) { return dropItems.First(x => x.id == objectId); }
         public ObjectResource GetObjectResource(string objectId) { return levelObjects.First(x => x.id == objectId); }
         public ObjectWall GetObjectWall(string objectId) { return levelWalls.First(x => x.id == objectId); }
         public ObjectFloor GetObjectFloor(string objectId) { return levelFloors.First(x => x.id == objectId); }
         public LightingResource GetLightingResource(string lightingId) { return levelLights.First(x => x.id == lightingId); }
-
     }
 
+    [System.Serializable]
+    public class DropItemResource
+    {
+        public string id;
+        public GameObject prefab;
+        public Sprite sprite;
+    }
     [System.Serializable]
     public class ObjectResource
     {
@@ -819,5 +831,7 @@ namespace EditorTool
         public GameObject prefab;
         public Sprite sprite;
     }
+
+
     #endregion
 }

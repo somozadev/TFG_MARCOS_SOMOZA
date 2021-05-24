@@ -45,8 +45,7 @@ public class RoomEditorUIHelper : MonoBehaviour
     * TODO : LIMIT CAMERA TARGET POSITION TO GRID SIZE ***********DONE***********
     * TODO : MAKE TUTORIAL UI AT BEGINNING WITH ALL CONTROLS ***********DONE***********
     * TODO : DYNAMIC EREASE NODE GRID SLOT (MAYBE HIDE MESH AND RECALCULATE COLLIDER??)  ***********DONE***********
-    * TODO : DOORS
-
+    * TODO : DOORS ***********DONE***********
     * TODO : DROPS (COINS, HPBOTTLES, TINTEDROCKS...) EDITOR
     * TODO : ENEMIES BY TYPE || ENEMIE POOL SPAWNER
     */
