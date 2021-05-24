@@ -28,7 +28,8 @@ public class ShopComponent : MonoBehaviour
     {
         int i = 0;
         foreach (ShopItem item in shop.shopItems)
-        {
+        {   
+            item.Item.Action = ItemAction.BUY;
             GameObject aux = Instantiate(item.Prefab, itemSpots[i].position, Quaternion.identity, itemSpots[i].transform);
             aux.GetComponent<SceneItem>().item = item.Item;
             aux.GetComponent<SceneItem>().item.Price = item.Price;

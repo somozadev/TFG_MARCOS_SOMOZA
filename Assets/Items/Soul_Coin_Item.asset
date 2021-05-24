@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee4532d3e11f5864ab42ddb2ecb69350, type: 3}
-  m_Name: Hp_Bottle
+  m_Name: Soul_Coin_Item
   m_EditorClassIdentifier: 
-  id: 0
-  cuantity: 20
-  price: 20
+  id: 5
+  cuantity: 100
+  price: 0
   isUnlocked: 1
-  type: 2
+  type: 0
   action: 0
-  itemSprite: {fileID: 2130535880278150251, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}
+  itemSprite: {fileID: 0}

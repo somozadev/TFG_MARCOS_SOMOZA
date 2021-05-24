@@ -110,13 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 0
-  item:
-    id: 0
-    cuantity: 1
-    isUnlocked: 1
-    type: 0
-    action: 0
-    transform: {fileID: 0}
+  item: {fileID: 11400000, guid: c418a580af425934ea17fb66878f4624, type: 2}
   colliderObject: {fileID: 3221497530354851916}
 --- !u!1 &5043573475272762955
 GameObject:

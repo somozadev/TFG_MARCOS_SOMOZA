@@ -40,7 +40,7 @@ public class SceneItem : MonoBehaviour
         {
             if (item.Action.Equals(ItemAction.PICK))
             {
-                item.PickAction();
+                PickAction();
                 Destroy(gameObject);
             }
             else if (item.Action.Equals(ItemAction.INTERACT))
@@ -64,7 +64,7 @@ public class SceneItem : MonoBehaviour
             }
             else if (item.Action.Equals(ItemAction.BUY))
             {
-                item.BuyAction();
+                BuyAction();
             }
         }
     }
@@ -87,6 +87,146 @@ public class SceneItem : MonoBehaviour
 
     private void EnablePopUpInteract() => PopUpCanvas.Activate();
     private void DisablePopUpInteract() => PopUpCanvas.Deactivate();
+
+    public void PickAction()
+    {
+        switch (item.Type)
+        {
+            case ItemType.SOULCOIN:
+                AddSoulCoin();
+                GameManager.Instance.statsCanvas.AssignCoins();
+                break;
+            case ItemType.KEY:
+                CheckIfExistsOnInventory();
+                GameManager.Instance.statsCanvas.AssignKeys();
+                break;
+            case ItemType.HEALTH:
+                CheckIfNeedsHeal();
+                GameManager.Instance.statsCanvas.AssignHp();
+                break;
+            case ItemType.XP:
+                AddXp();
+                GameManager.Instance.statsCanvas.AssignXp();
+                break;
+
+        }
+    }
+
+    #region PICK_METHODS
+    ///<summary> Comprueba si existe un item con el mismo id en el inventario, si sí, añade la canditad de this.
+    /// Si no, lo añade como nuevo item./></summary>
+    private void CheckIfExistsOnInventory()
+    {
+        if (GameManager.Instance.player.playerStats.Inventory.Exists(x => x.Id == item.Id))
+            GameManager.Instance.player.playerStats.Inventory.Find(x => x.Id == item.Id).Cuantity += item.Cuantity;
+        else
+            GameManager.Instance.player.playerStats.Inventory.Add(item);
+    }
+    ///<summary> Comprueba si la vida actual del jugador es menor que la máxima posible. Si lo es, se añade vida./></summary>
+    private bool CheckIfNeedsHeal()
+    {
+        bool canHeal = false;
+        Debug.Log("CurrentHP:" + GameManager.Instance.player.playerStats.CurrentHp);
+        Debug.Log("MaxHP:" + GameManager.Instance.player.playerStats.Hp);
+
+        if (GameManager.Instance.player.playerStats.CurrentHp < GameManager.Instance.player.playerStats.Hp)
+        {
+            GameManager.Instance.player.playerStats.AddHp(item.Cuantity);
+            canHeal = true;
+        }
+
+        return canHeal;
+    }
+    ///<summary> Comprueba si la xp actual del jugador es menor que la máxima posible. Si lo es, se añade xp. Si no, se sube de nivel y se resetea el current xp/></summary>
+    private void AddXp()
+    {
+        if (GameManager.Instance.player.playerStats.ShouldAddXp(item.Cuantity))
+            GameManager.Instance.player.playerStats.LevelUp();
+        else
+            GameManager.Instance.player.playerStats.AddXp(item.Cuantity);
+    }
+    ///<summary> Añade la cantidad del this. item a las stats del inventario</summary>
+    private void AddSoulCoin() => GameManager.Instance.player.playerStats.SoulCoins += item.Cuantity;
+
+    #endregion
+
+
+
+    public void BuyAction()
+    {
+        bool ShouldBuy = false;
+
+        if (CanAffordBuy())
+        {
+            Debug.Log("BUY");
+            switch (item.Type)
+            {
+                case ItemType.KEY:
+                    ShouldBuy = true;
+                    CheckIfExistsOnInventory();
+                    GameManager.Instance.statsCanvas.AssignKeys();
+                    break;
+                case ItemType.HEALTH:
+                    if (CheckIfNeedsHeal())
+                    {
+                        ShouldBuy = true;
+                        GameManager.Instance.statsCanvas.AssignHp();
+                    }
+                    break;
+                case ItemType.ITEM:
+                    ShouldBuy = true;
+                    AddItemToInventory(item);
+                    GameManager.Instance.player.currentItemsVisual.AddNewItem(item);
+                    break;
+
+            }
+            if (ShouldBuy)
+            {
+                RetrieveSoulCoins();
+                GameObject.Destroy(GameManager.Instance.player.playerInteractor.InteractedObject.transform.parent.gameObject);
+                if (item.Type.Equals(ItemType.ITEM))
+                {
+                    switch (item.Id)
+                    {
+                        case 2: //Greek glasses
+                            item.DoubleShot();
+                            break;
+                        case 3:// Wings of jisus
+                            item.AddWings();
+                            break;
+                        case 4:// Speed Bow
+                            item.AddRange(5f);
+                            break;
+                    }
+                }
+            }
+
+        }
+        else
+        {
+
+            GameManager.Instance.player.playerInteractor.InteractedObject.GetComponent<SceneItem>().GetComponentInParent<ShopSlot>().CantAfford();
+            Debug.Log("CANT BUY");
+        }
+    }
+
+
+    #region  BUY_METHODS
+
+    private bool CanAffordBuy()
+    {
+        bool canBuy = false;
+        if (GameManager.Instance.player.playerStats.SoulCoins >= item.Price)
+            canBuy = true;
+
+        return canBuy;
+    }
+    private void RetrieveSoulCoins() => GameManager.Instance.player.playerStats.SoulCoins -= item.Price;
+    private void AddItemToInventory(Item item) => GameManager.Instance.player.playerStats.Inventory.Add(item);
+
+    #endregion
+
+
 
 
 
