@@ -22,6 +22,7 @@ namespace EditorTool
         public Button floorButton;
         public Button lightingButton;
         public Button objectsButton;
+        public Button dropsButton;
         public TMP_InputField inputField;
 
 
@@ -32,11 +33,17 @@ namespace EditorTool
         public EditorResources resources;
 
         public List<GameObject> inSceneGameObjects = new List<GameObject>();
+        public List<GameObject> InSceneDropItems = new List<GameObject>();
         public List<GameObject> inSceneWalls = new List<GameObject>();
 
         Vector3 mousePos;
         Vector3 worldPos;
 
+        //DROP_ITEMS
+        bool placeDrop;
+        GameObject dropToPlace;
+        GameObject dropCloneObj;
+        bool deleteDropItem;
 
         //OBJECTS
         bool placeObj;
@@ -63,6 +70,9 @@ namespace EditorTool
         private void Start() => inputField.text = transform.GetChild(0).name;
         private void Update()
         {
+            PlaceDropItems();
+            DeleteDropItems();
+
             PlaceObject();
             DeleteObjects();
             PlaceWall();
@@ -90,6 +100,9 @@ namespace EditorTool
         }
         void CloseAll()
         {
+            placeDrop = false;
+            deleteDropItem = false;
+
             placeObj = false;
             deleteObj = false;
 
@@ -99,6 +112,11 @@ namespace EditorTool
             placeFloorObj = false;
             deleteFloor = false;
 
+            if (dropCloneObj != null)
+            {
+                Destroy(dropCloneObj);
+                dropCloneObj = null;
+            }
             if (cloneObj != null)
             {
                 Destroy(cloneObj);
@@ -566,6 +584,7 @@ namespace EditorTool
         #region FLOORS
         public void PassFloorToPlace(string objId)
         {
+            Debug.LogError(objId);
             deleteFloor = false;
             if (floorCloneObj != null)
                 Destroy(floorCloneObj);
@@ -671,7 +690,135 @@ namespace EditorTool
 
         #endregion
         #region DROP_ITEMS
+        public void PassDropItemToPlace(string objId)
+        {
+            Debug.LogError(objId);
+            deleteDropItem = false;
+            if (dropCloneObj != null)
+                Destroy(dropCloneObj);
+            CloseAll();
+            dropCloneObj = null;
+            placeDrop = true;
+            dropToPlace = resources.GetDropItemResource(objId).prefab;
+        }
+        public void DeleteDropItem()
+        {
+            highLitedMat.color = new Color32(255, 0, 0, 16);
+            highLitedMat.SetColor("_EmissionColor", Color.red);
+            GameObject remove = dropCloneObj;
+            Destroy(remove);
+            CloseAll();
+            deleteDropItem = true;
+        }
+        public void PlaceDropItems()
+        {
+            if (placeDrop)
+            {
+                Node current = grid.NodeFromWorldPos(mousePos);
 
+                highLitedMat.color = new Color32(255, 255, 0, 16);
+                highLitedMat.SetColor("_EmissionColor", Color.yellow);
+                UpdateMousePosition();
+                if (current == null)
+                    return;
+                Floor floor = current.floorObj.GetComponent<Floor>();
+                worldPos = current.floorObj.transform.position;
+
+
+                //UNLIGHT N LIGHT CURRENT NODE FLOOR
+                foreach (Node n in grid.grid)
+                {
+                    if (n != current)
+                    {
+                        Floor f = n.floorObj.GetComponent<Floor>();
+                        f.UnShadeAll();
+                    }
+                    else
+                        n.floorObj.GetComponent<Floor>().ShadeFloor();
+                }
+
+
+                if (dropCloneObj == null)
+                {
+                    dropCloneObj = Instantiate(dropToPlace, worldPos, Quaternion.identity) as GameObject;
+                    objProperties = dropCloneObj.GetComponent<LevelObject>();
+                }
+                else
+                {
+                    if (dropCloneObj.GetComponent<LevelObject>().posOffset == Vector3.zero)
+                        dropCloneObj.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z);
+                    else
+                        dropCloneObj.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z) + dropCloneObj.GetComponent<LevelObject>().posOffset;
+
+                    if (Mouse.current.leftButton.wasPressedThisFrame)
+                    {
+                        GameObject actualObjPlaced = Instantiate(dropToPlace, worldPos, dropCloneObj.transform.rotation);
+                        actualObjPlaced.transform.parent = transform.GetChild(0).transform.GetChild(3).transform;
+                        LevelObject placedProp = actualObjPlaced.GetComponent<LevelObject>();
+                        placedProp.x = current.x;
+                        placedProp.z = current.z;
+                        if (placedProp.posOffset == Vector3.zero)
+                            placedProp.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z);
+                        else
+                            placedProp.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z) + placedProp.posOffset;
+
+                        placedProp.transform.rotation = dropCloneObj.transform.rotation;
+
+                        current.dropItemsObj.Add(actualObjPlaced);
+                        InSceneDropItems.Add(actualObjPlaced);
+
+                    }
+                    if (Mouse.current.rightButton.wasPressedThisFrame)
+                        objProperties.ChangeRotation();
+                }
+            }
+            else
+            {
+                if (cloneObj != null)
+                    Destroy(cloneObj);
+
+            }
+
+
+
+        }
+        public void DeleteDropItems()
+        {
+            if (deleteDropItem)
+            {
+                UpdateMousePosition();
+                Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
+
+                current.floorObj.GetComponent<Floor>().ShadeFloor();
+
+                foreach (Node node in grid.grid)
+                {
+                    if (node != current)
+                        node.floorObj.GetComponent<Floor>().UnShadeFloor();
+                }
+
+
+
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    if (current.dropItemsObj.Count > 0)
+                    {
+                        List<GameObject> aux = current.dropItemsObj;
+                        foreach (GameObject g in current.dropItemsObj)
+                        {
+                            InSceneDropItems.Remove(g);
+                            Destroy(aux[aux.IndexOf(g)]);
+                        }
+                        current.floorObj.GetComponent<Floor>().UnShadeFloor();
+                    }
+                    current.dropItemsObj.Clear();
+                }
+            }
+
+
+        }
         #endregion
 
         #region  UI
@@ -742,7 +889,6 @@ namespace EditorTool
             lightingButton.onClick.AddListener(() => PassLightingToPlace(resources.levelLights[lightingRotativeCounter].id));
 
         }
-
         int objectsRotativeCounter = 0;
         public void RotateObjectsResources(bool right)
         {
@@ -763,7 +909,27 @@ namespace EditorTool
             objectsButton.onClick.AddListener(() => PassGameObjectToPlace(resources.levelObjects[objectsRotativeCounter].id));
 
         }
+        int dropsRotativeCounter = 0;
+        public void RotateDropsResources(bool right)
+        {
+            if (right)
+            {
+                dropsRotativeCounter++;
+                if (dropsRotativeCounter >= resources.dropItems.Count)
+                    dropsRotativeCounter = 0;
+            }
+            else
+            {
+                dropsRotativeCounter--;
+                if (dropsRotativeCounter < 0)
+                    dropsRotativeCounter = resources.dropItems.Count - 1;
+            }
+            dropsButton.GetComponent<Image>().sprite = resources.dropItems[dropsRotativeCounter].sprite;
+            dropsButton.onClick.RemoveAllListeners();
+            Debug.Log("NEW:" + resources.dropItems[dropsRotativeCounter].id);
+            dropsButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItems[dropsRotativeCounter].id));
 
+        }
         #endregion
 
     }
@@ -778,6 +944,7 @@ namespace EditorTool
         public int z;
         public GameObject floorObj;
         public List<GameObject> placedObj = new List<GameObject>();
+        public List<GameObject> dropItemsObj = new List<GameObject>();
 
     }
 

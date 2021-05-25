@@ -33,7 +33,9 @@ public class RoomEditorUIHelper : MonoBehaviour
 
     public GameObject AssetsPanelObj { get { return assetsPanel; } }
     public GameObject GridPanelObj { get { return gridPanel; } }
+    public GameObject DropItemPanelObj { get { return dropsPannel; } }
     public Button AssetButton { get { return assetsButton; } }
+    public Button DropItemButton { get { return dropsButton; } }
     public Button GridButton { get { return gridButton; } }
 
     /*

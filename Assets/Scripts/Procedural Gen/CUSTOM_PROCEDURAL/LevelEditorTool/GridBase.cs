@@ -41,6 +41,8 @@ namespace EditorTool
                 GetComponent<RoomEditorUIHelper>().openClosGrid = true;
                 GetComponent<RoomEditorUIHelper>().AssetsPanelObj.SetActive(true);
                 GetComponent<RoomEditorUIHelper>().AssetButton.gameObject.SetActive(true);
+                GetComponent<RoomEditorUIHelper>().DropItemPanelObj.SetActive(true);
+                GetComponent<RoomEditorUIHelper>().DropItemButton.gameObject.SetActive(true);
 
             }
             else

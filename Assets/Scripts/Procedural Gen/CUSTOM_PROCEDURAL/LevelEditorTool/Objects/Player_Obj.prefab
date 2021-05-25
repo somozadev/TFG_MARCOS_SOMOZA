@@ -148,7 +148,7 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0}
   isStackable: 0
   isWall: 0
-  rotationDegrees: 90
+  rotationDegrees: 30
 --- !u!1 &7303690273875765531
 GameObject:
   m_ObjectHideFlags: 0
