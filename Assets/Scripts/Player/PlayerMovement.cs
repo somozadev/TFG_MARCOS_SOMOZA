@@ -13,9 +13,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     private int speed;
     [SerializeField] private bool isMoving;
-    private Vector3 moveDirection, forward, right;
+    private Vector3 moveDirection, lookDirection, forward, right;
     private Rigidbody rb;
-    private Vector2 rawInput;
+    [SerializeField] Vector2 rawInput;
+    [SerializeField] Vector2 rawInputShooting;
     [Header("Attack")]
     [SerializeField] private bool isAttacking;
     [SerializeField] private bool canAttack = true;
@@ -51,20 +52,25 @@ public class PlayerMovement : MonoBehaviour
         if (isMoving)
             Move(rawInput);
         if (isAttacking)
-            Attack();
+            LookAttack(rawInputShooting);
     }
 
 
     #region INPUT_SEND_MESSAGES
-    private void OnAttack(InputValue value)
+    // private void OnAttack(InputValue value)
+    // {
+    //     isAttacking = !isAttacking;
+    // }
+    private void OnAttackDir(InputValue value)
     {
-        isAttacking = !isAttacking;
+        rawInputShooting = value.Get<Vector2>();
+        isAttacking = rawInputShooting == Vector2.zero ? false : true;
+        lookDirection = new Vector3(rawInputShooting.x, 0, rawInputShooting.y).normalized;
     }
     private void OnMove(InputValue value)
     {
         rawInput = value.Get<Vector2>();
         isMoving = rawInput == Vector2.zero ? false : true;
-
         moveDirection = new Vector3(rawInput.x, 0, rawInput.y).normalized;
 
     }
@@ -77,16 +83,28 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region INPUT_METHODS
-    private void Attack()
+    private void LookAttack(Vector2 rawInput)
     {
+        transform.forward = lookDirection;
         if (canAttack)
         {
             canAttack = false;
-            StartCoroutine(WaitToAttack(attRate / 10));
+            StartCoroutine(WaitToAttackLook(attRate / 10));
         }
     }
-    private IEnumerator WaitToAttack(float waitTime)
+
+
+    // private void Attack()
+    // {
+    //     if (canAttack)
+    //     {
+    //         canAttack = false;
+    //         StartCoroutine(WaitToAttack(attRate / 10));
+    //     }
+    // }
+    private IEnumerator WaitToAttackLook(float waitTime)
     {
+
         float radius = 0.1f;
 
         for (int i = 0; i < GameManager.Instance.player.extraStats.NumberOfShots; i++)
@@ -97,7 +115,24 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
         canAttack = true;
+
+
+
     }
+    // private IEnumerator WaitToAttack(float waitTime)
+    // {
+    //     float radius = 0.1f;
+
+    //     for (int i = 0; i < GameManager.Instance.player.extraStats.NumberOfShots; i++)
+    //     {
+    //         Vector3 randomPos = new Vector3(shootingPoint.position.x + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.y + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.z);
+    //         GameObject bullet = GameObject.Instantiate(bulletPrefab, randomPos, Quaternion.identity);
+    //         bullet.GetComponent<Bullet>().rb.AddForce(transform.forward * attSpeed, ForceMode.Impulse);
+    //         // transform.forward = bullet.GetComponent<Rigidbody>().velocity;
+    //     }
+    //     yield return new WaitForSeconds(waitTime);
+    //     canAttack = true;
+    // }
     private void Interact()
     {
         GetComponentInChildren<PlayerInteractor>().interacting = false;
@@ -111,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rightMovement = right * speed * Time.deltaTime * moveDirection.x;
             Vector3 upMovement = forward * speed * Time.deltaTime * moveDirection.z;
             Vector3 finalDirection = Vector3.Normalize(rightMovement + upMovement);
-            transform.forward = finalDirection;
+            // transform.forward = finalDirection;
 
             rb.AddForce(rb.position + (rightMovement + upMovement));
             // rb.MovePosition(rb.position + (rightMovement + upMovement));
