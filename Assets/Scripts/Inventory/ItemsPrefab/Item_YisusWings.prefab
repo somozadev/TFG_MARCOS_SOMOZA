@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 1
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: abb49935a9d26c14aa06f23bedffa3c3, type: 2}
   colliderObject: {fileID: 9028451793646743131}
 --- !u!1 &8013336122407440527
 GameObject:

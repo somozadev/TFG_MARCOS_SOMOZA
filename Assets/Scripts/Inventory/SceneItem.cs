@@ -8,6 +8,8 @@ public class SceneItem : MonoBehaviour
 {
     public bool canInteract;
     public Item item;
+    public ItemAction action;
+
     private AnimationWoldSpaceCanvas PopUpCanvas;
     [SerializeField] Collider colliderObject;
 
@@ -23,11 +25,15 @@ public class SceneItem : MonoBehaviour
         {
             canInteract = true;
             // item.Transform = this.transform;
-            if (item.Action.Equals(ItemAction.INTERACT))
+            if (action.Equals(ItemAction.INTERACT))
                 PopUpCanvas = GetComponentInChildren<AnimationWoldSpaceCanvas>(true);
-            if (item.Action.Equals(ItemAction.BUY))
+            if (action.Equals(ItemAction.BUY))
             {
-                colliderObject.gameObject.SetActive(false);
+                if (colliderObject != null)
+                {
+                    colliderObject.enabled = false;
+                    colliderObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
             }
             if (item.Type.Equals(ItemType.XP)) { }
         }
@@ -38,14 +44,14 @@ public class SceneItem : MonoBehaviour
     {
         if (canInteract)
         {
-            if (item.Action.Equals(ItemAction.PICK))
+            if (action.Equals(ItemAction.PICK))
             {
                 PickAction();
                 Destroy(gameObject);
             }
-            else if (item.Action.Equals(ItemAction.INTERACT))
+            else if (action.Equals(ItemAction.INTERACT))
                 EnablePopUpInteract();
-            else if (item.Action.Equals(ItemAction.BUY))
+            else if (action.Equals(ItemAction.BUY))
             {
                 Debug.Log("Shall animate item");
                 GetComponentInParent<ShopSlot>().SelectedItem();
@@ -56,13 +62,13 @@ public class SceneItem : MonoBehaviour
     {
         if (canInteract)
         {
-            if (item.Action.Equals(ItemAction.INTERACT))
+            if (action.Equals(ItemAction.INTERACT))
             {
                 item.InteractAction();
                 DisablePopUpInteract();
                 // GameManager.Instance.player.playerInteractor.InteractedObject.gameObject.tag = "Untagged";
             }
-            else if (item.Action.Equals(ItemAction.BUY))
+            else if (action.Equals(ItemAction.BUY))
             {
                 BuyAction();
             }
@@ -72,11 +78,11 @@ public class SceneItem : MonoBehaviour
     {
         if (canInteract)
         {
-            if (item.Action.Equals(ItemAction.INTERACT))
+            if (action.Equals(ItemAction.INTERACT))
             {
                 DisablePopUpInteract();
             }
-            else if (item.Action.Equals(ItemAction.BUY))
+            else if (action.Equals(ItemAction.BUY))
             {
                 GetComponentInParent<ShopSlot>().DeselectedItem();
                 Debug.Log("Shall finish animating item if didnt bought");
@@ -104,9 +110,28 @@ public class SceneItem : MonoBehaviour
                 CheckIfNeedsHeal();
                 GameManager.Instance.statsCanvas.AssignHp();
                 break;
+            case ItemType.DMG:
+                GameManager.Instance.player.playerStats.AddDmg(item.Cuantity);
+                break;
             case ItemType.XP:
                 AddXp();
                 GameManager.Instance.statsCanvas.AssignXp();
+                break;
+            case ItemType.ITEM:
+                AddItemToInventory(item);
+                GameManager.Instance.player.currentItemsVisual.AddNewItem(item);
+                switch (item.Id)
+                {
+                    case 2: //Greek glasses
+                        item.DoubleShot();
+                        break;
+                    case 3:// Wings of jisus
+                        item.AddWings();
+                        break;
+                    case 4:// Speed Bow
+                        item.AddRange(5f);
+                        break;
+                }
                 break;
 
         }
@@ -221,7 +246,11 @@ public class SceneItem : MonoBehaviour
 
         return canBuy;
     }
-    private void RetrieveSoulCoins() => GameManager.Instance.player.playerStats.SoulCoins -= item.Price;
+    private void RetrieveSoulCoins()
+    {
+        GameManager.Instance.player.playerStats.SoulCoins -= item.Price; 
+        GameManager.Instance.statsCanvas.AssignCoins();
+    }
     private void AddItemToInventory(Item item) => GameManager.Instance.player.playerStats.Inventory.Add(item);
 
     #endregion

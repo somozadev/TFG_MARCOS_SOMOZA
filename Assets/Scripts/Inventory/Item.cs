@@ -13,24 +13,24 @@ public class Item : ScriptableObject
     [SerializeField] private int price;
     [SerializeField] private bool isUnlocked;
     [SerializeField] private ItemType type;
-    [SerializeField] private ItemAction action;
+    // [SerializeField] private ItemAction action;
     [SerializeField] private Sprite itemSprite;
 
     public int Id { get { return id; } }
     public int Cuantity { get { return cuantity; } set { cuantity = value; } }
     public Sprite ItemSprite { get { return itemSprite; } }
     public int Price { get { return price; } set { price = value; } }
-    public ItemAction Action { get { return action; } set { action = value; } }
+    // public ItemAction Action { get { return action; } set { action = value; } }
     public ItemType Type { get { return type; } }
 
 
-    public Item(int id, int cuantity, bool isUnlocked, ItemType type, ItemAction action)
+    public Item(int id, int cuantity, bool isUnlocked, ItemType type)//, ItemAction action)
     {
         this.id = id;
         this.cuantity = cuantity;
         this.isUnlocked = isUnlocked;
         this.type = type;
-        this.action = action;
+        // this.action = action;
     }
 
     public void InteractAction()
@@ -46,10 +46,6 @@ public class Item : ScriptableObject
         Debug.Log("Interacted");
     }
 
-    void onDisable()
-    {
-        Action = ItemAction.PICK;
-    }
 
 
 
@@ -98,6 +94,7 @@ public enum ItemType
     SOULCOIN,
     KEY,
     HEALTH,
+    DMG,
     XP,
     CHEST,
     DOOR,

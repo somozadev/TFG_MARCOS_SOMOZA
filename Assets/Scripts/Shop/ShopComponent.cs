@@ -9,6 +9,7 @@ public class ShopComponent : MonoBehaviour
 
     public List<Transform> itemSpots;
 
+    public Shop setShop { set { shop = value; } }
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class ShopComponent : MonoBehaviour
         {
             slot.GetComponent<ShopSlot>().RotateStuff();
         }
+        
     }
 
 
@@ -28,11 +30,11 @@ public class ShopComponent : MonoBehaviour
     {
         int i = 0;
         foreach (ShopItem item in shop.shopItems)
-        {   
-            item.Item.Action = ItemAction.BUY;
+        {
             GameObject aux = Instantiate(item.Prefab, itemSpots[i].position, Quaternion.identity, itemSpots[i].transform);
             aux.GetComponent<SceneItem>().item = item.Item;
             aux.GetComponent<SceneItem>().item.Price = item.Price;
+            aux.GetComponent<SceneItem>().action = ItemAction.BUY;
             aux.GetComponent<SceneItem>().Initialize();
             itemSpots[shop.shopItems.IndexOf(item)].GetComponentInChildren<TMP_Text>().text = item.Price.ToString();
             i++;

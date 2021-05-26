@@ -23,6 +23,10 @@ namespace EditorTool
         public Button lightingButton;
         public Button objectsButton;
         public Button dropsButton;
+        public Button dropsStatModButton;
+        public Button dropsAbilityModButton;
+        public Button dropsInteractModButton;
+        public Button dropsShopConfigButton;
         public TMP_InputField inputField;
 
 
@@ -43,6 +47,7 @@ namespace EditorTool
         bool placeDrop;
         GameObject dropToPlace;
         GameObject dropCloneObj;
+        LevelObject dropObjProperties;
         bool deleteDropItem;
 
         //OBJECTS
@@ -67,14 +72,25 @@ namespace EditorTool
         public GameObject lightVolumeObj;
         #endregion
         #region START_UPDATE
+
+        private void Awake()
+        {
+            foreach (Shop s in Methods.LoadShops())
+            {
+                ShopConfig sc = new ShopConfig();
+                sc.id = s.name;
+                sc.prefab = s;
+                resources.shopConfigs.Add(sc);
+            } 
+        }
         private void Start() => inputField.text = transform.GetChild(0).name;
         private void Update()
         {
+            PlaceObject();
+            DeleteObjects();
             PlaceDropItems();
             DeleteDropItems();
 
-            PlaceObject();
-            DeleteObjects();
             PlaceWall();
             DeleteWalls();
             PlaceFloor();
@@ -692,7 +708,6 @@ namespace EditorTool
         #region DROP_ITEMS
         public void PassDropItemToPlace(string objId)
         {
-            Debug.LogError(objId);
             deleteDropItem = false;
             if (dropCloneObj != null)
                 Destroy(dropCloneObj);
@@ -701,6 +716,42 @@ namespace EditorTool
             placeDrop = true;
             dropToPlace = resources.GetDropItemResource(objId).prefab;
         }
+        public void PassDropItemStatModToPlace(string objId)
+        {
+            deleteDropItem = false;
+            if (dropCloneObj != null)
+                Destroy(dropCloneObj);
+            CloseAll();
+            dropCloneObj = null;
+            placeDrop = true;
+            dropToPlace = resources.GetDropItemStatModResource(objId).prefab;
+        }
+        public void PassDropItemAbilityModToPlace(string objId)
+        {
+            deleteDropItem = false;
+            if (dropCloneObj != null)
+                Destroy(dropCloneObj);
+            CloseAll();
+            dropCloneObj = null;
+            placeDrop = true;
+            dropToPlace = resources.GetDropItemAbilityModResource(objId).prefab;
+        }
+        public void PassDropItemInteractModToPlace(string objId)
+        {
+            deleteDropItem = false;
+            if (dropCloneObj != null)
+                Destroy(dropCloneObj);
+            CloseAll();
+            dropCloneObj = null;
+            placeDrop = true;
+            dropToPlace = resources.GetDropItemInteractModResource(objId).prefab;
+        }
+        public void PassShopConfigToSet(string objId)
+        {
+            Shop newConfig = resources.GetShopConfigResource(objId).prefab;
+            resources.dropItemsInteractMod.First(x => x.id == "Item_Shop").prefab.GetComponent<ShopComponent>().setShop = newConfig;
+        }
+
         public void DeleteDropItem()
         {
             highLitedMat.color = new Color32(255, 0, 0, 16);
@@ -741,7 +792,7 @@ namespace EditorTool
                 if (dropCloneObj == null)
                 {
                     dropCloneObj = Instantiate(dropToPlace, worldPos, Quaternion.identity) as GameObject;
-                    objProperties = dropCloneObj.GetComponent<LevelObject>();
+                    dropObjProperties = dropCloneObj.GetComponent<LevelObject>();
                 }
                 else
                 {
@@ -769,20 +820,20 @@ namespace EditorTool
 
                     }
                     if (Mouse.current.rightButton.wasPressedThisFrame)
-                        objProperties.ChangeRotation();
+                        dropObjProperties.ChangeRotation();
                 }
             }
             else
             {
-                if (cloneObj != null)
-                    Destroy(cloneObj);
+                if (dropCloneObj != null)
+                    Destroy(dropCloneObj);
 
             }
 
 
 
         }
-        public void DeleteDropItems()
+        void DeleteDropItems()
         {
             if (deleteDropItem)
             {
@@ -930,6 +981,86 @@ namespace EditorTool
             dropsButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItems[dropsRotativeCounter].id));
 
         }
+        int dropsStatModRotativeCounter = 0;
+        public void RotateDropsStatModResources(bool right)
+        {
+            if (right)
+            {
+                dropsStatModRotativeCounter++;
+                if (dropsStatModRotativeCounter >= resources.dropItemsStatMod.Count)
+                    dropsStatModRotativeCounter = 0;
+            }
+            else
+            {
+                dropsStatModRotativeCounter--;
+                if (dropsStatModRotativeCounter < 0)
+                    dropsStatModRotativeCounter = resources.dropItemsStatMod.Count - 1;
+            }
+            dropsStatModButton.GetComponent<Image>().sprite = resources.dropItemsStatMod[dropsStatModRotativeCounter].sprite;
+            dropsStatModButton.onClick.RemoveAllListeners();
+            dropsStatModButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItemsStatMod[dropsStatModRotativeCounter].id));
+
+        }
+        int dropsAbilityModRotativeCounter = 0;
+        public void RotateDropsAbilityModResources(bool right)
+        {
+            if (right)
+            {
+                dropsAbilityModRotativeCounter++;
+                if (dropsAbilityModRotativeCounter >= resources.dropItemsAbilityMod.Count)
+                    dropsAbilityModRotativeCounter = 0;
+            }
+            else
+            {
+                dropsAbilityModRotativeCounter--;
+                if (dropsAbilityModRotativeCounter < 0)
+                    dropsAbilityModRotativeCounter = resources.dropItemsAbilityMod.Count - 1;
+            }
+            dropsAbilityModButton.GetComponent<Image>().sprite = resources.dropItemsAbilityMod[dropsAbilityModRotativeCounter].sprite;
+            dropsAbilityModButton.onClick.RemoveAllListeners();
+            dropsAbilityModButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItemsAbilityMod[dropsAbilityModRotativeCounter].id));
+
+        }
+        int dropsInteractModRotativeCounter = 0;
+        public void RotateDropsInteractModResources(bool right)
+        {
+            if (right)
+            {
+                dropsInteractModRotativeCounter++;
+                if (dropsInteractModRotativeCounter >= resources.dropItemsInteractMod.Count)
+                    dropsInteractModRotativeCounter = 0;
+            }
+            else
+            {
+                dropsInteractModRotativeCounter--;
+                if (dropsInteractModRotativeCounter < 0)
+                    dropsInteractModRotativeCounter = resources.dropItemsInteractMod.Count - 1;
+            }
+            dropsInteractModButton.GetComponent<Image>().sprite = resources.dropItemsInteractMod[dropsInteractModRotativeCounter].sprite;
+            dropsInteractModButton.onClick.RemoveAllListeners();
+            dropsInteractModButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItemsInteractMod[dropsInteractModRotativeCounter].id));
+
+        }
+        int shopConfigRotativeCounter = 0;
+        public void RotateShopConfigResources(bool right)
+        {
+            if (right)
+            {
+                shopConfigRotativeCounter++;
+                if (shopConfigRotativeCounter >= resources.shopConfigs.Count)
+                    shopConfigRotativeCounter = 0;
+            }
+            else
+            {
+                shopConfigRotativeCounter--;
+                if (shopConfigRotativeCounter < 0)
+                    shopConfigRotativeCounter = resources.shopConfigs.Count - 1;
+            }
+            dropsShopConfigButton.GetComponentInChildren<TMP_Text>().text = resources.shopConfigs[shopConfigRotativeCounter].id;
+            dropsShopConfigButton.onClick.RemoveAllListeners();
+            dropsShopConfigButton.onClick.AddListener(() => PassShopConfigToSet(resources.shopConfigs[shopConfigRotativeCounter].id));
+
+        }
         #endregion
 
     }
@@ -952,12 +1083,20 @@ namespace EditorTool
     public class EditorResources
     {
         public List<DropItemResource> dropItems = new List<DropItemResource>();
+        public List<DropItemResource> dropItemsStatMod = new List<DropItemResource>();
+        public List<DropItemResource> dropItemsAbilityMod = new List<DropItemResource>();
+        public List<DropItemResource> dropItemsInteractMod = new List<DropItemResource>();
+        public List<ShopConfig> shopConfigs = new List<ShopConfig>();
         public List<ObjectResource> levelObjects = new List<ObjectResource>();
         public List<ObjectWall> levelWalls = new List<ObjectWall>();
         public List<ObjectFloor> levelFloors = new List<ObjectFloor>();
         public List<LightingResource> levelLights = new List<LightingResource>();
 
         public DropItemResource GetDropItemResource(string objectId) { return dropItems.First(x => x.id == objectId); }
+        public DropItemResource GetDropItemStatModResource(string objectId) { return dropItemsStatMod.First(x => x.id == objectId); }
+        public DropItemResource GetDropItemAbilityModResource(string objectId) { return dropItemsAbilityMod.First(x => x.id == objectId); }
+        public DropItemResource GetDropItemInteractModResource(string objectId) { return dropItemsInteractMod.First(x => x.id == objectId); }
+        public ShopConfig GetShopConfigResource(string objectId) { return shopConfigs.First(x => x.id == objectId); }
         public ObjectResource GetObjectResource(string objectId) { return levelObjects.First(x => x.id == objectId); }
         public ObjectWall GetObjectWall(string objectId) { return levelWalls.First(x => x.id == objectId); }
         public ObjectFloor GetObjectFloor(string objectId) { return levelFloors.First(x => x.id == objectId); }
@@ -970,6 +1109,12 @@ namespace EditorTool
         public string id;
         public GameObject prefab;
         public Sprite sprite;
+    }
+    [System.Serializable]
+    public class ShopConfig
+    {
+        public string id;
+        public Shop prefab;
     }
     [System.Serializable]
     public class ObjectResource

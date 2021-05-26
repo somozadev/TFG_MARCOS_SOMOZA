@@ -7,16 +7,21 @@ namespace EditorTool
 {
     public class PrefabCreatorCleaner : MonoBehaviour
     {
-        [SerializeField] private GameObject walls;
-        [SerializeField] private List<GameObject> wallsList;
         [SerializeField] private GameObject objects;
         [SerializeField] private List<GameObject> objectsList;
+        [SerializeField] private GameObject drops;
+        [SerializeField] private List<GameObject> dropsList;
+        [SerializeField] private GameObject walls;
+        [SerializeField] private List<GameObject> wallsList;
         [SerializeField] private GameObject floors;
         [SerializeField] private List<GameObject> floorsList;
         [SerializeField] public Transform playerPos;
 
+        private GameObject parent;
+
         public IEnumerator StartClear(GameObject parent)
         {
+            this.parent = parent;
             yield return StartCoroutine(AsyncClear());
             parent.GetComponent<Room>().enabled = true;
             parent.GetComponent<Room>().SetId = DataController.Instance.GenerateId();
@@ -31,23 +36,31 @@ namespace EditorTool
             ClearFloors();
             ClearWalls();
             ClearObjects();
+            ClearDrops();
             yield return new WaitForEndOfFrame();
 
         }
 
         public void InitRefs()
         {
-            foreach (Transform wall in walls.transform)
-                if (wall.name != "Objects")
-                    wallsList.Add(wall.gameObject);
             foreach (Transform obj in objects.transform)
                 if (obj.name != "Floors")
                 {
                     if (obj.name == "Player_Obj(Clone)")
                         playerPos = obj;
-                    else
-                        objectsList.Add(obj.gameObject);
+                        
+                    objectsList.Add(obj.gameObject);
                 }
+            foreach (Transform drop in drops.transform)
+            {
+                if (drop.name != "Walls")
+                {
+                    dropsList.Add(drop.gameObject);
+                }
+            }
+            foreach (Transform wall in walls.transform)
+                if (wall.name != "Objects")
+                    wallsList.Add(wall.gameObject);
             foreach (Transform floor in floors.transform)
                 if (floor.parent == floors.transform)
                     floorsList.Add(floor.gameObject);
@@ -112,12 +125,31 @@ namespace EditorTool
         {
             var aux = objectsList;
             foreach (GameObject obj in objectsList)
-            {   
+            {
                 Destroy(obj.GetComponent<LevelObject>());
                 if (obj.GetComponent<Rigidbody>() != null)
                     obj.GetComponent<Rigidbody>().isKinematic = false;
             }
 
+        }
+        void ClearDrops()
+        {
+            if (dropsList.Count > 0)
+                parent.GetComponent<Room>().SetHasDrop = true;
+            var aux = dropsList;
+            foreach (GameObject obj in dropsList)
+            {
+                Destroy(obj.GetComponent<LevelObject>());
+                if (obj.GetComponent<ShopComponent>() != null)
+                {
+                    parent.GetComponent<Room>().SetHasShop = true;
+
+                    foreach (Transform child in obj.transform)
+                    {
+                        Destroy(child.GetComponent<ShopSlot>().itemToSell.gameObject); //LIMPIA LOS OBJETOS DE LA TIENDA PORQUE SE INSTANCIARAN EN ESCENA CUANDO SE GENEREN EN EL START
+                    }
+                }
+            }
         }
 
     }

@@ -24,6 +24,8 @@ public class Room : MonoBehaviour
 
     public int SetId { set { RoomId = value; } }
     public int GetId { get { return RoomId; } }
+    public bool SetHasShop { set { hasShop = value; } }
+    public bool SetHasDrop { set { isDroppingItem = value; } }
 
 
     private void Awake()
@@ -32,8 +34,9 @@ public class Room : MonoBehaviour
     }
 
 
-    private void Update() {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+    private void Update()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             Complete();
         }
@@ -41,8 +44,8 @@ public class Room : MonoBehaviour
 
 
     private void OnEnable()
-    {   
-        if(GetComponentInParent<StageController>() != null)
+    {
+        if (GetComponentInParent<StageController>() != null)
             GetComponentInParent<StageController>().currentRoom = this;
 
         playerStartPos = GetComponent<EditorTool.PrefabCreatorCleaner>().playerPos.position;

@@ -174,10 +174,10 @@ public class RoomEditorUIHelper : MonoBehaviour
             tutorialButton.gameObject.SetActive(false);
         if (cameraTargetPosButton != current)
             cameraTargetPosButton.gameObject.SetActive(false);
+        if(dropsButton != current)
+            dropsButton.gameObject.SetActive(false);
         // if(enemiesButton != current)
         //     enemiesButton.gameObject.SetActive(false);
-        // if(dropsButton != current)
-        //     dropsButton.gameObject.SetActive(false);
     }
     public void ShowllOtherButtons()
     {
@@ -185,8 +185,8 @@ public class RoomEditorUIHelper : MonoBehaviour
         assetsButton.gameObject.SetActive(true);
         tutorialButton.gameObject.SetActive(true);
         cameraTargetPosButton.gameObject.SetActive(true);
+        dropsButton.gameObject.SetActive(true);
         // enemiesButton.gameObject.SetActive(true);
-        // dropsButton.gameObject.SetActive(true);
     }
 
 

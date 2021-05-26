@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 11400000, guid: c61bed0f44db4ce479279a61c5653071, type: 2}
-  colliderObject: {fileID: 0}
+  colliderObject: {fileID: 5471701736790355837}
 --- !u!54 &1076795209669037337
 Rigidbody:
   m_ObjectHideFlags: 0

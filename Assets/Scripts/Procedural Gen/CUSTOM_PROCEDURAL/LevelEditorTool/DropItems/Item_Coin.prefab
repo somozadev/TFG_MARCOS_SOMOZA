@@ -156,8 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446d6f0b511592c44ab29194162130a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canInteract: 0
+  canInteract: 1
   item: {fileID: 11400000, guid: c418a580af425934ea17fb66878f4624, type: 2}
+  action: 0
   colliderObject: {fileID: 5798592965093413501}
 --- !u!114 &6374273163061432553
 MonoBehaviour:
