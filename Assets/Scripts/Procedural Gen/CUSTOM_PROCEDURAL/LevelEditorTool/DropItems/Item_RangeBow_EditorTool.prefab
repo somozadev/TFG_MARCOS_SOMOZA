@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1799382559512272433}
   - component: {fileID: 4079545867581580359}
   - component: {fileID: 8628358586735963195}
+  - component: {fileID: -1139738732477657557}
   m_Layer: 0
   m_Name: Item_RangeBow_EditorTool
   m_TagString: Interactable
@@ -181,3 +182,15 @@ MonoBehaviour:
   isStackable: 0
   isWall: 0
   rotationDegrees: 90
+--- !u!114 &-1139738732477657557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053007440203934165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825ea8e9493df8646aad2ee3e624c8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

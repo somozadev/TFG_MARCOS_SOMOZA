@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
         initialPos = transform.position;
         topFire.material.SetVector("_Seed", new Vector4(Random.Range(0, 10), Random.Range(0, 10), 0, 0));
         rb = GetComponent<Rigidbody>();
+        Physics.IgnoreLayerCollision(10,11,true);
     }
     void Start()
     {

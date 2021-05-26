@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1191071628338648909}
   - component: {fileID: 1191071628338648906}
   - component: {fileID: 1191071628338648907}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4822,7 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4694793337344388544}
   - component: {fileID: 7972728654606292003}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4962,7 +4962,7 @@ GameObject:
   - component: {fileID: 6830175969080377601}
   - component: {fileID: 7466142877846893740}
   - component: {fileID: 5727611756972403308}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet_Prefab
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -5041,7 +5041,7 @@ GameObject:
   - component: {fileID: 1482566227857517736}
   - component: {fileID: 1269775316600882228}
   - component: {fileID: 5729040994838692954}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,21 +13,26 @@ public class ShopComponent : MonoBehaviour
 
     private void Awake()
     {
+        if(GetComponentInParent<Room>() != null)
+            GetComponentInParent<Room>().onRoomCompleted += SubsInit;
+    }
+
+    private void SubsInit()
+    {
         foreach (ShopSlot slot in GetComponentsInChildren<ShopSlot>())
             itemSpots.Add(slot.transform);
-        InitializeShop();
+        StartCoroutine(InitializeShop());
 
         foreach (Transform slot in itemSpots)
         {
             slot.GetComponent<ShopSlot>().RotateStuff();
         }
-        
+
     }
 
-
-
-    public void InitializeShop()
+    public IEnumerator InitializeShop()
     {
+        yield return new WaitForSeconds(.5f);
         int i = 0;
         foreach (ShopItem item in shop.shopItems)
         {

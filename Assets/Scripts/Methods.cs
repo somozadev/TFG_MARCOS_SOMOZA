@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
@@ -13,6 +14,24 @@ public static class Methods
         return result;
     }
 
+    public static IEnumerator EnableAnim(this GameObject obj)
+    {
+        yield return new WaitForSeconds(0.2f);
+        float elapsedTime = 0;
+        float waitTime = 1f;
+        obj.transform.localScale = Vector3.zero;
+        obj.SetActive(true);
+        while (elapsedTime < waitTime)
+        {
+            obj.transform.localScale = Vector3.Lerp(obj.transform.localScale, Vector3.one, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        obj.transform.localScale = Vector3.one;
+        yield return null;
+
+    }
 
     public static Shop[] LoadShops()
     {

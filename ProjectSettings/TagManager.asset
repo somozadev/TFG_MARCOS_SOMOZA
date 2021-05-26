@@ -17,8 +17,8 @@ TagManager:
   - 
   - DirectionalLight
   - Walkable
-  - 
-  - 
+  - BulletIgnorer
+  - Bullet
   - 
   - 
   - 

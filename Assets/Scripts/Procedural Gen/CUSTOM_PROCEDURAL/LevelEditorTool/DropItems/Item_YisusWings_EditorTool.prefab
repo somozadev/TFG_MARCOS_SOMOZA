@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4896672385157720047}
   - component: {fileID: 5246608308627790032}
   - component: {fileID: 2271976324469053293}
+  - component: {fileID: -4115261787905433127}
   m_Layer: 0
   m_Name: Item_YisusWings_EditorTool
   m_TagString: Interactable
@@ -196,3 +197,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.18, z: 1.38}
   m_Center: {x: -0.00008992851, y: 0.08, z: 0.0016745031}
+--- !u!114 &-4115261787905433127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577566151032001417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825ea8e9493df8646aad2ee3e624c8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

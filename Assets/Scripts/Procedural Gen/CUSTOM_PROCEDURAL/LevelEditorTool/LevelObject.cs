@@ -17,6 +17,13 @@ namespace EditorTool
         public bool isWall;
         public int rotationDegrees = 90;
 
+        private void Start()
+        {
+            if (objectId == "Item_Shop")
+            {
+                StartCoroutine(GetComponent<ShopComponent>().InitializeShop());
+            }
+        }
 
         public void UpdateNode(Node[,] grid)
         {

@@ -48,7 +48,7 @@ namespace EditorTool
                 {
                     if (obj.name == "Player_Obj(Clone)")
                         playerPos = obj;
-                        
+
                     objectsList.Add(obj.gameObject);
                 }
             foreach (Transform drop in drops.transform)
@@ -149,6 +149,21 @@ namespace EditorTool
                         Destroy(child.GetComponent<ShopSlot>().itemToSell.gameObject); //LIMPIA LOS OBJETOS DE LA TIENDA PORQUE SE INSTANCIARAN EN ESCENA CUANDO SE GENEREN EN EL START
                     }
                 }
+
+                Collider[] c = obj.GetComponents<Collider>();
+                foreach (Collider col in c)
+                {
+                    col.enabled = false;
+                    if(col.GetComponentsInChildren<Collider>().Length > 0)
+                    {
+                        foreach(Collider cc in col.GetComponentsInChildren<Collider>())
+                        {
+                            cc.enabled = false;
+                        }
+                    }
+                }
+
+                obj.transform.localScale = Vector3.zero;
             }
         }
 
