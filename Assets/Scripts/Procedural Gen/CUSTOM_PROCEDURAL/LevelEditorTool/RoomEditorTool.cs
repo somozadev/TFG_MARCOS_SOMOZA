@@ -10,7 +10,6 @@ using UnityEngine.Rendering;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets;
-using System.Linq;
 
 namespace EditorTool
 {

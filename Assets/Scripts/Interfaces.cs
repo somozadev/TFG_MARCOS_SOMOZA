@@ -10,3 +10,11 @@ interface IAnimable
     void Deactivate();
     IEnumerator LerpAnim();
 }
+
+namespace StateMachine
+{
+    public interface IState
+    {
+        IState DoState(StateMachine stateMachine);
+    }
+}
