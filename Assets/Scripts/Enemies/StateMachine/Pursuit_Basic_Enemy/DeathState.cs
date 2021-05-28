@@ -18,6 +18,7 @@ namespace StateMachine.Pursuit_Basic_Enemy
             stateMachine.navAgent.isStopped = true;
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.enemy.SetNewDamageIndicator();
+            stateMachine.enemy.ParticleDamaged();
             stateMachine.animator.SetTrigger("Die");
             stateMachine.animator.SetBool("isDie", true);
             stateMachine.enemy.conditions.isAttacking = false;

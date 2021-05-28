@@ -31,12 +31,10 @@ public class DamageIndicator : MonoBehaviour
     {
         float curr = GetComponentInParent<Enemy>().stats.CurrentHp;
         float max = GetComponentInParent<Enemy>().stats.Hp;
-        Debug.LogWarning("Curr:" + curr + "//" + "Max:" + max);
-        Debug.LogWarning("(float)(2 / max):"+ (float)(2 / max));
 
-        if (curr / max > (float)(2 / max))
+        if (curr / max > 0.8f)
             text.color = new Color32(30, 255, 30, 255);//green
-        else if (curr / max >= (float)(1 / max))
+        else if (curr / max >= 0.4f)
             text.color = new Color32(255, 244, 30, 255);//yellow
         else
             text.color = new Color32(255, 30, 30, 255);//red
@@ -61,7 +59,7 @@ public class DamageIndicator : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetDamageText(int damage) => text.text = damage.ToString();
+    public void SetDamageText(float damage) => text.text = damage.ToString();
 
 
 }

@@ -26,8 +26,9 @@ namespace StateMachine.Pursuit_Basic_Enemy
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.animator.SetTrigger("GetHit");
             stateMachine.enemy.SetNewDamageIndicator();
+            stateMachine.enemy.ParticleDamaged();
         
-            stateMachine.enemy.stats.CurrentHp -= (int)stateMachine.enemy.cuantity;
+            stateMachine.enemy.stats.CurrentHp -= stateMachine.enemy.cuantity;
 
             stateMachine.enemy.conditions.isWait = true;
             stateMachine.enemy.conditions.isHitten = false;

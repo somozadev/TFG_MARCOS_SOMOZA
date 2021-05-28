@@ -5,7 +5,7 @@ public class EnemyStats
 {
     #region VARIABLES
     [SerializeField] private int hp;
-    [SerializeField] private int currentHp;
+    [SerializeField] private float currentHp;
 
     [SerializeField] private float def;
     [SerializeField] private float dmg;
@@ -18,7 +18,7 @@ public class EnemyStats
     #region GETTERS
 
     public int Hp { get { return hp; } }
-    public int CurrentHp { get { return currentHp; } set { currentHp = value; } }
+    public float CurrentHp { get { return currentHp; } set { currentHp = value; } }
     public float Def { get { return def; } }
     public float Dmg { get { return dmg; } }
     public float Spd { get { return spd; } }
