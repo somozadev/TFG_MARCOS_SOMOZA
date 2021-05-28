@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 [System.Serializable]
-public class PlayerStats
+public class PlayerStats : IDamageable
 {
 
     [SerializeField] private int level;
@@ -76,6 +76,17 @@ public class PlayerStats
     public void AddXp(int currentXp) => this.currentXp += currentXp;
     public void AddMaxXp(int xp) => this.xp += xp;
     public void AddDmg(float dmg) => this.dmg += dmg;
+
+    public void RecieveDamage(float cuantity)
+    {
+        GameManager.Instance.statsCanvas.AssignHp();
+        this.currentHp -= (int)cuantity;
+        if (this.currentHp <= 0)
+        {
+            Die();
+        }
+    }
+    public void Die() => Debug.Log("Dead");
     #endregion
 
 }

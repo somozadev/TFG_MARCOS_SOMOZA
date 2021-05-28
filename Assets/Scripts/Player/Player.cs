@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public PlayerMovement playerMovement;
     [Header("UI right side for current inventory")]
     public CurrentItemsVisual currentItemsVisual;
+    // [Header("UI stats canvas")]
+    // public StatsCanvasController statsCanvasController;
 
     private void Start()
     {

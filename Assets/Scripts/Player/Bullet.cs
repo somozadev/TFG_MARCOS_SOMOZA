@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
         initialPos = transform.position;
         topFire.material.SetVector("_Seed", new Vector4(Random.Range(0, 10), Random.Range(0, 10), 0, 0));
         rb = GetComponent<Rigidbody>();
-        Physics.IgnoreLayerCollision(10,11,true);
+        Physics.IgnoreLayerCollision(10, 11, true);
     }
     void Start()
     {
@@ -29,10 +29,19 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other)
-    {   
+    {
         // Debug.Log(other.gameObject.name);
-        if(other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
             StartCoroutine(WaitToDestroy(.2f));
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<Enemy>().RecieveDamage(GameManager.Instance.player.playerStats.Dmg);
+            Destroy(gameObject);
+        }
     }
 
     void Update()

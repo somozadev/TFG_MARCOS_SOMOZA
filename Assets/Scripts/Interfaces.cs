@@ -11,10 +11,11 @@ interface IAnimable
     IEnumerator LerpAnim();
 }
 
-namespace StateMachine
+interface IDamageable
 {
-    public interface IState
-    {
-        IState DoState(StateMachine stateMachine);
-    }
+    void RecieveDamage(float cuantity);
 }
+interface IDamager
+{
+    void MakeDamage();}
+
