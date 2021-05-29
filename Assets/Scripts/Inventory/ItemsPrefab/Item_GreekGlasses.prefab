@@ -172,12 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 1
-  item:
-    id: 200
-    cuantity: 1
-    price: 100
-    isUnlocked: 1
-    type: 6
-    action: 0
-    transform: {fileID: 0}
+  item: {fileID: 11400000, guid: e1c8caf57a3558a4d95c5ff817d66bf5, type: 2}
+  action: 0
   colliderObject: {fileID: 633996605190356998}

@@ -77,14 +77,18 @@ public class ConditionsState
     public bool isHitten;
     public bool isDead;
     public bool isWait;
+    public bool canShoot;
+    public bool isShootingRange;
 
     public void Reset()
     {
         isChasing = false;
         isRange = false;
+        isShootingRange = false; 
         isAttacking = false;
         isHitten = false;
         isDead = false;
         isWait = false;
+        canShoot = false;
     }
 }

@@ -13,13 +13,6 @@ public class EnemyCallDeadEvent : MonoBehaviour
         GetComponent<Enemy>().GetComponent<NavMeshAgent>().enabled = false;
         GetComponent<Enemy>().GetComponent<Collider>().enabled = false;
         GetComponent<Enemy>().Drop();
-        // StartCoroutine(Wait());
-    }
-
-    private IEnumerator Wait()
-    {
-        yield return new WaitForSecondsRealtime(1f);
-
     }
 
 }

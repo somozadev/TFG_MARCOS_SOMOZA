@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-
 interface IAnimable
 {
     [SerializeField] bool Open { get; set; }
@@ -17,5 +16,5 @@ interface IDamageable
 }
 interface IDamager
 {
-    void MakeDamage();}
-
+    void MakeDamage();
+}
