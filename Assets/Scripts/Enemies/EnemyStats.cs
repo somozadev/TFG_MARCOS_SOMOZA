@@ -13,7 +13,7 @@ public class EnemyStats
     [SerializeField] private float range;
 
     [SerializeField] private int dropXp;
-    [SerializeField] private Item dropItem;
+    [SerializeField] private SceneItem dropItem;
     #endregion
     #region GETTERS
 
@@ -24,11 +24,11 @@ public class EnemyStats
     public float Spd { get { return spd; } }
     public float Range { get { return range; } }
     public int DropXp { get { return dropXp; } set { dropXp = value; } }
-    public Item DropItem { get { return dropItem; } set { dropItem = value; } }
+    public SceneItem DropItem { get { return dropItem; } set { dropItem = value; } }
 
     #endregion
     #region  CONSTRUCTORS
-    public EnemyStats(int hp, int currentHp, int def, int dmg, float spd, float range, int dropXp, Item dropItem)
+    public EnemyStats(int hp, int currentHp, int def, int dmg, float spd, float range, int dropXp, SceneItem dropItem)
     {
         this.hp = hp;
         this.currentHp = currentHp;
