@@ -85,11 +85,17 @@ public class PlayerMovement : MonoBehaviour
     #region INPUT_METHODS
     private void LookAttack(Vector2 rawInput)
     {
-        transform.forward = lookDirection;
-        if (canAttack)
+        if (rawInput.magnitude >= 0.2f)
         {
-            canAttack = false;
-            StartCoroutine(WaitToAttackLook(attRate / 10));
+            Vector3 rightMovement = right * speed * Time.deltaTime * lookDirection.x;
+            Vector3 upMovement = forward * speed * Time.deltaTime * lookDirection.z;
+            Vector3 finalDirection = Vector3.Normalize(rightMovement + upMovement);
+            transform.forward = finalDirection;
+            if (canAttack)
+            {
+                canAttack = false;
+                StartCoroutine(WaitToAttackLook(attRate / 10));
+            }
         }
     }
 
