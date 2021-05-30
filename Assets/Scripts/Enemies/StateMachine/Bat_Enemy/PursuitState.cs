@@ -9,7 +9,7 @@ namespace StateMachine.Bat_Enemy
             DoPursuit(stateMachine);
             if (stateMachine.enemy.conditions.isRange)
                 return stateMachine.attackState;
-            else if(stateMachine.enemy.conditions.isShootingRange)
+            else if (stateMachine.enemy.conditions.canShoot)
                 return stateMachine.shootingState;
             else if (stateMachine.enemy.conditions.isHitten)
                 return stateMachine.getHitState;
@@ -19,7 +19,7 @@ namespace StateMachine.Bat_Enemy
                 return stateMachine.pursuitState;
 
         }
-        private void DoPursuit(StateMachine stateMachine)
+        private void DoPursuit(BatStateMachine stateMachine)
         {
             stateMachine.navAgent.isStopped = false;
             if (stateMachine.navAgent.destination != GameManager.Instance.player.transform.position)
@@ -27,14 +27,28 @@ namespace StateMachine.Bat_Enemy
                 stateMachine.navAgent.SetDestination(GameManager.Instance.player.transform.position);
                 stateMachine.SetPursuitAnim(true);
             }
-            if(Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) <= stateMachine.enemy.stats.Range)
-            {
-                stateMachine.enemy.conditions.isShootingRange = true; 
-            }
             if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) <= stateMachine.navAgent.stoppingDistance)
             {
+                stateMachine.enemy.conditions.isShootingRange = false;
+                stateMachine.enemy.conditions.canShoot = false;
+                stateMachine.StopCoroutine("CounterToIsShootOn");
                 stateMachine.enemy.conditions.isRange = true;
                 stateMachine.enemy.conditions.isChasing = false;
+            }
+            else if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) <= stateMachine.enemy.stats.ShootingRange)
+            {
+                stateMachine.enemy.conditions.isShootingRange = true;
+                stateMachine.enemy.conditions.isChasing = false;
+                stateMachine.enemy.conditions.isRange = false;
+                stateMachine.ShootingMonobehaviour();
+            }
+            else if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) > stateMachine.enemy.stats.ShootingRange)
+            {
+                stateMachine.enemy.conditions.isShootingRange = false;
+                stateMachine.enemy.conditions.canShoot = false;
+                stateMachine.StopCoroutine("CounterToIsShootOn");
+                stateMachine.enemy.conditions.isWait = false;
+
             }
 
 

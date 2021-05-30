@@ -7,6 +7,10 @@ namespace StateMachine.Bat_Enemy
 {
     public class BatStateMachine : StateMachine
     {
+        public Transform shootingPoint;
+        public GameObject bulletPrefab;
+
+
         public new IState currentState;
         public PursuitState pursuitState = new PursuitState();
         public AttackState attackState = new AttackState();
@@ -20,6 +24,7 @@ namespace StateMachine.Bat_Enemy
             enemy = GetComponent<Enemy>();
             navAgent = enemy.agent;
             animator = enemy.animator;
+            bulletPrefab.GetComponent<BatBullet>().dmg = enemy.stats.Dmg * 0.89f;
         }
 
         public void OnEnable() { currentState = pursuitState; }
@@ -37,6 +42,19 @@ namespace StateMachine.Bat_Enemy
             yield return new WaitForSecondsRealtime(0.6f);
             enemy.conditions.isWait = false;
         }
+
+        public void ShootingMonobehaviour()
+        {
+            StartCoroutine(CounterToIsShootOn(enemy.stats.Attrate));
+        }
+        private IEnumerator CounterToIsShootOn(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            enemy.conditions.canShoot = true;
+        }
+        
+
+
         public override void SetPursuitAnim(bool condition) { animator.SetBool("Pursuit", condition); }
         public override void SetIsDieAnim(bool condition) { animator.SetBool("isDie", condition); }
         public void SetAttackAnim(bool condition) { animator.SetBool("Attack", condition); }

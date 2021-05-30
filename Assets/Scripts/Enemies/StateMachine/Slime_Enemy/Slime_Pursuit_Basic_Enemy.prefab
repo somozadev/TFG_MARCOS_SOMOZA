@@ -75,8 +75,10 @@ MonoBehaviour:
     currentHp: 3
     def: 5
     dmg: 5
-    spd: 1
+    spd: 7
     range: 1.5
+    shootingRange: 0
+    attrate: 0
     dropXp: 2
     dropItem: {fileID: 3652036988734390016, guid: 70e24dde8ee1c00418b14ca820e380b9, type: 3}
   conditions:
@@ -86,6 +88,8 @@ MonoBehaviour:
     isHitten: 0
     isDead: 0
     isWait: 0
+    canShoot: 0
+    isShootingRange: 0
   agent: {fileID: 1578819138880020011}
   animator: {fileID: 1578819138880020008}
   damagedParticle: {fileID: 1578819139407042277}

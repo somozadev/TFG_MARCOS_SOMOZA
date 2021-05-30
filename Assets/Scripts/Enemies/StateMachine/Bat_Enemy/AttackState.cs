@@ -6,7 +6,7 @@ namespace StateMachine.Bat_Enemy
 {
     public class AttackState : IState
     {
-        
+
         public IState DoState(BatStateMachine stateMachine)
         {
             DoAttack(stateMachine);
@@ -19,33 +19,24 @@ namespace StateMachine.Bat_Enemy
             else
                 return stateMachine.pursuitState;
         }
-        private void DoAttack(StateMachine stateMachine)
+        private void DoAttack(BatStateMachine stateMachine)
         {
             stateMachine.SetPursuitAnim(false);
 
-            if (!stateMachine.enemy.conditions.isAttacking)
+            if (!stateMachine.enemy.conditions.isAttacking)// && stateMachine.enemy.conditions.isChasing)
             {
                 stateMachine.transform.LookAt(GameManager.Instance.player.transform.position);
-                if (Random.Range(0, 2) == 0)
-                {
-                    stateMachine.SetAttack1Anim(true);
-                    stateMachine.SetAttack2Anim(false);
-                }
-                else
-                {
-                    stateMachine.SetAttack2Anim(true);
-                    stateMachine.SetAttack1Anim(false);
-                }
+
+                stateMachine.SetAttackAnim(true);
+
                 stateMachine.enemy.conditions.isAttacking = true;
             }
-
-            if (Vector3.Distance(stateMachine.navAgent.transform.position, GameManager.Instance.player.transform.position) > stateMachine.navAgent.stoppingDistance)
+            if (Vector3.Distance(stateMachine.transform.position, GameManager.Instance.player.transform.position) > stateMachine.navAgent.stoppingDistance)
             {
                 stateMachine.enemy.conditions.isRange = false;
                 stateMachine.enemy.conditions.isChasing = true;
                 stateMachine.enemy.conditions.isAttacking = false;
-                stateMachine.SetAttack2Anim(false);
-                stateMachine.SetAttack1Anim(false);
+                stateMachine.SetAttackAnim(false);
             }
         }
 

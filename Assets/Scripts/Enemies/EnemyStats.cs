@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class EnemyStats 
+public class EnemyStats
 {
     #region VARIABLES
     [SerializeField] private int hp;
@@ -11,6 +11,7 @@ public class EnemyStats
     [SerializeField] private float dmg;
     [Range(1, 10)] [SerializeField] private float spd;
     [SerializeField] private float range;
+    [SerializeField] private float shootingRange;
     [SerializeField] private float attrate;
 
     [SerializeField] private int dropXp;
@@ -24,7 +25,8 @@ public class EnemyStats
     public float Dmg { get { return dmg; } }
     public float Spd { get { return spd; } }
     public float Range { get { return range; } }
-    public float Attrate { get { return attrate; } set { attrate = value; } }
+    public float ShootingRange { get { return shootingRange; } }
+    public float Attrate { get { return getRandomRate(); } set { attrate = value; } }
     public int DropXp { get { return dropXp; } set { dropXp = value; } }
     public SceneItem DropItem { get { return dropItem; } set { dropItem = value; } }
 
@@ -55,5 +57,6 @@ public class EnemyStats
     }
     #endregion
 
-    
+    private float getRandomRate() { return Random.Range(2, 9); }
+
 }
