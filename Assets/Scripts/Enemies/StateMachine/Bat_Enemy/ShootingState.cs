@@ -25,6 +25,7 @@ namespace StateMachine.Bat_Enemy
         private void DoShooting(BatStateMachine stateMachine)
         {
             stateMachine.SetShootAnim(true);
+
             if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) <= stateMachine.navAgent.stoppingDistance)
             {
                 stateMachine.enemy.conditions.isShootingRange = false;

@@ -28,7 +28,11 @@ namespace StateMachine.Bat_Enemy
         }
 
         public void OnEnable() { currentState = pursuitState; }
-        public override void Update() { OnStateChange(); }
+        public override void Update()
+        {
+            OnStateChange();
+            transform.LookAt(GameManager.Instance.player.transform);
+        }
 
         private void OnStateChange()
         {
@@ -53,7 +57,6 @@ namespace StateMachine.Bat_Enemy
             enemy.conditions.canShoot = true;
         }
         
-
 
         public override void SetPursuitAnim(bool condition) { animator.SetBool("Pursuit", condition); }
         public override void SetIsDieAnim(bool condition) { animator.SetBool("isDie", condition); }

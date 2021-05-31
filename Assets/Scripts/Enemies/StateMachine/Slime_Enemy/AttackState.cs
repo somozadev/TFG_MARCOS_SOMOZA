@@ -28,16 +28,19 @@ namespace StateMachine.Slime_Enemy
                 {
                     stateMachine.SetAttack1Anim(true);
                     stateMachine.SetAttack2Anim(false);
+                    stateMachine.enemy.stats.Range = 1f;
+
                 }
                 else
                 {
                     stateMachine.SetAttack2Anim(true);
                     stateMachine.SetAttack1Anim(false);
+                    stateMachine.enemy.stats.Range = 4f;
                 }
                 stateMachine.enemy.conditions.isAttacking = true;
             }
 
-            if (Vector3.Distance(stateMachine.navAgent.transform.position, GameManager.Instance.player.transform.position) > stateMachine.navAgent.stoppingDistance)
+            if (Vector3.Distance(stateMachine.navAgent.transform.position, GameManager.Instance.player.transform.position) > stateMachine.enemy.stats.Range)
             {
                 stateMachine.enemy.conditions.isRange = false;
                 stateMachine.enemy.conditions.isChasing = true;

@@ -24,7 +24,7 @@ public class EnemyStats
     public float Def { get { return def; } }
     public float Dmg { get { return dmg; } }
     public float Spd { get { return spd; } }
-    public float Range { get { return range; } }
+    public float Range { get { return range; } set { range = value; } }
     public float ShootingRange { get { return shootingRange; } }
     public float Attrate { get { return getRandomRate(); } set { attrate = value; } }
     public int DropXp { get { return dropXp; } set { dropXp = value; } }

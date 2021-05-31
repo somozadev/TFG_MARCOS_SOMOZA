@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &2414223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3745148951897830926, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
+  m_PrefabInstance: {fileID: 3744663246116792973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &119460014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6204,6 +6209,14 @@ PrefabInstance:
       propertyPath: stats.attrate
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1578819138880019988, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
+      propertyPath: stats.range
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578819138880019989, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
+      propertyPath: hitBone
+      value: 
+      objectReference: {fileID: 383778395}
     - target: {fileID: 1578819138880020012, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.25
@@ -6252,6 +6265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime_Pursuit_Basic_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1578819138880020013, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1578819139347151670, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.size
       value: 1
@@ -6299,6 +6316,10 @@ PrefabInstance:
     - target: {fileID: 1578819139347151671, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578819139347151671, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1579848280138644056, guid: 612e74bebff82264a86b0afb1f7a5719, type: 3}
       propertyPath: m_IsActive
@@ -6383,6 +6404,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1373937550348310186, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2082581512637619945, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
       propertyPath: CollisionModule.plane0
       value: 
@@ -6454,6 +6479,10 @@ PrefabInstance:
     - target: {fileID: 3743699531663133492, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
       propertyPath: m_Name
       value: Bat_Pursuit_Shoot_Basic_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743699531663133492, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3743699531663133494, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
       propertyPath: stats.spd
@@ -6631,6 +6660,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 15.1401615
       objectReference: {fileID: 0}
+    - target: {fileID: 5991518168510258847, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
+      propertyPath: hitBone
+      value: 
+      objectReference: {fileID: 2414223}
     m_RemovedComponents:
     - {fileID: 8577587927813389129, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 11eb20ad846e34a41bb75389db20b0c5, type: 3}
