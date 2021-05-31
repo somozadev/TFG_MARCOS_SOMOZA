@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using StateMachine.Bat_Enemy;
-public class EnemyCallShootEvent : MonoBehaviour
+public class BatCallShootEvent : MonoBehaviour
 {
-    float radius = 0.1f;
+    protected float radius = 0.1f;
     private void Shoot()
     {
         // transform.LookAt(GameManager.Instance.player.transform.position);

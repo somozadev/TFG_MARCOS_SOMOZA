@@ -1,23 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StateMachine;
-
-namespace StateMachine.Bat_Enemy
+namespace StateMachine.Dragon_Enemy
 {
-    public class BatStateMachine : StateMachine
+    public class DragonStateMachine : StateMachine
     {
         public Transform shootingPoint;
         public GameObject bulletPrefab;
-
+        public Collider childrenCollider;
 
         public new IState currentState;
         public PursuitState pursuitState = new PursuitState();
-        public AttackState attackState = new AttackState();
         public DeathState deathState = new DeathState();
         public GetHitState getHitState = new GetHitState();
-        public WaitState waitState = new WaitState();
         public ShootingState shootingState = new ShootingState();
+
+
 
         private void Awake()
         {
@@ -39,14 +37,6 @@ namespace StateMachine.Bat_Enemy
             currentState = currentState.DoState(this);
             currentStateName = currentState.ToString();
         }
-
-        public override void WaitCor() { StartCoroutine(wait()); }
-        public override IEnumerator wait()
-        {
-            yield return new WaitForSecondsRealtime(0.6f);
-            enemy.conditions.isWait = false;
-        }
-
         public void ShootingMonobehaviour()
         {
             StartCoroutine(CounterToIsShootOn(enemy.stats.Attrate));
@@ -56,20 +46,17 @@ namespace StateMachine.Bat_Enemy
             yield return new WaitForSeconds(waitTime);
             enemy.conditions.canShoot = true;
         }
-        
 
-        public override void SetPursuitAnim(bool condition) { animator.SetBool("Pursuit", condition); }
+
         public override void SetIsDieAnim(bool condition) { animator.SetBool("isDie", condition); }
-        public void SetAttackAnim(bool condition) { animator.SetBool("Attack", condition); }
         public void SetShootAnim(bool condition) { animator.SetBool("Shoot", condition); }
-
         public override bool GetIsDieAnim() { return animator.GetBool("isDie"); }
-
         public override void SetTriggerDieAnim() { animator.SetTrigger("Die"); }
         public override void SetTriggerGetHitAnim() { animator.SetTrigger("GetHit"); }
+
     }
     public interface IState
     {
-        IState DoState(BatStateMachine stateMachine);
+        IState DoState(DragonStateMachine stateMachine);
     }
 }

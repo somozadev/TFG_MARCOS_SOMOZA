@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
     }
     public void ParticleDead() => deadParticle.Play();
     public void ParticleDamaged() => damagedParticle.Play();
-    public void SetNewDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(cuantity);
+    public void SetNewDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position + Vector3.up*3f, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(cuantity);
 
 
     public void MakeDamage() { GameManager.Instance.player.playerStats.RecieveDamage(stats.Dmg); }
