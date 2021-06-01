@@ -85,11 +85,11 @@ namespace StateMachine.Orc_Enemy
         public void SetTriggerAttackAnim() { animator.SetTrigger("Attack"); }
         public void SetTriggerSpinAnim() { animator.SetTrigger("Spin"); }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, enemy.stats.PursuitRange);
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     Gizmos.color = Color.cyan;
+        //     Gizmos.DrawWireSphere(transform.position, enemy.stats.PursuitRange);
+        // }
 
 
     }
