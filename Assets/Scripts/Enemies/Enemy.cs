@@ -76,6 +76,7 @@ public class ConditionsState
     public bool isHitten;
     public bool isDead;
     public bool isWait;
+    public bool isIdle;
     public bool canShoot;
     public bool isShootingRange;
     public bool isAttackRange;
@@ -96,5 +97,6 @@ public class ConditionsState
         isPatrol = false; 
         canShoot = false;
         canSpinAttack = false;
+        isIdle = false;
     }
 }
