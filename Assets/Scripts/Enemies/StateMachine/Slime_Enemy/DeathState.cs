@@ -21,7 +21,7 @@ namespace StateMachine.Slime_Enemy
             stateMachine.SetIsDieAnim(true);
             stateMachine.enemy.conditions.isAttacking = false;
             stateMachine.enemy.conditions.isChasing = false;
-            stateMachine.enemy.conditions.isRange = false;
+            stateMachine.enemy.conditions.isAttackRange = false;
             stateMachine.enemy.conditions.isHitten = false;
             stateMachine.enemy.conditions.isDead = true;
         }

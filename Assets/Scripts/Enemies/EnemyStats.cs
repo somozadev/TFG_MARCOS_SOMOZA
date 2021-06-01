@@ -10,8 +10,9 @@ public class EnemyStats
     [SerializeField] private float def;
     [SerializeField] private float dmg;
     [Range(1, 10)] [SerializeField] private float spd;
-    [SerializeField] private float range;
+    [SerializeField] private float attackRange; //being the attackRange
     [SerializeField] private float shootingRange;
+    [SerializeField] private float pursuitRange;
     [SerializeField] private float attrate;
 
     [SerializeField] private int dropXp;
@@ -23,8 +24,9 @@ public class EnemyStats
     public float CurrentHp { get { return currentHp; } set { currentHp = value; } }
     public float Def { get { return def; } }
     public float Dmg { get { return dmg; } }
-    public float Spd { get { return spd; } }
-    public float Range { get { return range; } set { range = value; } }
+    public float Spd { get { return spd; } set { spd = value; } }
+    public float AttackRange { get { return attackRange; } set { attackRange = value; } }
+    public float PursuitRange { get { return pursuitRange; } }
     public float ShootingRange { get { return shootingRange; } }
     public float Attrate { get { return getRandomRate(); } set { attrate = value; } }
     public int DropXp { get { return dropXp; } set { dropXp = value; } }
@@ -39,7 +41,7 @@ public class EnemyStats
         this.def = def;
         this.dmg = dmg;
         this.spd = spd;
-        this.range = range;
+        this.attackRange = range;
         this.dropXp = dropXp;
         this.dropItem = dropItem;
     }
@@ -50,7 +52,7 @@ public class EnemyStats
         this.def = 5;
         this.dmg = 5;
         this.spd = 1;
-        this.range = 1.5f;
+        this.attackRange = 1.5f;
         this.dropXp = 2;
         this.dropItem = null;
 

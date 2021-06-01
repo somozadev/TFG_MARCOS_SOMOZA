@@ -16,7 +16,7 @@ namespace StateMachine.Bat_Enemy
                 return stateMachine.getHitState;
             else if (stateMachine.enemy.conditions.isChasing)
                 return stateMachine.pursuitState;
-            else if (stateMachine.enemy.conditions.isRange)
+            else if (stateMachine.enemy.conditions.isAttackRange)
                 return stateMachine.attackState;
             else return this;
 
@@ -29,7 +29,7 @@ namespace StateMachine.Bat_Enemy
             if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) <= stateMachine.navAgent.stoppingDistance)
             {
                 stateMachine.enemy.conditions.isShootingRange = false;
-                stateMachine.enemy.conditions.isRange = true;
+                stateMachine.enemy.conditions.isAttackRange = true;
                 stateMachine.enemy.conditions.isChasing = false;
                 stateMachine.SetShootAnim(false);
             }

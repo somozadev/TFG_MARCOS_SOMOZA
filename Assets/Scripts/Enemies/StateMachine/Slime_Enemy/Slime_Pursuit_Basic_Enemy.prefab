@@ -76,20 +76,23 @@ MonoBehaviour:
     def: 5
     dmg: 5
     spd: 5.5
-    range: 4
+    attackRange: 1.5
     shootingRange: 0
+    pursuitRange: 0
     attrate: 10
     dropXp: 2
     dropItem: {fileID: 3652036988734390016, guid: 70e24dde8ee1c00418b14ca820e380b9, type: 3}
   conditions:
     isChasing: 0
-    isRange: 0
     isAttacking: 0
     isHitten: 0
     isDead: 0
     isWait: 0
     canShoot: 0
     isShootingRange: 0
+    isAttackRange: 0
+    isPursuitRange: 0
+    isPatrol: 0
   agent: {fileID: 1578819138880020011}
   animator: {fileID: 1578819138880020008}
   damagedParticle: {fileID: 1578819139407042277}
@@ -118,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1578819138880020013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d04d8eddff213043ae8e8e4d1217e11, type: 3}
+  m_Script: {fileID: 11500000, guid: b90be3c492edff34abd120cc1892f351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!195 &1578819138880020011

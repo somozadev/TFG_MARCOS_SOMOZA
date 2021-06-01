@@ -599,7 +599,7 @@ namespace EditorTool
         #region FLOORS
         public void PassFloorToPlace(string objId)
         {
-            Debug.LogError(objId);
+            // Debug.LogError(objId);
             deleteFloor = false;
             if (floorCloneObj != null)
                 Destroy(floorCloneObj);

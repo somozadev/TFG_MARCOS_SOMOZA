@@ -5282,7 +5282,7 @@ MonoBehaviour:
   stats:
     hp: 12
     currentHp: 12
-    def: 12
+    def: 25
     dmg: 10
     spd: 1
     range: 10

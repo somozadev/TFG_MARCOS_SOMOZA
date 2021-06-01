@@ -1,12 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using StateMachine.Bat_Enemy;
+public class EnemyCallDeadEvent : MonoBehaviour
 
-public class BatCallDeadEvent : MonoBehaviour
 {
-    public void PerfDead()
+    public virtual void PerfDead()
     {   
         Enemy enemy = GetComponent<Enemy>();
         enemy.ParticleDead();
@@ -15,7 +14,6 @@ public class BatCallDeadEvent : MonoBehaviour
         enemy.GetComponent<NavMeshAgent>().enabled = false;
         enemy.GetComponent<Collider>().enabled = false;
         enemy.Drop();
-        GetComponent<BatStateMachine>().SetIsDieAnim(true);
     }
 
 }

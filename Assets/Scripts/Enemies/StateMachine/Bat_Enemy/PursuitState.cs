@@ -7,7 +7,7 @@ namespace StateMachine.Bat_Enemy
         public IState DoState(BatStateMachine stateMachine)
         {
             DoPursuit(stateMachine);
-            if (stateMachine.enemy.conditions.isRange)
+            if (stateMachine.enemy.conditions.isAttackRange)
                 return stateMachine.attackState;
             else if (stateMachine.enemy.conditions.canShoot)
                 return stateMachine.shootingState;
@@ -32,14 +32,14 @@ namespace StateMachine.Bat_Enemy
                 stateMachine.enemy.conditions.isShootingRange = false;
                 stateMachine.enemy.conditions.canShoot = false;
                 stateMachine.StopCoroutine("CounterToIsShootOn");
-                stateMachine.enemy.conditions.isRange = true;
+                stateMachine.enemy.conditions.isAttackRange = true;
                 stateMachine.enemy.conditions.isChasing = false;
             }
             else if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) <= stateMachine.enemy.stats.ShootingRange)
             {
                 stateMachine.enemy.conditions.isShootingRange = true;
                 stateMachine.enemy.conditions.isChasing = false;
-                stateMachine.enemy.conditions.isRange = false;
+                stateMachine.enemy.conditions.isAttackRange = false;
                 stateMachine.ShootingMonobehaviour();
             }
             else if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) > stateMachine.enemy.stats.ShootingRange)

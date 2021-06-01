@@ -79,8 +79,8 @@ public class PlayerStats : IDamageable
 
     public void RecieveDamage(float cuantity)
     {
-        GameManager.Instance.statsCanvas.AssignHp();
         this.currentHp -= (int)cuantity;
+        GameManager.Instance.statsCanvas.AssignHp();
         if (this.currentHp <= 0)
         {
             Die();

@@ -6,7 +6,7 @@ namespace StateMachine.Slime_Enemy
         public IState DoState(SlimeStateMachine stateMachine)
         {
             DoPursuit(stateMachine);
-            if (stateMachine.enemy.conditions.isRange)
+            if (stateMachine.enemy.conditions.isAttackRange)
                 return stateMachine.attackState;
             else if (stateMachine.enemy.conditions.isHitten)
                 return stateMachine.getHitState;
@@ -26,7 +26,7 @@ namespace StateMachine.Slime_Enemy
             }
             if (Vector3.Distance(stateMachine.navAgent.transform.position, stateMachine.navAgent.destination) <= stateMachine.navAgent.stoppingDistance)
             {
-                stateMachine.enemy.conditions.isRange = true;
+                stateMachine.enemy.conditions.isAttackRange = true;
                 stateMachine.enemy.conditions.isChasing = false;
             }
 

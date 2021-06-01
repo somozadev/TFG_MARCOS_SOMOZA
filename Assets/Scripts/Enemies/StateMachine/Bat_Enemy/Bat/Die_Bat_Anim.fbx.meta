@@ -287,7 +287,7 @@ ModelImporter:
       - time: 1
         functionName: PerfDead
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 3363b22f5fcda4a4f911de45d26054f0, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 4480253ba7aadb54d97b9179882f167e, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

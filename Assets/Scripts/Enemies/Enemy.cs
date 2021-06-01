@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
         initialStats = stats;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = stats.Spd;
-        agent.stoppingDistance = stats.Range;
+        agent.stoppingDistance = stats.AttackRange;
 
     }
 
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
         {
             conditions.isHitten = true;
             conditions.isChasing = false;
-            conditions.isRange = false;
+            conditions.isAttackRange = false;
         }
 
     }
@@ -72,23 +72,29 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
 public class ConditionsState
 {
     public bool isChasing;
-    public bool isRange;
     public bool isAttacking;
     public bool isHitten;
     public bool isDead;
     public bool isWait;
     public bool canShoot;
     public bool isShootingRange;
+    public bool isAttackRange;
+    public bool isPursuitRange;
+    public bool isPatrol;
+    public bool canSpinAttack;
 
     public void Reset()
     {
         isChasing = false;
-        isRange = false;
+        isAttackRange = false;
+        isPursuitRange = false;
         isShootingRange = false; 
         isAttacking = false;
         isHitten = false;
         isDead = false;
         isWait = false;
+        isPatrol = false; 
         canShoot = false;
+        canSpinAttack = false;
     }
 }

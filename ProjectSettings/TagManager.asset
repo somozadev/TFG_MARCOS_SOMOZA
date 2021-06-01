@@ -7,6 +7,7 @@ TagManager:
   - Interactable
   - Bullet
   - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - Walkable
   - BulletIgnorer
   - Bullet
-  - 
-  - 
+  - SceneLevel
+  - Player
   - 
   - 
   - 

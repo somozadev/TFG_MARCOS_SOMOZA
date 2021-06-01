@@ -4,21 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 using StateMachine.Dragon_Enemy;
 
-public class DragonCallDeadEvent : MonoBehaviour
+public class DragonCallDeadEvent : EnemyCallDeadEvent
 {
-    public void PerfDead()
+    public override void PerfDead()
     {
+        base.PerfDead();
         DragonStateMachine stateMachine = GetComponent<DragonStateMachine>();
-        Enemy enemy = GetComponent<Enemy>();
-        stateMachine.navAgent.enabled = false;
         stateMachine.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        enemy.ParticleDead();
-        enemy.transform.GetChild(1).gameObject.SetActive(false);
-        // enemy.GetComponent<Rigidbody>().isKinematic = true;
-        enemy.GetComponent<NavMeshAgent>().enabled = false;
-        enemy.GetComponent<Collider>().enabled = false;
-        enemy.Drop();
+        stateMachine.navAgent.enabled = false;
         GetComponent<DragonStateMachine>().SetIsDieAnim(true);
     }
-
 }
+
+

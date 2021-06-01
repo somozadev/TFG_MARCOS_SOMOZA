@@ -11,7 +11,7 @@ namespace StateMachine.Slime_Enemy
             DoGetHit(stateMachine);
             if (stateMachine.enemy.conditions.isWait)
                 return stateMachine.waitState;
-            else if (stateMachine.enemy.conditions.isRange)
+            else if (stateMachine.enemy.conditions.isAttackRange)
                 return stateMachine.attackState;
             else if (stateMachine.enemy.conditions.isDead)
                 return stateMachine.deathState;

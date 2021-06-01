@@ -10,7 +10,7 @@ namespace StateMachine.Bat_Enemy
         public IState DoState(BatStateMachine stateMachine)
         {
             DoAttack(stateMachine);
-            if (stateMachine.enemy.conditions.isRange)
+            if (stateMachine.enemy.conditions.isAttackRange)
                 return stateMachine.attackState;
             else if (stateMachine.enemy.conditions.isHitten)
                 return stateMachine.getHitState;
@@ -33,7 +33,7 @@ namespace StateMachine.Bat_Enemy
             }
             if (Vector3.Distance(stateMachine.transform.position, GameManager.Instance.player.transform.position) > stateMachine.navAgent.stoppingDistance)
             {
-                stateMachine.enemy.conditions.isRange = false;
+                stateMachine.enemy.conditions.isAttackRange = false;
                 stateMachine.enemy.conditions.isChasing = true;
                 stateMachine.enemy.conditions.isAttacking = false;
                 stateMachine.SetAttackAnim(false);

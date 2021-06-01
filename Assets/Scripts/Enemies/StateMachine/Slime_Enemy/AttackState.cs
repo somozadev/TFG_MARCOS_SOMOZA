@@ -8,7 +8,7 @@ namespace StateMachine.Slime_Enemy
         public IState DoState(SlimeStateMachine stateMachine)
         {
             DoAttack(stateMachine);
-            if (stateMachine.enemy.conditions.isRange)
+            if (stateMachine.enemy.conditions.isAttackRange)
                 return stateMachine.attackState;
             else if (stateMachine.enemy.conditions.isHitten)
                 return stateMachine.getHitState;
@@ -28,21 +28,21 @@ namespace StateMachine.Slime_Enemy
                 {
                     stateMachine.SetAttack1Anim(true);
                     stateMachine.SetAttack2Anim(false);
-                    stateMachine.enemy.stats.Range = 1f;
+                    stateMachine.enemy.stats.AttackRange = 1f;
 
                 }
                 else
                 {
                     stateMachine.SetAttack2Anim(true);
                     stateMachine.SetAttack1Anim(false);
-                    stateMachine.enemy.stats.Range = 4f;
+                    stateMachine.enemy.stats.AttackRange = 4f;
                 }
                 stateMachine.enemy.conditions.isAttacking = true;
             }
 
-            if (Vector3.Distance(stateMachine.navAgent.transform.position, GameManager.Instance.player.transform.position) > stateMachine.enemy.stats.Range)
+            if (Vector3.Distance(stateMachine.navAgent.transform.position, GameManager.Instance.player.transform.position) > stateMachine.enemy.stats.AttackRange)
             {
-                stateMachine.enemy.conditions.isRange = false;
+                stateMachine.enemy.conditions.isAttackRange = false;
                 stateMachine.enemy.conditions.isChasing = true;
                 stateMachine.enemy.conditions.isAttacking = false;
                 stateMachine.SetAttack2Anim(false);
