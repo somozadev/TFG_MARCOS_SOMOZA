@@ -6,9 +6,11 @@ namespace StateMachine.Plant_Enemy
     public class PlantStateMachine : StateMachine
     {
         public new IState currentState;
+        public Transform shootingPoint;
+        public GameObject bulletPrefab;
 
         public IdleState idleState = new IdleState();
-        // public AttackState attackState = new AttackState();
+        public ShootingState shootingState = new ShootingState();
         public ShootRangeState shootRangeState = new ShootRangeState();
         // public DeathState deathState = new DeathState();
         // public GetHitState getHitState = new GetHitState();
@@ -37,8 +39,15 @@ namespace StateMachine.Plant_Enemy
             currentState = currentState.DoState(this);
             currentStateName = currentState.ToString();
         }
-
-
+        public void ShootingMonobehaviour()
+        {
+            StartCoroutine(CounterToIsShootOn(enemy.stats.Attrate));
+        }
+        private IEnumerator CounterToIsShootOn(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            enemy.conditions.canShoot = true;
+        }
 
 
         public override bool GetIsDieAnim() { return animator.GetBool("isDie"); }
@@ -51,6 +60,13 @@ namespace StateMachine.Plant_Enemy
         public void SetIdleAnim(bool condition) { animator.SetBool("isIdle", condition); }
 
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, enemy.stats.ShootingRange);
+
+
+        }
 
 
     }

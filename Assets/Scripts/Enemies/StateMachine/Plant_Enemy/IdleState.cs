@@ -16,9 +16,10 @@ namespace StateMachine.Plant_Enemy
         private void DoIdle(PlantStateMachine stateMachine)
         {
             stateMachine.SetIdleAnim(true);
+            stateMachine.SetInRangeToShootAnim(false);
             if (Vector3.Distance(stateMachine.transform.position, GameManager.Instance.player.transform.position) <= stateMachine.enemy.stats.ShootingRange)
             {
-                stateMachine.enemy.conditions.isAttackRange = true;
+                stateMachine.enemy.conditions.isShootingRange = true;
                 stateMachine.enemy.conditions.isIdle = false;
             }
         }
