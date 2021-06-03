@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
     public void ParticleDead() => deadParticle.Play();
     public void ParticleDamaged() => damagedParticle.Play();
     public void SetNewDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position + Vector3.up*3f, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(cuantity);
+    public void SetNewInvencibleDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position + Vector3.up*3f, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(0);
 
 
     public void MakeDamage() { GameManager.Instance.player.playerStats.RecieveDamage(stats.Dmg); }
@@ -83,6 +84,7 @@ public class ConditionsState
     public bool isPursuitRange;
     public bool isPatrol;
     public bool canSpinAttack;
+    public bool isInvincible;
 
     public void Reset()
     {
@@ -98,5 +100,6 @@ public class ConditionsState
         canShoot = false;
         canSpinAttack = false;
         isIdle = false;
+        isInvincible = false;
     }
 }

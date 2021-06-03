@@ -69,13 +69,13 @@ namespace StateMachine.Plant_Enemy
         public void SetIdleAnim(bool condition) { animator.SetBool("isIdle", condition); }
 
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, enemy.stats.ShootingRange);
+        // private void OnDrawGizmosSelected()
+        // {
+        //     Gizmos.color = Color.green;
+        //     Gizmos.DrawWireSphere(transform.position, enemy.stats.ShootingRange);
 
 
-        }
+        // }
 
 
     }
