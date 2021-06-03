@@ -12,8 +12,8 @@ namespace StateMachine.Plant_Enemy
         public IdleState idleState = new IdleState();
         public ShootingState shootingState = new ShootingState();
         public ShootRangeState shootRangeState = new ShootRangeState();
-        // public DeathState deathState = new DeathState();
-        // public GetHitState getHitState = new GetHitState();
+        public DeathState deathState = new DeathState();
+        public GetHitState getHitState = new GetHitState();
         // public WaitState waitState = new WaitState();
 
 
@@ -43,10 +43,19 @@ namespace StateMachine.Plant_Enemy
         {
             StartCoroutine(CounterToIsShootOn(enemy.stats.Attrate));
         }
+        [SerializeField] bool isShootinCorr = false;
         private IEnumerator CounterToIsShootOn(float waitTime)
         {
-            yield return new WaitForSeconds(waitTime);
-            enemy.conditions.canShoot = true;
+            if (isShootinCorr)
+                yield return null;
+            else
+            {
+                isShootinCorr = true;
+                SetTriggerShootAnim();
+                yield return new WaitForSecondsRealtime(waitTime);
+                isShootinCorr = false;
+            }
+
         }
 
 

@@ -11,8 +11,6 @@ public class PlantCallShootEvent : BatCallShootEvent
         Vector3 randomPos = new Vector3(stateMachine.shootingPoint.position.x + UnityEngine.Random.Range(-radius, radius), stateMachine.shootingPoint.position.y + UnityEngine.Random.Range(-radius, radius), stateMachine.shootingPoint.position.z);
 
         StartCoroutine(WaitToLaunchMore(stateMachine, randomPos));
-        // GameObject bullet = GameObject.Instantiate(stateMachine.bulletPrefab, randomPos, Quaternion.identity);
-        // bullet.GetComponent<PlantBullet>().Launch();
 
     }
 

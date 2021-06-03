@@ -9,6 +9,10 @@ namespace StateMachine.Plant_Enemy
             DoShootRange(stateMachine);
             if (stateMachine.enemy.conditions.isIdle)
                 return stateMachine.idleState;
+            else if (stateMachine.enemy.conditions.isHitten)
+                return stateMachine.getHitState;
+            else if (stateMachine.enemy.conditions.isDead)
+                return stateMachine.deathState;
             else if (stateMachine.enemy.conditions.canShoot)
                 return stateMachine.shootingState;
             else
