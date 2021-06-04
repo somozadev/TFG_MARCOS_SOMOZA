@@ -8,10 +8,22 @@ namespace StateMachine.Turtle_Enemy
     {
         public IState DoState(TurtleStateMachine stateMachine)
         {
-            throw new System.NotImplementedException();
+            if (!stateMachine.GetIsDieAnim())
+                DoDeathState(stateMachine);
+            return this;
+        }
+        private void DoDeathState(TurtleStateMachine stateMachine)
+        {
+
+            stateMachine.navAgent.velocity = Vector3.zero;
+            stateMachine.enemy.SetNewDamageIndicator();
+            stateMachine.enemy.ParticleDamaged();
+            stateMachine.SetTriggerDieAnim();
+            stateMachine.SetIsDieAnim(true);
+
+            stateMachine.enemy.conditions.Reset();
         }
 
-        
     }
 
 }

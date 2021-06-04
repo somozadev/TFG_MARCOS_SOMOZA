@@ -11,6 +11,8 @@ namespace StateMachine.Turtle_Enemy
             DoPatrol(stateMachine);
             if(stateMachine.enemy.conditions.isHitten && !stateMachine.enemy.conditions.isInvincible)
                 return stateMachine.getHitState;
+            else if (stateMachine.enemy.conditions.isDead)
+                return stateMachine.deathState;
             
             else
                 return this;

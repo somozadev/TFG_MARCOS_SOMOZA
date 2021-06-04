@@ -7,8 +7,7 @@ namespace StateMachine.Turtle_Enemy
     public class TurtleStateMachine : StateMachine
     {
         public new IState currentState;
-        public Transform shootingPoint;
-        public GameObject bulletPrefab;
+
         [SerializeField] GameObject PointsObj;
         public PatrolPoint[] points;
         public PatrolPoint currentPoint;
@@ -54,6 +53,27 @@ namespace StateMachine.Turtle_Enemy
 
             }
         }
+        bool canDamage = true;
+        private void OnTriggerEnter(Collider other)
+        {
+            if (canDamage)
+            {
+                if (other.gameObject.tag == "Player" && currentState == patrolState)
+                {
+                    GameManager.Instance.player.playerStats.RecieveDamage(enemy.stats.Dmg);
+                    canDamage = false;
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.tag == "Player" && currentState == patrolState)
+            {
+                canDamage = true;
+            }
+        }
+
         [SerializeField] bool isPatCorr = false;
         public void WaitToPatrol(float waitTime) { StartCoroutine(waitPatCorr(waitTime)); }
         private IEnumerator waitPatCorr(float waitTime)
@@ -79,9 +99,9 @@ namespace StateMachine.Turtle_Enemy
         public override void SetTriggerDieAnim() { animator.SetTrigger("Die"); }
         public override void SetTriggerGetHitAnim() { animator.SetTrigger("GetHit"); }
 
-        public void SetGetHitInvincibleAnim(bool condition) { animator.SetBool("GetHitInvulnerable",condition); }
+        public void SetGetHitInvincibleAnim(bool condition) { animator.SetBool("GetHitInvulnerable", condition); }
         public void SetIdleAnim(bool condition) { animator.SetBool("isIdle", condition); }
-        public void SetPatrolAnim(bool condition) { animator.SetBool("Patrol",condition); }
+        public void SetPatrolAnim(bool condition) { animator.SetBool("Patrol", condition); }
 
 
 
