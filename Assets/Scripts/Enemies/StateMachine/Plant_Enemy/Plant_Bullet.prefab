@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4870740007117692787}
   - component: {fileID: 3808599308100075813}
   - component: {fileID: 997432941280188699}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plant_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   waitDestroyTime: 4
   h: 5
   g: -18
+  debugPath: 0
 --- !u!33 &1302273086925453815
 MeshFilter:
   m_ObjectHideFlags: 0

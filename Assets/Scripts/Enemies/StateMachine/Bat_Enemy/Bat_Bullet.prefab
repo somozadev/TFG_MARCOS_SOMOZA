@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7026014588595294209}
   - component: {fileID: 1640418384270937687}
   - component: {fileID: 3444871951101761129}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bat_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f594f5f2dc57e549b6eaafe1dc0ebbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 0
+  dmg: 7.12
   waitDestroyTime: 4
 --- !u!33 &3462046870046111365
 MeshFilter:

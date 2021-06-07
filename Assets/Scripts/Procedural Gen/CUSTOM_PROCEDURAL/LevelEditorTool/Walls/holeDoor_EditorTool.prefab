@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2517493867237429564}
   - component: {fileID: 9047355510796270989}
   - component: {fileID: 5601032011850832476}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: holeDoor_EditorTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}

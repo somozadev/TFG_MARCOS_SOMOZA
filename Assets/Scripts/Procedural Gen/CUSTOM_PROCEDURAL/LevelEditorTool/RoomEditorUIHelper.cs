@@ -34,9 +34,11 @@ public class RoomEditorUIHelper : MonoBehaviour
     public GameObject AssetsPanelObj { get { return assetsPanel; } }
     public GameObject GridPanelObj { get { return gridPanel; } }
     public GameObject DropItemPanelObj { get { return dropsPannel; } }
+    public GameObject EnemiesPanelObj { get { return enemiesPanel; } }
     public Button AssetButton { get { return assetsButton; } }
     public Button DropItemButton { get { return dropsButton; } }
     public Button GridButton { get { return gridButton; } }
+    public Button EnemiesButton { get { return enemiesButton; } }
 
     /*
     * TODO : ADD THE OTHER 3 TYPE OF WALLS AND THE 2 DOORS ***********DONE***********
@@ -48,7 +50,7 @@ public class RoomEditorUIHelper : MonoBehaviour
     * TODO : MAKE TUTORIAL UI AT BEGINNING WITH ALL CONTROLS ***********DONE***********
     * TODO : DYNAMIC EREASE NODE GRID SLOT (MAYBE HIDE MESH AND RECALCULATE COLLIDER??)  ***********DONE***********
     * TODO : DOORS ***********DONE***********
-    * TODO : DROPS (COINS, HPBOTTLES, TINTEDROCKS...) EDITOR
+    * TODO : DROPS (COINS, HPBOTTLES, TINTEDROCKS...) EDITOR ***********DONE***********
     * TODO : ENEMIES BY TYPE || ENEMIE POOL SPAWNER
     */
  
@@ -176,8 +178,8 @@ public class RoomEditorUIHelper : MonoBehaviour
             cameraTargetPosButton.gameObject.SetActive(false);
         if(dropsButton != current)
             dropsButton.gameObject.SetActive(false);
-        // if(enemiesButton != current)
-        //     enemiesButton.gameObject.SetActive(false);
+        if(enemiesButton != current)
+            enemiesButton.gameObject.SetActive(false);
     }
     public void ShowllOtherButtons()
     {
@@ -186,7 +188,7 @@ public class RoomEditorUIHelper : MonoBehaviour
         tutorialButton.gameObject.SetActive(true);
         cameraTargetPosButton.gameObject.SetActive(true);
         dropsButton.gameObject.SetActive(true);
-        // enemiesButton.gameObject.SetActive(true);
+        enemiesButton.gameObject.SetActive(true);
     }
 
 

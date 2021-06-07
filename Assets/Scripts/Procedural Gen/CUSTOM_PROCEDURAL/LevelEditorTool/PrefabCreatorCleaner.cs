@@ -15,8 +15,10 @@ namespace EditorTool
         [SerializeField] private List<GameObject> wallsList;
         [SerializeField] private GameObject floors;
         [SerializeField] private List<GameObject> floorsList;
+        [SerializeField] public Transform enemies;
+        [SerializeField] private List<GameObject> enemiesList;
         [SerializeField] public Transform playerPos;
-
+        public GameObject navMesherCollider;
         private GameObject parent;
 
         public IEnumerator StartClear(GameObject parent)
@@ -26,7 +28,21 @@ namespace EditorTool
             parent.GetComponent<Room>().enabled = true;
             parent.GetComponent<Room>().SetId = DataController.Instance.GenerateId();
             transform.parent.GetComponent<RoomEditorTool>().SavePrefabFinale(parent);
-
+        }
+        private void Awake()
+        {
+            try
+            {
+                navMesherCollider = GetComponentInChildren<UnityEngine.AI.NavMeshSurface>().gameObject;
+            }
+            catch
+            {
+                Debug.Log("nope");
+            }
+            if (navMesherCollider != null)
+            {
+                Bake();
+            }
         }
 
         private IEnumerator AsyncClear()
@@ -37,6 +53,7 @@ namespace EditorTool
             ClearWalls();
             ClearObjects();
             ClearDrops();
+            ClearEnemies();
             yield return new WaitForEndOfFrame();
 
         }
@@ -64,6 +81,9 @@ namespace EditorTool
             foreach (Transform floor in floors.transform)
                 if (floor.parent == floors.transform)
                     floorsList.Add(floor.gameObject);
+            foreach (Transform enemy in enemies.transform)
+                if (enemy.parent == enemies.transform)
+                    enemiesList.Add(enemy.gameObject);
 
         }
 
@@ -154,9 +174,9 @@ namespace EditorTool
                 foreach (Collider col in c)
                 {
                     col.enabled = false;
-                    if(col.GetComponentsInChildren<Collider>().Length > 0)
+                    if (col.GetComponentsInChildren<Collider>().Length > 0)
                     {
-                        foreach(Collider cc in col.GetComponentsInChildren<Collider>())
+                        foreach (Collider cc in col.GetComponentsInChildren<Collider>())
                         {
                             cc.enabled = false;
                         }
@@ -164,6 +184,46 @@ namespace EditorTool
                 }
 
                 obj.transform.localScale = Vector3.zero;
+            }
+        }
+        void ClearEnemies()
+        {
+
+            foreach (GameObject obj in enemiesList)
+            {
+                Destroy(obj.GetComponent<LevelObject>());
+                obj.GetComponentInChildren<Rigidbody>().isKinematic = false;
+                obj.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                obj.GetComponentInChildren<StateMachine.StateMachine>().enabled = true;
+            }
+
+
+        }
+
+        void Bake()
+        {
+            navMesherCollider.GetComponent<UnityEngine.AI.NavMeshSurface>().BuildNavMesh();
+            foreach (GameObject obj in enemiesList)
+            {
+                try
+                { obj.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true; }
+                catch
+                { Debug.Log("F"); }
+
+                try { obj.GetComponent<StateMachine.Bat_Enemy.BatStateMachine>().enabled = true; }
+                catch { Debug.Log("No bat"); }
+                try { obj.GetComponent<StateMachine.Dragon_Enemy.DragonStateMachine>().enabled = true; }
+                catch { Debug.Log("No dragon"); }
+                try { obj.GetComponent<StateMachine.Slime_Enemy.SlimeStateMachine>().enabled = true; }
+                catch { Debug.Log("No slime"); }
+                try { obj.GetComponent<StateMachine.Golem_Enemy.GolemStateMachine>().enabled = true; }
+                catch { Debug.Log("No golem"); }
+                try { obj.GetComponent<StateMachine.Orc_Enemy.OrcStateMachine>().enabled = true; }
+                catch { Debug.Log("No orc"); }
+                try { obj.GetComponent<StateMachine.Plant_Enemy.PlantStateMachine>().enabled = true; }
+                catch { Debug.Log("No plant"); }
+                try { obj.GetComponentInChildren<StateMachine.Turtle_Enemy.TurtleStateMachine>().enabled = true; }
+                catch { Debug.Log("No turtle"); }
             }
         }
 

@@ -20,14 +20,14 @@ public class EnemyStats
     #endregion
     #region GETTERS
 
-    public int Hp { get { return hp; } }
+    public int Hp { get { return hp; } set { hp = value; } }
     public float CurrentHp { get { return currentHp; } set { currentHp = value; } }
-    public float Def { get { return def; } }
-    public float Dmg { get { return dmg; } }
+    public float Def { get { return def; } set { def = value;}}
+    public float Dmg { get { return dmg; } set { dmg = value;}}
     public float Spd { get { return spd; } set { spd = value; } }
     public float AttackRange { get { return attackRange; } set { attackRange = value; } }
-    public float PursuitRange { get { return pursuitRange; } }
-    public float ShootingRange { get { return shootingRange; } }
+    public float PursuitRange { get { return pursuitRange; } set { pursuitRange = value; } }
+    public float ShootingRange { get { return shootingRange; } set { shootingRange = value; } }
     public float Attrate { get { return getRandomRate(); } set { attrate = value; } }
     public int DropXp { get { return dropXp; } set { dropXp = value; } }
     public SceneItem DropItem { get { return dropItem; } set { dropItem = value; } }

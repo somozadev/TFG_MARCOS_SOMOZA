@@ -20,7 +20,7 @@ namespace StateMachine.Golem_Enemy
         {
             startPos = transform.localPosition;
             enemy = GetComponentInParent<Enemy>();
-            layerMask = LayerMask.GetMask("SceneLevel", "Player");
+            layerMask = LayerMask.GetMask("SceneLevel", "Player", "BulletIgnorer");
         }
 
 

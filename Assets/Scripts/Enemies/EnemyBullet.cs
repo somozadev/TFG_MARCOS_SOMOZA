@@ -12,6 +12,11 @@ public class EnemyBullet : MonoBehaviour
             other.gameObject.GetComponent<Player>().playerStats.RecieveDamage(dmg);
             Destroy(gameObject);
         }
+        else
+        {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            StartCoroutine(WaitToDestroy(0.5f));
+        }
     }
     public virtual void Start()
     {

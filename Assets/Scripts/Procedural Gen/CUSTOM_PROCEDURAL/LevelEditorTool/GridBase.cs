@@ -43,6 +43,8 @@ namespace EditorTool
                 GetComponent<RoomEditorUIHelper>().AssetButton.gameObject.SetActive(true);
                 GetComponent<RoomEditorUIHelper>().DropItemPanelObj.SetActive(true);
                 GetComponent<RoomEditorUIHelper>().DropItemButton.gameObject.SetActive(true);
+                GetComponent<RoomEditorUIHelper>().EnemiesPanelObj.SetActive(true);
+                GetComponent<RoomEditorUIHelper>().EnemiesButton.gameObject.SetActive(true);
 
             }
             else
@@ -127,6 +129,11 @@ namespace EditorTool
         {
             GameObject aux = new GameObject();
             aux.AddComponent<BoxCollider>();
+            var nav = aux.AddComponent<UnityEngine.AI.NavMeshSurface>();
+            aux.name = "NavMesherCollider";
+            
+            nav.agentTypeID = UnityEngine.AI.NavMesh.GetSettingsByIndex(7).agentTypeID;
+            nav.BuildNavMesh();
             aux.GetComponent<BoxCollider>().size = new Vector3(x * offset, 0.1f, z * offset);
             aux.transform.position = new Vector3(((x * offset) / 2) - 2, 0, ((z * offset) / 2) - 2);
             gridStuff.Add(aux);
@@ -161,8 +168,9 @@ namespace EditorTool
             if (innerz < 0)
                 innerz = 0;
 
+            if(innerx > grid.GetLength(0)-1 || innerz > grid.GetLength(1)-1)
+                return null;
             if (grid[innerx, innerz] != null)
-
                 return grid[innerx, innerz];
 
             else

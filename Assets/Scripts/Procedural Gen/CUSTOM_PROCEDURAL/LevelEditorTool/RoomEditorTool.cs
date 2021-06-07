@@ -26,6 +26,7 @@ namespace EditorTool
         public Button dropsAbilityModButton;
         public Button dropsInteractModButton;
         public Button dropsShopConfigButton;
+        public Button enemyButton;
         public TMP_InputField inputField;
 
 
@@ -38,9 +39,18 @@ namespace EditorTool
         public List<GameObject> inSceneGameObjects = new List<GameObject>();
         public List<GameObject> InSceneDropItems = new List<GameObject>();
         public List<GameObject> inSceneWalls = new List<GameObject>();
+        public List<GameObject> inSceneEnemies = new List<GameObject>();
 
         Vector3 mousePos;
         Vector3 worldPos;
+
+        //ENEMY_ITEMS
+        bool placeEnemy;
+        GameObject enemyToPlace;
+        GameObject enemyCloneObj;
+        LevelObject enemyObjProperties;
+        bool deleteEnemyItem;
+        public EnemyStatsEditor stats;
 
         //DROP_ITEMS
         bool placeDrop;
@@ -80,18 +90,23 @@ namespace EditorTool
                 sc.id = s.name;
                 sc.prefab = s;
                 resources.shopConfigs.Add(sc);
-            } 
+            }
         }
         private void Start() => inputField.text = transform.GetChild(0).name;
         private void Update()
         {
+            PlaceEnemy();
+            DeleteEnemies();
+
             PlaceObject();
             DeleteObjects();
+
             PlaceDropItems();
             DeleteDropItems();
 
             PlaceWall();
             DeleteWalls();
+
             PlaceFloor();
             DeleteFloors();
             if (Mouse.current.middleButton.wasPressedThisFrame)
@@ -115,6 +130,9 @@ namespace EditorTool
         }
         void CloseAll()
         {
+            placeEnemy = false;
+            deleteEnemyItem = false;
+
             placeDrop = false;
             deleteDropItem = false;
 
@@ -126,7 +144,11 @@ namespace EditorTool
 
             placeFloorObj = false;
             deleteFloor = false;
-
+            if (enemyCloneObj != null)
+            {
+                Destroy(enemyCloneObj);
+                enemyCloneObj = null;
+            }
             if (dropCloneObj != null)
             {
                 Destroy(dropCloneObj);
@@ -870,6 +892,134 @@ namespace EditorTool
 
         }
         #endregion
+        #region ENEMIES
+        public void PassEnemyToPlace(string enemyId)
+        {
+            Debug.Log(enemyId);
+            // deleteEnemyItem = false;
+            if (enemyCloneObj != null)
+                Destroy(enemyCloneObj);
+            CloseAll();
+            enemyCloneObj = null;
+            placeEnemy = true;
+            enemyToPlace = resources.GetEnemyResource(enemyId).prefab;
+        }
+        void PlaceEnemy()
+        {
+            if (placeEnemy)
+            {
+                Node current = grid.NodeFromWorldPos(mousePos);
+                highLitedMat.color = new Color32(255, 255, 0, 16);
+                highLitedMat.SetColor("_EmissionColor", Color.yellow);
+                UpdateMousePosition();
+                if (current == null)
+                    return;
+                Floor floor = current.floorObj.GetComponent<Floor>();
+                worldPos = current.floorObj.transform.position;
+
+
+                //UNLIGHT N LIGHT CURRENT NODE FLOOR
+                foreach (Node n in grid.grid)
+                {
+                    if (n != current)
+                    {
+                        Floor f = n.floorObj.GetComponent<Floor>();
+                        f.UnShadeAll();
+                    }
+                    else
+                        n.floorObj.GetComponent<Floor>().ShadeFloor();
+                }
+
+
+                if (enemyCloneObj == null)
+                {
+                    enemyCloneObj = Instantiate(enemyToPlace, worldPos, Quaternion.identity) as GameObject;
+                    objProperties = enemyCloneObj.GetComponent<LevelObject>();
+                }
+                else
+                {
+                    if (enemyCloneObj.GetComponent<LevelObject>().posOffset == Vector3.zero)
+                        enemyCloneObj.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z);
+                    else
+                        enemyCloneObj.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z) + enemyCloneObj.GetComponent<LevelObject>().posOffset;
+
+                    if (Mouse.current.leftButton.wasPressedThisFrame)
+                    {
+                        GameObject actualObjPlaced = Instantiate(enemyToPlace, worldPos, enemyCloneObj.transform.rotation);
+                        actualObjPlaced.transform.parent = transform.GetChild(0).transform.GetChild(4).transform;
+                        LevelObject placedProp = actualObjPlaced.GetComponent<LevelObject>();
+                        placedProp.x = current.x;
+                        placedProp.z = current.z;
+                        if (placedProp.posOffset == Vector3.zero)
+                            placedProp.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z);
+                        else
+                            placedProp.transform.position = new Vector3(mousePos.x, worldPos.y, mousePos.z) + placedProp.posOffset;
+
+                        placedProp.transform.rotation = enemyCloneObj.transform.rotation;
+
+                        current.placedEnemies.Add(actualObjPlaced);
+                        inSceneEnemies.Add(actualObjPlaced);
+
+                    }
+                    if (Mouse.current.rightButton.wasPressedThisFrame)
+                        objProperties.ChangeRotation();
+                }
+            }
+            else
+            {
+                if (enemyCloneObj != null)
+                    Destroy(enemyCloneObj);
+
+            }
+        }
+        void DeleteEnemies()
+        {
+            if (deleteEnemyItem)
+            {
+                UpdateMousePosition();
+                Node current = grid.NodeFromWorldPos(mousePos);
+                if (current == null)
+                    return;
+
+                current.floorObj.GetComponent<Floor>().ShadeFloor();
+
+                foreach (Node node in grid.grid)
+                {
+                    if (node != current)
+                        node.floorObj.GetComponent<Floor>().UnShadeFloor();
+                }
+
+
+
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    if (current.placedEnemies.Count > 0)
+                    {
+                        List<GameObject> aux = current.placedEnemies;
+                        foreach (GameObject g in current.placedEnemies)
+                        {
+                            inSceneEnemies.Remove(g);
+                            Destroy(aux[aux.IndexOf(g)]);
+                        }
+                        current.floorObj.GetComponent<Floor>().UnShadeFloor();
+                    }
+                    current.placedEnemies.Clear();
+                }
+            }
+
+        }
+        public void DeleteEnemy()
+        {
+            highLitedMat.color = new Color32(255, 0, 0, 16);
+            highLitedMat.SetColor("_EmissionColor", Color.red);
+            GameObject remove = enemyCloneObj;
+            Destroy(remove);
+            CloseAll();
+            deleteEnemyItem = true;
+        }
+
+        #endregion
+
 
         #region  UI
 
@@ -1060,7 +1210,32 @@ namespace EditorTool
             dropsShopConfigButton.onClick.AddListener(() => PassShopConfigToSet(resources.shopConfigs[shopConfigRotativeCounter].id));
 
         }
+        int enemiesRotativeCounter = 0;
+        public void RotateEnemiesResources(bool right)
+        {
+            if (right)
+            {
+                enemiesRotativeCounter++;
+                if (enemiesRotativeCounter >= resources.enemies.Count)
+                    enemiesRotativeCounter = 0;
+            }
+            else
+            {
+                enemiesRotativeCounter--;
+                if (enemiesRotativeCounter < 0)
+                    enemiesRotativeCounter = resources.enemies.Count - 1;
+            }
+            enemyButton.GetComponent<Image>().sprite = resources.enemies[enemiesRotativeCounter].sprite;
+            enemyButton.onClick.RemoveAllListeners();
+            stats.InitValues(resources.enemies[enemiesRotativeCounter].prefab.GetComponentInChildren<Enemy>());
+            enemyButton.onClick.AddListener(() => PassEnemyToPlace(resources.enemies[enemiesRotativeCounter].id));
+        }
+
         #endregion
+
+        public void ChangeColor(TMP_Text text) => text.color = new Color32(0, 180, 0, 255);
+        public void ResetColor(TMP_Text text) => text.color = Color.black;
+        public void ApplyButtonStats() {stats.SetAll(resources.enemies[enemiesRotativeCounter].prefab);}
 
     }
 
@@ -1075,6 +1250,7 @@ namespace EditorTool
         public GameObject floorObj;
         public List<GameObject> placedObj = new List<GameObject>();
         public List<GameObject> dropItemsObj = new List<GameObject>();
+        public List<GameObject> placedEnemies = new List<GameObject>();
 
     }
 
@@ -1090,6 +1266,7 @@ namespace EditorTool
         public List<ObjectWall> levelWalls = new List<ObjectWall>();
         public List<ObjectFloor> levelFloors = new List<ObjectFloor>();
         public List<LightingResource> levelLights = new List<LightingResource>();
+        public List<EnemyResource> enemies = new List<EnemyResource>();
 
         public DropItemResource GetDropItemResource(string objectId) { return dropItems.First(x => x.id == objectId); }
         public DropItemResource GetDropItemStatModResource(string objectId) { return dropItemsStatMod.First(x => x.id == objectId); }
@@ -1100,6 +1277,7 @@ namespace EditorTool
         public ObjectWall GetObjectWall(string objectId) { return levelWalls.First(x => x.id == objectId); }
         public ObjectFloor GetObjectFloor(string objectId) { return levelFloors.First(x => x.id == objectId); }
         public LightingResource GetLightingResource(string lightingId) { return levelLights.First(x => x.id == lightingId); }
+        public EnemyResource GetEnemyResource(string enemyId) { return enemies.First(x => x.id == enemyId); }
     }
 
     [System.Serializable]
@@ -1141,6 +1319,77 @@ namespace EditorTool
         public string id;
         public GameObject prefab;
         public Sprite sprite;
+    }
+    [System.Serializable]
+    public class EnemyResource
+    {
+        public string id;
+        public GameObject prefab;
+        public Sprite sprite;
+    }
+    [System.Serializable]
+    public class EnemyStatsEditor
+    {
+        public TMP_InputField hp;
+        public TMP_InputField def;
+        public TMP_InputField dmg;
+        public TMP_InputField spd;
+        public TMP_InputField det_range;
+        public TMP_InputField att_range;
+        public TMP_InputField att_rate;
+        public TMP_InputField shoot_range;
+
+        public float GetHp() { return float.Parse(hp.text); }
+        public float GetDef() { return float.Parse(def.text); }
+        public float GetDmg() { return float.Parse(dmg.text); }
+        public float GetSpd() { return float.Parse(spd.text); }
+        public float GetDetRange() { return float.Parse(det_range.text); }
+        public float GetAttRange() { return float.Parse(att_range.text); }
+        public float GetShootRange() { return float.Parse(shoot_range.text); }
+        public float GetAttRate() { return float.Parse(att_rate.text); }
+
+        public void SetHp(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.Hp = (int)GetHp(); enemy.GetComponentInChildren<Enemy>().stats.CurrentHp = (int)GetHp(); }
+        public void SetDef(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.Def = GetDef(); }
+        public void SetDmg(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.Dmg = GetDmg(); }
+        public void SetSpd(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.Spd = GetSpd(); }
+        public void SetDetRange(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.PursuitRange = GetDetRange(); }
+        public void SetAttRange(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.AttackRange = GetAttRange(); }
+        public void SetShootRange(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.ShootingRange = GetShootRange(); }
+        public void SetAttRate(GameObject enemy) { enemy.GetComponentInChildren<Enemy>().stats.Attrate = GetAttRate(); }
+
+        public void SetAll(GameObject enemy)
+        {
+            SetHp(enemy);
+            SetDef(enemy);
+            SetDmg(enemy);
+            SetSpd(enemy);
+            SetDetRange(enemy);
+            SetAttRange(enemy);
+            SetAttRate(enemy);
+            SetShootRange(enemy);
+        }
+        public void InitValues(Enemy enemy)
+        {
+            hp.text = enemy.stats.Hp.ToString();
+            def.text = enemy.stats.Def.ToString();
+            dmg.text = enemy.stats.Dmg.ToString();
+            spd.text = enemy.stats.Spd.ToString();
+            det_range.text = enemy.stats.PursuitRange.ToString();
+            att_range.text = enemy.stats.AttackRange.ToString();
+            att_rate.text = enemy.stats.Attrate.ToString();
+            shoot_range.text = enemy.stats.ShootingRange.ToString();
+
+            hp.GetComponentInChildren<TMP_Text>().color = Color.black;
+            def.GetComponentInChildren<TMP_Text>().color = Color.black;
+            dmg.GetComponentInChildren<TMP_Text>().color = Color.black;
+            spd.GetComponentInChildren<TMP_Text>().color = Color.black;
+            det_range.GetComponentInChildren<TMP_Text>().color = Color.black;
+            att_range.GetComponentInChildren<TMP_Text>().color = Color.black;
+            att_rate.GetComponentInChildren<TMP_Text>().color = Color.black;
+            shoot_range.GetComponentInChildren<TMP_Text>().color = Color.black;
+        }
+
+
     }
 
 

@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 7959107147985948514}
   - component: {fileID: 5769867695195566716}
   - component: {fileID: 1346108433304463341}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shade_Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 167562111299817993}
   - component: {fileID: 3676803671584798884}
   - component: {fileID: 8313368483535550871}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shade_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 8915710802192855405}
   - component: {fileID: 1811356948169092522}
   - component: {fileID: 1692687575385480643}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EmptyFloor_EditorTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2079909002179368403}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4415190540088081256}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3678948611030730062}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 3868604638837939096}
   - component: {fileID: 4030989287759473404}
   - component: {fileID: 4740949498248892464}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shade_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 4733407546337008204}
   - component: {fileID: 4873367927363469216}
   - component: {fileID: 1361859934874966582}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shade_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

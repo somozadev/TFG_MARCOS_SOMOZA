@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6465685129208575937}
   - component: {fileID: 494266679992703856}
   - component: {fileID: 3958534311784496289}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: door_EditorTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6018160198746403066}
   - component: {fileID: 5995080082968499144}
   - component: {fileID: 4181751527856844320}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: door-wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 4337092193745999743}
   - component: {fileID: 858694712189313331}
   - component: {fileID: 6086214741047791668}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EXIT_CONTROLLER
   m_TagString: Untagged
   m_Icon: {fileID: 0}

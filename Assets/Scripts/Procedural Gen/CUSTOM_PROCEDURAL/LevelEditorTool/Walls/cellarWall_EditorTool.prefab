@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3427100111926810415}
   - component: {fileID: 4876320342109816236}
   - component: {fileID: 8202467312993660682}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: cellarWall_EditorTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7840430354165288995}
   - component: {fileID: 7840430354163124292}
   - component: {fileID: 4744118930092251884}
-  m_Layer: 0
-  m_Name: WindowedWall 1
+  m_Layer: 12
+  m_Name: WallWindowed_EditorTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

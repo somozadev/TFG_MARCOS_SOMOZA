@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2804013600018208709}
   - component: {fileID: 5884902195167562131}
   - component: {fileID: 7540736891654295981}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dragon_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

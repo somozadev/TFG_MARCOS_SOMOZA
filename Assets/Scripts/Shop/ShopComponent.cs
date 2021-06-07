@@ -42,8 +42,8 @@ public class ShopComponent : MonoBehaviour
             aux.GetComponent<SceneItem>().action = ItemAction.BUY;
             aux.GetComponent<SceneItem>().Initialize();
             itemSpots[shop.shopItems.IndexOf(item)].GetComponentInChildren<TMP_Text>().text = item.Price.ToString();
-            i++;
             itemSpots[i].GetComponent<ShopSlot>().itemToSell = aux;
+            i++;
         }
     }
 

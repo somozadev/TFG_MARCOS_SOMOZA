@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6326587073253408215}
   - component: {fileID: 8099613095080900409}
   - component: {fileID: 4971874571479941718}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: cellarDoor_EditorTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
