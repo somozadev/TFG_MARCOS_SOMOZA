@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public EventSystem defaultEventSystem,playerEventSystem;
     public StageController stageController;
+    public XpController xpController;
 
     private void Start()
     {

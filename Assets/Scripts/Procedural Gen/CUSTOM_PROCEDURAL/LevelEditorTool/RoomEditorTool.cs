@@ -72,6 +72,7 @@ namespace EditorTool
         LevelObject wallProperties;
         bool deleteWallObj;
         //FLOORS    
+        [SerializeField] bool fillFloor;
         bool placeFloorObj;
         GameObject floorObjToPlace;
         GameObject floorCloneObj;
@@ -107,7 +108,10 @@ namespace EditorTool
             PlaceWall();
             DeleteWalls();
 
-            PlaceFloor();
+            if (!fillFloor)
+                PlaceFloor();
+            else
+                FillFloor();
             DeleteFloors();
             if (Mouse.current.middleButton.wasPressedThisFrame)
                 CloseAll();
@@ -629,6 +633,44 @@ namespace EditorTool
             floorCloneObj = null;
             placeFloorObj = true;
             floorObjToPlace = resources.GetObjectFloor(objId).prefab;
+
+        }
+        List<GameObject> floorsFill;
+        bool areSeeing = true;
+        void FillFloor()
+        {
+            foreach (Node node in grid.grid)
+            {
+                node.floorObj.GetComponent<Floor>().ShadeFloor();
+            }
+            if (areSeeing)
+            {
+                foreach (Node node in grid.grid)
+                {
+                    floorCloneObj = Instantiate(floorObjToPlace, worldPos, Quaternion.identity) as GameObject;
+
+                    floorCloneObj.transform.position = node.floorObj.transform.position + new Vector3(0, 0.5f, 0);
+                    floorCloneObj.transform.localScale *= 0.8f;
+                    floorsFill.Add(floorCloneObj);
+                }
+                areSeeing = false;
+            }
+
+            //PLACE (dont destroy node bc should change so many things)
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                foreach (Node node in grid.grid)
+                {
+                    if (node.floorObj.GetComponent<Floor>().floor.GetComponent<LevelObject>().objectId != floorCloneObj.GetComponent<LevelObject>().objectId)
+                    {
+                        node.floorObj.GetComponent<Floor>().floor.GetComponent<LevelObject>().objectId = floorObjToPlace.GetComponent<LevelObject>().objectId;
+                        node.floorObj.GetComponent<Floor>().floor.GetComponent<MeshFilter>().mesh = floorObjToPlace.GetComponent<MeshFilter>().sharedMesh;
+                        node.floorObj.GetComponent<Floor>().floor.GetComponent<MeshRenderer>().materials = floorObjToPlace.GetComponent<MeshRenderer>().sharedMaterials;
+                        node.floorObj.GetComponent<Floor>().UnShadeFloor();
+                    }
+                }
+            }
+
 
         }
         private void PlaceFloor()
@@ -1235,7 +1277,7 @@ namespace EditorTool
 
         public void ChangeColor(TMP_Text text) => text.color = new Color32(0, 180, 0, 255);
         public void ResetColor(TMP_Text text) => text.color = Color.black;
-        public void ApplyButtonStats() {stats.SetAll(resources.enemies[enemiesRotativeCounter].prefab);}
+        public void ApplyButtonStats() { stats.SetAll(resources.enemies[enemiesRotativeCounter].prefab); }
 
     }
 

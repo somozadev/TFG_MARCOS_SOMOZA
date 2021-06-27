@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &30128656
 SphereCollider:
@@ -457,14 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff1e9ca90c75480418cf3d94bc6f9b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 1
-  maxAllowedDistance: 10
-  maxLevelSize: 6
-  initialBlock: {fileID: 9050353313634984367, guid: bdbb4e2a14fb03445bf32db53abf5ad2, type: 3}
-  blocks:
-  - {fileID: 7592541241211529066, guid: a0d00ed7467d618429c87716e9c6fdf3, type: 3}
-  - {fileID: 158729777390031137, guid: baadcb07c8a3dc94c9b7f68aed2179da, type: 3}
-  registeredBlocks: []
 --- !u!4 &72841593
 Transform:
   m_ObjectHideFlags: 0
@@ -513,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &75315901
 SphereCollider:
@@ -1159,6 +1153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &254589132
 SphereCollider:
@@ -1348,6 +1343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &349561271
 SphereCollider:
@@ -1671,6 +1667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &525299636
 SphereCollider:
@@ -1872,6 +1869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &553744519
 SphereCollider:
@@ -3983,6 +3981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &1216496465
 SphereCollider:
@@ -5095,6 +5094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &1481760731
 SphereCollider:
@@ -5304,6 +5304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &1560474836
 SphereCollider:
@@ -5426,6 +5427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &1644611798
 SphereCollider:
@@ -6177,28 +6179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d0ccc66aab76042875c54b26c17c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 248006281
-  maxAllowedDistance: 12
-  maxLevelSize: 600
-  sections:
-  - {fileID: 4956877597261251652, guid: 75433923e5166504882491a15f4ada49, type: 3}
-  - {fileID: 8493526272897539471, guid: 855139dbf8e670f40be2038c259047a3, type: 3}
-  - {fileID: 3204502474963934629, guid: bd001519a7136664d9ef3cff8a7da6bb, type: 3}
-  - {fileID: 3817429455753506326, guid: 914863675b2368c46a0c02f6e6a52a38, type: 3}
-  - {fileID: 7410811784574095900, guid: ef8d37724124fdf46a71e4d67ee5cc21, type: 3}
-  - {fileID: 1402166913117273090, guid: fb257fe1621127d41a8e1c7bc78478a4, type: 3}
-  initialSectionTags:
-  - Main
-  tagRules:
-  - tag: Looting
-    minAmount: 0
-    maxAmount: 1
-  - tag: Main
-    minAmount: 1
-    maxAmount: 1
-  deadEnds:
-  - {fileID: 694222766406231763, guid: ded18c27e0bf2574d880b895eb9bae5e, type: 3}
-  - {fileID: 7681190321635238849, guid: e8282345fb5d120459b360cec6b50f7d, type: 3}
 --- !u!4 &1949706181
 Transform:
   m_ObjectHideFlags: 0
@@ -6910,6 +6890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 0}
 --- !u!135 &2139837897
 SphereCollider:
@@ -7339,10 +7320,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1599839182960593227, guid: f75606856882ba84b820d53f640a4648, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5131711328369970510, guid: f75606856882ba84b820d53f640a4648, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -7360,13 +7337,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 103568187}
     - target: {fileID: 5131711328369970511, guid: f75606856882ba84b820d53f640a4648, type: 3}
-      propertyPath: playerEventSystem
-      value: 
-      objectReference: {fileID: 1282275977}
-    - target: {fileID: 5131711328369970511, guid: f75606856882ba84b820d53f640a4648, type: 3}
       propertyPath: defaultEventSystem
       value: 
       objectReference: {fileID: 1314899222809809494}
+    - target: {fileID: 5131711328369970511, guid: f75606856882ba84b820d53f640a4648, type: 3}
+      propertyPath: playerEventSystem
+      value: 
+      objectReference: {fileID: 1282275977}
     - target: {fileID: 5131711328369970544, guid: f75606856882ba84b820d53f640a4648, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

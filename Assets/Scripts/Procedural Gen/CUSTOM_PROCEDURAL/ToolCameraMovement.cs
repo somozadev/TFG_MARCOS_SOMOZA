@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class ToolCameraMovement : MonoBehaviour
-{
+{   
+    [SerializeField] float maxDist_WS = 30f;
     public Transform target;
     public Vector3 offset;
     public Vector3 startPos;
@@ -35,7 +36,7 @@ public class ToolCameraMovement : MonoBehaviour
                 transform.Translate(p);
             }
         }
-        if (Vector3.Distance(transform.position, target.position) < 20)
+        if (Vector3.Distance(transform.position, target.position) < maxDist_WS)
         {
             if (Keyboard.current.sKey.isPressed)
             {

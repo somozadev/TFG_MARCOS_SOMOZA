@@ -166,11 +166,14 @@ public class SceneItem : MonoBehaviour
     private void AddXp()
     {
         if (GameManager.Instance.player.playerStats.ShouldAddXp(item.Cuantity))
+        {
             GameManager.Instance.player.playerStats.LevelUp();
+            GameManager.Instance.player.playerStats.AddXp(item.Cuantity);
+        }
         else
             GameManager.Instance.player.playerStats.AddXp(item.Cuantity);
     }
-    ///<summary> Añade la cantidad del this. item a las stats del inventario</summary>
+    ///<summary> Añade la cantidad del this.item a las stats del inventario</summary>
     private void AddSoulCoin() => GameManager.Instance.player.playerStats.SoulCoins += item.Cuantity;
 
     #endregion
@@ -248,7 +251,7 @@ public class SceneItem : MonoBehaviour
     }
     private void RetrieveSoulCoins()
     {
-        GameManager.Instance.player.playerStats.SoulCoins -= item.Price; 
+        GameManager.Instance.player.playerStats.SoulCoins -= item.Price;
         GameManager.Instance.statsCanvas.AssignCoins();
     }
     private void AddItemToInventory(Item item) => GameManager.Instance.player.playerStats.Inventory.Add(item);

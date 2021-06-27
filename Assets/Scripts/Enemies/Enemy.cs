@@ -45,12 +45,22 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
         {
             Instantiate(stats.DropItem, transform.position + Vector3.up, Quaternion.identity);
         }
+        DropXp();
+        Destroy(gameObject);
     }
+
+    public void DropXp()
+    {
+        GameManager.Instance.xpController.PerformXps(stats.DropXp, transform);
+    }
+
+
+
     public void ParticleDead() => deadParticle.Play();
     public void ParticleDamaged() => damagedParticle.Play();
-    public void SetNewDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position + Vector3.up*3f, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(cuantity);
-    public void SetNewInvencibleDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position + Vector3.up*3f, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(0);
-    
+    public void SetNewDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position + Vector3.up * 3f, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(cuantity);
+    public void SetNewInvencibleDamageIndicator() => Instantiate(damageIndicatorPrefab, transform.position + Vector3.up * 3f, Quaternion.identity, transform).GetComponent<DamageIndicator>().SetDamageText(0);
+
 
     public void MakeDamage() { GameManager.Instance.player.playerStats.RecieveDamage(stats.Dmg); }
     public void RecieveDamage(float cuantity)
@@ -92,12 +102,12 @@ public class ConditionsState
         isChasing = false;
         isAttackRange = false;
         isPursuitRange = false;
-        isShootingRange = false; 
+        isShootingRange = false;
         isAttacking = false;
         isHitten = false;
         isDead = false;
         isWait = false;
-        isPatrol = false; 
+        isPatrol = false;
         canShoot = false;
         canSpinAttack = false;
         isIdle = false;

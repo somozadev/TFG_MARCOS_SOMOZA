@@ -43,6 +43,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99676325f8c1d4145968f790c628b5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageController: {fileID: 0}
+--- !u!1 &4356296283348888466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692823883147093270}
+  - component: {fileID: 4606357913082986377}
+  m_Layer: 0
+  m_Name: XpController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692823883147093270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4356296283348888466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5131711328369970544}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4606357913082986377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4356296283348888466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64572ef51f502404bbc0c00a5160a485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xpItem: {fileID: 1455929904138149501, guid: 053982c84c951174cb51523403e990ca, type: 3}
+  xps:
+  - {fileID: 11400000, guid: 04e9392d30be7664381c9fe71e9303ce, type: 2}
+  - {fileID: 11400000, guid: ef0dcc23bf2af724ca7f9fb6789f1a53, type: 2}
+  - {fileID: 11400000, guid: 64594ccc396f08048ae2c98917c9a057, type: 2}
+  - {fileID: 11400000, guid: ba8715fe2b8faeb4191c3d9d518e3a4c, type: 2}
+  - {fileID: 11400000, guid: a85fbfd4ccdbd414ca22a69f808a3643, type: 2}
+  sol: 
+  cost: 
 --- !u!1 &5131711328369970510
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,6 +126,7 @@ Transform:
   m_Children:
   - {fileID: 2846664911182181148}
   - {fileID: 7206106606903211845}
+  - {fileID: 692823883147093270}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -92,6 +146,10 @@ MonoBehaviour:
   statsCanvas: {fileID: 0}
   mainCamera: {fileID: 0}
   player: {fileID: 0}
+  defaultEventSystem: {fileID: 0}
+  playerEventSystem: {fileID: 0}
+  stageController: {fileID: 0}
+  xpController: {fileID: 4606357913082986377}
 --- !u!1 &6607989686440242774
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +193,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8270280a76abb5e4f882e5f95904aa4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newRun: 0
+  currentGameData:
+    seed: null
+    playerStats:
+      level: 0
+      hp: 0
+      xp: 0
+      currentXp: 0
+      currentHp: 0
+      def: 0
+      dmg: 0
+      spd: 0
+      attspd: 0
+      attrate: 0
+      range: 0
+      soulCoins: 0
+      inventory: []
+    gameCompletePercentaje: 0
+    itemsUnlocked: 
   ids:
     id: 
   scenesFloorOne: []
