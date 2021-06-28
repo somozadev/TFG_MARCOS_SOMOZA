@@ -43,6 +43,14 @@ namespace EditorTool
             {
                 Bake();
             }
+            Room room = GetComponent<Room>();
+            if (room)
+            {
+                room.SetEnemiesList = enemiesList;
+                room.SetEnemiesListDied = new bool[enemiesList.Count];
+                if (enemiesList.Count <= 0)
+                    room.Complete();
+            }
         }
 
         private IEnumerator AsyncClear()
@@ -130,6 +138,7 @@ namespace EditorTool
                 Destroy(floor.GetComponent<Floor>());
                 Destroy(floor.GetComponent<NodeObject>());
                 Destroy(floor.GetComponent<LevelObject>());
+                floor.layer = 10;
             }
 
         }

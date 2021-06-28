@@ -16,6 +16,7 @@ public class Room : MonoBehaviour
 
 
     [SerializeField] List<GameObject> enemiesList;
+    [SerializeField] bool[] enemiesListDied;
     [SerializeField] bool hasShop;
     [SerializeField] bool isCompleted;
     [SerializeField] bool isDroppingItem;
@@ -26,7 +27,8 @@ public class Room : MonoBehaviour
     public int GetId { get { return RoomId; } }
     public bool SetHasShop { set { hasShop = value; } }
     public bool SetHasDrop { set { isDroppingItem = value; } }
-
+    public List<GameObject> SetEnemiesList { set { enemiesList = value; } }
+    public bool[] SetEnemiesListDied { set { enemiesListDied = value; } }
 
     private void Awake()
     {
@@ -34,15 +36,21 @@ public class Room : MonoBehaviour
     }
 
 
-    private void Update()
+
+
+    public void EnemyDiedCall(GameObject enemy) { if (EnemyDied(enemy)) Complete(); }
+    private bool EnemyDied(GameObject enemy)
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        bool shallComplete = true;
+        int index = enemiesList.IndexOf(enemy);
+        enemiesListDied[index] = true;
+        foreach (bool enemyCond in enemiesListDied)
         {
-            Complete();
+            if (!enemyCond)
+                shallComplete = false;
         }
+        return shallComplete;
     }
-
-
     private void OnEnable()
     {
         if (GetComponentInParent<StageController>() != null)
