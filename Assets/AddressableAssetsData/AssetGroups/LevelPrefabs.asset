@@ -22,13 +22,20 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 2357202912256193039, guid: 5510f893fa074904993c5726aa4b3868, type: 3}
+    m_TargetAsset: {fileID: 2357202912256193039, guid: 5510f893fa074904993c5726aa4b3868, type: 3}
   - m_GUID: c1f94d3b12f31cf44a37dd7912aa9fe9
     m_Address: level_00
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: df7daf2ab8261fb4b8d4a6e2aac749c9
+    m_Address: level_20
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage2
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0

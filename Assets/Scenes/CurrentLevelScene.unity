@@ -152,20 +152,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265e80a9372af024cb99484b0d285280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRoom: {fileID: 0}
+  stage1Range: {x: 5, y: 8}
+  stage2Range: {x: 9, y: 13}
+  stage3Range: {x: 14, y: 16}
+  stage4Range: {x: 17, y: 23}
+  stage5Range: {x: 24, y: 26}
   seed: 
   actualStage: 1
+  actualRoom: 1
   numberOfRooms: 0
   stages: 0000000000000000000000000000000000000000
   sceneGroups:
-  - levelName: 
+  - levelName: Stage 1
     LevelGroupScenes: []
-  - levelName: 
+  - levelName: Stage 2
     LevelGroupScenes: []
-  - levelName: 
+  - levelName: Stage 3
     LevelGroupScenes: []
-  - levelName: 
+  - levelName: Stage 4
     LevelGroupScenes: []
-  - levelName: 
+  - levelName: Stage 5
     LevelGroupScenes: []
 --- !u!4 &721699656
 Transform:

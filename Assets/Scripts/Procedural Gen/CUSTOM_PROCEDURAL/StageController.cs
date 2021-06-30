@@ -3,17 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using CustomAttributes.MinMaxSlider;
 
 public class StageController : MonoBehaviour
 {
     public Room currentRoom;
 
+    [Header("Numero de rooms por nivel")]
+    [Space]
+    [MinMaxSlider(5, 8)]
+    [SerializeField] Vector2Int stage1Range;
+    [MinMaxSlider(9, 13)]
+    [SerializeField] Vector2Int stage2Range;
+    [MinMaxSlider(14, 16)]
+    [SerializeField] Vector2Int stage3Range;
+    [MinMaxSlider(17, 23)]
+    [SerializeField] Vector2Int stage4Range;
+    [MinMaxSlider(24, 26)]
+    [SerializeField] Vector2Int stage5Range;
+
+    [Header("Semilla")]
+    [Space]
     [SerializeField] string seed;
+
+    [Header("Current room & level")]
+    [Space]
     [SerializeField] int actualStage = 1;
     [SerializeField] int actualRoom = 1;
-    [SerializeField] int numberOfRooms;
+    [HideInInspector] [SerializeField] int numberOfRooms;
+    
+    [Header("Seed stages numbers")]
+    [Space]
     [SerializeField] int[] stages = new int[5];
 
+    [Header("Total seed groups")]
+    [Space]
     [SerializeField] List<LevelGroup> sceneGroups = new List<LevelGroup>(); // 5 as length
 
 
@@ -43,24 +67,24 @@ public class StageController : MonoBehaviour
     public void LoadRun(string loadedSeed) { DataController.Instance.DeserializeSeed(loadedSeed); }
 
     public void LoadNextScene()
-    {   
-        if(actualRoom >= stages[actualStage-1])
-        {   
+    {
+        if (actualRoom >= stages[actualStage - 1])
+        {
             actualRoom = 1;
             actualStage++;
         }
-        if(actualStage > 5)
+        if (actualStage > 5)
         {
             //FINISHED GAME
             print("finished run");
         }
 
-        if(currentRoom!=null)
-        {   
+        if (currentRoom != null)
+        {
             GameManager.Instance.player.gameObject.SetActive(false);
             Destroy(currentRoom.gameObject);
         }
-        Instantiate(sceneGroups[actualStage-1].LevelGroupScenes[actualRoom - 1], transform);
+        Instantiate(sceneGroups[actualStage - 1].LevelGroupScenes[actualRoom - 1], transform);
         actualRoom++;
     }
 
@@ -72,24 +96,24 @@ public class StageController : MonoBehaviour
         switch (stage)
         {
             case 1:
-                returner = Random.Range(5, 8);
+                returner = Random.Range(stage1Range.x, stage1Range.y);
                 break;
             case 2:
-                returner = Random.Range(9, 13);
+                returner = Random.Range(stage2Range.x, stage2Range.y);
                 break;
             case 3:
-                returner = Random.Range(14, 16);
+                returner = Random.Range(stage3Range.x, stage3Range.y);
                 break;
             case 4:
-                returner = Random.Range(17, 23);
+                returner = Random.Range(stage4Range.x, stage4Range.y);
                 break;
             case 5:
-                returner = Random.Range(24, 26);
+                returner = Random.Range(stage5Range.x, stage5Range.y);
                 break;
         }
         return returner;
     }
-    
+
 
     #region SCENES_LOADER_FROM_ADRESSEABLES_METHODS_&&_SEEDS
     public void CreateThisRunSeed()
@@ -131,36 +155,14 @@ public class StageController : MonoBehaviour
         LoadNextScene();
 
     }
-    private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup)
+    private void FillUpSceneGroups(int numberOf, LevelGroup currentGroup) //aquí es donde aparecería lo "procedural" en el stageNumber....
     {
+        Debug.Log(currentGroup.levelName + ":" + sceneGroups.IndexOf(currentGroup) + 1);
         StartCoroutine(DataController.Instance.LoadAllAssetsByKey(numberOf, currentGroup, (sceneGroups.IndexOf(currentGroup) + 1)));
     }
 
 
-    // public void HandleLifeCycle()
-    // {
-    //     bool hasSpawnedInstance = instances.Count > 0 ? true : false;
-    //     // Debug.Log(hasSpawnedInstance);
-    //     if (hasSpawnedInstance)
-    //         Despawn();
-    //     else
-    //         Spawn();
-    // }
-    // private void Spawn()
-    // {
-    //     AsyncOperationHandle<GameObject> asyncOperationHandle = sceneGroups[actualStage - 1].LevelGroupScenes[0].InstantiateAsync(transform.position, Quaternion.identity, transform);
-    //     asyncOperationHandle.Completed += handle => instances.Add(handle.Result);
 
-    // }
-    // private void Despawn()
-    // {
-    //     foreach (GameObject instance in instances)
-    //     {
-    //     Addressables.ReleaseInstance(instance);
-    //     }
-    //     instances.Clear();
-    //     HandleLifeCycle();
-    // }
     #endregion
 }
 
