@@ -51,7 +51,6 @@ public class StageController : MonoBehaviour
         {
             numberOfRooms = SetRandomNumberOfRooms(actualStage);
             CreateThisRunSeed();
-            // HandleLifeCycle();
         }
         else
         {
@@ -68,10 +67,10 @@ public class StageController : MonoBehaviour
 
     public void LoadNextScene()
     {
-        if (actualRoom >= stages[actualStage - 1])
+        if (actualRoom > stages[actualStage - 1])
         {
-            actualRoom = 1;
             actualStage++;
+            actualRoom = 1;
         }
         if (actualStage > 5)
         {
@@ -87,7 +86,7 @@ public class StageController : MonoBehaviour
         Instantiate(sceneGroups[actualStage - 1].LevelGroupScenes[actualRoom - 1], transform);
         actualRoom++;
     }
-
+    
 
 
     private int SetRandomNumberOfRooms(int stage)

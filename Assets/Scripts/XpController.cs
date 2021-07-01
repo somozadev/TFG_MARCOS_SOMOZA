@@ -45,7 +45,7 @@ public class XpController : MonoBehaviour
                 xpItem.item = xps[i];
                 GameObject xp = Instantiate(xpItem.gameObject, (pos.position + Vector3.up) + new Vector3(Random.Range(-2f,2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f)), Quaternion.identity, transform);
                 sol[i] -= 1;
-                xp.GetComponent<Rigidbody>().AddForce(Vector3.up);
+                //xp.GetComponent<Rigidbody>().AddForce(Vector3.up);
             }
         }
     }
