@@ -13,6 +13,7 @@ public class StatsCanvasController : MonoBehaviour
     [SerializeField] private TMP_Text lvl;
     [SerializeField] private Image xpProgress;
     [SerializeField] Animator animator;
+    [SerializeField] StatsVisualController statsVisualController;
     public Image XpProgress { get { return xpProgress; } }
 
     private void Start()

@@ -14,10 +14,10 @@ public class Player : MonoBehaviour
     public PlayerMovement playerMovement;
     [Header("UI right side for current inventory")]
     public CurrentItemsVisual currentItemsVisual;
-    [Header("GetHit particle")]
-    public ParticleSystem getHit;
-    // [Header("UI stats canvas")]
-    // public StatsCanvasController statsCanvasController;
+    [Header("Player particles")]
+    public PlayerParticles particles;
+    [Header("UI stats canvas")]
+    public StatsCanvasController statsCanvasController;
 
     private void Start()
     {

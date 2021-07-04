@@ -31,13 +31,13 @@ public class PlayerStats : IDamageable
     public int CurrentXp { get { return currentXp; } set { currentXp = value; } }
     public int Hp { get { return hp; } }
     public int CurrentHp { get { return currentHp; } set { currentHp = value; } }
-    public float Dmg { get { return dmg; } set { dmg = value; } }
-    public float Spd { get { return spd; } set { spd = value; } }
-    public float Def { get { return def; } set { def = value; } }
-    public float Attspd { get { return attspd; } set { attspd = value; } }
-    public float Attrate { get { return attrate; } set { attrate = value; } }
-    public float Range { get { return range; } set { range = value; } }
-    public int SoulCoins { get { return soulCoins; } set { soulCoins = value; } }
+    public float Dmg { get { return dmg; } set { dmg = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
+    public float Spd { get { return spd; } set { spd = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
+    public float Def { get { return def; } set { def = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
+    public float Attspd { get { return attspd; } set { attspd = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
+    public float Attrate { get { return attrate; } set { attrate = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
+    public float Range { get { return range; } set { range = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
+    public int SoulCoins { get { return soulCoins; } set { soulCoins = value; GameManager.Instance.player.particles.GetCoinParticle(); } }
     public List<Item> Inventory { get { return inventory; } }
     #endregion
 
@@ -61,7 +61,7 @@ public class PlayerStats : IDamageable
     #endregion
 
     #region METODOS
-    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level, 2f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; }
+    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level, 2f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; GameManager.Instance.player.particles.GetLvlUpParticle(); }
     public void AddItem(Item item) => inventory.Add(item);
 
     public void AddHp(int currentHp)
@@ -69,17 +69,19 @@ public class PlayerStats : IDamageable
         this.currentHp += currentHp;
         if (this.currentHp > this.hp)
             this.currentHp = this.hp;
+        GameManager.Instance.player.particles.GetHealParticle();
+
     }
     public void AddMaxHp(int hp) => this.hp += hp;
 
     public bool ShouldAddXp(int currentXp) => this.currentXp + currentXp >= this.xp ? true : false;
     public void AddXp(int currentXp) => this.currentXp += currentXp;
     public void AddMaxXp(int xp) => this.xp += xp;
-    public void AddDmg(float dmg) => this.dmg += dmg;
+    public void AddDmg(float dmg) { this.dmg += dmg; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
 
     public void RecieveDamage(float cuantity)
     {
-        GameManager.Instance.player.getHit.Play();
+        GameManager.Instance.player.particles.GetHitParticle();
         GameManager.Instance.mainCamera.GetComponent<CameraShake>().StartShake(GameManager.Instance.mainCamera.GetComponent<CameraShake>().properties);
         this.currentHp -= (int)cuantity;
         GameManager.Instance.statsCanvas.AssignHp();
