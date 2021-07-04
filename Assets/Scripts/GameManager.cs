@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public EventSystem defaultEventSystem,playerEventSystem;
     public StageController stageController;
     public XpController xpController;
+    public IngamePause ingamePause;
 
     private void Start()
     {
