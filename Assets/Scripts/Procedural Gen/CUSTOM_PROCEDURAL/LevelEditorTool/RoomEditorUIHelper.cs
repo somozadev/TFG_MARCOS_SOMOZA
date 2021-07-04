@@ -29,16 +29,24 @@ public class RoomEditorUIHelper : MonoBehaviour
     [SerializeField] Button dropsButton;
     public bool openCloseDrops = true;
 
+    [SerializeField] GameObject savePannel;
+    [SerializeField] Button saveButton;
+    public bool openCloseSave = true;
+
     public List<Toggle> toggles;
+    public Toggle bossToggle;
+    public Toggle startToggle;
 
     public GameObject AssetsPanelObj { get { return assetsPanel; } }
     public GameObject GridPanelObj { get { return gridPanel; } }
     public GameObject DropItemPanelObj { get { return dropsPannel; } }
     public GameObject EnemiesPanelObj { get { return enemiesPanel; } }
+    public GameObject SavePanelObj { get { return savePannel; } }
     public Button AssetButton { get { return assetsButton; } }
     public Button DropItemButton { get { return dropsButton; } }
     public Button GridButton { get { return gridButton; } }
     public Button EnemiesButton { get { return enemiesButton; } }
+    public Button SavePanelButton { get { return saveButton; } }
 
     /*
     * TODO : ADD THE OTHER 3 TYPE OF WALLS AND THE 2 DOORS ***********DONE***********
@@ -51,9 +59,9 @@ public class RoomEditorUIHelper : MonoBehaviour
     * TODO : DYNAMIC EREASE NODE GRID SLOT (MAYBE HIDE MESH AND RECALCULATE COLLIDER??)  ***********DONE***********
     * TODO : DOORS ***********DONE***********
     * TODO : DROPS (COINS, HPBOTTLES, TINTEDROCKS...) EDITOR ***********DONE***********
-    * TODO : ENEMIES BY TYPE || ENEMIE POOL SPAWNER
+    * TODO : ENEMIES BY TYPE || ENEMIE POOL SPAWNER  ***********DONE***********
     */
- 
+
     public void OnOffTxt(Toggle current)
     {
         Debug.Log(current.transform.GetComponentInChildren<TMPro.TMP_Text>(true).gameObject.name);
@@ -65,13 +73,29 @@ public class RoomEditorUIHelper : MonoBehaviour
     public int GetCurrentToogle()
     {
         int returner = 0;
-        foreach(Toggle t in toggles)
+        foreach (Toggle t in toggles)
         {
-            if(t.isOn)
+            if (t.isOn)
                 returner = System.Convert.ToInt32(t.transform.GetComponentInChildren<TMPro.TMP_Text>(true).text);
         }
         return returner;
     }
+
+    private bool GetBossToggle() { return bossToggle.isOn; }
+    private bool GetStartToggle() { return startToggle.isOn; }
+
+    public string GetExtraLabel()
+    {
+        if (GetBossToggle())
+            return "BossRoom";
+        else if (GetStartToggle())
+            return "StartRoom";
+        else
+            return "none";
+    }
+
+
+
     public void CameraTargetOffsetPanel()
     {
         if (openClosecameraTargetPos)
@@ -165,6 +189,22 @@ public class RoomEditorUIHelper : MonoBehaviour
         }
 
     }
+    public void SavePanel()
+    {
+        if (openCloseSave)
+        {
+            savePannel.GetComponent<Animator>().SetTrigger("Open");
+            HideAllOtherButtons(saveButton);
+            openCloseSave = false;
+        }
+        else
+        {
+            savePannel.GetComponent<Animator>().SetTrigger("Close");
+            ShowllOtherButtons();
+            openCloseSave = true;
+        }
+
+    }
 
     public void HideAllOtherButtons(Button current)
     {
@@ -176,10 +216,12 @@ public class RoomEditorUIHelper : MonoBehaviour
             tutorialButton.gameObject.SetActive(false);
         if (cameraTargetPosButton != current)
             cameraTargetPosButton.gameObject.SetActive(false);
-        if(dropsButton != current)
+        if (dropsButton != current)
             dropsButton.gameObject.SetActive(false);
-        if(enemiesButton != current)
+        if (enemiesButton != current)
             enemiesButton.gameObject.SetActive(false);
+        if (saveButton != current)
+            saveButton.gameObject.SetActive(false);
     }
     public void ShowllOtherButtons()
     {
@@ -189,6 +231,7 @@ public class RoomEditorUIHelper : MonoBehaviour
         cameraTargetPosButton.gameObject.SetActive(true);
         dropsButton.gameObject.SetActive(true);
         enemiesButton.gameObject.SetActive(true);
+        saveButton.gameObject.SetActive(true);
     }
 
 

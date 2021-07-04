@@ -79,6 +79,8 @@ public class PlayerStats : IDamageable
 
     public void RecieveDamage(float cuantity)
     {
+        GameManager.Instance.player.getHit.Play();
+        GameManager.Instance.mainCamera.GetComponent<CameraShake>().StartShake(GameManager.Instance.mainCamera.GetComponent<CameraShake>().properties);
         this.currentHp -= (int)cuantity;
         GameManager.Instance.statsCanvas.AssignHp();
         if (this.currentHp <= 0)

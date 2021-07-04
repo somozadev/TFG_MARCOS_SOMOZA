@@ -200,10 +200,20 @@ namespace EditorTool
             var settings = AddressableAssetSettingsDefaultObject.Settings;
             string labelName = "Stage" + (GetComponent<RoomEditorUIHelper>().GetCurrentToogle());
             settings.AddLabel(labelName, false);
+
+
+            string extraLabelName = GetComponent<RoomEditorUIHelper>().GetExtraLabel();
+            if (extraLabelName != "none")
+                settings.AddLabel(extraLabelName, false);
+
+
             AddressableAssetGroup g = settings.FindGroup("LevelPrefabs");
             var guid = AssetDatabase.AssetPathToGUID(localPath);
             var entry = settings.CreateOrMoveEntry(guid, g);
             entry.labels.Add(labelName);
+            if (extraLabelName != "none")
+                entry.labels.Add(extraLabelName);
+
             entry.address = parent.name;
             settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entry, true);
             AssetDatabase.SaveAssets();

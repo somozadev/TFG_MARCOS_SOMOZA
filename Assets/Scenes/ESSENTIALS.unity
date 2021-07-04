@@ -7453,14 +7453,38 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1282275976}
+    - target: {fileID: 5511366637749689059, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5511366637855441880, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 235260919}
+    - target: {fileID: 5511366637970089728, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511366638057311960, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5511366638572875095, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 169854790}
+    - target: {fileID: 5511366639066834013, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 45bb7b4fa508e72438a8525529e6a4e6, type: 2}
+    - target: {fileID: 5511366639066834013, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8679532495863591843, guid: 45bb7b4fa508e72438a8525529e6a4e6, type: 2}
+    - target: {fileID: 5511366639066834013, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
 --- !u!1001 &6410791823885463670

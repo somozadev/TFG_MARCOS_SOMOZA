@@ -21,12 +21,17 @@ public class Room : MonoBehaviour
     [SerializeField] bool isCompleted;
     [SerializeField] bool isDroppingItem;
 
+    [SerializeField] bool isStartingRoom;
+    [SerializeField] bool isBossRoom;
+
     [SerializeField] Room backtrackingRoom;
 
     public int SetId { set { RoomId = value; } }
     public int GetId { get { return RoomId; } }
     public bool SetHasShop { set { hasShop = value; } }
     public bool SetHasDrop { set { isDroppingItem = value; } }
+    public bool SetisStartingRoom { set { isStartingRoom = value; } }
+    public bool SetIsBossRoom { set { isBossRoom = value; } }
     public List<GameObject> SetEnemiesList { set { enemiesList = value; } }
     public bool[] SetEnemiesListDied { set { enemiesListDied = value; } }
 
@@ -70,6 +75,9 @@ public class Room : MonoBehaviour
         GameManager.Instance.player.gameObject.transform.position = new Vector3(playerStartPos.x, GameManager.Instance.player.gameObject.transform.position.y, playerStartPos.z);
 
         GameManager.Instance.player.gameObject.SetActive(true);
+
+        if (isStartingRoom)
+            Complete();
     }
 
     public void ResetEvent() => onRoomCompleted = null;

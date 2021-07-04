@@ -1123,7 +1123,7 @@ MonoBehaviour:
     def: 2
     dmg: 8
     spd: 7
-    attackRange: 15
+    attackRange: 1.5
     shootingRange: 10
     pursuitRange: 0
     attrate: 3

@@ -149,7 +149,7 @@ public class DataController : MonoBehaviour
         for (int i = 0; i < len; i++)
         {
             if (internalCounter == 2)
-            {   
+            {
                 lvl1_int.Add(int.Parse(lvl1.Substring(0, internalCounter)));
                 lvl1 = lvl1.Substring(internalCounter);
                 internalCounter = 0;
@@ -167,7 +167,7 @@ public class DataController : MonoBehaviour
         for (int i = 0; i < len; i++)
         {
             if (internalCounter == 2)
-            {   
+            {
                 lvl2_int.Add(int.Parse(lvl2.Substring(0, internalCounter)));
                 lvl2 = lvl2.Substring(internalCounter);
                 internalCounter = 0;
@@ -185,7 +185,7 @@ public class DataController : MonoBehaviour
         for (int i = 0; i < len; i++)
         {
             if (internalCounter == 2)
-            {   
+            {
                 lvl3_int.Add(int.Parse(lvl3.Substring(0, internalCounter)));
                 lvl3 = lvl3.Substring(internalCounter);
                 internalCounter = 0;
@@ -196,14 +196,14 @@ public class DataController : MonoBehaviour
         scenesFloorThree = new List<GameObject>();
         StartCoroutine(WaitToFillGroup(long.Parse(s3), groupLabelThree, 3, scenesFloorThree, lvl3_int));
         print("lvl3int: " + lvl3_int);
-        
+
         List<int> lvl4_int = new List<int>();
         internalCounter = 1;
         len = lvl4.Length;
         for (int i = 0; i < len; i++)
         {
             if (internalCounter == 2)
-            {   
+            {
                 lvl4_int.Add(int.Parse(lvl4.Substring(0, internalCounter)));
                 lvl4 = lvl4.Substring(internalCounter);
                 internalCounter = 0;
@@ -221,7 +221,7 @@ public class DataController : MonoBehaviour
         for (int i = 0; i < len; i++)
         {
             if (internalCounter == 2)
-            {   
+            {
                 lvl5_int.Add(int.Parse(lvl5.Substring(0, internalCounter)));
                 lvl5 = lvl5.Substring(internalCounter);
                 internalCounter = 0;
@@ -292,10 +292,14 @@ public class DataController : MonoBehaviour
     ///</sumary>
     public IEnumerator LoadAllAssetsByKey(long numberOf, LevelGroup currentGroup, int stageNumber)
     {
-        AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + stageNumber, asset =>
-           {     //Gets called for every loaded asset
-           });
+        AsyncOperationHandle<IList<GameObject>> loadFirsts = Addressables.LoadAssetsAsync<GameObject>("StartRoom", asset => { });
+        AsyncOperationHandle<IList<GameObject>> loadBosses = Addressables.LoadAssetsAsync<GameObject>("BossRoom", asset => { });
+        AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + stageNumber, asset => { });
+        yield return loadFirsts;
+        yield return loadBosses;
         yield return loadWithSingleKeyHandle;
+        IList<GameObject> stageFirstsResult = loadFirsts.Result;
+        IList<GameObject> stageBossesResult = loadBosses.Result;
         IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
         if (numberOf > stageAllScenesResult.Count)
             numberOf = stageAllScenesResult.Count;
@@ -307,9 +311,31 @@ public class DataController : MonoBehaviour
             else
                 currentGroup.LevelGroupScenes.Add(stageAllScenesResult[i]);
         }
-
+        GameObject firstScene, bossScene;
+        foreach (GameObject first in stageFirstsResult)
+        {
+            if (currentGroup.LevelGroupScenes.Contains(first))
+            {
+                firstScene = first;
+                currentGroup.LevelGroupScenes.Remove(first);
+                currentGroup.LevelGroupScenes.Insert(0, firstScene);
+                firstScene.GetComponent<Room>().SetisStartingRoom = true;
+                break;
+            }
+        }
+        foreach (GameObject boss in stageBossesResult)
+        {
+            if (currentGroup.LevelGroupScenes.Contains(boss))
+            {
+                bossScene = boss;
+                currentGroup.LevelGroupScenes.Remove(boss);
+                currentGroup.LevelGroupScenes.Add(bossScene);
+                bossScene.GetComponent<Room>().SetIsBossRoom = true;
+                break;
+            }
+        }
     }
-    
+
 
 
 }
