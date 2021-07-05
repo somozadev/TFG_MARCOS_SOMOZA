@@ -39,6 +39,13 @@ MonoBehaviour:
     - Stage1
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 77dc33d9d49f86c488de2ab0aeed236d
+    m_Address: level_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage5
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: dcfe8d7804a34ce45b88b2a0b08157dd
     m_Address: level_21
     m_ReadOnly: 0

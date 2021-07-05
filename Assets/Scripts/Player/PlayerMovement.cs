@@ -80,6 +80,18 @@ public class PlayerMovement : MonoBehaviour
         if (isInteracting)
             Interact();
     }
+
+    private void OnPause(InputValue value)
+    {
+        bool pause = Convert.ToBoolean(value.Get<float>());
+        Debug.Log(pause);
+        if (pause)
+        {
+            GameManager.Instance.ingamePause.Pause();
+        }
+    }
+
+
     #endregion
 
     #region INPUT_METHODS
