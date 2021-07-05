@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     [SerializeField] bool deleteGame;
+    public DeviceController deviceController;
     public StatsCanvasController statsCanvas;
     public GameObject mainCamera;
     public Player player;

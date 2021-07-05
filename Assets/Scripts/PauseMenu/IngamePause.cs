@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
@@ -8,22 +9,46 @@ public class IngamePause : MonoBehaviour
     int currentResolutionIndex = 0;
     [SerializeField] TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
+    public bool paused;
+
+    [Header("Buttons Refs")]
+    [SerializeField] Button resume;
+    [SerializeField] Button video;
+    [SerializeField] TMP_Dropdown resolution;
+
 
     private void Start()
     {
         GetResolutions();
     }
 
-    public void Pause() { animator.SetTrigger("Pause"); Time.timeScale = 0; }
-    public void UnPause() { animator.SetTrigger("UnPause"); Time.timeScale = 1; }
-    public void Video() { animator.SetTrigger("Video"); }
+    public void Pause()
+    {
+        // animator.gameObject.SetActive(true);
+        animator.SetTrigger("Pause");
+        resume.Select();
+        GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
+        GameManager.Instance.playerEventSystem.gameObject.SetActive(false);
+        paused = true;
+        Time.timeScale = 0;
+    }
+    public void UnPause()
+    {
+        animator.SetTrigger("UnPause");
+        GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
+        GameManager.Instance.playerEventSystem.gameObject.SetActive(true);
+        paused = false;
+        // animator.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+    public void Video() { animator.SetTrigger("Video"); resolution.Select(); }
 
 
     public void Continue() => UnPause();
 
-    public void Settings() => animator.SetTrigger("Config");
-    public void BackToConfig() => animator.SetTrigger("BackToConfig");
-    public void BackToPause() => animator.SetTrigger("BackToPause");
+    public void Settings() {animator.SetTrigger("Config"); video.Select();}
+    public void BackToConfig() { animator.SetTrigger("BackToConfig"); video.Select(); }
+    public void BackToPause() { animator.SetTrigger("BackToPause"); resume.Select(); }
 
     public void Quit() => GameManager.Instance.ExitGame();
 

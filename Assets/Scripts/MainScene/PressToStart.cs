@@ -11,25 +11,15 @@ public class PressToStart : MonoBehaviour
 
     [SerializeField] TMP_Text text;
     [SerializeField] DevicesDictionaryCompound currentDevices;
-
+    private DeviceController dc;
     private void Start()
     {
-        InitCurrentDevices();
-    }
-
-
-    private void InitCurrentDevices()
-    {
-        if (Gamepad.current != null)
-            currentDevices = new DevicesDictionaryCompound(Keyboard.current.name, Keyboard.current.enabled, Mouse.current.name, Mouse.current.enabled, Gamepad.current.name, Gamepad.current.enabled);
-        else
-            currentDevices = new DevicesDictionaryCompound(Keyboard.current.name, Keyboard.current.enabled, Mouse.current.name, Mouse.current.enabled, "disconnected Gamepad", false);
-
-
+        dc = GameManager.Instance.deviceController;
+        currentDevices = dc.currentDevices;
     }
     private void UpdateCurrentDevices()
     {
-        InitCurrentDevices();
+        dc.InitCurrentDevices();
     }
 
     private void Update()
