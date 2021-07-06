@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8058315593908252918}
-  - component: {fileID: 8058315593908252919}
+  - component: {fileID: 767299016}
   m_Layer: 0
   m_Name: Menu_Controller
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8058315593908252919
+--- !u!114 &767299016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8058315593908252917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590df561f6e9ea14a842ecf473f0fa24, type: 3}
+  m_Script: {fileID: 11500000, guid: 06bbfb9efd6ef9e4b9c2906e0f16d93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   continueB: {fileID: 0}

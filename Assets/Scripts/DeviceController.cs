@@ -1,10 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+
 public class DeviceController : MonoBehaviour
 {
     public DevicesDictionaryCompound currentDevices;
+    public event Action gamepadEvent;
+    public event Action keyboardEvent;
 
     private void Start()
     {
@@ -24,27 +27,62 @@ public class DeviceController : MonoBehaviour
 
     void Update()
     {
-        if (Gamepad.current != null && Gamepad.current.enabled)
+        if (Gamepad.current != null && !currentDevices.devices[2].enabled)
+        {
             SwitchToGamepad();
+            InitCurrentDevices();
+            Debug.Log("<><><><><><><><><><><><<><>><><>");
+        }
 
-        else
+        else if (Gamepad.current == null && !currentDevices.devices[0].enabled)
+        {
             SwitchToKeyboard();
-        InitCurrentDevices();
+            InitCurrentDevices();
+            Debug.Log("[][][[][][][]][][][][][][][][]]");
+        }
     }
 
 
 
     private void SwitchToGamepad()
     {
+        int count = SceneManager.sceneCount;
+        bool canEvent = false;
+        Debug.Log("count: " + count);
+        for (int i = 0; i < count; i++)
+        {
+            string name = SceneManager.GetSceneAt(i).name;
+            Debug.Log(name);
+            if (name == "CurrentLevelScene")
+                canEvent = true;
+        }
+        if (gamepadEvent != null && canEvent)
+            gamepadEvent();
         InputSystem.EnableDevice(Gamepad.current);
-        InputSystem.DisableDevice(Keyboard.current);
-        InputSystem.DisableDevice(Mouse.current);
+        if (Keyboard.current != null)
+            InputSystem.DisableDevice(Keyboard.current);
+        if (Mouse.current != null)
+            InputSystem.DisableDevice(Mouse.current);
+
     }
     private void SwitchToKeyboard()
     {
+        int count = SceneManager.sceneCount;
+        bool canEvent = false;
+        Debug.Log("count: " + count);
+        for (int i = 0; i < count; i++)
+        {
+            string name = SceneManager.GetSceneAt(i).name;
+            Debug.Log(name);
+            if (name == "CurrentLevelScene")
+                canEvent = true;
+        }
+        if (keyboardEvent != null && canEvent)
+            keyboardEvent();
         InputSystem.EnableDevice(Keyboard.current);
         InputSystem.EnableDevice(Mouse.current);
         if (Gamepad.current != null)
             InputSystem.DisableDevice(Gamepad.current);
+
     }
 }

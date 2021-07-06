@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public StageController stageController;
     public XpController xpController;
     public IngamePause ingamePause;
+    public DeviceChange deviceChanged;
 
     private void Start()
     {

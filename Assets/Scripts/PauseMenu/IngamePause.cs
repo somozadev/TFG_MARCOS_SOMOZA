@@ -24,7 +24,8 @@ public class IngamePause : MonoBehaviour
 
     public void Pause()
     {
-        // animator.gameObject.SetActive(true);
+        if (paused)
+            return;
         animator.SetTrigger("Pause");
         resume.Select();
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
@@ -34,11 +35,12 @@ public class IngamePause : MonoBehaviour
     }
     public void UnPause()
     {
+        if (!paused)
+            return;
         animator.SetTrigger("UnPause");
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
         GameManager.Instance.playerEventSystem.gameObject.SetActive(true);
         paused = false;
-        // animator.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
     public void Video() { animator.SetTrigger("Video"); resolution.Select(); }
@@ -46,7 +48,7 @@ public class IngamePause : MonoBehaviour
 
     public void Continue() => UnPause();
 
-    public void Settings() {animator.SetTrigger("Config"); video.Select();}
+    public void Settings() { animator.SetTrigger("Config"); video.Select(); }
     public void BackToConfig() { animator.SetTrigger("BackToConfig"); video.Select(); }
     public void BackToPause() { animator.SetTrigger("BackToPause"); resume.Select(); }
 
