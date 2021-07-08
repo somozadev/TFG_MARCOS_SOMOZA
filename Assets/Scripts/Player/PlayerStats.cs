@@ -81,6 +81,9 @@ public class PlayerStats : IDamageable
 
     public void RecieveDamage(float cuantity)
     {
+        if(GameManager.Instance.player.animator.GetBool("Invincible"))
+            return;
+        GameManager.Instance.player.animator.SetBool("Invincible",true);
         GameManager.Instance.player.particles.GetHitParticle();
         GameManager.Instance.mainCamera.GetComponent<CameraShake>().StartShake(GameManager.Instance.mainCamera.GetComponent<CameraShake>().properties);
         this.currentHp -= (int)cuantity;

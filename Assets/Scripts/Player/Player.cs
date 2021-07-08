@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public PlayerParticles particles;
     [Header("UI stats canvas")]
     public StatsCanvasController statsCanvasController;
+    [Header("Player animator")]
+    public Animator animator;
 
     private void Start()
     {

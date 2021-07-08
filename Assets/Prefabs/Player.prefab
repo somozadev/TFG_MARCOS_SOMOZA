@@ -4919,6 +4919,8 @@ GameObject:
   - component: {fileID: 5511366636991874748}
   - component: {fileID: 5511366636991874751}
   - component: {fileID: 5511366636991874750}
+  - component: {fileID: 194264892842691413}
+  - component: {fileID: 664441214894253085}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -4972,12 +4974,14 @@ MonoBehaviour:
     attrate: 0
     range: 0
     soulCoins: 600
+    invincible: 0
     inventory: []
   playerInteractor: {fileID: 5511366637439774767}
   playerMovement: {fileID: 5511366636991874748}
   currentItemsVisual: {fileID: 1015565604172474447}
   particles: {fileID: 992693645665958868}
   statsCanvasController: {fileID: 5511366638572875092}
+  animator: {fileID: 0}
 --- !u!114 &992693645665958868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5095,6 +5099,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!95 &194264892842691413
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5511366636991874746}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 637e3dabd82976145b6a7d36394b2f66, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &664441214894253085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5511366636991874746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64139716f0204f64391cc9ebc28f4eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5511366637439774764
 GameObject:
   m_ObjectHideFlags: 0
