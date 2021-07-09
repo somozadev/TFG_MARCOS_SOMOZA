@@ -19,15 +19,25 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
-    [SerializeField] bool deleteGame;
+    [Space(10)]
+    [Header("Controllers & Managers")]
+    [Space(2)]
+
+    public DataController dataController;
+    public SoundManager soundManager;
     public DeviceController deviceController;
+    public SceneController sceneController;  
+    public IngamePause ingameCanvasController;
+    [Space(10)]
+    [Header("Extras")]
+    [Space(10)]
     public StatsCanvasController statsCanvas;
+    public StageController stageController;
     public GameObject mainCamera;
     public Player player;
+    [SerializeField] bool deleteGame;
     public EventSystem defaultEventSystem,playerEventSystem;
-    public StageController stageController;
     public XpController xpController;
-    public IngamePause ingamePause;
     public DeviceChange deviceChanged;
 
     private void Start()

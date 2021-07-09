@@ -87,10 +87,10 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(pause);
         if (pause)
         {
-            if (!GameManager.Instance.ingamePause.paused)
-                GameManager.Instance.ingamePause.Pause();
+            if (!GameManager.Instance.ingameCanvasController.paused)
+                GameManager.Instance.ingameCanvasController.Pause();
             else
-                GameManager.Instance.ingamePause.UnPause();
+                GameManager.Instance.ingameCanvasController.UnPause();
         }
     }
 

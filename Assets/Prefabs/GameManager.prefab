@@ -1775,7 +1775,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5131711328369970544}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1017368298537123786
 MonoBehaviour:
@@ -3346,7 +3346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5131711328369970544}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4606357913082986377
 MonoBehaviour:
@@ -3717,11 +3717,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6189197423870849472}
   - {fileID: 2846664911182181148}
+  - {fileID: 6581843459096192330}
+  - {fileID: 6189197423870849472}
   - {fileID: 7206106606903211845}
-  - {fileID: 692823883147093270}
   - {fileID: 1570992384186796272}
+  - {fileID: 692823883147093270}
   - {fileID: 478600892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -3738,16 +3739,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ce924f136b7b942910334b5a52bb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deleteGame: 1
+  dataController: {fileID: 8107703249891167486}
+  soundManager: {fileID: 5131711328995659221}
   deviceController: {fileID: 959721067270825930}
+  sceneController: {fileID: 1017368298537123786}
+  ingameCanvasController: {fileID: 2207285407530432239}
   statsCanvas: {fileID: 0}
+  stageController: {fileID: 0}
   mainCamera: {fileID: 0}
   player: {fileID: 0}
+  deleteGame: 1
   defaultEventSystem: {fileID: 0}
   playerEventSystem: {fileID: 0}
-  stageController: {fileID: 0}
   xpController: {fileID: 4606357913082986377}
-  ingamePause: {fileID: 2207285407530432239}
   deviceChanged: {fileID: 478600891}
 --- !u!1 &5171049399556848444
 GameObject:
@@ -4942,7 +4946,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5131711328369970544}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8107703249891167486
 MonoBehaviour:
@@ -5114,6 +5118,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &6858040033316607058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6581843459096192330}
+  - component: {fileID: 5131711328995659221}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6581843459096192330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858040033316607058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5131711328369970544}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5131711328995659221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858040033316607058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af7fc4163fa0b8408b4b9839474ab67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7107982864097035292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5180,7 +5227,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5131711328369970544}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &959721067270825930
 MonoBehaviour:
@@ -7039,7 +7086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9065728916805310257, guid: c7f4de50ed0361c4481cb25e472790c8, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9065728916805310257, guid: c7f4de50ed0361c4481cb25e472790c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
