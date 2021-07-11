@@ -9,8 +9,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] Sound currentTheme;
     [Space(20)]
-    	
+
     [SerializeField] Sound[] sounds;
+
+
+    public AudioMixer GetAudioMixer { get { return audioMixer; } }
 
     private void Awake()
     {
@@ -34,26 +37,9 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void AtenuateOnMenu() => audioMixer.FindSnapshot("OnMenu").TransitionTo(.01f);
 
-
-    public void DesAtenuateOnMenu() => audioMixer.FindSnapshot("OffMenu").TransitionTo(.01f);
-
-
-    public void MuteFx(bool mute)
-    {
-        if (mute)
-            audioMixer.SetFloat("fxVolume", -80);
-        else
-            audioMixer.SetFloat("fxVolume", -10);
-    }
-    public void MuteMusic(bool mute)
-    {
-        if (mute)
-            audioMixer.SetFloat("musicVolume", -80);
-        else
-            audioMixer.SetFloat("musicVolume", -10);
-    }
+    
+    
     public void LowerCurrentTheme()
     {
         currentTheme.sound.volume -= 0.04f;
@@ -84,6 +70,13 @@ public class SoundManager : MonoBehaviour
     {
         currentTheme = Array.Find(sounds, sound => sound.name == theme);
     }
+
+
+
+
+
+
+
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
