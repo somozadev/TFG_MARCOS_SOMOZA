@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
@@ -7,9 +7,21 @@ using System;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
+    [Header("Audio sprites")]
+    [Space(20)]
+    public Sprite audioOff;
+    public Sprite audioOn;
+    [Header("Volume info")]
+    [Space(20)]
+    public float masterVol;
+    public float musicVol;
+    public float fxVol;
+    public float uiVol;
+    public bool masterVolMute, musicVolMute, fxVolMute, uiVolMute;
     [SerializeField] Sound currentTheme;
     [Space(20)]
-
+    [Header("Sounds")]
+    [Space(20)]
     [SerializeField] Sound[] sounds;
 
 
@@ -38,8 +50,36 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    
-    
+
+    public void MuteGeneral() { masterVol = 20; audioMixer.SetFloat("MasterVolume", -80f); }
+    public void UnMuteGeneral() { audioMixer.SetFloat("MasterVolume", masterVol); masterVol = 20; }
+    public void MuteMusic() { musicVol = -12; audioMixer.SetFloat("MUSICVolume", -80f); }
+    public void UnMuteMusic() { audioMixer.SetFloat("MUSICVolume", musicVol); musicVol = -12; }
+    public void MuteFx() { fxVol = -6; audioMixer.SetFloat("FXVolume", -80f); }
+    public void UnMuteFx() { audioMixer.SetFloat("FXVolume", fxVol); fxVol = -6; }
+    public void MuteUi() { uiVol = -20; audioMixer.SetFloat("UIVolume", -80f); }
+    public void UnMuteUi() { audioMixer.SetFloat("UIVolume", uiVol); uiVol = -20; }
+
+    public void SetGeneralMute(bool value) { if (!value) MuteGeneral(); else UnMuteGeneral(); masterVolMute = !value; }
+    public void SetMusicMute(bool value) { if (!value) MuteMusic(); else UnMuteMusic(); musicVolMute = !value; }
+    public void SetFxMute(bool value) { if (!value) MuteFx(); else UnMuteFx(); fxVolMute = !value; }
+    public void SetUIMute(bool value) { if (!value) MuteUi(); else UnMuteUi(); uiVolMute = !value; }
+    public void SetMuteSprite(Image sprite) { if (sprite.sprite.Equals(audioOn)) sprite.sprite = audioOff; else sprite.sprite = audioOn; }
+
+    public void SetGeneralVolume(float value) { if (masterVolMute) return; audioMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 10 + 20); }
+    public void SetMusicVolume(float value) { if (musicVolMute) return; audioMixer.SetFloat("MUSICVolume", Mathf.Log10(value) * 10 - 24); }
+    public void SetFxVolume(float value) { if (fxVolMute) return; audioMixer.SetFloat("FXVolume", Mathf.Log10(value) * 10 - 12); }
+    public void SetUiVolume(float value) { if (uiVolMute) return; audioMixer.SetFloat("UIVolume", Mathf.Log10(value) * 10 - 20); }
+    public float GetMasterVolume() { float ret; audioMixer.GetFloat("MasterVolume", out ret); return Mathf.Log10(ret) * 10; }
+    public float GetMusicVolume() { float ret; audioMixer.GetFloat("MUSICVolume", out ret); return Mathf.Log10(ret) * 10; }
+    public float GetFxVolume() { float ret; audioMixer.GetFloat("FXVolume", out ret); return Mathf.Log10(ret) * 10; }
+    public float GetUiVolume() { float ret; audioMixer.GetFloat("UIVolume", out ret); return Mathf.Log10(ret) * 10; }
+
+
+
+
+
+
     public void LowerCurrentTheme()
     {
         currentTheme.sound.volume -= 0.04f;
@@ -88,15 +128,12 @@ public class SoundManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.sound.source.Pause();
     }
-
     public bool isPlaying(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         bool result = s.sound.source.isPlaying;
         return result;
     }
-
-
     public void PauseAllOthers(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

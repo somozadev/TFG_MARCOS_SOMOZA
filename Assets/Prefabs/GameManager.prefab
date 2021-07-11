@@ -3640,7 +3640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3323926054700699099
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3986,8 +3986,7 @@ MonoBehaviour:
   musicSlider: {fileID: 2191079437638935733}
   fxSlider: {fileID: 4252640233782247040}
   uiSlider: {fileID: 5645122618454718465}
-  audioOff: {fileID: 21300000, guid: 46b1f888a31d192498f54a2d59bb2a16, type: 3}
-  audioOn: {fileID: 21300000, guid: 1d1d72be104d8eb4c899eabc9d26789f, type: 3}
+  isOnPauseScreen: 0
 --- !u!1 &2993634359294439224
 GameObject:
   m_ObjectHideFlags: 0
@@ -8381,6 +8380,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 6bf6882e23aaa0b43afbcedb3a9d79b7, type: 2}
+  audioOff: {fileID: 21300000, guid: 1d1d72be104d8eb4c899eabc9d26789f, type: 3}
+  audioOn: {fileID: 21300000, guid: 46b1f888a31d192498f54a2d59bb2a16, type: 3}
+  masterVol: 0
+  musicVol: 0
+  fxVol: 0
+  uiVol: 0
+  masterVolMute: 0
+  musicVolMute: 0
+  fxVolMute: 0
+  uiVolMute: 0
   currentTheme:
     name: 
     sound:
