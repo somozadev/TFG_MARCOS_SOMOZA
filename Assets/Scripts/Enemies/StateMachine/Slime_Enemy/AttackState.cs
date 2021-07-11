@@ -37,6 +37,7 @@ namespace StateMachine.Slime_Enemy
                     stateMachine.SetAttack1Anim(false);
                     stateMachine.enemy.stats.AttackRange = 4f;
                 }
+                GameManager.Instance.soundManager.Play("SlimeAttack");
                 stateMachine.enemy.conditions.isAttacking = true;
             }
 

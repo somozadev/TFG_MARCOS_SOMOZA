@@ -5,6 +5,10 @@ public class BatCallShootEvent : MonoBehaviour
     protected float radius = 0.1f;
     private void Shoot()
     {
+        if (Random.Range(0, 2).Equals(0))
+            GameManager.Instance.soundManager.Play("BatShoot1");
+        else
+            GameManager.Instance.soundManager.Play("BatShoot2");
         // transform.LookAt(GameManager.Instance.player.transform.position);
         BatStateMachine stateMachine = GetComponent<BatStateMachine>();
         // stateMachine.navAgent.updateRotation = true;

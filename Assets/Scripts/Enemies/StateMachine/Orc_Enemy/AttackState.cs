@@ -23,7 +23,9 @@ namespace StateMachine.Orc_Enemy
             stateMachine.SetPursuitAnim(false);
             if (!stateMachine.enemy.conditions.isAttacking)
             {
+
                 stateMachine.transform.LookAt(GameManager.Instance.player.transform.position);
+                GameManager.Instance.soundManager.Play("OrcAttack");
                 stateMachine.SetTriggerAttackAnim();
                 stateMachine.enemy.conditions.isAttacking = true;
             }

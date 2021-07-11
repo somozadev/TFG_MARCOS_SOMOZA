@@ -37,6 +37,8 @@ public class SceneController : MonoBehaviour
 
     public void LoadNextFloor()
     {
+        GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
+        GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
         stageController.LoadNextScene();
         Debug.Log("Next Room");
     }

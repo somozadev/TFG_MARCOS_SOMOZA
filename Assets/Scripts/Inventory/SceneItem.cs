@@ -101,6 +101,7 @@ public class SceneItem : MonoBehaviour
             case ItemType.SOULCOIN:
                 AddSoulCoin();
                 GameManager.Instance.statsCanvas.AssignCoins();
+                GameManager.Instance.soundManager.Play("CoinItem");
                 break;
             case ItemType.KEY:
                 CheckIfExistsOnInventory();
@@ -109,13 +110,16 @@ public class SceneItem : MonoBehaviour
             case ItemType.HEALTH:
                 CheckIfNeedsHeal();
                 GameManager.Instance.statsCanvas.AssignHp();
+                GameManager.Instance.soundManager.Play("HealthItem");
                 break;
             case ItemType.DMG:
                 GameManager.Instance.player.playerStats.AddDmg(item.Cuantity);
+                GameManager.Instance.soundManager.Play("HealthItem");
                 break;
             case ItemType.XP:
                 AddXp();
                 GameManager.Instance.statsCanvas.AssignXp();
+                GameManager.Instance.soundManager.Play("Xp");
                 break;
             case ItemType.ITEM:
                 AddItemToInventory(item);

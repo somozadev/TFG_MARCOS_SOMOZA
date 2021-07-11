@@ -32,6 +32,12 @@ public class Bullet : MonoBehaviour
         // Debug.Log(other.gameObject.name);
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
             StartCoroutine(WaitToDestroy(.2f));
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<Enemy>().RecieveDamage(GameManager.Instance.player.playerStats.Dmg);
+            Destroy(gameObject);
+        }
+
 
     }
     private void OnTriggerEnter(Collider other)

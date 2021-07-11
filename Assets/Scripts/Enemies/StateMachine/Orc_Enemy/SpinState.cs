@@ -10,9 +10,9 @@ namespace StateMachine.Orc_Enemy
         public IState DoState(OrcStateMachine stateMachine)
         {
             DoSpin(stateMachine);
-            if(stateMachine.enemy.conditions.isChasing || stateMachine.enemy.conditions.isPursuitRange)
+            if (stateMachine.enemy.conditions.isChasing || stateMachine.enemy.conditions.isPursuitRange)
                 return stateMachine.pursuitState;
-            else if(stateMachine.enemy.conditions.isPatrol)
+            else if (stateMachine.enemy.conditions.isPatrol)
                 return stateMachine.patrolState;
             return stateMachine.waitState;
         }
@@ -20,12 +20,13 @@ namespace StateMachine.Orc_Enemy
         private void DoSpin(OrcStateMachine stateMachine)
         {
             stateMachine.spinCollider.SetActive(true);
-            stateMachine.enemy.conditions.canSpinAttack = false; 
+            stateMachine.enemy.conditions.canSpinAttack = false;
             stateMachine.navAgent.speed = 20f;
             stateMachine.navAgent.acceleration = 15f;
             stateMachine.enemy.conditions.isPatrol = false;
             stateMachine.enemy.conditions.isChasing = false;
             stateMachine.navAgent.SetDestination(GameManager.Instance.player.transform.position);
+            GameManager.Instance.soundManager.Play("OrcSpin");
             stateMachine.SetTriggerSpinAnim();
 
         }

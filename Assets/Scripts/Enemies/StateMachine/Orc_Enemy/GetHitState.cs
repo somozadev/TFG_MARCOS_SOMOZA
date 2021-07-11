@@ -22,6 +22,8 @@ namespace StateMachine.Orc_Enemy
 
         private void DoGetHit(StateMachine stateMachine)
         {
+            if (!GameManager.Instance.soundManager.isPlaying("OrcGetHit"))
+                GameManager.Instance.soundManager.Play("OrcGetHit");
             stateMachine.navAgent.isStopped = true;
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.SetTriggerGetHitAnim();

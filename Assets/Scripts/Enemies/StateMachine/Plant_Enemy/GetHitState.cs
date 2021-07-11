@@ -18,6 +18,8 @@ namespace StateMachine.Plant_Enemy
         private void DoGetHit(PlantStateMachine stateMachine)
         {
             
+            if (!GameManager.Instance.soundManager.isPlaying("PlantGetHit"))
+                GameManager.Instance.soundManager.Play("PlantGetHit");
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.SetTriggerGetHitAnim();
             stateMachine.enemy.SetNewDamageIndicator();

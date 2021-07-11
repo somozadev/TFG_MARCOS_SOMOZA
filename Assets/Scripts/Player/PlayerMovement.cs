@@ -132,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 randomPos = new Vector3(shootingPoint.position.x + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.y + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.z);
             GameObject bullet = GameObject.Instantiate(bulletPrefab, randomPos, Quaternion.identity);
+            GameManager.Instance.soundManager.Play("PlayerShoot");
+            GameManager.Instance.soundManager.Play("BulletWind");
             bullet.GetComponent<Bullet>().rb.AddForce(transform.forward * attSpeed, ForceMode.Impulse);
         }
         yield return new WaitForSeconds(waitTime);

@@ -22,12 +22,14 @@ namespace StateMachine.Slime_Enemy
 
         private void DoGetHit(StateMachine stateMachine)
         {
+            if (!GameManager.Instance.soundManager.isPlaying("SlimeGetHit"))
+                GameManager.Instance.soundManager.Play("SlimeGetHit");
             stateMachine.navAgent.isStopped = true;
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.SetTriggerGetHitAnim();
             stateMachine.enemy.SetNewDamageIndicator();
             stateMachine.enemy.ParticleDamaged();
-        
+
             stateMachine.enemy.stats.CurrentHp -= stateMachine.enemy.cuantity;
 
             stateMachine.enemy.conditions.isWait = true;

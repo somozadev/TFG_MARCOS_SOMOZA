@@ -117,6 +117,8 @@ public class GameDataController : MonoBehaviour
     {
         if (loaded)
         {
+            GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.MenuScene;
+            GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
             DataController.Instance.currentGameData = loadedGame;
             SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);
         }
@@ -127,7 +129,7 @@ public class GameDataController : MonoBehaviour
 [System.Serializable]
 public class GameData
 {
-    public string seed; 
+    public string seed;
     public PlayerStats playerStats;
     public float gameCompletePercentaje;
     public List<bool> itemsUnlocked;
@@ -135,7 +137,7 @@ public class GameData
     public GameData() { seed = "null"; }
     public GameData(string seed, PlayerStats playerStats, float gameCompletePercentaje, List<bool> itemsUnlocked)
     {
-        this.seed = seed; 
+        this.seed = seed;
         this.playerStats = playerStats;
         this.gameCompletePercentaje = gameCompletePercentaje;
         this.itemsUnlocked = itemsUnlocked;

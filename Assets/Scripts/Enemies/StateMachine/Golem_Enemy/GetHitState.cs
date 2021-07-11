@@ -8,7 +8,7 @@ namespace StateMachine.Golem_Enemy
         public IState DoState(GolemStateMachine stateMachine)
         {
             DoGetHit(stateMachine);
-             if (stateMachine.enemy.conditions.isAttackRange)
+            if (stateMachine.enemy.conditions.isAttackRange)
                 return stateMachine.attackState;
             else if (stateMachine.enemy.conditions.isDead)
                 return stateMachine.deathState;
@@ -17,6 +17,8 @@ namespace StateMachine.Golem_Enemy
         }
         private void DoGetHit(GolemStateMachine stateMachine)
         {
+            if (!GameManager.Instance.soundManager.isPlaying("GolemGetHit"))
+                GameManager.Instance.soundManager.Play("GolemGetHit");
             stateMachine.navAgent.isStopped = true;
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.SetTriggerGetHitAnim();

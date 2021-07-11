@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public DeviceController deviceController;
     public SceneController sceneController;  
     public IngamePause ingameCanvasController;
+    public SceneThemeMusicSelector sceneThemeMusicSelector;
+    
     [Space(10)]
     [Header("Extras")]
     [Space(10)]

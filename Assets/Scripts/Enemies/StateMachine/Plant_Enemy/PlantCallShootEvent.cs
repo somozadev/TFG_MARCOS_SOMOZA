@@ -16,6 +16,7 @@ public class PlantCallShootEvent : BatCallShootEvent
 
     private IEnumerator WaitToLaunchMore(PlantStateMachine stateMachine, Vector3 randomPos)
     {
+        GameManager.Instance.soundManager.Play("PlantShoot");
         GameObject bullet = GameObject.Instantiate(stateMachine.bulletPrefab, randomPos, Quaternion.identity);
         bullet.GetComponent<PlantBullet>().Launch();
         yield return new WaitForSeconds(0.2f);

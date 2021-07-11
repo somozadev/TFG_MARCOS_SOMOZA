@@ -7,6 +7,9 @@ using System;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
+    [SerializeField] Sound currentTheme;
+    [Space(20)]
+    	
     [SerializeField] Sound[] sounds;
 
     private void Awake()
@@ -17,15 +20,17 @@ public class SoundManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            if (s.mixerGroup.Equals(AudioMixerGroup.FX))
-                s.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Fx")[0];
-            else if (s.mixerGroup.Equals(AudioMixerGroup.MUSIC))
-                s.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Music")[0];
+            s.sound.source = gameObject.AddComponent<AudioSource>();
+            s.sound.source.clip = s.sound.clip;
+            s.sound.source.volume = s.sound.volume;
+            s.sound.source.pitch = s.sound.pitch;
+            s.sound.source.loop = s.sound.loop;
+            if (s.sound.mixerGroup.Equals(AudioMixerGroup.FX))
+                s.sound.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("FX")[0];
+            else if (s.sound.mixerGroup.Equals(AudioMixerGroup.MUSIC))
+                s.sound.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("MUSIC")[0];
+            else if (s.sound.mixerGroup.Equals(AudioMixerGroup.UI))
+                s.sound.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("UI")[0];
         }
     }
 
@@ -49,32 +54,87 @@ public class SoundManager : MonoBehaviour
         else
             audioMixer.SetFloat("musicVolume", -10);
     }
-
+    public void LowerCurrentTheme()
+    {
+        currentTheme.sound.volume -= 0.04f;
+        currentTheme.sound.pitch -= 0.1f;
+        foreach (AudioSource aus in GetComponents<AudioSource>())
+        {
+            if (aus.clip.name == currentTheme.sound.clip.name)
+            {
+                aus.volume = currentTheme.sound.volume;
+                aus.pitch = currentTheme.sound.pitch;
+            }
+        }
+    }
+    public void RestoreCurrentTheme()
+    {
+        currentTheme.sound.volume += 0.04f;
+        currentTheme.sound.pitch += 0.1f;
+        foreach (AudioSource aus in GetComponents<AudioSource>())
+        {
+            if (aus.clip.name == currentTheme.sound.clip.name)
+            {
+                aus.volume = currentTheme.sound.volume;
+                aus.pitch = currentTheme.sound.pitch;
+            }
+        }
+    }
+    public void SetCurrentTheme(string theme)
+    {
+        currentTheme = Array.Find(sounds, sound => sound.name == theme);
+    }
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.Play();
+        Debug.Log("Playing: " + s.name);
+        s.sound.source.Play();
     }
     public void Pause(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.Pause();
+        s.sound.source.Pause();
     }
 
     public bool isPlaying(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        bool result = s.source.isPlaying;
+        bool result = s.sound.source.isPlaying;
         return result;
     }
-}
 
+
+    public void PauseAllOthers(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        foreach (Sound sound in sounds)
+        {
+            if (sound.sound.mixerGroup == AudioMixerGroup.MUSIC)
+            {
+                if (sound != s)
+                {
+                    if (isPlaying(sound.name))
+                        Pause(sound.name);
+                }
+            }
+        }
+    }
+
+
+
+}
 
 [System.Serializable]
 public class Sound
 {
-    public AudioMixerGroup mixerGroup;
     public string name;
+    public SoundConfig sound;
+}
+
+[System.Serializable]
+public class SoundConfig
+{
+    public AudioMixerGroup mixerGroup;
     public bool loop;
     public AudioClip clip;
     [Range(0f, 1f)]

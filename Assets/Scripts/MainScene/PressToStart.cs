@@ -66,6 +66,9 @@ public class PressToStart : MonoBehaviour
         {
             if (Gamepad.current.aButton.isPressed)
             {
+                GameManager.Instance.soundManager.Play("AcceptNewDevice");
+                GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.SaveFileScene;
+                GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
                 Debug.LogWarning("A BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
                 SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
@@ -75,6 +78,9 @@ public class PressToStart : MonoBehaviour
         {
             if (Keyboard.current.spaceKey.isPressed)
             {
+                GameManager.Instance.soundManager.Play("AcceptNewDevice");
+                GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.SaveFileScene;
+                GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
                 Debug.LogWarning("SPACE BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
                 SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);

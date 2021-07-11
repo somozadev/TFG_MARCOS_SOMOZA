@@ -26,6 +26,9 @@ public class IngamePause : MonoBehaviour
     {
         if (paused)
             return;
+        
+        GameManager.Instance.soundManager.Play("OpenPause");
+        GameManager.Instance.soundManager.LowerCurrentTheme();
         animator.SetTrigger("Pause");
         resume.Select();
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
@@ -37,6 +40,8 @@ public class IngamePause : MonoBehaviour
     {
         if (!paused)
             return;
+        GameManager.Instance.soundManager.Play("OpenPause");
+        GameManager.Instance.soundManager.RestoreCurrentTheme();
         animator.SetTrigger("UnPause");
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
         GameManager.Instance.playerEventSystem.gameObject.SetActive(true);

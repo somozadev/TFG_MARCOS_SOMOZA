@@ -13,6 +13,7 @@ public class MegaAttackCallEvent : MonoBehaviour
     }
     public void PerfMegaAttack()
     {
+        GameManager.Instance.soundManager.Play("GolemAttack2");
         GolemStateMachine stateMachine = GetComponent<GolemStateMachine>();
         stateMachine.megaAttackPreVisual.SetActive(false);
         stateMachine.megaAttackCollider.enabled = true;
@@ -20,6 +21,7 @@ public class MegaAttackCallEvent : MonoBehaviour
     }
     public void PerfStartMegaAttack()
     {
+        GameManager.Instance.soundManager.Play("GolemAttack1");
         GolemStateMachine stateMachine = GetComponent<GolemStateMachine>();
         stateMachine.megaAttackPreVisual.SetActive(true);
 

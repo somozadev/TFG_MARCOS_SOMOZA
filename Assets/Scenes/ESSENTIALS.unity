@@ -1938,6 +1938,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553744516}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &599370275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6858040033316607058, guid: f75606856882ba84b820d53f640a4648, type: 3}
+  m_PrefabInstance: {fileID: 5131711328995659216}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &599370278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599370275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4e5c8457bb4464a9cab7581b5aa80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: 0
 --- !u!1001 &606550086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7465,6 +7483,10 @@ PrefabInstance:
       propertyPath: playerEventSystem
       value: 
       objectReference: {fileID: 1282275977}
+    - target: {fileID: 5131711328369970511, guid: f75606856882ba84b820d53f640a4648, type: 3}
+      propertyPath: sceneThemeMusicSelector
+      value: 
+      objectReference: {fileID: 599370278}
     - target: {fileID: 5131711328369970544, guid: f75606856882ba84b820d53f640a4648, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

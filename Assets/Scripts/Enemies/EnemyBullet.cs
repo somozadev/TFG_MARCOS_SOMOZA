@@ -20,6 +20,7 @@ public class EnemyBullet : MonoBehaviour
     }
     public virtual void Start()
     {
+        GameManager.Instance.soundManager.Play("BulletWind");
         StartCoroutine(WaitToDestroy(waitDestroyTime));
     }
 

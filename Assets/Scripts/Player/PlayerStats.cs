@@ -61,7 +61,12 @@ public class PlayerStats : IDamageable
     #endregion
 
     #region METODOS
-    public void LevelUp() { level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level, 2f); GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; GameManager.Instance.player.particles.GetLvlUpParticle(); }
+    public void LevelUp()
+    {
+        level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level, 2f);
+        GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; GameManager.Instance.player.particles.GetLvlUpParticle();
+        GameManager.Instance.soundManager.Play("LvlUp");
+    }
     public void AddItem(Item item) => inventory.Add(item);
 
     public void AddHp(int currentHp)
@@ -81,9 +86,10 @@ public class PlayerStats : IDamageable
 
     public void RecieveDamage(float cuantity)
     {
-        if(GameManager.Instance.player.animator.GetBool("Invincible"))
+        if (GameManager.Instance.player.animator.GetBool("Invincible"))
             return;
-        GameManager.Instance.player.animator.SetBool("Invincible",true);
+        GameManager.Instance.soundManager.Play("PlayerGetHit");
+        GameManager.Instance.player.animator.SetBool("Invincible", true);
         GameManager.Instance.player.particles.GetHitParticle();
         GameManager.Instance.mainCamera.GetComponent<CameraShake>().StartShake(GameManager.Instance.mainCamera.GetComponent<CameraShake>().properties);
         this.currentHp -= (int)cuantity;

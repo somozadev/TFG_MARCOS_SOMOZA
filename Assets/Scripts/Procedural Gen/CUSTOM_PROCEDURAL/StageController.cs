@@ -31,7 +31,7 @@ public class StageController : MonoBehaviour
     [SerializeField] int actualStage = 1;
     [SerializeField] int actualRoom = 1;
     [HideInInspector] [SerializeField] int numberOfRooms;
-    
+
     [Header("Seed stages numbers")]
     [Space]
     [SerializeField] int[] stages = new int[5];
@@ -44,8 +44,12 @@ public class StageController : MonoBehaviour
 
     List<GameObject> instances = new List<GameObject>();
 
+    public int GetActualStage { get { return actualStage; } }
+    public int GetActualRoom { get { return actualRoom; } }
+
     private void Start()
     {
+
         SceneController.Instance.stageController = this;
         if (DataController.Instance.newRun)
         {
@@ -61,6 +65,8 @@ public class StageController : MonoBehaviour
         GameManager.Instance.mainCamera.transform.parent.gameObject.SetActive(true);
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
 
+        GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
+        GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
     }
 
     public void LoadRun(string loadedSeed) { DataController.Instance.DeserializeSeed(loadedSeed); }
@@ -86,7 +92,7 @@ public class StageController : MonoBehaviour
         Instantiate(sceneGroups[actualStage - 1].LevelGroupScenes[actualRoom - 1], transform);
         actualRoom++;
     }
-    
+
 
 
     private int SetRandomNumberOfRooms(int stage)

@@ -18,12 +18,14 @@ namespace StateMachine.Dragon_Enemy
 
         private void DoGetHit(DragonStateMachine stateMachine)
         {
+            if (!GameManager.Instance.soundManager.isPlaying("DragonGetHit"))
+                GameManager.Instance.soundManager.Play("DragonGetHit");
             stateMachine.navAgent.isStopped = true;
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.SetTriggerGetHitAnim();
             stateMachine.enemy.SetNewDamageIndicator();
             stateMachine.enemy.ParticleDamaged();
-        
+
             stateMachine.enemy.stats.CurrentHp -= stateMachine.enemy.cuantity;
 
             stateMachine.enemy.conditions.isWait = true;

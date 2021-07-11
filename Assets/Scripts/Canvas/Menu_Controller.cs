@@ -22,18 +22,22 @@ public class Menu_Controller : MonoBehaviour
         if (DataController.Instance.currentGameData.seed == "null")
             continueB.interactable = false;
     }
-    
+
     public void ContinueGame()
     {
         DataController.Instance.newRun = false;
-        SceneController.Instance.LoadAdresseableScene(SceneName.CurrentLevelScene,true);
+        GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
+        GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
+        SceneController.Instance.LoadAdresseableScene(SceneName.CurrentLevelScene, true);
     }
 
     public void NewGame()
     {
         DataController.Instance.newRun = true;
-        SceneController.Instance.LoadAdresseableScene(SceneName.CurrentLevelScene,true);
-        
+        GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
+            GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
+        SceneController.Instance.LoadAdresseableScene(SceneName.CurrentLevelScene, true);
+
 
     }
     public void Config()
@@ -44,7 +48,7 @@ public class Menu_Controller : MonoBehaviour
     {
 
     }
-    public void Back() => SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene,true);
+    public void Back() => SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
     public void Exit() => GameManager.Instance.ExitGame();
-    
+
 }

@@ -36,6 +36,7 @@ public class DeviceChange : MonoBehaviour
             {
                 if (Gamepad.current.aButton.isPressed)
                 {
+                    GameManager.Instance.soundManager.Play("AcceptNewDevice");
                     ResumeTime();
                     animator.SetBool("OnEnable", false);
                     animator.SetBool("OnDisable", true);
@@ -46,6 +47,7 @@ public class DeviceChange : MonoBehaviour
             {
                 if (Keyboard.current.spaceKey.isPressed)
                 {
+                    GameManager.Instance.soundManager.Play("AcceptNewDevice");
                     ResumeTime();
                     animator.SetBool("OnEnable", false);
                     animator.SetBool("OnDisable", true);
@@ -62,6 +64,7 @@ public class DeviceChange : MonoBehaviour
 
         else if (Gamepad.current is UnityEngine.InputSystem.DualShock.DualShockGamepad)
             text.text = "PRESS <sprite index=2> TO START";
+        GameManager.Instance.soundManager.Play("NewDevice");
         animator.SetBool("OnDisable", false);
         animator.SetBool("OnEnable", true);
         listenGamepad = true;
@@ -71,6 +74,7 @@ public class DeviceChange : MonoBehaviour
     private void SetUpTextKeyboard()
     {
         text.text = "PRESS <sprite index=0> TO START";
+        GameManager.Instance.soundManager.Play("NewDevice");
         animator.SetBool("OnDisable", false);
         animator.SetBool("OnEnable", true);
         listenKeyboard = true;
