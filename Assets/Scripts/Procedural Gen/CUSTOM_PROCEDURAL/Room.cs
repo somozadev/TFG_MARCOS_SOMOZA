@@ -37,6 +37,7 @@ public class Room : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.soundManager.Pause("Portal");
         ResetEvent();
     }
 
@@ -70,6 +71,8 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
+
+
         GameManager.Instance.playerEventSystem.gameObject.SetActive(true);
 
         GameManager.Instance.player.gameObject.transform.position = new Vector3(playerStartPos.x, GameManager.Instance.player.gameObject.transform.position.y, playerStartPos.z);

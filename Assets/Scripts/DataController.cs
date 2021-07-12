@@ -18,7 +18,6 @@ public class DataController : MonoBehaviour
             instance = this;
         else
             Destroy(this);
-        DontDestroyOnLoad(gameObject);
     }
     #endregion
     public bool newRun;

@@ -71,6 +71,7 @@ public class PressToStart : MonoBehaviour
                 GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
                 Debug.LogWarning("A BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
+                // SceneController.Instance.LoadScene(SceneName.SaveFileScene);
                 SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
             }
         }

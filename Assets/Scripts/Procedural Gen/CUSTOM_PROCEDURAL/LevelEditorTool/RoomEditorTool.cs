@@ -7,10 +7,12 @@ using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets;
-
+#endif
 namespace EditorTool
 {
     public class RoomEditorTool : MonoBehaviour
@@ -187,6 +189,7 @@ namespace EditorTool
         public void SavePrefabFinale(GameObject parent)
         {
 
+#if UNITY_EDITOR
             // parent.GetComponent<Room>().enabled = true;
             // parent.GetComponent<Room>().SetId = DataController.Instance.GenerateId();
             // CREATING PREFAB
@@ -221,7 +224,7 @@ namespace EditorTool
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-
+#endif
         }
         #endregion
         #region OBJECTS 

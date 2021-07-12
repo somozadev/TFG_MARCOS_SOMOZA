@@ -39,13 +39,13 @@ public class IngamePause : MonoBehaviour
         GameManager.Instance.soundManager.Play("OpenPause");
         GameManager.Instance.soundManager.LowerCurrentTheme();
         animator.SetTrigger("Pause");
-        resume.Select();
         SetFxVolume(0.3f);
         fxSlider.value = 0.3f;
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
         GameManager.Instance.playerEventSystem.gameObject.SetActive(false);
         paused = true;
         Time.timeScale = 0;
+        resume.Select();
     }
     public void UnPause()
     {
@@ -71,8 +71,14 @@ public class IngamePause : MonoBehaviour
     public void BackToConfig() { animator.SetTrigger("BackToConfig"); video.Select(); isOnPauseScreen = false; }
     public void BackToPause() { animator.SetTrigger("BackToPause"); resume.Select(); isOnPauseScreen = true; }
     public void BackToConfigFromAudio() { animator.SetTrigger("BackToConfigFromAudio"); video.Select(); isOnPauseScreen = false; }
-    public void Quit() => GameManager.Instance.ExitGame();
-
+    public void Quit()
+    {
+        UnPause();
+        GameManager.Instance.playerEventSystem.gameObject.SetActive(false);
+        GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
+        GameManager.Instance.player.gameObject.SetActive(false);
+        SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+    }
 
     private void MuteGeneral() { soundManager.MuteGeneral(); }
     private void UnMuteGeneral() { soundManager.UnMuteGeneral(); }

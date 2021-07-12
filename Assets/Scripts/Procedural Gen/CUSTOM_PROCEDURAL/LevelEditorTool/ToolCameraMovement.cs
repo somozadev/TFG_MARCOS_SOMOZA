@@ -13,6 +13,7 @@ public class ToolCameraMovement : MonoBehaviour
     public bool lockOffsetT;
     public bool lockOffsetB;
 
+    
     public EditorTool.RoomEditorTool tool;
     public float speed = 30f;
     Vector3 p = new Vector3();

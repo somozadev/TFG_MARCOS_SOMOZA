@@ -8677,7 +8677,7 @@ MonoBehaviour:
       mixerGroup: 0
       loop: 1
       clip: {fileID: 8300000, guid: 17c7d4424af98324ba49552f62d045dc, type: 3}
-      volume: 0.03
+      volume: 0.021
       pitch: 1.54
       source: {fileID: 0}
 --- !u!114 &599370278

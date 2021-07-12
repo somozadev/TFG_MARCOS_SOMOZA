@@ -120,7 +120,8 @@ public class GameDataController : MonoBehaviour
             GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.MenuScene;
             GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
             DataController.Instance.currentGameData = loadedGame;
-            SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);
+            // SceneController.Instance.LoadScene(SceneName.MenuScene);
+            SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene,true);
         }
     }
 

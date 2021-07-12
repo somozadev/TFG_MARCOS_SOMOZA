@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Menu_Controller : MonoBehaviour
 {
 
-    [SerializeField] Button continueB, newGameB, configB, achievemB, backB, exitB;
+    [SerializeField] Button continueB, newGameB, configB, achievemB, backB, exitB, videoB;
+    [SerializeField] Animator animator;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class Menu_Controller : MonoBehaviour
         DataController.Instance.newRun = false;
         GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
         GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
+        //SceneController.Instance.LoadScene(SceneName.CurrentLevelScene);//, true);
         SceneController.Instance.LoadAdresseableScene(SceneName.CurrentLevelScene, true);
     }
 
@@ -35,20 +37,20 @@ public class Menu_Controller : MonoBehaviour
     {
         DataController.Instance.newRun = true;
         GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
-            GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
+        GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
+        //SceneController.Instance.LoadScene(SceneName.CurrentLevelScene);
         SceneController.Instance.LoadAdresseableScene(SceneName.CurrentLevelScene, true);
 
-
     }
-    public void Config()
+    public void Config() { animator.SetTrigger("OpenConfig"); videoB.Select(); }
+    public void CloseConfig() { animator.SetTrigger("CloseConfig"); newGameB.Select(); }
+    public void Video() { animator.SetTrigger("OpenVideo"); }
+    public void Sound() { animator.SetTrigger("OpenSound"); }
+    public void Progress()
     {
 
     }
-    public void Achievements()
-    {
-
-    }
-    public void Back() => SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
+    public void Back() => SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true); //SceneController.Instance.LoadScene(SceneName.SaveFileScene);
     public void Exit() => GameManager.Instance.ExitGame();
 
 }

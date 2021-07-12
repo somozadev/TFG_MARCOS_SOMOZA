@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using CustomAttributes.MinMaxSlider;
+
 
 public class StageController : MonoBehaviour
 {
@@ -11,15 +11,10 @@ public class StageController : MonoBehaviour
 
     [Header("Numero de rooms por nivel")]
     [Space]
-    [MinMaxSlider(5, 8)]
     [SerializeField] Vector2Int stage1Range;
-    [MinMaxSlider(9, 13)]
     [SerializeField] Vector2Int stage2Range;
-    [MinMaxSlider(14, 16)]
     [SerializeField] Vector2Int stage3Range;
-    [MinMaxSlider(17, 23)]
     [SerializeField] Vector2Int stage4Range;
-    [MinMaxSlider(24, 26)]
     [SerializeField] Vector2Int stage5Range;
 
     [Header("Semilla")]
