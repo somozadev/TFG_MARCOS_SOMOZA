@@ -3,11 +3,12 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.Audio;
+using System.Linq;
 
 public class IngamePause : MonoBehaviour
 {
     [SerializeField] Animator animator;
-    int currentResolutionIndex = 0;
+    int currentResolutionIndex;
     [SerializeField] TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
     public bool paused;
@@ -26,6 +27,7 @@ public class IngamePause : MonoBehaviour
     private SoundManager soundManager;
     private void Start()
     {
+        resolutions = Screen.resolutions;
         soundManager = GameManager.Instance.soundManager;
         GetResolutions();
         //GetVolumeConfigs();
@@ -74,6 +76,9 @@ public class IngamePause : MonoBehaviour
     public void Quit()
     {
         UnPause();
+        GameManager.Instance.soundManager.PauseLoopedAudios();
+        GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.MainScene;
+        GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
         GameManager.Instance.playerEventSystem.gameObject.SetActive(false);
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
         GameManager.Instance.player.gameObject.SetActive(false);
@@ -110,15 +115,20 @@ public class IngamePause : MonoBehaviour
 
     private void GetResolutions()
     {
-        resolutions = Screen.resolutions;
+
+
         resolutionDropdown.ClearOptions();
+
+
         List<string> options = new List<string>();
+        currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.currentResolution.width &&
+            resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
@@ -127,12 +137,18 @@ public class IngamePause : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
-    public void SetResolution()
+    public void SetResolution(int index)
     {
-        Resolution resolution = resolutions[currentResolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Resolution currRes = resolutions[index];
+        Screen.SetResolution(currRes.width, currRes.height, Screen.fullScreen);
+
+
     }
-    public void SetFullScreen(bool condition) => Screen.fullScreen = condition;
+    public void SetFullScreen(bool condition)
+    {
+        Screen.fullScreen = condition;
+
+    }
     public void SetQuality(int quality)
     {
         QualitySettings.SetQualityLevel(quality);

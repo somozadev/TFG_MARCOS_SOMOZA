@@ -37,7 +37,8 @@ public class Room : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.soundManager.Pause("Portal");
+        if (GameManager.Instance != null)
+            GameManager.Instance.soundManager.Pause("Portal");
         ResetEvent();
     }
 

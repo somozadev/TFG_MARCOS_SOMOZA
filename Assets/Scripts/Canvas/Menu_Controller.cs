@@ -35,6 +35,7 @@ public class Menu_Controller : MonoBehaviour
 
     public void NewGame()
     {
+        GameManager.Instance.dataController.AddAnotherRun();
         DataController.Instance.newRun = true;
         GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
         GameManager.Instance.sceneThemeMusicSelector.CheckTheme();

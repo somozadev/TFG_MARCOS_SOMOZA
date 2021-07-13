@@ -20,32 +20,41 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     [Space(10)]
-    [Header("Controllers & Managers")]
+    [Header("Main controllers")]
     [Space(2)]
 
     public DataController dataController;
     public SoundManager soundManager;
     public DeviceController deviceController;
-    public SceneController sceneController;  
-    public IngamePause ingameCanvasController;
+    public SceneController sceneController;
     public SceneThemeMusicSelector sceneThemeMusicSelector;
-    
-    [Space(10)]
-    [Header("Extras")]
-    [Space(10)]
-    public StatsCanvasController statsCanvas;
     public StageController stageController;
+
+    [Space(10)]
+    [Header("Canvas controllers")]
+    [Space(2)]
+
+    public IngamePause ingameCanvasController;
+    public StatsCanvasController statsCanvas;
+    public OnDieCanvas  onDieCanvas;
+    public DeviceChange deviceChanged;
+
+    [Space(10)]
+    [Header("Extra controllers")]
+    [Space(2)]
+    public XpController xpController;    
+    [Space(10)]
+    [Header("Refs")]
+    [Space(2)]
     public GameObject mainCamera;
     public Player player;
+    public EventSystem defaultEventSystem, playerEventSystem;
     [SerializeField] bool deleteGame;
-    public EventSystem defaultEventSystem,playerEventSystem;
-    public XpController xpController;
-    public DeviceChange deviceChanged;
 
     private void Start()
     {
         Physics.IgnoreLayerCollision(10, 11, true);
-        if(deleteGame) DataController.Instance.DeleteGame();
+        if (deleteGame) DataController.Instance.DeleteGame();
         print("Gamemanager started! ");
     }
 

@@ -79,7 +79,16 @@ public class SoundManager : MonoBehaviour
 
 
 
-
+    public void PauseLoopedAudios()
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.sound.loop)
+            {
+                Pause(s.name);
+            }
+        }
+    }
     public void LowerCurrentTheme()
     {
         currentTheme.sound.volume -= 0.04f;
@@ -143,8 +152,7 @@ public class SoundManager : MonoBehaviour
             {
                 if (sound != s)
                 {
-                    if (isPlaying(sound.name))
-                        Pause(sound.name);
+                    Pause(sound.name);
                 }
             }
         }

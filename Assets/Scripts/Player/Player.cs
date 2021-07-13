@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
     [Header("Player animator")]
     public Animator animator;
 
+
+
+    
+    private void Awake() { playerStats.ResetOnDeadEvent(); }
     private void Start()
     {
         // DataController.Instance.GetPlayerStats(playerStats);    

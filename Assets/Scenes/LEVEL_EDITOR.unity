@@ -6141,7 +6141,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2026391036}
         m_TargetAssemblyTypeName: EditorTool.RoomEditorTool, Assembly-CSharp
-        m_MethodName: RotatrDropsStatModResources
+        m_MethodName: RotateDropsStatModResources
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18756,7 +18756,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2026391036}
         m_TargetAssemblyTypeName: EditorTool.RoomEditorTool, Assembly-CSharp
-        m_MethodName: RotatrDropsStatModResources
+        m_MethodName: RotateDropsStatModResources
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24453,6 +24453,9 @@ MonoBehaviour:
     - id: Item_Bow
       prefab: {fileID: 6053007440203934165, guid: 33956fd5b006a1b4ea7e8ca5be55faa7, type: 3}
       sprite: {fileID: 21300000, guid: cbea7bd408d6bc24aa9071330f0e2a6f, type: 3}
+    - id: Item_ThunderShot
+      prefab: {fileID: 8065568815424263805, guid: 6ad3a4fe326781b43ac315f37728a723, type: 3}
+      sprite: {fileID: 21300000, guid: b9cd336115546334ebe7253cc151b698, type: 3}
     dropItemsAbilityMod:
     - id: Item_Fly
       prefab: {fileID: 577566151032001417, guid: 9471f010813624b4cba88444504c30d9, type: 3}
@@ -27318,10 +27321,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8270280a76abb5e4f882e5f95904aa4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stupidButCoolStats:
+    runs: 0
+    deaths: 0
+    enemiesKilled: 0
+    itemsUnlocked: 0
   newRun: 0
   currentGameData:
     seed: null
     playerStats:
+      isDead: 0
       level: 0
       hp: 0
       xp: 0

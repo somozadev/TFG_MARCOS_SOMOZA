@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 [System.Serializable]
 public class PlayerStats : IDamageable
 {
 
+
+    public event Action onPlayerDead;
+
+    [SerializeField] private bool isDead;
+    [Space(20)]
     [SerializeField] private int level;
     [SerializeField] private int hp;
     [SerializeField] private int xp;
@@ -26,6 +32,7 @@ public class PlayerStats : IDamageable
 
 
     #region GETTERS
+    public bool IsDdead { get { return isDead; } set { isDead = value; } }
     public int Level { get { return level; } }
     public int Xp { get { return xp; } }
     public int CurrentXp { get { return currentXp; } set { currentXp = value; } }
@@ -93,13 +100,31 @@ public class PlayerStats : IDamageable
         GameManager.Instance.player.particles.GetHitParticle();
         GameManager.Instance.mainCamera.GetComponent<CameraShake>().StartShake(GameManager.Instance.mainCamera.GetComponent<CameraShake>().properties);
         this.currentHp -= (int)cuantity;
-        GameManager.Instance.statsCanvas.AssignHp();
         if (this.currentHp <= 0)
         {
-            Die();
+            this.currentHp = 0;
+            Dead();
         }
+        GameManager.Instance.statsCanvas.AssignHp();
+
     }
-    public void Die() => Debug.Log("Dead");
+    public void ResetOnDeadEvent() => onPlayerDead = null;
+    public void Dead()
+    {
+        onPlayerDead += OpenDeadUI;
+        isDead = true;
+        if (onPlayerDead != null)
+            onPlayerDead();
+    }
+    private void OpenDeadUI()
+    {
+        GameManager.Instance.dataController.AddAnotherDeath();
+        GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
+        GameManager.Instance.playerEventSystem.gameObject.SetActive(false);
+        GameManager.Instance.player.playerMovement.enabled = false;
+        GameManager.Instance.onDieCanvas.gameObject.SetActive(true);
+        // Time.timeScale = 0;
+    }
     #endregion
 
 }
@@ -108,14 +133,17 @@ public class PlayerStats : IDamageable
 public class ExtraStats
 {
     [SerializeField] private int numberOfShots;
+    [SerializeField] private bool electricShots;
 
 
 
     public int NumberOfShots { get { return numberOfShots; } set { numberOfShots = value; } }
+    public bool ElectricShots { get { return electricShots; } set { electricShots = value; } }
 
 
     public ExtraStats(int numberOfShots)
     {
         this.numberOfShots = numberOfShots;
+        electricShots = false;
     }
 }

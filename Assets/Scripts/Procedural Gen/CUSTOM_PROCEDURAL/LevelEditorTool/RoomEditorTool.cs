@@ -1202,7 +1202,7 @@ namespace EditorTool
             }
             dropsStatModButton.GetComponent<Image>().sprite = resources.dropItemsStatMod[dropsStatModRotativeCounter].sprite;
             dropsStatModButton.onClick.RemoveAllListeners();
-            dropsStatModButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItemsStatMod[dropsStatModRotativeCounter].id));
+            dropsStatModButton.onClick.AddListener(() => PassDropItemStatModToPlace(resources.dropItemsStatMod[dropsStatModRotativeCounter].id));
 
         }
         int dropsAbilityModRotativeCounter = 0;
@@ -1222,7 +1222,7 @@ namespace EditorTool
             }
             dropsAbilityModButton.GetComponent<Image>().sprite = resources.dropItemsAbilityMod[dropsAbilityModRotativeCounter].sprite;
             dropsAbilityModButton.onClick.RemoveAllListeners();
-            dropsAbilityModButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItemsAbilityMod[dropsAbilityModRotativeCounter].id));
+            dropsAbilityModButton.onClick.AddListener(() => PassDropItemAbilityModToPlace(resources.dropItemsAbilityMod[dropsAbilityModRotativeCounter].id));
 
         }
         int dropsInteractModRotativeCounter = 0;
@@ -1242,7 +1242,7 @@ namespace EditorTool
             }
             dropsInteractModButton.GetComponent<Image>().sprite = resources.dropItemsInteractMod[dropsInteractModRotativeCounter].sprite;
             dropsInteractModButton.onClick.RemoveAllListeners();
-            dropsInteractModButton.onClick.AddListener(() => PassDropItemToPlace(resources.dropItemsInteractMod[dropsInteractModRotativeCounter].id));
+            dropsInteractModButton.onClick.AddListener(() => PassDropItemInteractModToPlace(resources.dropItemsInteractMod[dropsInteractModRotativeCounter].id));
 
         }
         int shopConfigRotativeCounter = 0;

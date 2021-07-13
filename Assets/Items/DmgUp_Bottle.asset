@@ -17,5 +17,4 @@ MonoBehaviour:
   price: 50
   isUnlocked: 1
   type: 6
-  action: 0
   itemSprite: {fileID: 184950751378207249, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}

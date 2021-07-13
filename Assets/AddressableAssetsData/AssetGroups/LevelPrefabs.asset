@@ -35,17 +35,36 @@ MonoBehaviour:
   - m_GUID: 5510f893fa074904993c5726aa4b3868
     m_Address: level_02
     m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2357202912256193039, guid: 5510f893fa074904993c5726aa4b3868, type: 3}
+    m_TargetAsset: {fileID: 2357202912256193039, guid: 5510f893fa074904993c5726aa4b3868, type: 3}
+  - m_GUID: 6c1b4cd86beba394fba59643f9746b19
+    m_Address: level_init4
+    m_ReadOnly: 0
     m_SerializedLabels:
-    - Stage1
+    - Stage4
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: 77dc33d9d49f86c488de2ab0aeed236d
     m_Address: level_00
     m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: b5d1babcd1846a344bf8bd97ac6a7006
+    m_Address: Assets/Scenes/Generated_Scenes/level_00 1.prefab
+    m_ReadOnly: 0
     m_SerializedLabels:
     - Stage5
-    m_MainAsset: {fileID: 1081663201677479775, guid: 77dc33d9d49f86c488de2ab0aeed236d, type: 3}
-    m_TargetAsset: {fileID: 1081663201677479775, guid: 77dc33d9d49f86c488de2ab0aeed236d, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: d88db5ae575605d4980551dd9f88d84c
+    m_Address: level_7x5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: dcfe8d7804a34ce45b88b2a0b08157dd
     m_Address: level_21
     m_ReadOnly: 0
@@ -59,6 +78,13 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage2
     - StartRoom
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: ef5ba0e7f18e5d84e8d8dedd66314d61
+    m_Address: level_Sliced
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0

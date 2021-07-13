@@ -18,8 +18,18 @@ public class DataController : MonoBehaviour
             instance = this;
         else
             Destroy(this);
+
+
+        stupidButCoolStats = new StupidButCoolStats(GetTotalRuns(), GetTotalDeaths(), GetTotalEnemiesKilled());
+
     }
     #endregion
+
+    [Header("User game cool stats")]
+    [Space(2)]
+    public StupidButCoolStats stupidButCoolStats;
+
+    [Space(20)]
     public bool newRun;
     public GameData currentGameData;
     public Ids ids;
@@ -37,7 +47,22 @@ public class DataController : MonoBehaviour
     }
 
 
+    //mejor seria cambiarlo a una clase de stupid stats en json pero bue por ahora ta bien
+    #region STUPID_BUT_COOL_GAME_STATS
 
+    private int GetTotalRuns() { return PlayerPrefs.GetInt("totalRuns", 0); }
+    public void AddAnotherRun() { int runs = GetTotalRuns(); PlayerPrefs.SetInt("totalRuns", runs+1); UpdateStupidButCoolGameStats(); }
+    private int GetTotalDeaths() { return PlayerPrefs.GetInt("totalDeaths", 0); }
+    public void AddAnotherDeath() { int deaths = GetTotalDeaths(); PlayerPrefs.SetInt("totalDeaths", deaths+1); UpdateStupidButCoolGameStats(); }
+    private int GetTotalEnemiesKilled() { return PlayerPrefs.GetInt("totalEnemiesKilled", 0); }
+    public void AddAnotherEnemiesKilled() { int killed = GetTotalEnemiesKilled(); PlayerPrefs.SetInt("totalEnemiesKilled", killed+1); UpdateStupidButCoolGameStats(); }
+    public void UpdateStupidButCoolGameStats()
+    {
+        stupidButCoolStats.runs = GetTotalRuns();
+        stupidButCoolStats.deaths = GetTotalDeaths();
+        stupidButCoolStats.enemiesKilled = GetTotalEnemiesKilled();
+    }
+    #endregion
 
 
     #region SCENES_SEED_SAVE_LOAD
@@ -274,7 +299,7 @@ public class DataController : MonoBehaviour
     public void DeleteGame()
     {
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.player.playerStats = new PlayerStats(0, 100, 0, 100, 50, 1, 5, 1, 1, 1, 7, 0, new List<Item>());
+        GameManager.Instance.player.playerStats = new PlayerStats(0, 100, 0, 100, 50, 1, 5, 1, 1, 10, 7, 0, new List<Item>());
     }
     private void Start()
     {
@@ -338,7 +363,24 @@ public class DataController : MonoBehaviour
 
 
 }
+[System.Serializable]
+public class StupidButCoolStats
+{
 
+    public int runs;
+    public int deaths;
+    public int enemiesKilled;
+    public int itemsUnlocked;
+
+    public StupidButCoolStats(int runs, int deaths, int enemiesKilled)
+    {
+        this.runs = runs;
+        this.deaths = deaths;
+        this.enemiesKilled = enemiesKilled;
+    }
+
+
+}
 [System.Serializable]
 public class Ids
 {

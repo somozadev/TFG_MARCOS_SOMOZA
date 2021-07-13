@@ -77,12 +77,25 @@ public class StageController : MonoBehaviour
         {
             //FINISHED GAME
             print("finished run");
+            SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+            GameManager.Instance.player.playerMovement.enabled = true;
+            GameManager.Instance.player.playerStats.CurrentHp = 100;
+            GameManager.Instance.statsCanvas.AssignHp();
+            GameManager.Instance.player.gameObject.SetActive(false);
         }
 
         if (currentRoom != null)
         {
             GameManager.Instance.player.gameObject.SetActive(false);
             Destroy(currentRoom.gameObject);
+        }
+
+        //si resulta que no hay suficientes escenas, cargamos al siguiente stage.
+        if (stages[actualStage - 1] > sceneGroups[0].LevelGroupScenes.Count && actualRoom - 1 == sceneGroups[actualStage - 1].LevelGroupScenes.Count)
+        {
+            actualStage++;
+
+            actualRoom = 1;
         }
         Instantiate(sceneGroups[actualStage - 1].LevelGroupScenes[actualRoom - 1], transform);
         actualRoom++;

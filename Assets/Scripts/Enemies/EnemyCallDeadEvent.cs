@@ -14,6 +14,7 @@ public class EnemyCallDeadEvent : MonoBehaviour
         enemy.GetComponent<NavMeshAgent>().enabled = false;
         enemy.GetComponent<Collider>().enabled = false;
         enemy.Drop();
+        GameManager.Instance.dataController.AddAnotherEnemiesKilled();
         if(GetComponentInParent<Room>())
             GetComponentInParent<Room>().EnemyDiedCall(gameObject);
     }

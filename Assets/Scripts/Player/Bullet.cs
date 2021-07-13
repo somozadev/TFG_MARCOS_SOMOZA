@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
     private IEnumerator WaitToDestroy(float time)
     {
         yield return new WaitForSeconds(time);
+        GameManager.Instance.player.playerMovement.Bullets.Remove(gameObject);
         Destroy(gameObject);
     }
 

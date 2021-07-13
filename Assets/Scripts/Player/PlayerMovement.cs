@@ -20,17 +20,20 @@ public class PlayerMovement : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private bool isAttacking;
     [SerializeField] private bool canAttack = true;
-
+    [Header("Bullets")]
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform shootingPoint;
+    [SerializeField] LineRenderer lineRenderer;
     [Range(1, 5)]
     [SerializeField] float attSpeed;
     [Range(1, 10)]
     [SerializeField] float attRate;
+    [SerializeField] List<GameObject> bullets;
 
     public PlayerInput PlayerInput { get { return playerInput; } }
     public bool IsInteracting { get { return isInteracting; } }
     public Rigidbody Rb { get { return rb; } }
+    public List<GameObject> Bullets { get { return bullets; } }
 
     private void Awake()
     {
@@ -53,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
             Move(rawInput);
         if (isAttacking)
             LookAttack(rawInputShooting);
+
     }
 
 
@@ -132,9 +136,12 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 randomPos = new Vector3(shootingPoint.position.x + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.y + UnityEngine.Random.Range(-radius, radius), shootingPoint.position.z);
             GameObject bullet = GameObject.Instantiate(bulletPrefab, randomPos, Quaternion.identity);
+            bullets.Add(bullet);
             GameManager.Instance.soundManager.Play("PlayerShoot");
             GameManager.Instance.soundManager.Play("BulletWind");
             bullet.GetComponent<Bullet>().rb.AddForce(transform.forward * attSpeed, ForceMode.Impulse);
+            if (GameManager.Instance.player.extraStats.ElectricShots)
+                DoElectricShot().GetComponent<UpdateLine>().DoUpdateLine(bullet,bullets);
         }
         yield return new WaitForSeconds(waitTime);
         canAttack = true;
@@ -175,10 +182,22 @@ public class PlayerMovement : MonoBehaviour
             // rb.MovePosition(rb.position + (rightMovement + upMovement));
         }
     }
+    public void ElectricShot()
+    {
+        GameManager.Instance.player.extraStats.ElectricShots = true;
+    }
+    public LineRenderer DoElectricShot()
+    {
+        LineRenderer newLine = Instantiate(lineRenderer);
+        return newLine;
+        
+    }
+    
     public void Levitate()
     {
         StartCoroutine(LevitateCoroutine());
     }
+
     private IEnumerator LevitateCoroutine()
     {
         while (true)

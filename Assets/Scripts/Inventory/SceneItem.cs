@@ -113,7 +113,7 @@ public class SceneItem : MonoBehaviour
                 GameManager.Instance.soundManager.Play("HealthItem");
                 break;
             case ItemType.DMG:
-                GameManager.Instance.player.playerStats.AddDmg(item.Cuantity);
+                GameManager.Instance.player.playerStats.AddDmg(((float)item.Cuantity*0.1f));
                 GameManager.Instance.soundManager.Play("HealthItem");
                 break;
             case ItemType.XP:
@@ -134,6 +134,10 @@ public class SceneItem : MonoBehaviour
                         break;
                     case 4:// Speed Bow
                         item.AddRange(5f);
+                        break;
+                    case 15:// Thunder Shot
+                        item.AddDmg(20f);
+                        item.AddThunderShot();
                         break;
                 }
                 break;

@@ -77,12 +77,18 @@ public class Item : ScriptableObject
     {
         GameManager.Instance.player.playerStats.Range += range;
     }
+    public void AddDmg(float dmg)
+    {
+        GameManager.Instance.player.playerStats.Dmg += ((float) dmg * 0.1f);
+    }
     public void AddWings()
     {
-
         GameManager.Instance.player.playerMovement.Levitate();
     }
-
+    public void AddThunderShot()
+    {
+        GameManager.Instance.player.playerMovement.ElectricShot();
+    }
 
     #endregion
 }

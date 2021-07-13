@@ -17,6 +17,8 @@ public class EnemyStats
 
     [SerializeField] private int dropXp;
     [SerializeField] private SceneItem dropItem;
+    [Tooltip("Ratio such as 0.4")]
+    [SerializeField] private float dropItemRatio;
     #endregion
     #region GETTERS
 
@@ -31,6 +33,7 @@ public class EnemyStats
     public float Attrate { get { return getRandomRate(); } set { attrate = value; } }
     public int DropXp { get { return dropXp; } set { dropXp = value; } }
     public SceneItem DropItem { get { return dropItem; } set { dropItem = value; } }
+    public float DropItemRatio { get { return dropItemRatio; } set { dropItemRatio = value; } }
 
     #endregion
     #region  CONSTRUCTORS
