@@ -15,6 +15,7 @@ namespace StateMachine.Turtle_Enemy
         private void DoDeathState(TurtleStateMachine stateMachine)
         {
 
+            stateMachine.enemy.hpIndicator.UpdateHp();
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.enemy.SetNewDamageIndicator();
             stateMachine.enemy.ParticleDamaged();

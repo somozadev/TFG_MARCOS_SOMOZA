@@ -26,6 +26,7 @@ namespace StateMachine.Plant_Enemy
             stateMachine.enemy.ParticleDamaged();
 
             stateMachine.enemy.stats.CurrentHp -= stateMachine.enemy.cuantity;
+            stateMachine.enemy.hpIndicator.UpdateHp();
 
             stateMachine.enemy.conditions.isHitten = false;
 

@@ -7513,6 +7513,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8661203151825976242, guid: f75606856882ba84b820d53f640a4648, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f75606856882ba84b820d53f640a4648, type: 3}
 --- !u!1001 &5511366637094917504
@@ -7694,6 +7698,22 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 103568194}
+    - target: {fileID: 5511366636991874747, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: extraStats.electricShots
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511366636991874747, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: extraStats.numberOfShots
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511366636991874747, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: playerStats.attrate
+      value: 1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511366636991874748, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: attRate
+      value: 3.36
+      objectReference: {fileID: 0}
     - target: {fileID: 5511366636991874749, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7752,7 +7772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511366637749689059, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5511366637855441880, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7764,7 +7784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511366638057311960, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5511366638572875095, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_Camera

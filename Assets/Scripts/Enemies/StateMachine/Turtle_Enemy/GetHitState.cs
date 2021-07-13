@@ -24,7 +24,10 @@ namespace StateMachine.Turtle_Enemy
 
             stateMachine.SetTriggerGetHitAnim();
             stateMachine.enemy.SetNewDamageIndicator();
+
             stateMachine.enemy.stats.CurrentHp -= stateMachine.enemy.cuantity;
+            stateMachine.enemy.hpIndicator.UpdateHp();
+
             stateMachine.navAgent.speed += 0.2f;
             stateMachine.enemy.conditions.isHitten = false;
             stateMachine.enemy.conditions.isInvincible = true;

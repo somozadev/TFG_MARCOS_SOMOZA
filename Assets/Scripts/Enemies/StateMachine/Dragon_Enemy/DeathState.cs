@@ -15,6 +15,7 @@ namespace StateMachine.Dragon_Enemy
 
         private void DoDeathState(DragonStateMachine stateMachine)
         {
+            stateMachine.enemy.hpIndicator.UpdateHp();
             stateMachine.navAgent.isStopped = true;
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.enemy.SetNewDamageIndicator();

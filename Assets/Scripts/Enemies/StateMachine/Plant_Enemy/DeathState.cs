@@ -16,6 +16,7 @@ namespace StateMachine.Plant_Enemy
         private void DoDeathState(PlantStateMachine stateMachine)
         {
 
+            stateMachine.enemy.hpIndicator.UpdateHp();
             stateMachine.navAgent.velocity = Vector3.zero;
             stateMachine.enemy.SetNewDamageIndicator();
             stateMachine.enemy.ParticleDamaged();

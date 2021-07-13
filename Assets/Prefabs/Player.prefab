@@ -4961,7 +4961,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extraStats:
     numberOfShots: 1
+    electricShots: 0
   playerStats:
+    isDead: 0
     level: 0
     hp: 50
     xp: 50
@@ -4974,7 +4976,6 @@ MonoBehaviour:
     attrate: 0
     range: 0
     soulCoins: 600
-    invincible: 0
     inventory: []
   playerInteractor: {fileID: 5511366637439774767}
   playerMovement: {fileID: 5511366636991874748}
@@ -5019,8 +5020,10 @@ MonoBehaviour:
   canAttack: 1
   bulletPrefab: {fileID: 6868282663555404953, guid: 752412aedc7cca642aeb42ebebee07c3, type: 3}
   shootingPoint: {fileID: 112422711626507197}
+  lineRenderer: {fileID: 361996764337662227, guid: c61314739775f414fae769f1cf1502a8, type: 3}
   attSpeed: 0
   attRate: 10
+  bullets: []
 --- !u!114 &5511366636991874751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5097,7 +5100,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &194264892842691413
 Animator:
@@ -5130,6 +5133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64139716f0204f64391cc9ebc28f4eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &5511366637439774764
 GameObject:
   m_ObjectHideFlags: 0

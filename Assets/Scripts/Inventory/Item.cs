@@ -71,7 +71,7 @@ public class Item : ScriptableObject
 
     public void DoubleShot()
     {
-        GameManager.Instance.player.extraStats.NumberOfShots = 2;
+        GameManager.Instance.player.extraStats.NumberOfShots += 2;
     }
     public void AddRange(float range)
     {

@@ -11,11 +11,13 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
     public VisualEffect deadParticle;
     [SerializeField] GameObject damageIndicatorPrefab;
     [HideInInspector] public float cuantity;
+    public EnemyHpIndicator hpIndicator;
 
     private EnemyStats initialStats;
 
     private void Awake()
     {
+        hpIndicator = GetComponentInChildren<EnemyHpIndicator>();
         initialStats = stats;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = stats.Spd;
@@ -66,8 +68,12 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
     public void RecieveDamage(float cuantity)
     {
         this.cuantity = (cuantity - (stats.Def / 100));
+
         if (this.stats.CurrentHp - (int)cuantity <= 0)
+        {
+            this.stats.CurrentHp = 0;
             conditions.isDead = true;
+        }
         else
         {
             conditions.isHitten = true;

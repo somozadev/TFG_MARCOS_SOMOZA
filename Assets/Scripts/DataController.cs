@@ -299,7 +299,8 @@ public class DataController : MonoBehaviour
     public void DeleteGame()
     {
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.player.playerStats = new PlayerStats(0, 100, 0, 100, 50, 1, 5, 1, 1, 10, 7, 0, new List<Item>());
+        GameManager.Instance.player.playerStats = new PlayerStats(0, 100, 0, 100, 50, 4, 5, 1, 1, 2, 7, 0, new List<Item>());
+        GameManager.Instance.player.extraStats.ElectricShots = true;
     }
     private void Start()
     {
