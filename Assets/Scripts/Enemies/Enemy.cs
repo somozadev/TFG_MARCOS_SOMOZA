@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
     {
         if (stats.DropItem != null)
         {
-            Instantiate(stats.DropItem, transform.position + Vector3.up, Quaternion.identity);
+            Instantiate(stats.DropItem, transform.position + Vector3.up, Quaternion.identity,GetComponentInParent<Room>().transform.GetChild(3));
         }
         DropXp();
         Destroy(gameObject);

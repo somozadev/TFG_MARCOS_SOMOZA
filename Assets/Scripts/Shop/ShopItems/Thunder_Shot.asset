@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Thunder_Shot
   price: 200
-  genre: 2
+  genre: 3
   item: {fileID: 11400000, guid: 748daa24ca0719845a3f1cbf8d1a680f, type: 2}
   prefab: {fileID: 1033983942214322913, guid: cb5dcde4651a61b4c88e14916cfe6a02, type: 3}

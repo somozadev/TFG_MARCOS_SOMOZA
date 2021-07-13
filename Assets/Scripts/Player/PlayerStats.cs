@@ -111,6 +111,7 @@ public class PlayerStats : IDamageable
     public void ResetOnDeadEvent() => onPlayerDead = null;
     public void Dead()
     {
+        GameManager.Instance.dataController.AddAnotherDeath();
         onPlayerDead += OpenDeadUI;
         isDead = true;
         if (onPlayerDead != null)
@@ -118,7 +119,6 @@ public class PlayerStats : IDamageable
     }
     private void OpenDeadUI()
     {
-        GameManager.Instance.dataController.AddAnotherDeath();
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
         GameManager.Instance.playerEventSystem.gameObject.SetActive(false);
         GameManager.Instance.player.playerMovement.enabled = false;

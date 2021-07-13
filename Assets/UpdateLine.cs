@@ -27,8 +27,11 @@ public class UpdateLine : MonoBehaviour
 
         if (bullets.IndexOf(init) - 1 >= 0)
         {
-            Vector3 pos2 = bullets[bullets.IndexOf(init) - 1].transform.position;
-            newLine.SetPosition(1, pos2);
+            if (init != null)
+            {
+                Vector3 pos2 = bullets[bullets.IndexOf(init) - 1].transform.position;
+                newLine.SetPosition(1, pos2);
+            }
 
         }
         StartCoroutine(WaitToDestroyLineRenderer(newLine, 2f));

@@ -736,6 +736,7 @@ MonoBehaviour:
   lvl: {fileID: 1015565603734362512}
   xpProgress: {fileID: 1015565603535734235}
   animator: {fileID: 7654933425573920370}
+  statsVisualController: {fileID: 0}
 --- !u!95 &7654933425573920370
 Animator:
   serializedVersion: 3

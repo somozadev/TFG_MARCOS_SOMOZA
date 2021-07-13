@@ -6,6 +6,7 @@ public class CallNextFloor : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            Destroy(GetComponentInParent<Room>().transform.GetChild(3).gameObject);
             SceneController.Instance.LoadNextFloor();
         }
     }

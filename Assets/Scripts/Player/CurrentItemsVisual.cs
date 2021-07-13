@@ -14,6 +14,13 @@ public class CurrentItemsVisual : MonoBehaviour
         GameObject aux = Instantiate(iconPrefab, Vector3.zero, Quaternion.identity, transform);
         aux.GetComponent<Image>().sprite = item.ItemSprite;
     }
+    public void ClearItemsVisuals()
+    {
+        foreach(Transform child in GetComponentsInChildren<Transform>())
+        {
+            Destroy(child.gameObject);
+        }
+    }
     public void InitializeInventory()
     {
         foreach (Item item in GameManager.Instance.player.playerStats.Inventory)

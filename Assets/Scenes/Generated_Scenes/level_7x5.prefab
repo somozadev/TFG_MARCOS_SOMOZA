@@ -15260,13 +15260,13 @@ MonoBehaviour:
   - {fileID: 3838347688524150918}
   enemies: {fileID: 5825176268736273004}
   enemiesList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2999505147743650524}
+  - {fileID: 7902882946637292097}
+  - {fileID: 8029231358516128503}
+  - {fileID: 1785685674557060761}
+  - {fileID: 8863699785255757382}
+  - {fileID: 7154762583183015182}
+  - {fileID: 8073898455959581464}
   playerPos: {fileID: 7847781361384670251}
   navMesherCollider: {fileID: 0}
 --- !u!114 &5825176268773799573
@@ -15291,7 +15291,7 @@ MonoBehaviour:
   - {fileID: 1785685674557060761}
   - {fileID: 8863699785255757382}
   - {fileID: 7154762583183015182}
-  enemiesListDied: 
+  enemiesListDied: 00000000000000
   hasShop: 0
   isCompleted: 1
   isDroppingItem: 1

@@ -30,6 +30,7 @@ public class DataController : MonoBehaviour
     public StupidButCoolStats stupidButCoolStats;
 
     [Space(20)]
+    public string seed;
     public bool newRun;
     public GameData currentGameData;
     public Ids ids;
@@ -38,7 +39,7 @@ public class DataController : MonoBehaviour
     public List<GameObject> scenesFloorThree;
     public List<GameObject> scenesFloorFour;
     public List<GameObject> scenesFloorFive;
-
+    private float startTime;
     public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); }
     public void GetPlayerStats(PlayerStats playerStats)
     {
@@ -49,19 +50,25 @@ public class DataController : MonoBehaviour
 
     //mejor seria cambiarlo a una clase de stupid stats en json pero bue por ahora ta bien
     #region STUPID_BUT_COOL_GAME_STATS
-
+    public void StartTimer() { startTime = Time.time; }
     private int GetTotalRuns() { return PlayerPrefs.GetInt("totalRuns", 0); }
-    public void AddAnotherRun() { int runs = GetTotalRuns(); PlayerPrefs.SetInt("totalRuns", runs+1); UpdateStupidButCoolGameStats(); }
+    public void AddAnotherRun()
+    {
+        int runs = GetTotalRuns(); PlayerPrefs.SetInt("totalRuns", runs + 1);
+        StartTimer();
+        UpdateStupidButCoolGameStats();
+    }
     private int GetTotalDeaths() { return PlayerPrefs.GetInt("totalDeaths", 0); }
-    public void AddAnotherDeath() { int deaths = GetTotalDeaths(); PlayerPrefs.SetInt("totalDeaths", deaths+1); UpdateStupidButCoolGameStats(); }
+    public void AddAnotherDeath() { int deaths = GetTotalDeaths(); PlayerPrefs.SetInt("totalDeaths", deaths + 1); UpdateStupidButCoolGameStats(); }
     private int GetTotalEnemiesKilled() { return PlayerPrefs.GetInt("totalEnemiesKilled", 0); }
-    public void AddAnotherEnemiesKilled() { int killed = GetTotalEnemiesKilled(); PlayerPrefs.SetInt("totalEnemiesKilled", killed+1); UpdateStupidButCoolGameStats(); }
+    public void AddAnotherEnemiesKilled() { int killed = GetTotalEnemiesKilled(); PlayerPrefs.SetInt("totalEnemiesKilled", killed + 1); UpdateStupidButCoolGameStats(); }
     public void UpdateStupidButCoolGameStats()
     {
         stupidButCoolStats.runs = GetTotalRuns();
         stupidButCoolStats.deaths = GetTotalDeaths();
         stupidButCoolStats.enemiesKilled = GetTotalEnemiesKilled();
     }
+    private void Update() { stupidButCoolStats.runTime = Time.time - startTime; }
     #endregion
 
 
@@ -372,6 +379,7 @@ public class StupidButCoolStats
     public int deaths;
     public int enemiesKilled;
     public int itemsUnlocked;
+    public float runTime;
 
     public StupidButCoolStats(int runs, int deaths, int enemiesKilled)
     {

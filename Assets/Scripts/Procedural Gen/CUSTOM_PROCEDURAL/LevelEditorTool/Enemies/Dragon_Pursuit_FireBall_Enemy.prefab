@@ -829,6 +829,7 @@ MonoBehaviour:
   deadParticle: {fileID: 5048986450453616220}
   damageIndicatorPrefab: {fileID: 1454722556318668716, guid: 4761461ea12f467429769a6f2091a6f9, type: 3}
   cuantity: 0
+  hpIndicator: {fileID: 0}
 --- !u!114 &2723107825781618501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,7 +1805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2724614334091089838}
   m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2720427866776950181}

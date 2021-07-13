@@ -46,6 +46,7 @@ public class StageController : MonoBehaviour
     {
 
         SceneController.Instance.stageController = this;
+        GameManager.Instance.stageController = this;
         if (DataController.Instance.newRun)
         {
             numberOfRooms = SetRandomNumberOfRooms(actualStage);
@@ -54,12 +55,13 @@ public class StageController : MonoBehaviour
         else
         {
             seed = DataController.Instance.currentGameData.seed;
+            GameManager.Instance.dataController.seed = seed;
+
             LoadRun(seed);
         }
 
         GameManager.Instance.mainCamera.transform.parent.gameObject.SetActive(true);
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
-
         GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
         GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
     }
@@ -165,6 +167,8 @@ public class StageController : MonoBehaviour
         seed = DataController.Instance.SerializeSeed(oneT, twoT, threeT, fourT, fiveT,
         sceneGroups[0].LevelGroupScenes, sceneGroups[1].LevelGroupScenes, sceneGroups[2].LevelGroupScenes,
         sceneGroups[3].LevelGroupScenes, sceneGroups[4].LevelGroupScenes);
+        GameManager.Instance.dataController.seed = seed;
+
         LoadNextScene();
 
     }

@@ -416,6 +416,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0
+        functionName: PerfStartMegaAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 5cc9b2d8d8ec8604dae4bae681203ae1, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.4630137
         functionName: PerfMegaAttack
         data: 
@@ -423,15 +430,8 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9803149
+      - time: 0.752819
         functionName: PerfEndMegaAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 5cc9b2d8d8ec8604dae4bae681203ae1, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0
-        functionName: PerfStartMegaAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 5cc9b2d8d8ec8604dae4bae681203ae1, type: 3}
         floatParameter: 0

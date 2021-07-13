@@ -538,7 +538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340684767383627763}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.205, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.00000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1339246872744039759}
@@ -10491,6 +10491,7 @@ MonoBehaviour:
   deadParticle: {fileID: 1340684766338724091}
   damageIndicatorPrefab: {fileID: 1454722556318668716, guid: 4761461ea12f467429769a6f2091a6f9, type: 3}
   cuantity: 0
+  hpIndicator: {fileID: 0}
 --- !u!114 &1341230441937665445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10542,7 +10543,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341230441937665499}
   m_Enabled: 1
-  m_AgentTypeID: -1923039037
+  m_AgentTypeID: 658490984
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
