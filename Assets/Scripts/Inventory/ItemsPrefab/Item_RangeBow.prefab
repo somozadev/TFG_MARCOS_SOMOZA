@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 535247139984996962}
   - component: {fileID: 4383456113930360598}
   - component: {fileID: 8184777401870321144}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_RangeBow
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 1
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 2544191873928653993}
 --- !u!1 &3544436995073266301
 GameObject:
@@ -124,7 +125,7 @@ GameObject:
   - component: {fileID: 3788613651623575716}
   - component: {fileID: 2544191873928653993}
   - component: {fileID: 4587489720736875497}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

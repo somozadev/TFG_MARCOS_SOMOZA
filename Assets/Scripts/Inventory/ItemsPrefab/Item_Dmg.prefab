@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4247604051527650065}
   - component: {fileID: 1251926235485202699}
   - component: {fileID: 5825932997619734499}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_Dmg
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 1
   item: {fileID: 11400000, guid: 378bad15ae9a09340bd646e44aa291ad, type: 2}
+  action: 0
   colliderObject: {fileID: 4247604051527650065}
 --- !u!65 &4247604051527650065
 BoxCollider:

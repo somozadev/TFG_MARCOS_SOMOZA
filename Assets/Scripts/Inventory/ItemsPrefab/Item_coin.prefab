@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3652036988734390028}
   - component: {fileID: 3652036988734390016}
   - component: {fileID: -1545770580047449180}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_Coin
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 11400000, guid: c418a580af425934ea17fb66878f4624, type: 2}
+  action: 0
   colliderObject: {fileID: 3221497530354851916}
 --- !u!114 &-1545770580047449180
 MonoBehaviour:
@@ -137,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6389766648668526154}
   - component: {fileID: 3221497530354851916}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

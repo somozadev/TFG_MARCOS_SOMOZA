@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4079545867581580359}
   - component: {fileID: 8628358586735963195}
   - component: {fileID: -1139738732477657557}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_RangeBow_EditorTool
   m_TagString: Interactable
   m_Icon: {fileID: 0}

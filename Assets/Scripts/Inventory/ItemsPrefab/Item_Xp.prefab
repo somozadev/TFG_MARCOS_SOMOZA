@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1455929904138149501}
   - component: {fileID: 6000339820206213311}
   - component: {fileID: 3248983072400136146}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_Xp
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -131,7 +131,6 @@ MonoBehaviour:
   iterationFactor: 0.0476
   friction: 0.0702
   frictionConstant: 0.08
-  hitSurface: 0
 --- !u!96 &3248983072400136146
 TrailRenderer:
   serializedVersion: 2

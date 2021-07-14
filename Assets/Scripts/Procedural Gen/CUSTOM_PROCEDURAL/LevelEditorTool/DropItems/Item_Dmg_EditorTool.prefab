@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5391045239557026057}
   - component: {fileID: 8277776291523424468}
   - component: {fileID: 8175717421164470597}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_Dmg_EditorTool
   m_TagString: Interactable
   m_Icon: {fileID: 0}

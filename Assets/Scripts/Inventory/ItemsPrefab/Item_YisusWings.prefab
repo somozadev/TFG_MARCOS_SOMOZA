@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6442641596929800336}
   - component: {fileID: 7120298804530370020}
   - component: {fileID: 3428193397811087114}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_YisusWings
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 1
   item: {fileID: 11400000, guid: abb49935a9d26c14aa06f23bedffa3c3, type: 2}
+  action: 0
   colliderObject: {fileID: 9028451793646743131}
 --- !u!1 &8013336122407440527
 GameObject:
@@ -125,7 +126,7 @@ GameObject:
   - component: {fileID: 7680489074683445846}
   - component: {fileID: 9028451793646743131}
   - component: {fileID: 7038916819313852699}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

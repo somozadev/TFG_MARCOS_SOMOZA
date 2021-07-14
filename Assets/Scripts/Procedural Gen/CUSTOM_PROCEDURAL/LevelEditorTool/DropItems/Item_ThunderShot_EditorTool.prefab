@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6099052672768294582}
   - component: {fileID: 6099052672768294548}
   - component: {fileID: 6099052672768294634}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 6099052672768294581}
   - component: {fileID: 6099052672768294549}
   - component: {fileID: 6099052672768294635}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9633,7 +9633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6099052672768294543}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: Bullet_Prefab
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -9673,7 +9673,7 @@ GameObject:
   - component: {fileID: 6160309770809753194}
   - component: {fileID: 7103990405311930073}
   - component: {fileID: 3398071841224786740}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_ThunderShot_EditorTool
   m_TagString: Interactable
   m_Icon: {fileID: 0}

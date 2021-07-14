@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DitherPlayer
+  m_Name: DitherEnemies
   m_Shader: {fileID: -6465566751694194690, guid: cdf6e2b5f27d56549b542de40de27d7f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,9 +20,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_192D3122: 0.26
-    - Vector1_9922EDD7: 1.01
-    - Vector1_D5E4BC4B: 0.1
+    - Vector1_192D3122: 0.62
+    - Vector1_9922EDD7: -0
+    - Vector1_D5E4BC4B: 0.51
     m_Colors:
-    - Color_EB7C42FF: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0}
+    - Color_EB7C42FF: {r: 0.94509804, g: 0.38823533, b: 0.39368778, a: 1}
   m_BuildTextureStacks: []

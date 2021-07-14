@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2621290224950912123}
   - component: {fileID: 5798592965093413501}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 6374273163061432553}
   - component: {fileID: 546479453701780514}
   - component: {fileID: -5208219826136818428}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_Coin
   m_TagString: Interactable
   m_Icon: {fileID: 0}

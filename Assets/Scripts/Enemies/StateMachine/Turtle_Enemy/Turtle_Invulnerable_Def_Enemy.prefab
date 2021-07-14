@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124222585417738174}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Spine01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124263530595212018}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornR01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117185245906456394}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornLTip01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117342911787646896}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: UpperCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117085954486421642}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornMidTip01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4117363009332892852}
   - component: {fileID: 4092591352930943652}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TurtleShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 4118678732293495899}
   - component: {fileID: 4118678732293495892}
   - component: {fileID: 4118678732293495889}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Turtle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -353,6 +353,7 @@ MonoBehaviour:
     attrate: 0
     dropXp: 2
     dropItem: {fileID: 0}
+    dropItemRatio: 0
   conditions:
     isChasing: 0
     isAttacking: 0
@@ -367,12 +368,14 @@ MonoBehaviour:
     isPatrol: 0
     canSpinAttack: 0
     isInvincible: 0
+    canMegaAttack: 0
   agent: {fileID: 4118678732293495899}
   animator: {fileID: 4069303824615227418}
   damagedParticle: {fileID: 4119973481743026163}
   deadParticle: {fileID: 4119973483015023559}
   damageIndicatorPrefab: {fileID: 1454722556318668716, guid: 4761461ea12f467429769a6f2091a6f9, type: 3}
   cuantity: 0
+  hpIndicator: {fileID: 0}
 --- !u!114 &4118678732293495894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124583066483854036}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornL04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124367488670850660}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornLTip03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124190388092040418}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornR04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124521123664864002}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornLTip04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117337008899932664}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornRTip01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +631,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117332803846458958}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornMid01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117090224274396660}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornRTip03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117128140313839488}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornMidTip02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +722,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124305651970561894}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116945307819674316}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornL03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124190023107371186}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornR03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116889381721394322}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornRTip02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -842,7 +845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117411004840466072}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornMidTip03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124516092753037192}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornR02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124691742609195730}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornRTip04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -933,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124564389984348904}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BottomCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116933190337957312}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Spine02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116975700223686522}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1027,7 +1030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117064658495926736}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornL02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124256625279264088}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornMid02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1094,7 @@ GameObject:
   - component: {fileID: 4119973481743026161}
   - component: {fileID: 4119973481743026163}
   - component: {fileID: 4119973481743026160}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 'GetHit_Particle '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5959,7 +5962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4119973482142522838}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5995,7 +5998,7 @@ GameObject:
   - component: {fileID: 4119973483015023557}
   - component: {fileID: 4119973483015023559}
   - component: {fileID: 4119973483015023556}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 'Smoke_Stylized '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6132,7 +6135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4119973483257261583}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Turtle_Invulnerable_Def_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6164,7 +6167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124335429584367926}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6205,7 +6208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124289118779439882}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Eyeball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6235,7 +6238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124503084290993650}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornMid03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6266,7 +6269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4117334784317577716}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornLTip02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6296,7 +6299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124548776601781520}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HornL01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6372,6 +6375,10 @@ PrefabInstance:
     - target: {fileID: 5846904657147045874, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
       propertyPath: m_Name
       value: Point (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846904657147045874, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8566870911274612397, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
       propertyPath: nextPoint
@@ -6450,6 +6457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Point (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5846904657147045874, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8566870911274612397, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
       propertyPath: nextPoint
       value: 
@@ -6527,6 +6538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Point
       objectReference: {fileID: 0}
+    - target: {fileID: 5846904657147045874, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8566870911274612397, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
       propertyPath: nextPoint
       value: 
@@ -6603,6 +6618,10 @@ PrefabInstance:
     - target: {fileID: 5846904657147045874, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
       propertyPath: m_Name
       value: Point (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846904657147045874, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8566870911274612397, guid: ee25716cbdd49b04c85e0c4dca10b73d, type: 3}
       propertyPath: nextPoint

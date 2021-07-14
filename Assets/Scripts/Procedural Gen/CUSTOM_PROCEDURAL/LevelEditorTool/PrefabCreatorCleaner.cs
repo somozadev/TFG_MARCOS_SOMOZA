@@ -48,8 +48,12 @@ namespace EditorTool
             {
                 room.SetEnemiesList = enemiesList;
                 room.SetEnemiesListDied = new bool[enemiesList.Count];
-                if (enemiesList.Count <= 0)
-                    room.Complete();
+                foreach (GameObject item in dropsList)
+                {
+                    item.layer = 16;
+                }
+                    if (enemiesList.Count <= 0)
+                        room.Complete();
             }
         }
 

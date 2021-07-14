@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5246608308627790032}
   - component: {fileID: 2271976324469053293}
   - component: {fileID: -4115261787905433127}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_YisusWings_EditorTool
   m_TagString: Interactable
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 227302819160537210}
   - component: {fileID: 1456728551251328746}
   - component: {fileID: 633996605190356998}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4776585609402570671}
   - component: {fileID: 1587719471008377720}
   - component: {fileID: 1475144833314511887}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_RapidBow
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -173,4 +173,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 1
   item: {fileID: 0}
+  action: 0
   colliderObject: {fileID: 633996605190356998}

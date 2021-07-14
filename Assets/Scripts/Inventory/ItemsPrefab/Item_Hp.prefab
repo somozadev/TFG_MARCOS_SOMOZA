@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1076795209669037337}
   - component: {fileID: 5471701736790355837}
   - component: {fileID: 736112495524787953}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Item_Hp
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   item: {fileID: 11400000, guid: c61bed0f44db4ce479279a61c5653071, type: 2}
+  action: 0
   colliderObject: {fileID: 5471701736790355837}
 --- !u!54 &1076795209669037337
 Rigidbody:
