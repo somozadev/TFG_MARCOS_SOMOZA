@@ -113,6 +113,9 @@ public class SceneItem : MonoBehaviour
                 GameManager.Instance.soundManager.Play("HealthItem");
                 break;
             case ItemType.DMG:
+                Debug.LogError("Added to dmg stats: " + (float)item.Cuantity*0.1f);
+                Debug.LogError("Current dmg stat: " + GameManager.Instance.player.playerStats.Dmg);
+
                 GameManager.Instance.player.playerStats.AddDmg(((float)item.Cuantity*0.1f));
                 GameManager.Instance.soundManager.Play("HealthItem");
                 break;

@@ -39,10 +39,11 @@ MonoBehaviour:
     - Stage4
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: 77dc33d9d49f86c488de2ab0aeed236d
-    m_Address: level_00
+  - m_GUID: a8a54dd76d50a594a889935962fa6df6
+    m_Address: levelHuges4
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Stage4
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: b5d1babcd1846a344bf8bd97ac6a7006
@@ -50,8 +51,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage5
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 1081663201677479775, guid: b5d1babcd1846a344bf8bd97ac6a7006, type: 3}
+    m_TargetAsset: {fileID: 1081663201677479775, guid: b5d1babcd1846a344bf8bd97ac6a7006, type: 3}
   - m_GUID: d88db5ae575605d4980551dd9f88d84c
     m_Address: level_7x5
     m_ReadOnly: 0

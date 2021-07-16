@@ -36082,6 +36082,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItem
+      value: 
+      objectReference: {fileID: 4207033218878212018, guid: 80cb4b1f74e720348bd04704f940a63c, type: 3}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItemRatio
+      value: 17.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1341230441937665499, guid: 8876036098a2d45419c939957988c922, type: 3}
       propertyPath: m_Name
       value: Golem_Stunt_Enemy (1)
@@ -36236,6 +36244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plant_Static_Shoot_Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8185732169720194599, guid: fe912f3232d49fa4d82ab1b5b70d1acf, type: 3}
+      propertyPath: stats.dropItemRatio
+      value: 7.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe912f3232d49fa4d82ab1b5b70d1acf, type: 3}
 --- !u!1 &2864564006550624000 stripped
@@ -36377,6 +36389,14 @@ PrefabInstance:
     - target: {fileID: 1340684766338724088, guid: 8876036098a2d45419c939957988c922, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItem
+      value: 
+      objectReference: {fileID: 4207033218878212018, guid: 80cb4b1f74e720348bd04704f940a63c, type: 3}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItemRatio
+      value: 14.9
       objectReference: {fileID: 0}
     - target: {fileID: 1341230441937665499, guid: 8876036098a2d45419c939957988c922, type: 3}
       propertyPath: m_Name

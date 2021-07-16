@@ -6,6 +6,7 @@ using System;
 public class PlayerStats : IDamageable
 {
 
+    //! TODO MAYBE AN INIT STATS VARIABLE, FOR THE RUN, AND RESET TO THAT WHEN NEW RUN...
 
     public event Action onPlayerDead;
 
@@ -68,6 +69,12 @@ public class PlayerStats : IDamageable
     #endregion
 
     #region METODOS
+    public void LevelSpend(int amount)
+    {
+        level -= amount;
+        if (GameManager.Instance.statsCanvas != null)
+            GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0;
+    }
     public void LevelUp()
     {
         level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level, 2f);
@@ -109,9 +116,15 @@ public class PlayerStats : IDamageable
 
     }
     public void ResetOnDeadEvent() => onPlayerDead = null;
+    bool deadOneShot = false;
     public void Dead()
     {
-        GameManager.Instance.dataController.AddAnotherDeath();
+        if (!deadOneShot)
+        {
+            GameManager.Instance.dataController.AddAnotherDeath();
+            DataController.Instance.newRun = false;
+            deadOneShot = true;
+        }
         onPlayerDead += OpenDeadUI;
         isDead = true;
         if (onPlayerDead != null)

@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
     {
         if (stats.DropItem != null)
         {
+            if(Random.Range(0,101) <= stats.DropItemRatio)
             Instantiate(stats.DropItem, transform.position + Vector3.up, Quaternion.identity,GetComponentInParent<Room>().transform.GetChild(3));
         }
         DropXp();

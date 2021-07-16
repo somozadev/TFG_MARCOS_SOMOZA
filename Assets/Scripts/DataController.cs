@@ -40,7 +40,10 @@ public class DataController : MonoBehaviour
     public List<GameObject> scenesFloorFour;
     public List<GameObject> scenesFloorFive;
     private float startTime;
-    public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); }
+
+
+
+    public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); PlayerPrefs.Save();}
     public void GetPlayerStats(PlayerStats playerStats)
     {
         PlayerStats stats = new PlayerStats(0, 100, 0, 100, 50, 1, 5, 1, 1, 1, 7, 0, new List<Item>());
@@ -67,6 +70,8 @@ public class DataController : MonoBehaviour
         stupidButCoolStats.runs = GetTotalRuns();
         stupidButCoolStats.deaths = GetTotalDeaths();
         stupidButCoolStats.enemiesKilled = GetTotalEnemiesKilled();
+        DataController.instance.currentGameData.coolStats = stupidButCoolStats;
+        PlayerPrefs.Save();
     }
     private void Update() { stupidButCoolStats.runTime = Time.time - startTime; }
     #endregion
@@ -378,6 +383,10 @@ public class StupidButCoolStats
     public int runs;
     public int deaths;
     public int enemiesKilled;
+    public int enemiesDiscovered;
+    public int bossesDiscovered;
+    public int totalEnemies;
+    public int totalBosses;
     public int itemsUnlocked;
     public float runTime;
 

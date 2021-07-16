@@ -28,7 +28,7 @@ public class GameDataController : MonoBehaviour
             if (saveFiles[i].GetComponent<Image>().sprite == yesFile)
             {
                 saveFiles[i].GetComponent<Image>().sprite = selected;
-                GameManager.Instance.defaultEventSystem.firstSelectedGameObject = saveFiles[i];
+                saveFiles[i].GetComponent<Button>().Select();
                 ereaseIndex = i;
                 break;
             }
@@ -91,7 +91,7 @@ public class GameDataController : MonoBehaviour
         }
         else
         {
-            SetGameData(id, new GameData());
+            //SetGameData(id, new GameData());
             GetGameData(id);
 
         }
@@ -131,11 +131,13 @@ public class GameDataController : MonoBehaviour
 public class GameData
 {
     public string seed;
-    public PlayerStats playerStats;
-    public float gameCompletePercentaje;
-    public List<bool> itemsUnlocked;
+    public float gameCompletePercentaje;  //!falta hacer este sistema
+    public PlayerStats playerStats;       // se actualiza si hay una current run en proceso, donde guarda las stats actuales. 
+    public List<bool> itemsUnlocked; //!falta hacer este sistema
+    public StupidButCoolStats coolStats; //ya se actualiza, en DataControler.instance.UpdateStupidButCoolGameStats(). llamada on death event player.
 
-    public GameData() { seed = "null"; }
+
+    //public GameData() { seed = PlayerPrefs.GetString("seed","null"); }
     public GameData(string seed, PlayerStats playerStats, float gameCompletePercentaje, List<bool> itemsUnlocked)
     {
         this.seed = seed;

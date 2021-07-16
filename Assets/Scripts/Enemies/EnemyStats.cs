@@ -17,7 +17,8 @@ public class EnemyStats
 
     [SerializeField] private int dropXp;
     [SerializeField] private SceneItem dropItem;
-    [Tooltip("Ratio such as 0.4")]
+    [Tooltip("Ratio value such as 4, which is converted to a 4% chance")]
+    [Range(0,100)]
     [SerializeField] private float dropItemRatio;
     #endregion
     #region GETTERS

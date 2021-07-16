@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
 
 
-    
+
     private void Awake() { playerStats.ResetOnDeadEvent(); }
     private void Start()
     {
@@ -32,12 +32,23 @@ public class Player : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        DataController.Instance.SetPlayerStats(playerStats);
+        if (DataController.Instance.newRun)
+        {
+            DataController.Instance.SetPlayerStats(playerStats);
+            PlayerPrefs.Save();
+        }
     }
-    private void OnEnable()
+    public void ResetForNewRun()
     {
-        // transform.position = Vector3.zero; //get current room initialpos
-        // transform.position = GameManager.Instance.stageController.currentRoom.playerStartPos;
+        animator.SetBool("Invincible", false);
+        playerStats.CurrentHp = playerStats.Hp;
+        playerStats.SoulCoins = 0;
+        statsCanvasController.gameObject.SetActive(true);
+        currentItemsVisual.gameObject.SetActive(true);
     }
 
+    private void OnEnable()
+    {
+        ResetForNewRun();
+    }
 }

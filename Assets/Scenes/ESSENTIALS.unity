@@ -4803,6 +4803,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3652036988734390017, guid: 70e24dde8ee1c00418b14ca820e380b9, type: 3}
   m_PrefabInstance: {fileID: 984883376}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1382125257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2648707031052718607, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+  m_PrefabInstance: {fileID: 5511366637094917504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab203cbe4177f743868645f4d42ebf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1391501649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4174319371286682, guid: 3099df1c006684bb5b88c4d14fb8fc8e, type: 3}
@@ -8002,6 +8013,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5511366638572875092, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
+      propertyPath: statsVisualController
+      value: 
+      objectReference: {fileID: 1382125257}
     - target: {fileID: 5511366638572875095, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_Camera
       value: 

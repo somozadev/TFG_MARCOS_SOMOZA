@@ -48,6 +48,7 @@ public class Menu_Controller : MonoBehaviour
 
     public void NewGame()
     {
+        GameManager.Instance.player.ResetForNewRun();
         GameManager.Instance.dataController.AddAnotherRun();
         DataController.Instance.newRun = true;
         GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
@@ -60,7 +61,8 @@ public class Menu_Controller : MonoBehaviour
     public void CloseConfig() { animator.SetTrigger("CloseConfig"); newGameB.Select(); }
     public void Video() { animator.SetTrigger("OpenVideo"); resolution.Select(); }
     public void CloseVideo() { animator.SetTrigger("CloseVideo"); videoB.Select(); }
-    public void Sound() { animator.SetTrigger("OpenSound"); }
+    public void Sound() { animator.SetTrigger("OpenAudio"); masterSlider.Select();}
+    public void CloseSound() { animator.SetTrigger("CloseAudio");videoB.Select(); }
     public void Progress()
     {
 
@@ -110,6 +112,7 @@ public class Menu_Controller : MonoBehaviour
     {
 
 
+        resolutions = Screen.resolutions;
         resolution.ClearOptions();
 
 

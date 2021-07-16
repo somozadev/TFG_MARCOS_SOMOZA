@@ -24,8 +24,8 @@ public class OnDieCanvas : MonoBehaviour
     public void SetExtraStats()
     {
         runsText.text = "runs: " + GameManager.Instance.dataController.stupidButCoolStats.runs.ToString();
-        deathsText.text = "enemies killed: " + GameManager.Instance.dataController.stupidButCoolStats.deaths.ToString();
-        enemiesKilledText.text ="deaths: " + GameManager.Instance.dataController.stupidButCoolStats.enemiesKilled.ToString();
+        deathsText.text = "enemies killed: " + GameManager.Instance.dataController.stupidButCoolStats.enemiesKilled.ToString();
+        enemiesKilledText.text ="deaths: " + GameManager.Instance.dataController.stupidButCoolStats.deaths.ToString();
     }
     public void SetItems()
     {

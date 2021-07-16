@@ -379,6 +379,12 @@ MonoBehaviour:
       inventory: []
     gameCompletePercentaje: 0
     itemsUnlocked: 
+    coolStats:
+      runs: 0
+      deaths: 0
+      enemiesKilled: 0
+      itemsUnlocked: 0
+      runTime: 0
   ereaseIndex: -1
   saveFiles:
   - {fileID: 266732412}
@@ -1579,7 +1585,19 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 591997939b6e7cb49b4ca6e8d97134fc, type: 3}
     - target: {fileID: 8606833316028862864, guid: a5b5e32125fa6e54e864b054b7fefb79, type: 3}
       propertyPath: m_Transition
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606833316028862864, guid: a5b5e32125fa6e54e864b054b7fefb79, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606833316028862864, guid: a5b5e32125fa6e54e864b054b7fefb79, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606833316028862864, guid: a5b5e32125fa6e54e864b054b7fefb79, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8606833316028862865, guid: a5b5e32125fa6e54e864b054b7fefb79, type: 3}
       propertyPath: m_Sprite

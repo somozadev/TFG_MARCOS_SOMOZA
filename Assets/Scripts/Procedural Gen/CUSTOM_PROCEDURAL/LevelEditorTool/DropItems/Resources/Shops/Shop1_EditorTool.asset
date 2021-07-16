@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Speed_Wings(Clone)
   m_EditorClassIdentifier: 
   itemName: Speed_Wings(Clone)
-  price: 200
+  price: 25
   genre: 3
   item: {fileID: 11400000, guid: abb49935a9d26c14aa06f23bedffa3c3, type: 2}
   prefab: {fileID: 4785109882649467205, guid: 9a30b5c453675d54da6c35a62fccc239, type: 3}
@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Name: Thunder_Shot(Clone)
   m_EditorClassIdentifier: 
   itemName: Thunder_Shot(Clone)
-  price: 200
+  price: 25
   genre: 3
   item: {fileID: 11400000, guid: 748daa24ca0719845a3f1cbf8d1a680f, type: 2}
   prefab: {fileID: 1033983942214322913, guid: cb5dcde4651a61b4c88e14916cfe6a02, type: 3}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: Greek_Glasses(Clone)
   m_EditorClassIdentifier: 
   itemName: Greek_Glasses(Clone)
-  price: 200
+  price: 25
   genre: 3
   item: {fileID: 11400000, guid: e1c8caf57a3558a4d95c5ff817d66bf5, type: 2}
   prefab: {fileID: 6433721087174997626, guid: d91278eec6566f444b47cdb263120e2b, type: 3}

@@ -25,7 +25,8 @@ public class StatsCanvasController : MonoBehaviour
     {
         AssignHp();
         AssignCoins();
-        AssignXp();
+        // AssignXp();
+        statsVisualController.UpdateStats();
         // AssignKeys(); 
     }
     public void AssignXp()
