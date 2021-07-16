@@ -24,7 +24,7 @@ public class BuyableItemsController : MonoBehaviour
         UpdateText();
     }
 
-    public void UpdateText() => lvl.text = "100";// GameManager.Instance.player.playerStats.Level.ToString();
+    public void UpdateText() => lvl.text = GameManager.Instance.player.playerStats.Level.ToString();//"100";// 
     public bool HasSpace(BuyableItem asquer)
     {
         int space = 0;

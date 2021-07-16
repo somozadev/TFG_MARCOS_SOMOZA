@@ -7624,6 +7624,10 @@ PrefabInstance:
       propertyPath: playerEventSystem
       value: 
       objectReference: {fileID: 1282275977}
+    - target: {fileID: 5131711328369970511, guid: f75606856882ba84b820d53f640a4648, type: 3}
+      propertyPath: deleteGame
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5131711328369970544, guid: f75606856882ba84b820d53f640a4648, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

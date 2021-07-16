@@ -63,10 +63,8 @@ public class Menu_Controller : MonoBehaviour
     public void CloseVideo() { animator.SetTrigger("CloseVideo"); videoB.Select(); }
     public void Sound() { animator.SetTrigger("OpenAudio"); masterSlider.Select();}
     public void CloseSound() { animator.SetTrigger("CloseAudio");videoB.Select(); }
-    public void Progress()
-    {
-
-    }
+    public void Progress() {  animator.SetTrigger("OpenProgress"); videoB.Select();}
+    public void CloseProgress() { animator.SetTrigger("CloseProgress"); newGameB.Select();}
     public void Back() => SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true); //SceneController.Instance.LoadScene(SceneName.SaveFileScene);
     public void Exit() => GameManager.Instance.ExitGame();
 

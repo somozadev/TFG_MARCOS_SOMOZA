@@ -59,9 +59,9 @@ public class BuyableItem : MonoBehaviour
     {
         if (state.Equals(BuyableState.NOT_BOUGHT))
         {
-            if (100 >= price)//if (GameManager.Instance.player.playerStats.Level >= price)
+            if (GameManager.Instance.player.playerStats.Level >= price)//if (100 >= price)//
             {
-                //GameManager.Instance.player.playerStats.LevelSpend(price);
+                GameManager.Instance.player.playerStats.LevelSpend(price);
                 price = 0;
                 state = BuyableState.BOUGHT;
                 Debug.Log("BOUGHT ID: " + id);
@@ -123,6 +123,8 @@ public class BuyableItem : MonoBehaviour
 
     public void RestoreCurrentSlot()
     {
+        if (this.equipped.Equals(BuyableEquipped.NOT_EQUIPPED))
+            return;
         string auxId = this.id;
         this.id = gameObject.name;
         this.state = BuyableState.NOT_BOUGHT;
