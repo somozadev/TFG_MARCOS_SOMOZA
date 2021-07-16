@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        speed = Convert.ToInt32(GetComponent<Player>().playerStats.Spd * 1000);
         if (isMoving)
             Move(rawInput);
         if (isAttacking)

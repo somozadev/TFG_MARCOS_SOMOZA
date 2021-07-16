@@ -26,12 +26,18 @@ public class BuyableItem : MonoBehaviour
         {
             equipped = BuyableEquipped.EQUIPPED;
             controller.FillEquipped(this);
+
+            if (!GameManager.Instance.player.rocks.currentItems.Contains(id))
+                GameManager.Instance.player.rocks.currentItems.Add(id);
             GetComponent<Button>().interactable = false;
         }
     }
     public void Equip()
     {
         equipped = BuyableEquipped.EQUIPPED;
+
+        if (!GameManager.Instance.player.rocks.currentItems.Contains(id))
+            GameManager.Instance.player.rocks.currentItems.Add(id);
         PlayerPrefs.SetInt(id + "_Equipped", 1);
     }
 
@@ -59,7 +65,7 @@ public class BuyableItem : MonoBehaviour
     {
         if (state.Equals(BuyableState.NOT_BOUGHT))
         {
-            if (GameManager.Instance.player.playerStats.Level >= price)//if (100 >= price)//
+            if (PlayerPrefs.GetInt("level", 0) >= price)//if (100 >= price)//
             {
                 GameManager.Instance.player.playerStats.LevelSpend(price);
                 price = 0;
@@ -129,6 +135,8 @@ public class BuyableItem : MonoBehaviour
         this.id = gameObject.name;
         this.state = BuyableState.NOT_BOUGHT;
         this.equipped = BuyableEquipped.NOT_EQUIPPED;
+        GameManager.Instance.player.rocks.currentItems.Remove(auxId);
+
         PlayerPrefs.SetInt(auxId + "_Equipped", 0);
         PlayerPrefs.Save();
         this.price = 0;

@@ -7938,8 +7938,8 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5511366636991874747, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
-      propertyPath: playerStats.attrate
-      value: 1.72
+      propertyPath: playerStats.hp
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5511366636991874748, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: attRate

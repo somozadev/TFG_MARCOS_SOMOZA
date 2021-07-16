@@ -16,9 +16,10 @@ public class CurrentItemsVisual : MonoBehaviour
     }
     public void ClearItemsVisuals()
     {
-        foreach(Transform child in GetComponentsInChildren<Transform>())
+        foreach (Transform child in GetComponentsInChildren<Transform>())
         {
-            Destroy(child.gameObject);
+            if (child.gameObject != gameObject)
+                Destroy(child.gameObject);
         }
     }
     public void InitializeInventory()

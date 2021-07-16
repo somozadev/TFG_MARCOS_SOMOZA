@@ -4914,10 +4914,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5511366636991874749}
+  - component: {fileID: 3147588328546866264}
   - component: {fileID: 5511366636991874747}
-  - component: {fileID: 992693645665958868}
   - component: {fileID: 5511366636991874748}
   - component: {fileID: 5511366636991874751}
+  - component: {fileID: 992693645665958868}
   - component: {fileID: 5511366636991874750}
   - component: {fileID: 194264892842691413}
   - component: {fileID: 664441214894253085}
@@ -4947,6 +4948,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3147588328546866264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5511366636991874746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6016f3f6fe5f64542ac7013c299b9250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItems: []
 --- !u!114 &5511366636991874747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4961,7 +4975,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extraStats:
     numberOfShots: 1
+    shotsSize: 0
     electricShots: 0
+    sales: 0
+    dropRate: 0
   playerStats:
     isDead: 0
     level: 0
@@ -4982,23 +4999,8 @@ MonoBehaviour:
   currentItemsVisual: {fileID: 1015565604172474447}
   particles: {fileID: 992693645665958868}
   statsCanvasController: {fileID: 5511366638572875092}
+  rocks: {fileID: 3147588328546866264}
   animator: {fileID: 0}
---- !u!114 &992693645665958868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511366636991874746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1daed5157bae47b4693fdf15bed0c0d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  getHit: {fileID: 6076921176387516529}
-  getHeal: {fileID: 4572832161564419344}
-  getCoin: {fileID: 5920432994466946926}
-  getLvlUp: {fileID: 4013980780962216692}
 --- !u!114 &5511366636991874748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5086,6 +5088,22 @@ MonoBehaviour:
   m_DefaultActionMap: Player_default
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &992693645665958868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5511366636991874746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1daed5157bae47b4693fdf15bed0c0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getHit: {fileID: 6076921176387516529}
+  getHeal: {fileID: 4572832161564419344}
+  getCoin: {fileID: 5920432994466946926}
+  getLvlUp: {fileID: 4013980780962216692}
 --- !u!54 &5511366636991874750
 Rigidbody:
   m_ObjectHideFlags: 0

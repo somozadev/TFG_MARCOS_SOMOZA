@@ -34,7 +34,7 @@ public class PlayerStats : IDamageable
 
     #region GETTERS
     public bool IsDdead { get { return isDead; } set { isDead = value; } }
-    public int Level { get { return level; } }
+    public int Level { get { return level; } set { level = value; } }
     public int Xp { get { return xp; } }
     public int CurrentXp { get { return currentXp; } set { currentXp = value; } }
     public int Hp { get { return hp; } }
@@ -80,6 +80,8 @@ public class PlayerStats : IDamageable
         level++; this.currentXp = 0; this.xp += (int)Mathf.Pow(level, 2f);
         GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0; GameManager.Instance.player.particles.GetLvlUpParticle();
         GameManager.Instance.soundManager.Play("LvlUp");
+        PlayerPrefs.SetInt("level", level);
+        PlayerPrefs.Save();
     }
     public void AddItem(Item item) => inventory.Add(item);
 
@@ -91,12 +93,27 @@ public class PlayerStats : IDamageable
         GameManager.Instance.player.particles.GetHealParticle();
 
     }
-    public void AddMaxHp(int hp) => this.hp += hp;
+    public void SetCurrentHpToMax() { this.currentHp = hp; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
+    public void AddMaxHp(int hp) { this.hp += hp; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
+    public void AddDef(float def) { this.def += def; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
+    public void AddSpd(float spd) { this.spd += spd; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
+    public void AddAttr(float atr) { this.attrate += atr; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
+    public void AddDmg(float dmg) { this.dmg += dmg; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
+    public void HpRegen(float value)
+    {
 
+    }
+    public void HpSteal(float value)
+    {
+
+    }
+    public void InvOnNewRoom(float time)
+    {
+
+    }
     public bool ShouldAddXp(int currentXp) => this.currentXp + currentXp >= this.xp ? true : false;
     public void AddXp(int currentXp) => this.currentXp += currentXp;
     public void AddMaxXp(int xp) => this.xp += xp;
-    public void AddDmg(float dmg) { this.dmg += dmg; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
 
     public void RecieveDamage(float cuantity)
     {
@@ -139,20 +156,34 @@ public class PlayerStats : IDamageable
         // Time.timeScale = 0;
     }
     #endregion
-
+    public PlayerStats BaseStats()
+    {
+        PlayerStats playerStats = new PlayerStats(PlayerPrefs.GetInt("level", 0), 100, 0, 100, 50, 2, 5, 1, 1, 10, 10, 0, new List<Item>());
+        return playerStats;
+    }
 }
 
 [System.Serializable]
 public class ExtraStats
 {
     [SerializeField] private int numberOfShots;
+    [SerializeField] private float shotsSize = 0.5f;
     [SerializeField] private bool electricShots;
-
+    [SerializeField] private bool sales;
+    [SerializeField] private float dropRate = 0.0f;
 
 
     public int NumberOfShots { get { return numberOfShots; } set { numberOfShots = value; } }
+    public float ShotsSize { get { return shotsSize; } set { shotsSize = value; } }
     public bool ElectricShots { get { return electricShots; } set { electricShots = value; } }
+    public bool Sales { get { return sales; } set { sales = value; } }
+    public float DropRate { get { return dropRate; } set { dropRate = value; } }
 
+    public ExtraStats BaseStats()
+    {
+        ExtraStats extraStats = new ExtraStats(1);
+        return extraStats;        
+    }
 
     public ExtraStats(int numberOfShots)
     {

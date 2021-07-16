@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public PlayerParticles particles;
     [Header("UI stats canvas")]
     public StatsCanvasController statsCanvasController;
+    [Header("Player rocks")]
+    public PlayerRocks rocks;
     [Header("Player animator")]
     public Animator animator;
 
@@ -27,6 +29,8 @@ public class Player : MonoBehaviour
     private void Awake() { playerStats.ResetOnDeadEvent(); }
     private void Start()
     {
+        playerStats.Level = PlayerPrefs.GetInt("level", 0);
+
         // DataController.Instance.GetPlayerStats(playerStats);    
 
     }
@@ -41,14 +45,22 @@ public class Player : MonoBehaviour
     public void ResetForNewRun()
     {
         animator.SetBool("Invincible", false);
-        playerStats.CurrentHp = playerStats.Hp;
-        playerStats.SoulCoins = 0;
+        // playerStats.CurrentHp = playerStats.Hp;
+        // playerStats.SoulCoins = 0;
+        // playerStats.Spd = 5;
+        // playerStats.Inventory.Clear();
+        playerStats = playerStats.BaseStats();
+        extraStats = extraStats.BaseStats();
+        // rocks.ClearForLostRun();
+        GameManager.Instance.player.rocks.ApplyForRun();
+
         statsCanvasController.gameObject.SetActive(true);
         currentItemsVisual.gameObject.SetActive(true);
+        currentItemsVisual.ClearItemsVisuals();
     }
 
-    private void OnEnable()
-    {
-        ResetForNewRun();
-    }
+    //private void OnEnable()
+    //{
+    //    ResetForNewRun();
+    //}
 }
