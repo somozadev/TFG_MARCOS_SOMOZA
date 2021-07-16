@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
         initialPos = transform.position;
         topFire.material.SetVector("_Seed", new Vector4(Random.Range(0, 10), Random.Range(0, 10), 0, 0));
         rb = GetComponent<Rigidbody>();
+        transform.localScale = Vector3.one * GameManager.Instance.player.extraStats.ShotsSize;
     }
     void Start()
     {
@@ -36,6 +37,10 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().RecieveDamage(GameManager.Instance.player.playerStats.Dmg);
+            if (GameManager.Instance.player.extraStats.HpSteal)
+            {
+                GameManager.Instance.player.playerStats.CurrentHp += GameManager.Instance.player.extraStats.HpStealValue;
+            }
             Destroy(gameObject);
         }
 
@@ -46,6 +51,10 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().RecieveDamage(GameManager.Instance.player.playerStats.Dmg);
+            if (GameManager.Instance.player.extraStats.HpSteal)
+            {
+                GameManager.Instance.player.playerStats.CurrentHp += GameManager.Instance.player.extraStats.HpStealValue;
+            }
             Destroy(gameObject);
         }
     }

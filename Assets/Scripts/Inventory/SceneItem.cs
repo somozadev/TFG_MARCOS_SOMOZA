@@ -127,22 +127,7 @@ public class SceneItem : MonoBehaviour
             case ItemType.ITEM:
                 AddItemToInventory(item);
                 GameManager.Instance.player.currentItemsVisual.AddNewItem(item);
-                switch (item.Id)
-                {
-                    case 2: //Greek glasses
-                        item.DoubleShot();
-                        break;
-                    case 3:// Wings of jisus
-                        item.AddWings();
-                        break;
-                    case 4:// Speed Bow
-                        item.AddRange(5f);
-                        break;
-                    case 15:// Thunder Shot
-                        item.AddDmg(20f);
-                        item.AddThunderShot();
-                        break;
-                }
+            
                 break;
 
         }

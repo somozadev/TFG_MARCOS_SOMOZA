@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 [System.Serializable]
 public class PlayerStats : IDamageable
@@ -13,10 +14,10 @@ public class PlayerStats : IDamageable
     [SerializeField] private bool isDead;
     [Space(20)]
     [SerializeField] private int level;
-    [SerializeField] private int hp;
+    [SerializeField] private float hp;
     [SerializeField] private int xp;
     [SerializeField] private int currentXp;
-    [SerializeField] private int currentHp;
+    [SerializeField] private float currentHp;
 
     [SerializeField] private float def;
     [SerializeField] private float dmg;
@@ -37,8 +38,8 @@ public class PlayerStats : IDamageable
     public int Level { get { return level; } set { level = value; } }
     public int Xp { get { return xp; } }
     public int CurrentXp { get { return currentXp; } set { currentXp = value; } }
-    public int Hp { get { return hp; } }
-    public int CurrentHp { get { return currentHp; } set { currentHp = value; } }
+    public float Hp { get { return hp; } }
+    public float CurrentHp { get { return currentHp; } set { currentHp = value; } }
     public float Dmg { get { return dmg; } set { dmg = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
     public float Spd { get { return spd; } set { spd = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
     public float Def { get { return def; } set { def = value; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); } }
@@ -99,16 +100,55 @@ public class PlayerStats : IDamageable
     public void AddSpd(float spd) { this.spd += spd; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
     public void AddAttr(float atr) { this.attrate += atr; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
     public void AddDmg(float dmg) { this.dmg += dmg; GameManager.Instance.player.statsCanvasController.UpdateCanvas(); }
+
     public void HpRegen(float value)
     {
-
+        GameManager.Instance.player.extraStats.Regen = true;
+        GameManager.Instance.StartCoroutine(Regen(value));
     }
-    public void HpSteal(float value)
+
+    public float timeElapsed = 0;
+    public float timeElapsed2 = 0;
+    private IEnumerator Regen(float cuantity)
     {
+        while (GameManager.Instance.player.extraStats.Regen == true)
+        {
+            while (timeElapsed <= 10f)
+            {
+                timeElapsed += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            while (timeElapsed > 10f)
+            {
+                timeElapsed2 += Time.deltaTime;
+                if (timeElapsed2 > 3f)
+                {
+                    currentHp += cuantity;
+                    GameManager.Instance.player.statsCanvasController.UpdateCanvas();
+                    timeElapsed2 = 0;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+        }
 
     }
+
     public void InvOnNewRoom(float time)
     {
+        GameManager.Instance.player.extraStats.Inv = true;
+        GameManager.Instance.player.extraStats.InvValue = time;
+    }
+    public void InvOnNewRoom()
+    {
+        if (GameManager.Instance.player.extraStats.Inv)
+            GameManager.Instance.StartCoroutine((InvXSg(GameManager.Instance.player.extraStats.InvValue)));
+
+    }
+    private IEnumerator InvXSg(float time)
+    {
+        GameManager.Instance.player.animator.SetBool("Invincible", true);
+        yield return new WaitForSeconds(time);
+        GameManager.Instance.player.animator.SetBool("Invincible", false);
 
     }
     public bool ShouldAddXp(int currentXp) => this.currentXp + currentXp >= this.xp ? true : false;
@@ -117,6 +157,8 @@ public class PlayerStats : IDamageable
 
     public void RecieveDamage(float cuantity)
     {
+        timeElapsed = 0;
+        timeElapsed2 = 0;
         if (GameManager.Instance.player.animator.GetBool("Invincible"))
             return;
         GameManager.Instance.soundManager.Play("PlayerGetHit");
@@ -171,7 +213,17 @@ public class ExtraStats
     [SerializeField] private bool electricShots;
     [SerializeField] private bool sales;
     [SerializeField] private float dropRate = 0.0f;
+    [SerializeField] private bool hpSteal = false;
+    [SerializeField] private float hpStealValue = 0f;
+    [SerializeField] private bool regen = false;
+    [SerializeField] private bool inv = false;
+    [SerializeField] private float invValue = 0f;
 
+    public float InvValue { get { return invValue; } set { invValue = value; } }
+    public bool Inv { get { return inv; } set { inv = value; } }
+    public bool Regen { get { return regen; } set { regen = value; } }
+    public bool HpSteal { get { return hpSteal; } set { hpSteal = value; } }
+    public float HpStealValue { get { return hpStealValue; } set { hpStealValue = value; } }
 
     public int NumberOfShots { get { return numberOfShots; } set { numberOfShots = value; } }
     public float ShotsSize { get { return shotsSize; } set { shotsSize = value; } }
@@ -182,12 +234,18 @@ public class ExtraStats
     public ExtraStats BaseStats()
     {
         ExtraStats extraStats = new ExtraStats(1);
-        return extraStats;        
+        return extraStats;
     }
 
     public ExtraStats(int numberOfShots)
     {
         this.numberOfShots = numberOfShots;
         electricShots = false;
+        regen = false;
+        sales = false;
+        hpSteal = false;
+        hpStealValue = 0;
+        dropRate = 0;
+        shotsSize = 0.5f;
     }
 }

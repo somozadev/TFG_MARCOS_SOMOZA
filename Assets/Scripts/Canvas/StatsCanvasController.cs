@@ -66,7 +66,7 @@ public class StatsCanvasController : MonoBehaviour
     public void AssignKeys() => keys.text = GameManager.Instance.player.playerStats.Inventory.Find(x => x.Id == 3).Cuantity.ToString("000");
     public void AssignHp()
     {
-        health.text = GameManager.Instance.player.playerStats.CurrentHp.ToString("000");
+        health.text = ((int)GameManager.Instance.player.playerStats.CurrentHp).ToString("000");
         //if (!animator.GetBool("Hp_Coin")){
         //    animator.SetBool("Hp_Coin", true);Debug.LogWarning("HpCoin goes Brrrrrrrr");}
     }

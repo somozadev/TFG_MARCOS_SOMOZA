@@ -13,7 +13,7 @@ public class ShopComponent : MonoBehaviour
 
     private void Awake()
     {
-        if(GetComponentInParent<Room>() != null)
+        if (GetComponentInParent<Room>() != null)
             GetComponentInParent<Room>().onRoomCompleted += SubsInit;
     }
 
@@ -38,10 +38,16 @@ public class ShopComponent : MonoBehaviour
         {
             GameObject aux = Instantiate(item.Prefab, itemSpots[i].position, Quaternion.identity, itemSpots[i].transform);
             aux.GetComponent<SceneItem>().item = item.Item;
-            aux.GetComponent<SceneItem>().item.Price = item.Price;
+            if (GameManager.Instance.player.extraStats.Sales)
+                aux.GetComponent<SceneItem>().item.Price = (int) item.Price / 2;
+            else
+                aux.GetComponent<SceneItem>().item.Price = item.Price;
             aux.GetComponent<SceneItem>().action = ItemAction.BUY;
             aux.GetComponent<SceneItem>().Initialize();
-            itemSpots[shop.shopItems.IndexOf(item)].GetComponentInChildren<TMP_Text>().text = item.Price.ToString();
+            if (GameManager.Instance.player.extraStats.Sales)
+                itemSpots[shop.shopItems.IndexOf(item)].GetComponentInChildren<TMP_Text>().text = ((int)item.Price / 2).ToString();
+            else
+                itemSpots[shop.shopItems.IndexOf(item)].GetComponentInChildren<TMP_Text>().text = item.Price.ToString();
             itemSpots[i].GetComponent<ShopSlot>().itemToSell = aux;
             i++;
         }

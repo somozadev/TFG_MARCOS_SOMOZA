@@ -59,8 +59,8 @@ public class Player : MonoBehaviour
         currentItemsVisual.ClearItemsVisuals();
     }
 
-    //private void OnEnable()
-    //{
-    //    ResetForNewRun();
-    //}
+    private void OnEnable()
+    {
+     playerStats.InvOnNewRoom();
+    }
 }

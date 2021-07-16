@@ -8003,7 +8003,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511366637749689059, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5511366637855441880, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8015,7 +8015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511366638057311960, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5511366638572875092, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: statsVisualController

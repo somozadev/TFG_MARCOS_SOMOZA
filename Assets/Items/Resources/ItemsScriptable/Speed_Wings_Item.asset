@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 101
   cuantity: 1
-  price: 25
+  price: 12
   isUnlocked: 1
   type: 7
-  itemSprite: {fileID: 1202984965197363600, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}
+  itemSprite: {fileID: 5543941588292853863, guid: 6f79ae4c356c26d448be9add98734b06, type: 3}

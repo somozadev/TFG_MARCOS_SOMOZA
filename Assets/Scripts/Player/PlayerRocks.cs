@@ -24,15 +24,18 @@ public class PlayerRocks : MonoBehaviour
             //GameManager.Instance.player.playerStats.SetHpRockVisuals();
 
         }
+        //FINISHED
         public void ApplyDmgRock()
         {
             GameManager.Instance.player.playerStats.AddMaxHp(-50);
             GameManager.Instance.player.playerStats.AddDmg(0.7f);
-            GameManager.Instance.player.playerStats.SetCurrentHpToMax();
-            GameManager.Instance.player.playerStats.HpSteal(0.05f);
+            GameManager.Instance.player.playerStats.SetCurrentHpToMax(); 
+            GameManager.Instance.player.extraStats.HpSteal  = true;
+            GameManager.Instance.player.extraStats.HpStealValue= 0.02f;
             //GameManager.Instance.player.playerStats.SetDmgRockVisuals();
 
         }
+        //FINISHED
         public void ApplyDefRock()
         {
             GameManager.Instance.player.playerStats.AddDef(15);
@@ -40,35 +43,43 @@ public class PlayerRocks : MonoBehaviour
             //GameManager.Instance.player.playerStats.SetDefRockVisuals();
 
         }
+        //FINISHED
         public void ApplySpdRock()
         {
-
             GameManager.Instance.player.playerStats.AddDef(-7);
+            GameManager.Instance.player.playerStats.AddDmg(-1.2f);
             GameManager.Instance.player.playerStats.AddSpd(1.2f);
-            GameManager.Instance.player.playerStats.AddAttr(-0.6f);
+            GameManager.Instance.player.playerStats.AddAttr(-4.5f);
             //GameManager.Instance.player.playerStats.SetSpdRockVisuals();
         }
+        //FINISHED
         public void ApplyInvRock()
         {
             GameManager.Instance.player.playerStats.InvOnNewRoom(6f);
             //GameManager.Instance.player.playerStats.SetInvRockVisuals();
 
         }
+        //FINISHED
         public void ApplyDropRock()
         {
             GameManager.Instance.player.extraStats.DropRate = 50;
             //GameManager.Instance.player.playerStats.SeDropRockVisuals();
         }
+        //FINISHED
         public void ApplySalesRock()
         {
             GameManager.Instance.player.extraStats.Sales = true;
             //GameManager.Instance.player.playerStats.SeSalesRockVisuals();
         }
+        //FINISHED
         public void ApplyGrwRock()
         {
             GameManager.Instance.player.extraStats.ShotsSize += 2f;
+            GameManager.Instance.player.playerStats.Dmg += 2f;
+            GameManager.Instance.player.playerStats.AddAttr(15f);
             //GameManager.Instance.player.playerStats.SeGrwvRockVisuals();
         }
+        //FINISHED
         public void ApplyRndbRock()
         {
             List<string> randomList = new List<string>();

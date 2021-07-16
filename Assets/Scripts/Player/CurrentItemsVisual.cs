@@ -13,6 +13,22 @@ public class CurrentItemsVisual : MonoBehaviour
     {
         GameObject aux = Instantiate(iconPrefab, Vector3.zero, Quaternion.identity, transform);
         aux.GetComponent<Image>().sprite = item.ItemSprite;
+        switch (item.Id)
+        {
+            case 2: //Greek glasses
+                item.DoubleShot();
+                break;
+            case 3:// Wings of jisus
+                item.AddWings();
+                break;
+            case 4:// Speed Bow
+                item.AddRange(5f);
+                break;
+            case 15:// Thunder Shot
+                item.AddDmg(20f);
+                item.AddThunderShot();
+                break;
+        }
     }
     public void ClearItemsVisuals()
     {
