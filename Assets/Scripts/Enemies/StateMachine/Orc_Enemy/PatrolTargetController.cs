@@ -43,7 +43,7 @@ namespace StateMachine.Orc_Enemy
         {
             if (Physics.Raycast(transform.position, direction, out hit, distance, layerMask))
             {
-                Debug.Log(hit.transform.gameObject.layer);
+                // Debug.Log(hit.transform.gameObject.layer);
                 // Debug.Log(" LayerMask.GetMask(Player):" +  LayerMask.GetMask("Player"));
                 if (hit.transform.gameObject.layer != 13) //LayerMask.GetMask("Player") should be 13 but somehow marks 8192
                 {

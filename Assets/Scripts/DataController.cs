@@ -43,7 +43,7 @@ public class DataController : MonoBehaviour
 
 
 
-    public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); PlayerPrefs.Save();}
+    public void SetPlayerStats(PlayerStats playerStats) { PlayerPrefs.SetString("PlayerStats", JsonUtility.ToJson(playerStats)); PlayerPrefs.Save(); }
     public void GetPlayerStats(PlayerStats playerStats)
     {
         PlayerStats stats = new PlayerStats(0, 100, 0, 100, 50, 1, 5, 1, 1, 1, 7, 0, new List<Item>());
@@ -338,6 +338,14 @@ public class DataController : MonoBehaviour
         IList<GameObject> stageFirstsResult = loadFirsts.Result;
         IList<GameObject> stageBossesResult = loadBosses.Result;
         IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
+
+
+        // if (stageFirstsResult.Count > 0)
+        //     stageFirstsResult.Shuffle();
+        // if (stageBossesResult.Count > 0)
+        //     stageBossesResult.Shuffle();
+
+
         if (numberOf > stageAllScenesResult.Count)
             numberOf = stageAllScenesResult.Count;
         for (int i = 0; i < numberOf; i++)
@@ -348,6 +356,7 @@ public class DataController : MonoBehaviour
             else
                 currentGroup.LevelGroupScenes.Add(stageAllScenesResult[i]);
         }
+        currentGroup.LevelGroupScenes.Shuffle();
         GameObject firstScene, bossScene;
         foreach (GameObject first in stageFirstsResult)
         {

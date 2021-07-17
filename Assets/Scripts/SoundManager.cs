@@ -129,7 +129,7 @@ public class SoundManager : MonoBehaviour
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        Debug.Log("Playing: " + s.name);
+        // Debug.Log("Playing: " + s.name);
         s.sound.source.Play();
     }
     public void Pause(string name)
