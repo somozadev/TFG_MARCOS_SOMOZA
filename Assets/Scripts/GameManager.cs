@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Physics.IgnoreLayerCollision(10, 11, true);
+        Physics.IgnoreLayerCollision(11, 11, true);
         if (deleteGame) DataController.Instance.DeleteGame();
         print("Gamemanager started! ");
     }

@@ -15,16 +15,16 @@ public class CurrentItemsVisual : MonoBehaviour
         aux.GetComponent<Image>().sprite = item.ItemSprite;
         switch (item.Id)
         {
-            case 2: //Greek glasses
+            case 103: //Greek glasses
                 item.DoubleShot();
                 break;
-            case 3:// Wings of jisus
+            case 101:// Wings of jisus
                 item.AddWings();
                 break;
-            case 4:// Speed Bow
+            case 100:// Speed Bow
                 item.AddRange(5f);
                 break;
-            case 15:// Thunder Shot
+            case 102:// Thunder Shot
                 item.AddDmg(20f);
                 item.AddThunderShot();
                 break;

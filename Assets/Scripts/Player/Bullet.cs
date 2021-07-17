@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         GameManager.Instance.player.playerMovement.Bullets.Remove(gameObject);
+        GameManager.Instance.player.playerMovement.Bullets.RemoveAll(item => item == null);
         Destroy(gameObject);
     }
 

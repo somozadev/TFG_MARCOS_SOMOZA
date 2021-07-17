@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInput PlayerInput { get { return playerInput; } }
     public bool IsInteracting { get { return isInteracting; } }
     public Rigidbody Rb { get { return rb; } }
-    public List<GameObject> Bullets { get { return bullets; } }
+    public List<GameObject> Bullets { get { return bullets; } set {bullets = value;}}
 
     private void Awake()
     {

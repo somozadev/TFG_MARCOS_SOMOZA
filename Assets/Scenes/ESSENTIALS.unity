@@ -7931,7 +7931,7 @@ PrefabInstance:
       objectReference: {fileID: 103568194}
     - target: {fileID: 5511366636991874747, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: extraStats.electricShots
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5511366636991874747, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: extraStats.numberOfShots
@@ -7943,7 +7943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511366636991874748, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: attRate
-      value: 3.36
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5511366636991874749, guid: 25f8e2874c29d164a886bdf8cabc0ff5, type: 3}
       propertyPath: m_LocalPosition.x

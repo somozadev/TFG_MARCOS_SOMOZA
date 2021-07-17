@@ -7,6 +7,13 @@ public class UpdateLine : MonoBehaviour
     GameObject init;
     List<GameObject> bullets;
     bool updt;
+    [SerializeField] int index;
+    private void Awake()
+    {
+        //     GetComponent<LineRenderer>().SetPosition(0, init.transform.position);
+        //     GetComponent<LineRenderer>().SetPosition(1, init.transform.position);
+
+    }
     private void FixedUpdate()
     {
         if (updt)
@@ -16,25 +23,35 @@ public class UpdateLine : MonoBehaviour
     }
     private void Perf()
     {
+        if (bullets.Count <= 1)
+            return;
+
         LineRenderer newLine = GetComponent<LineRenderer>();
         if (init == null)
         {
-            StartCoroutine(WaitToDestroyLineRenderer(newLine, 0.2f));
+            StartCoroutine(WaitToDestroyLineRenderer(newLine, 0f));
             return;
         }
-        newLine.SetPosition(0, init.transform.position);
 
 
-        if (bullets.IndexOf(init) - 1 >= 0)
+
+
+
+        index = bullets.IndexOf(init);
+
+        if (index > 0)
         {
             if (init != null)
             {
-                Vector3 pos2 = bullets[bullets.IndexOf(init) - 1].transform.position;
+                Vector3 pos2 = bullets[bullets.IndexOf(init)-1].transform.position;
+                newLine.SetPosition(0, init.transform.position);
                 newLine.SetPosition(1, pos2);
+
             }
 
         }
-        StartCoroutine(WaitToDestroyLineRenderer(newLine, 2f));
+        transform.parent = init.transform;
+        StartCoroutine(WaitToDestroyLineRenderer(newLine, 8f));
 
     }
     public void DoUpdateLine(GameObject init, List<GameObject> bullets)
