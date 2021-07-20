@@ -42,6 +42,7 @@ public class SceneItem : MonoBehaviour
 
     public void Contact()
     {
+        Initialize();
         if (canInteract)
         {
             if (action.Equals(ItemAction.PICK))

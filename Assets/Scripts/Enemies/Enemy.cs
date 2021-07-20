@@ -17,11 +17,15 @@ public class Enemy : MonoBehaviour, IDamageable, IDamager
 
     private void Awake()
     {
-        hpIndicator = GetComponentInChildren<EnemyHpIndicator>();
+        if (GetComponentInChildren<EnemyHpIndicator>() != null)
+            hpIndicator = GetComponentInChildren<EnemyHpIndicator>();
         initialStats = stats;
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = stats.Spd;
-        agent.stoppingDistance = stats.AttackRange;
+        if (GetComponent<NavMeshAgent>() != null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+            agent.speed = stats.Spd;
+            agent.stoppingDistance = stats.AttackRange;
+        }
 
     }
 

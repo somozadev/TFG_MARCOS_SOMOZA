@@ -14,6 +14,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "AttackDir",
+                    "type": "Value",
+                    "id": "1756e603-8a0a-487b-8172-7c5f2fe2ae5f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "d35e73ee-09d6-4b5d-8e79-b0e72c1c5a38",
@@ -30,14 +38,6 @@
                     "interactions": "Press(behavior=2)"
                 },
                 {
-                    "name": "AttackDir",
-                    "type": "Value",
-                    "id": "1756e603-8a0a-487b-8172-7c5f2fe2ae5f",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "13141e38-fdd5-4513-a95e-963ff81b0bd1",
@@ -47,72 +47,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "WASD",
-                    "id": "2bc0abf5-f0da-4553-8efd-15fcdc04bf90",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movimiento",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "e0dbee32-b5a7-4d46-9f08-a1c9770bf440",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movimiento",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "746712df-8e3d-4bdc-a73e-dbe0bc842d9d",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movimiento",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "02836445-6e29-4e95-a3ee-ba67c39c8bb3",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movimiento",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "da9f1200-5bcd-4492-8802-437eaead250b",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movimiento",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "59b4f28b-a759-4209-9b70-2f808b5daa71",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Movimiento",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "4db2f9b4-b7b2-4510-a15d-65fa26d5b82f",
@@ -154,6 +88,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb640d93-a233-49d0-96d5-e0022cdf1261",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc0f12d6-748a-486a-b753-cb9cc56e3ef2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -224,24 +180,68 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "fb640d93-a233-49d0-96d5-e0022cdf1261",
-                    "path": "<Gamepad>/start",
+                    "name": "WASD",
+                    "id": "2bc0abf5-f0da-4553-8efd-15fcdc04bf90",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Pause",
-                    "isComposite": false,
+                    "groups": "",
+                    "action": "Movimiento",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "dc0f12d6-748a-486a-b753-cb9cc56e3ef2",
-                    "path": "<Keyboard>/escape",
+                    "name": "up",
+                    "id": "e0dbee32-b5a7-4d46-9f08-a1c9770bf440",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Pause",
+                    "action": "Movimiento",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "746712df-8e3d-4bdc-a73e-dbe0bc842d9d",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movimiento",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "02836445-6e29-4e95-a3ee-ba67c39c8bb3",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movimiento",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "da9f1200-5bcd-4492-8802-437eaead250b",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Movimiento",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "59b4f28b-a759-4209-9b70-2f808b5daa71",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Movimiento",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

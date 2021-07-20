@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace StateMachine
 {
-    [RequireComponent(typeof(NavMeshAgent))]
+    // [RequireComponent(typeof(NavMeshAgent))]
     public class StateMachine : MonoBehaviour
     {
         public string currentStateName;
@@ -17,8 +17,10 @@ namespace StateMachine
         private void Awake()
         {
             enemy = GetComponent<Enemy>();
-            navAgent = enemy.agent;
-            animator = enemy.animator;
+            if (enemy.agent != null)
+                navAgent = enemy.agent;
+            if (enemy.animator != null)
+                animator = enemy.animator;
         }
 
         // public virtual void OnEnable() { currentState = pursuitState; }
