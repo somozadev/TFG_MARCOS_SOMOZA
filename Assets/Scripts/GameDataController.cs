@@ -137,7 +137,7 @@ public class GameData
     public StupidButCoolStats coolStats; //ya se actualiza, en DataControler.instance.UpdateStupidButCoolGameStats(). llamada on death event player.
 
 
-    public GameData() { seed = PlayerPrefs.GetString("seed","null"); }
+    public GameData() {  }//seed = PlayerPrefs.GetString("seed","null");
     public GameData(string seed, PlayerStats playerStats, float gameCompletePercentaje, List<bool> itemsUnlocked)
     {
         this.seed = seed;

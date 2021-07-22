@@ -52,7 +52,7 @@ MonoBehaviour:
   waitDestroyTime: 4
   h: 5
   g: -18
-  debugPath: 0
+  debugPath: 1
 --- !u!33 &1302273086925453815
 MeshFilter:
   m_ObjectHideFlags: 0

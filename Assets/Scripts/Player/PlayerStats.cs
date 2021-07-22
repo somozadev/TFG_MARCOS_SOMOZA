@@ -73,6 +73,9 @@ public class PlayerStats : IDamageable
     public void LevelSpend(int amount)
     {
         level -= amount;
+        
+        PlayerPrefs.SetInt("level", level);
+        PlayerPrefs.Save();
         if (GameManager.Instance.statsCanvas != null)
             GameManager.Instance.statsCanvas.XpProgress.fillAmount = 0;
     }

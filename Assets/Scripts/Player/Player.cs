@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     {
         if (DataController.Instance.newRun)
         {
-            DataController.Instance.SetPlayerStats(playerStats);
+            // DataController.Instance.SetPlayerStats(playerStats);
             PlayerPrefs.Save();
         }
     }
@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
         statsCanvasController.gameObject.SetActive(true);
         currentItemsVisual.gameObject.SetActive(true);
         currentItemsVisual.ClearItemsVisuals();
+        statsCanvasController.UpdateCanvas();
     }
 
     private void OnEnable()

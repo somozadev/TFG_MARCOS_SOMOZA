@@ -10,6 +10,8 @@ public class BuyableItem : MonoBehaviour
     public Sprite image;
     public BuyableState state;
     public BuyableEquipped equipped;
+    ColorBlock colors;
+    ColorBlock colorsInvalid;
 
     public bool chosedToEquipped;
 
@@ -18,6 +20,9 @@ public class BuyableItem : MonoBehaviour
     private void Awake()
     {
         id = gameObject.name;
+        colors = GetComponent<Button>().colors;
+        colorsInvalid = GetComponent<Button>().colors;
+        colorsInvalid.normalColor = new Color32(255, 174, 174, 255);
     }
 
     private void Start()
@@ -67,7 +72,9 @@ public class BuyableItem : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("level", 0) >= price)//if (100 >= price)//
             {
+                GetComponent<Button>().colors = colors;
                 GameManager.Instance.player.playerStats.LevelSpend(price);
+                Debug.LogError("LEVEL BE LIKE WOW>"+PlayerPrefs.GetInt("level", 0));
                 price = 0;
                 state = BuyableState.BOUGHT;
                 Debug.Log("BOUGHT ID: " + id);
@@ -75,6 +82,10 @@ public class BuyableItem : MonoBehaviour
                 PlayerPrefs.Save();
                 controller.UpdateText();
                 GetComponentInChildren<TMP_Text>().text = "BOUGHT";
+            }
+            else
+            {
+                GetComponent<Button>().colors = colorsInvalid;
             }
         }
         else
