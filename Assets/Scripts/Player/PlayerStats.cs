@@ -203,7 +203,7 @@ public class PlayerStats : IDamageable
     #endregion
     public PlayerStats BaseStats()
     {
-        PlayerStats playerStats = new PlayerStats(PlayerPrefs.GetInt("level", 0), 100, 0, 100, 50, 2, 5, 1, 1, 10, 10, 0, new List<Item>());
+        PlayerStats playerStats = new PlayerStats(PlayerPrefs.GetInt("level", 0), 100, 0, 100, 50, 2.5f, 5, 1, 1, 6.5f, 10, 0, new List<Item>());
         return playerStats;
     }
 }

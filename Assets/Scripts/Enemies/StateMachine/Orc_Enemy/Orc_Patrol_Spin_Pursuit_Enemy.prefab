@@ -6791,7 +6791,7 @@ MonoBehaviour:
     shootingRange: 0
     pursuitRange: 5
     attrate: 0
-    dropXp: 2
+    dropXp: 25
     dropItem: {fileID: 4207033218878212018, guid: 80cb4b1f74e720348bd04704f940a63c, type: 3}
     dropItemRatio: 1.8
   conditions:

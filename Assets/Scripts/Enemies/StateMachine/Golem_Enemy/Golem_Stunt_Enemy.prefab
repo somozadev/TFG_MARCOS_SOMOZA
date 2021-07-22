@@ -10467,7 +10467,7 @@ MonoBehaviour:
     shootingRange: 10
     pursuitRange: 0
     attrate: 0
-    dropXp: 2
+    dropXp: 35
     dropItem: {fileID: 0}
     dropItemRatio: 4
   conditions:

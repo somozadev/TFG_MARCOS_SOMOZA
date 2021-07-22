@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Menu_Controller : MonoBehaviour
 {
     [Header("Buttons Refs")]
-    [SerializeField] Button continueB, newGameB, configB, achievemB, backB, exitB, videoB;
+    [SerializeField] Button continueB, newGameB, configB, achievemB, backB, exitB, videoB, rockB;
     [Header("Dropdowns Refs")]
     [SerializeField] TMP_Dropdown resolution;
 
@@ -25,6 +25,7 @@ public class Menu_Controller : MonoBehaviour
         StartCoroutine(WaitForSeed());
         soundManager = GameManager.Instance.soundManager;
         GetResolutions();
+        newGameB.Select();
     }
 
     // Waits untill loaded and check if there is a seed in current savefile. 
@@ -53,6 +54,8 @@ public class Menu_Controller : MonoBehaviour
         DataController.Instance.newRun = true;
         GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
         GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
+        GameManager.Instance.player.playerMovement.IsInteracting = false;
+        GameManager.Instance.player.playerMovement.canAttack = true;
         //SceneController.Instance.LoadScene(SceneName.CurrentLevelScene);
         SceneController.Instance.LoadAdresseableScene(SceneName.CurrentLevelScene, true);
 
@@ -63,9 +66,9 @@ public class Menu_Controller : MonoBehaviour
     public void CloseVideo() { animator.SetTrigger("CloseVideo"); videoB.Select(); }
     public void Sound() { animator.SetTrigger("OpenAudio"); masterSlider.Select();}
     public void CloseSound() { animator.SetTrigger("CloseAudio");videoB.Select(); }
-    public void Progress() {  animator.SetTrigger("OpenProgress"); videoB.Select();}
+    public void Progress() {  animator.SetTrigger("OpenProgress"); rockB.Select();}
     public void CloseProgress() { animator.SetTrigger("CloseProgress"); newGameB.Select();}
-    public void Back() => SceneController.Instance.LoadAdresseableScene(SceneName.MainScene, true); //SceneController.Instance.LoadScene(SceneName.SaveFileScene);
+    public void Back() { GameManager.Instance.fromMenu = true; SceneController.Instance.LoadAdresseableScene(SceneName.MainScene, true); }//SceneController.Instance.LoadScene(SceneName.SaveFileScene);
     public void Exit() => GameManager.Instance.ExitGame();
 
 

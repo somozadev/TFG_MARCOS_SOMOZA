@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     public EventSystem defaultEventSystem, playerEventSystem;
     [SerializeField] bool deleteGame;
 
+
+    public bool fromMenu;
+
     private void Start()
     {
         Physics.IgnoreLayerCollision(10, 11, true);

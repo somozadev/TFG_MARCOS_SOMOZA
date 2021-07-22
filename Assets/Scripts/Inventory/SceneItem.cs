@@ -127,6 +127,7 @@ public class SceneItem : MonoBehaviour
                 break;
             case ItemType.ITEM:
                 AddItemToInventory(item);
+                GameManager.Instance.soundManager.Play("Pop");
                 GameManager.Instance.player.currentItemsVisual.AddNewItem(item);
             
                 break;

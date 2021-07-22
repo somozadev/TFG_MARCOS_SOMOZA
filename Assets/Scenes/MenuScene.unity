@@ -718,10 +718,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 7181125085085199939}
-    m_SelectOnDown: {fileID: 4217066885389288291}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 1595777577}
+    m_SelectOnDown: {fileID: 1765963340}
+    m_SelectOnLeft: {fileID: 3702254221490803501}
+    m_SelectOnRight: {fileID: 3702254221490803501}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1154,7 +1154,6 @@ GameObject:
   - component: {fileID: 689364204}
   - component: {fileID: 689364201}
   - component: {fileID: 689364200}
-  - component: {fileID: 689364203}
   - component: {fileID: 689364202}
   m_Layer: 5
   m_Name: BACK
@@ -1249,23 +1248,6 @@ MonoBehaviour:
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &689364202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689364199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  button: {fileID: 0}
-  toggle: {fileID: 0}
-  dropdown: {fileID: 0}
-  ui: 0
---- !u!114 &689364203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1444,6 +1426,10 @@ PrefabInstance:
       propertyPath: uiSlider
       value: 
       objectReference: {fileID: 1765963340}
+    - target: {fileID: 767299016, guid: 207f2596294ffcd4ab893cff64bd741a, type: 3}
+      propertyPath: rockB
+      value: 
+      objectReference: {fileID: 3001966902485608498}
     - target: {fileID: 8058315593908252917, guid: 207f2596294ffcd4ab893cff64bd741a, type: 3}
       propertyPath: m_Name
       value: Menu_Controller
@@ -2238,10 +2224,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 7181125085085199939}
-    m_SelectOnDown: {fileID: 4217066885389288291}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 2964373655361745541}
+    m_SelectOnDown: {fileID: 376479706}
+    m_SelectOnLeft: {fileID: 5691712264300319167}
+    m_SelectOnRight: {fileID: 5691712264300319167}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2419,10 +2405,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 7181125085085199939}
-    m_SelectOnDown: {fileID: 4217066885389288291}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 376479706}
+    m_SelectOnDown: {fileID: 7181125085085199939}
+    m_SelectOnLeft: {fileID: 2858532006574126672}
+    m_SelectOnRight: {fileID: 2858532006574126672}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3654,7 +3640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 540493651976550493}
+    m_SelectOnUp: {fileID: 540493651293302738}
     m_SelectOnDown: {fileID: 540493650808700664}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -3935,7 +3921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 540493650808700664}
+    m_SelectOnUp: {fileID: 540493652129235827}
     m_SelectOnDown: {fileID: 540493651293302738}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -3959,7 +3945,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 540493650873340145}
   m_OnClick:
     m_PersistentCalls:
@@ -4202,7 +4188,6 @@ GameObject:
   - component: {fileID: 540493651293302739}
   - component: {fileID: 540493651293302738}
   - component: {fileID: 23}
-  - component: {fileID: 6438901017023273623}
   m_Layer: 5
   m_Name: EXIT
   m_TagString: Untagged
@@ -4245,7 +4230,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 540493650873340144}
-    m_SelectOnDown: {fileID: 540493651976550493}
+    m_SelectOnDown: {fileID: 540493650726817892}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -6470,7 +6455,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6189184704925738462}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -7748,6 +7733,7 @@ GameObject:
   - component: {fileID: 8279349626180455556}
   - component: {fileID: 5560447558613810231}
   - component: {fileID: 3001966902485608498}
+  - component: {fileID: 2589105422101592516}
   m_Layer: 5
   m_Name: HpRock
   m_TagString: Untagged
@@ -7755,6 +7741,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2589105422101592516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589105422101592515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!224 &2633336070788973931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7966,7 +7969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 3702254221490803501}
     m_SelectOnDown: {fileID: 7181125085085199939}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -8095,9 +8098,9 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 7181125085085199939}
-    m_SelectOnDown: {fileID: 4217066885389288291}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 1595777577}
+    m_SelectOnLeft: {fileID: 4217066885389288291}
+    m_SelectOnRight: {fileID: 4217066885389288291}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -8181,7 +8184,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -9096,8 +9099,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 5691712264300319167}
+    m_SelectOnDown: {fileID: 2858532006574126672}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -9360,6 +9363,7 @@ GameObject:
   - component: {fileID: 7478455298221560376}
   - component: {fileID: 6342276084360323723}
   - component: {fileID: 4361673673292117646}
+  - component: {fileID: 3945362520272447360}
   m_Layer: 5
   m_Name: DmgRock
   m_TagString: Untagged
@@ -9367,6 +9371,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362520272447360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362520272447359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362520306907098
 GameObject:
   m_ObjectHideFlags: 0
@@ -9380,6 +9401,7 @@ GameObject:
   - component: {fileID: 7478455298115535517}
   - component: {fileID: 6342276084367782446}
   - component: {fileID: 4361673673334924843}
+  - component: {fileID: 3945362520306907099}
   m_Layer: 5
   m_Name: SaleRock
   m_TagString: Untagged
@@ -9387,6 +9409,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362520306907099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362520306907098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362520410014723
 GameObject:
   m_ObjectHideFlags: 0
@@ -9400,6 +9439,7 @@ GameObject:
   - component: {fileID: 7478455297815949636}
   - component: {fileID: 6342276084198261239}
   - component: {fileID: 4361673673705821682}
+  - component: {fileID: 3945362520410014724}
   m_Layer: 5
   m_Name: GrwRock
   m_TagString: Untagged
@@ -9407,6 +9447,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362520410014724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362520410014723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362520470352531
 GameObject:
   m_ObjectHideFlags: 0
@@ -9420,6 +9477,7 @@ GameObject:
   - component: {fileID: 7478455297751549908}
   - component: {fileID: 6342276084297135975}
   - component: {fileID: 4361673673757893474}
+  - component: {fileID: 3945362520470352532}
   m_Layer: 5
   m_Name: RndRock
   m_TagString: Untagged
@@ -9427,6 +9485,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362520470352532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362520470352531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362520532764740
 GameObject:
   m_ObjectHideFlags: 0
@@ -9440,6 +9515,7 @@ GameObject:
   - component: {fileID: 7478455297961770243}
   - component: {fileID: 6342276084083772848}
   - component: {fileID: 4361673673551878581}
+  - component: {fileID: 3945362520532764741}
   m_Layer: 5
   m_Name: DropRock
   m_TagString: Untagged
@@ -9447,6 +9523,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362520532764741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362520532764740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362520932987542
 GameObject:
   m_ObjectHideFlags: 0
@@ -9460,6 +9553,7 @@ GameObject:
   - component: {fileID: 7478455298362001361}
   - component: {fileID: 6342276083683145570}
   - component: {fileID: 4361673674220954471}
+  - component: {fileID: 3945362520932987543}
   m_Layer: 5
   m_Name: InvRock
   m_TagString: Untagged
@@ -9467,6 +9561,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362520932987543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362520932987542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362521123199361
 GameObject:
   m_ObjectHideFlags: 0
@@ -9480,6 +9591,7 @@ GameObject:
   - component: {fileID: 6342276083568221301}
   - component: {fileID: 4361673674151250032}
   - component: {fileID: 7478455298377182406}
+  - component: {fileID: 3945362521123199362}
   m_Layer: 5
   m_Name: Slot1
   m_TagString: Untagged
@@ -9487,6 +9599,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362521123199362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362521123199361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362521448335689
 GameObject:
   m_ObjectHideFlags: 0
@@ -9500,6 +9629,7 @@ GameObject:
   - component: {fileID: 7478455298853288974}
   - component: {fileID: 6342276083092245693}
   - component: {fileID: 4361673672597182648}
+  - component: {fileID: 3945362521448335690}
   m_Layer: 5
   m_Name: DefRock
   m_TagString: Untagged
@@ -9507,6 +9637,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362521448335690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362521448335689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3945362521900417858
 GameObject:
   m_ObjectHideFlags: 0
@@ -9520,6 +9667,7 @@ GameObject:
   - component: {fileID: 7478455299743643141}
   - component: {fileID: 6342276082774410934}
   - component: {fileID: 4361673672780862131}
+  - component: {fileID: 3945362521900417859}
   m_Layer: 5
   m_Name: SpdRock
   m_TagString: Untagged
@@ -9527,6 +9675,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3945362521900417859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945362521900417858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &3954450530070847754
 GameObject:
   m_ObjectHideFlags: 0
@@ -9856,9 +10021,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 2964373655361745541}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnUp: {fileID: 7181125085085199939}
+    m_SelectOnDown: {fileID: 5691712264300319167}
+    m_SelectOnLeft: {fileID: 2964373655361745541}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -10213,7 +10378,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10268,7 +10433,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10323,7 +10488,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10378,7 +10543,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10433,7 +10598,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10488,7 +10653,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10543,7 +10708,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10653,7 +10818,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8820755, g: 0.9910437, b: 1, a: 1}
     m_PressedColor: {r: 0.7783019, g: 0.98316216, b: 1, a: 1}
-    m_SelectedColor: {r: 0.77647066, g: 0.9843138, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.98785514, b: 0.6745283, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10998,6 +11163,7 @@ GameObject:
   - component: {fileID: 3451823197526484812}
   - component: {fileID: 5432708457431806793}
   - component: {fileID: 1165257950728951807}
+  - component: {fileID: 4693774290166670009}
   m_Layer: 5
   m_Name: Slot3
   m_TagString: Untagged
@@ -11005,6 +11171,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4693774290166670009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693774290166670008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!222 &4716892788066313234
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12379,7 +12562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8, y: -9116.625}
+  m_AnchoredPosition: {x: -8, y: -13448.4375}
   m_SizeDelta: {x: -16, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5583390236740300336
@@ -13376,6 +13559,7 @@ GameObject:
   - component: {fileID: 2554967558072557240}
   - component: {fileID: 5185503627437968061}
   - component: {fileID: 2069848727063703051}
+  - component: {fileID: 5598507896157887309}
   m_Layer: 5
   m_Name: Slot2
   m_TagString: Untagged
@@ -13383,6 +13567,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5598507896157887309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598507896157887308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  button: {fileID: 0}
+  toggle: {fileID: 0}
+  dropdown: {fileID: 0}
+  ui: 0
 --- !u!1 &5620046542436862512
 GameObject:
   m_ObjectHideFlags: 0
@@ -13827,8 +14028,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 4217066885389288291}
+    m_SelectOnDown: {fileID: 3702254221490803501}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -15975,23 +16176,6 @@ RectTransform:
   m_AnchoredPosition: {x: -960, y: -540}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6438901017023273623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 540493651293302736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30bc5323cbc36134d8a2b75538d9d437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  button: {fileID: 0}
-  toggle: {fileID: 0}
-  dropdown: {fileID: 0}
-  ui: 0
 --- !u!1 &6462992306295658427
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,6 +66,11 @@ public class PressToStart : MonoBehaviour
         {
             if (Gamepad.current.aButton.isPressed)
             {
+                if (GameManager.Instance.fromMenu)
+                {
+                    StartCoroutine(WaitToEnable());
+                    return;
+                }
                 GameManager.Instance.soundManager.Play("AcceptNewDevice");
                 GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.SaveFileScene;
                 GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
@@ -84,12 +89,18 @@ public class PressToStart : MonoBehaviour
                 GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
                 Debug.LogWarning("SPACE BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
-                
+
                 SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
             }
 
         }
 
+    }
+
+    IEnumerator WaitToEnable()
+    {
+        yield return new WaitForSeconds(.5f);
+        GameManager.Instance.fromMenu = false;
     }
 
 }

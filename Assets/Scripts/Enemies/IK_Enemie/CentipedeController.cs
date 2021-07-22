@@ -13,8 +13,13 @@ public class CentipedeController : IkCharacter
     public bool isRotRight;
     public Transform TARGET;
 
+    public bool isStage1;
+    public bool isStage2;
+    public bool isStage3;
+
 
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] ShootingPoint[] shootingPoints;
 
     [SerializeField] EnemyState state;
     [SerializeField] public IkBody[] bodies;
@@ -33,6 +38,7 @@ public class CentipedeController : IkCharacter
         bodies = GetComponentsInChildren<IkBody>();
         type = EnemyType.CENTIPEDE;
         state = EnemyState.IDLE;
+        shootingPoints = GetComponentsInChildren<ShootingPoint>();
     }
     override public void Start()
     {
@@ -119,6 +125,10 @@ public class CentipedeController : IkCharacter
 
         head.transform.RotateAround(TARGET.transform.position, Vector3.up, 20 * Time.deltaTime);
         head.GetComponent<IkBody>().child.MoveSelf(head.transform, forward);
+    }
+    private void StageOne()
+    {
+        
     }
     private void UnFollowState()
     {

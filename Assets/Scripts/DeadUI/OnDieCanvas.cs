@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OnDieCanvas : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class OnDieCanvas : MonoBehaviour
     [SerializeField] TMP_Text runsText;
     [SerializeField] TMP_Text deathsText;
     [SerializeField] TMP_Text enemiesKilledText;
+    [SerializeField] Button exitButton;
     [SerializeField] StatsVisualController statsText;
     [SerializeField] CurrentItemsVisual items;
 
@@ -25,7 +27,7 @@ public class OnDieCanvas : MonoBehaviour
     {
         runsText.text = "runs: " + GameManager.Instance.dataController.stupidButCoolStats.runs.ToString();
         deathsText.text = "enemies killed: " + GameManager.Instance.dataController.stupidButCoolStats.enemiesKilled.ToString();
-        enemiesKilledText.text ="deaths: " + GameManager.Instance.dataController.stupidButCoolStats.deaths.ToString();
+        enemiesKilledText.text = "deaths: " + GameManager.Instance.dataController.stupidButCoolStats.deaths.ToString();
     }
     public void SetItems()
     {
@@ -41,6 +43,8 @@ public class OnDieCanvas : MonoBehaviour
     }
     public void OnEnable()
     {
+
+        exitButton.Select();
         SetTimerInfo();
         SetStatsInfo();
         SetSeedInfo();

@@ -17,22 +17,50 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 999b3843dd102bf449d769ef436785bf
   m_SerializeEntries:
+  - m_GUID: 091970fda6de7644484a57d26c5f486e
+    m_Address: level_2222222222
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage2
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 1ec255bcfd67d9b479268da157e9893c
+    m_Address: level_pocho
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage3
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 2a41e50064d3c6546b8f820d80305a48
     m_Address: level_30
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage3
     - StartRoom
-    m_MainAsset: {fileID: 1150921940895820886, guid: 2a41e50064d3c6546b8f820d80305a48, type: 3}
-    m_TargetAsset: {fileID: 1150921940895820886, guid: 2a41e50064d3c6546b8f820d80305a48, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 2a60f3e7804a257488dd226b9399166a
+    m_Address: level_3Hallway
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage4
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 3eb7a7e5e3eb8634ca0140a8c7552864
     m_Address: level_03
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
     - StartRoom
-    m_MainAsset: {fileID: 3885344205323110056, guid: 3eb7a7e5e3eb8634ca0140a8c7552864, type: 3}
-    m_TargetAsset: {fileID: 3885344205323110056, guid: 3eb7a7e5e3eb8634ca0140a8c7552864, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 5c1ff792dc18a5b439b82997c7a1a9d9
+    m_Address: level_3g
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage3
+    m_MainAsset: {fileID: 2188766933924431046, guid: 5c1ff792dc18a5b439b82997c7a1a9d9, type: 3}
+    m_TargetAsset: {fileID: 2188766933924431046, guid: 5c1ff792dc18a5b439b82997c7a1a9d9, type: 3}
   - m_GUID: 6c1b4cd86beba394fba59643f9746b19
     m_Address: level_init4
     m_ReadOnly: 0
@@ -41,6 +69,13 @@ MonoBehaviour:
     - StartRoom
     m_MainAsset: {fileID: 5457869613597226537, guid: 6c1b4cd86beba394fba59643f9746b19, type: 3}
     m_TargetAsset: {fileID: 5457869613597226537, guid: 6c1b4cd86beba394fba59643f9746b19, type: 3}
+  - m_GUID: a02d7a3e41c486649971cb529c0e2d23
+    m_Address: level_1smth0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    m_MainAsset: {fileID: 1997222690162771265, guid: a02d7a3e41c486649971cb529c0e2d23, type: 3}
+    m_TargetAsset: {fileID: 1997222690162771265, guid: a02d7a3e41c486649971cb529c0e2d23, type: 3}
   - m_GUID: a8a54dd76d50a594a889935962fa6df6
     m_Address: levelHuges4
     m_ReadOnly: 0
@@ -53,37 +88,51 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage5
-    m_MainAsset: {fileID: 1081663201677479775, guid: b5d1babcd1846a344bf8bd97ac6a7006, type: 3}
-    m_TargetAsset: {fileID: 1081663201677479775, guid: b5d1babcd1846a344bf8bd97ac6a7006, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: c53a1cd17e6447c4eb67a27cbdc70423
+    m_Address: level_SecretSpaceInvaad
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage4
+    m_MainAsset: {fileID: 6002360946768763339, guid: c53a1cd17e6447c4eb67a27cbdc70423, type: 3}
+    m_TargetAsset: {fileID: 6002360946768763339, guid: c53a1cd17e6447c4eb67a27cbdc70423, type: 3}
+  - m_GUID: d0e4f800deb918c49a46904ec81bbafd
+    m_Address: level_2secondweird
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage2
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: d88db5ae575605d4980551dd9f88d84c
     m_Address: level_7x5
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
-    m_MainAsset: {fileID: 5825176268773799570, guid: d88db5ae575605d4980551dd9f88d84c, type: 3}
-    m_TargetAsset: {fileID: 5825176268773799570, guid: d88db5ae575605d4980551dd9f88d84c, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: dcfe8d7804a34ce45b88b2a0b08157dd
     m_Address: level_21
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
-    m_MainAsset: {fileID: 6115136158823036567, guid: dcfe8d7804a34ce45b88b2a0b08157dd, type: 3}
-    m_TargetAsset: {fileID: 6115136158823036567, guid: dcfe8d7804a34ce45b88b2a0b08157dd, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: df7daf2ab8261fb4b8d4a6e2aac749c9
     m_Address: level_20
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage2
     - StartRoom
-    m_MainAsset: {fileID: 5293108171554631268, guid: df7daf2ab8261fb4b8d4a6e2aac749c9, type: 3}
-    m_TargetAsset: {fileID: 5293108171554631268, guid: df7daf2ab8261fb4b8d4a6e2aac749c9, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: ef5ba0e7f18e5d84e8d8dedd66314d61
     m_Address: level_Sliced
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage1
-    m_MainAsset: {fileID: 5049087324102219411, guid: ef5ba0e7f18e5d84e8d8dedd66314d61, type: 3}
-    m_TargetAsset: {fileID: 5049087324102219411, guid: ef5ba0e7f18e5d84e8d8dedd66314d61, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d7003938b8a4166429d1721dd9316b6a, type: 2}
   m_SchemaSet:

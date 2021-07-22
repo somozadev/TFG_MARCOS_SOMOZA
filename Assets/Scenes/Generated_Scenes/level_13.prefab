@@ -15389,6 +15389,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItem
+      value: 
+      objectReference: {fileID: 4207033218878212018, guid: 80cb4b1f74e720348bd04704f940a63c, type: 3}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItemRatio
+      value: 21.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1341230441937665499, guid: 8876036098a2d45419c939957988c922, type: 3}
       propertyPath: m_Name
       value: Golem_Stunt_Enemy (1)
@@ -15459,6 +15467,14 @@ PrefabInstance:
     - target: {fileID: 1340684766338724088, guid: 8876036098a2d45419c939957988c922, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItem
+      value: 
+      objectReference: {fileID: 4207033218878212018, guid: 80cb4b1f74e720348bd04704f940a63c, type: 3}
+    - target: {fileID: 1341230441937665446, guid: 8876036098a2d45419c939957988c922, type: 3}
+      propertyPath: stats.dropItemRatio
+      value: 11.3
       objectReference: {fileID: 0}
     - target: {fileID: 1341230441937665499, guid: 8876036098a2d45419c939957988c922, type: 3}
       propertyPath: m_Name

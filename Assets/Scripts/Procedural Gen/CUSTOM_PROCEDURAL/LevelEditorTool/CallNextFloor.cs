@@ -8,6 +8,8 @@ public class CallNextFloor : MonoBehaviour
         {
             Destroy(GetComponentInParent<Room>().transform.GetChild(3).gameObject);
             SceneController.Instance.LoadNextFloor();
+            GameManager.Instance.player.playerMovement.canAttack = true;
+            GameManager.Instance.player.playerMovement.IsInteracting = false;
         }
     }
 }

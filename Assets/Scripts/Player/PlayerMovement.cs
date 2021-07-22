@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 rawInputShooting;
     [Header("Attack")]
     [SerializeField] private bool isAttacking;
-    [SerializeField] private bool canAttack = true;
+    [SerializeField] public bool canAttack = true;
     [Header("Bullets")]
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform shootingPoint;
@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] List<GameObject> bullets;
 
     public PlayerInput PlayerInput { get { return playerInput; } }
-    public bool IsInteracting { get { return isInteracting; } }
+    public bool IsInteracting { get { return isInteracting; } set { isInteracting = value; } }
     public Rigidbody Rb { get { return rb; } }
-    public List<GameObject> Bullets { get { return bullets; } set {bullets = value;}}
+    public List<GameObject> Bullets { get { return bullets; } set { bullets = value; } }
 
     private void Awake()
     {
@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
             GameManager.Instance.soundManager.Play("BulletWind");
             bullet.GetComponent<Bullet>().rb.AddForce(transform.forward * attSpeed, ForceMode.Impulse);
             if (GameManager.Instance.player.extraStats.ElectricShots)
-                DoElectricShot().GetComponent<UpdateLine>().DoUpdateLine(bullet,bullets);
+                DoElectricShot().GetComponent<UpdateLine>().DoUpdateLine(bullet, bullets);
         }
         yield return new WaitForSeconds(waitTime);
         canAttack = true;
@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 finalDirection = Vector3.Normalize(rightMovement + upMovement);
             // transform.forward = finalDirection;
 
-            rb.AddForce(rb.position + (rightMovement + upMovement));
+            rb.AddForce( (rightMovement + upMovement)); //rb.position + esto daba error xdD
             // rb.MovePosition(rb.position + (rightMovement + upMovement));
         }
     }
@@ -191,12 +191,13 @@ public class PlayerMovement : MonoBehaviour
     {
         LineRenderer newLine = Instantiate(lineRenderer);
         return newLine;
-        
+
     }
-    
+
     public void Levitate()
     {
-        StartCoroutine(LevitateCoroutine());
+        GameManager.Instance.player.playerStats.AddSpd(3f);
+        // StartCoroutine(LevitateCoroutine());
     }
 
     private IEnumerator LevitateCoroutine()
