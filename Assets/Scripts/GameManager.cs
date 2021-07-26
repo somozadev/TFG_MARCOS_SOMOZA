@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
+
+
+
+    
     [Space(10)]
     [Header("Main controllers")]
     [Space(2)]

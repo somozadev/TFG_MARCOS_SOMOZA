@@ -330,13 +330,13 @@ public class DataController : MonoBehaviour
     public IEnumerator LoadAllAssetsByKey(long numberOf, LevelGroup currentGroup, int stageNumber)
     {
         AsyncOperationHandle<IList<GameObject>> loadFirsts = Addressables.LoadAssetsAsync<GameObject>("StartRoom", asset => { });
-        AsyncOperationHandle<IList<GameObject>> loadBosses = Addressables.LoadAssetsAsync<GameObject>("BossRoom", asset => { });
+        // AsyncOperationHandle<IList<GameObject>> loadBosses = Addressables.LoadAssetsAsync<GameObject>("BossRoom", asset => { });
         AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + stageNumber, asset => { });
         yield return loadFirsts;
-        yield return loadBosses;
+        // yield return loadBosses;
         yield return loadWithSingleKeyHandle;
         IList<GameObject> stageFirstsResult = loadFirsts.Result;
-        IList<GameObject> stageBossesResult = loadBosses.Result;
+        // IList<GameObject> stageBossesResult = loadBosses.Result;
         IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
 
 
@@ -369,17 +369,17 @@ public class DataController : MonoBehaviour
                 break;
             }
         }
-        foreach (GameObject boss in stageBossesResult)
-        {
-            if (currentGroup.LevelGroupScenes.Contains(boss))
-            {
-                bossScene = boss;
-                currentGroup.LevelGroupScenes.Remove(boss);
-                currentGroup.LevelGroupScenes.Add(bossScene);
-                bossScene.GetComponent<Room>().SetIsBossRoom = true;
-                break;
-            }
-        }
+        // foreach (GameObject boss in stageBossesResult)
+        // {
+        //     if (currentGroup.LevelGroupScenes.Contains(boss))
+        //     {
+        //         bossScene = boss;
+        //         currentGroup.LevelGroupScenes.Remove(boss);
+        //         currentGroup.LevelGroupScenes.Add(bossScene);
+        //         bossScene.GetComponent<Room>().SetIsBossRoom = true;
+        //         break;
+        //     }
+        // }
     }
 
 
