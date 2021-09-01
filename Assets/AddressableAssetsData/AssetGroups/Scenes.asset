@@ -31,12 +31,6 @@ MonoBehaviour:
     - default
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: 77dc33d9d49f86c488de2ab0aeed236d
-    m_Address: level_00
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 1081663201677479775, guid: 77dc33d9d49f86c488de2ab0aeed236d, type: 3}
-    m_TargetAsset: {fileID: 1081663201677479775, guid: 77dc33d9d49f86c488de2ab0aeed236d, type: 3}
   - m_GUID: a6ebcf9e3ee485749ab798e3180b3711
     m_Address: CurrentLevelScene
     m_ReadOnly: 0

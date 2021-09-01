@@ -24425,6 +24425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b16a989bcba11498cbb00f75201949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fakeAdresseables: {fileID: 11400000, guid: f0c517931972e3543839c2a7524f0e31, type: 2}
   wallButton: {fileID: 4776859975257524618}
   floorButton: {fileID: 4776859976402825444}
   lightingButton: {fileID: 4776859975278112640}
@@ -27325,10 +27326,17 @@ MonoBehaviour:
     runs: 0
     deaths: 0
     enemiesKilled: 0
+    enemiesDiscovered: 0
+    bossesDiscovered: 0
+    totalEnemies: 0
+    totalBosses: 0
     itemsUnlocked: 0
+    runTime: 0
+  seed: 
   newRun: 0
   currentGameData:
     seed: null
+    gameCompletePercentaje: 0
     playerStats:
       isDead: 0
       level: 0
@@ -27344,8 +27352,19 @@ MonoBehaviour:
       range: 0
       soulCoins: 0
       inventory: []
-    gameCompletePercentaje: 0
+      timeElapsed: 0
+      timeElapsed2: 0
     itemsUnlocked: 
+    coolStats:
+      runs: 0
+      deaths: 0
+      enemiesKilled: 0
+      enemiesDiscovered: 0
+      bossesDiscovered: 0
+      totalEnemies: 0
+      totalBosses: 0
+      itemsUnlocked: 0
+      runTime: 0
   ids:
     id: 
   scenesFloorOne: []

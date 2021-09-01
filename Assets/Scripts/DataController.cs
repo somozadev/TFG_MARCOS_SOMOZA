@@ -24,7 +24,8 @@ public class DataController : MonoBehaviour
 
     }
     #endregion
-
+    [Header("Fake adresseableObject")]
+    public FakeAdresseables fakeAdresseables;
     [Header("User game cool stats")]
     [Space(2)]
     public StupidButCoolStats stupidButCoolStats;
@@ -335,14 +336,17 @@ public class DataController : MonoBehaviour
         yield return loadFirsts;
         // yield return loadBosses;
         yield return loadWithSingleKeyHandle;
-        IList<GameObject> stageFirstsResult = loadFirsts.Result;
+        // IList<GameObject> stageFirstsResult = loadFirsts.Result;
         // IList<GameObject> stageBossesResult = loadBosses.Result;
-        IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
+        // IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
+        IList<GameObject> stageAllScenesResult = fakeAdresseables.GetStagePrefabs(stageNumber);
+        IList<GameObject> stageFirstsResult = fakeAdresseables.GetStageFirstPrefabs();
+        // IList<GameObject> stageBossesResult = loadBosses.Result;
 
 
-        // if (stageFirstsResult.Count > 0)
-        //     stageFirstsResult.Shuffle();
-        // if (stageBossesResult.Count > 0)
+        if (stageFirstsResult.Count > 1)
+            stageFirstsResult.Shuffle();
+        // if (stageBossesResult.Count > 1)
         //     stageBossesResult.Shuffle();
 
 

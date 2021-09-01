@@ -7770,6 +7770,10 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 861743728}
+    - target: {fileID: 8107703249891167486, guid: f75606856882ba84b820d53f640a4648, type: 3}
+      propertyPath: fakeAdresseables
+      value: 
+      objectReference: {fileID: 11400000, guid: f0c517931972e3543839c2a7524f0e31, type: 2}
     - target: {fileID: 8277858978435628390, guid: f75606856882ba84b820d53f640a4648, type: 3}
       propertyPath: m_AnchorMin.y
       value: 1

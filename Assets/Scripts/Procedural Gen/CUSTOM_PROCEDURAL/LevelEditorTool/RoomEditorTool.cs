@@ -18,6 +18,9 @@ namespace EditorTool
     public class RoomEditorTool : MonoBehaviour
     {
         #region VARIABLES
+
+        public FakeAdresseables fakeAdresseables;
+
         //UI
         public Button wallButton;
         public Button floorButton;
@@ -192,14 +195,14 @@ namespace EditorTool
 #if UNITY_EDITOR
             // parent.GetComponent<Room>().enabled = true;
             // parent.GetComponent<Room>().SetId = DataController.Instance.GenerateId();
-            // CREATING PREFAB
+            #region CREATING_PREFAB
             parent.name = inputField.text;
-            string localPath = "Assets/Scenes/Generated_Scenes/" + parent.name + ".prefab";
-            PrefabUtility.SaveAsPrefabAssetAndConnect(parent, localPath, InteractionMode.UserAction);
+            string localPath = "Assets/Scenes/Generated_Scenes/Prefabs" + parent.name + ".prefab";
+            GameObject createdPrefab = PrefabUtility.SaveAsPrefabAssetAndConnect(parent, localPath, InteractionMode.UserAction);
             GetComponent<RoomEditorUIHelper>().AssetsPanelObj.GetComponent<Animator>().SetTrigger("Open");
             PrefabUtility.UnpackPrefabInstance(parent, PrefabUnpackMode.Completely, InteractionMode.UserAction);
-
-            // MAKING PREFAB ADRESSEABLE
+            #endregion
+            #region MAKING_PREFAB_ADRESSEABLE
             var settings = AddressableAssetSettingsDefaultObject.Settings;
             string labelName = "Stage" + (GetComponent<RoomEditorUIHelper>().GetCurrentToogle());
             settings.AddLabel(labelName, false);
@@ -220,11 +223,47 @@ namespace EditorTool
             entry.address = parent.name;
             settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entry, true);
             AssetDatabase.SaveAssets();
+            #endregion
+            #region MAKING_PREFAB_FAKEADRESSEABLE
+            
+            int stageNumber = GetComponent<RoomEditorUIHelper>().GetCurrentToogle();
+            string specialType = GetComponent<RoomEditorUIHelper>().GetExtraLabel();
+
+            FakeAdresseable fakeAdresseable = ScriptableObject.CreateInstance<FakeAdresseable>();
+            fakeAdresseable = new FakeAdresseable(StageTextToEnum(stageNumber), SpecialTextToEnum(specialType), createdPrefab);
+            AssetDatabase.CreateAsset(fakeAdresseable, "Assets/Scenes/Generated_Scenes/" + parent.name + ".asset");
+            fakeAdresseables.adresseables.Add(fakeAdresseable);
+            
+            #endregion
 
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
 #endif
+        }
+        private SpecialRoom SpecialTextToEnum(string special)
+        {
+            if (special == "StartRoom")
+                return SpecialRoom.StartRoom;
+            else
+                return SpecialRoom.BossRoom;
+        }
+        private StageRoom StageTextToEnum(int number)
+        {
+            switch (number)
+            {
+                case 1:
+                    return StageRoom.Stage1;
+                case 2:
+                    return StageRoom.Stage2;
+                case 3:
+                    return StageRoom.Stage3;
+                case 4:
+                    return StageRoom.Stage4;
+                case 5:
+                    return StageRoom.Stage5;
+            }
+            return StageRoom.Stage1;
         }
         #endregion
         #region OBJECTS 
