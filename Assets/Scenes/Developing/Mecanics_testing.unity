@@ -10456,6 +10456,7 @@ MonoBehaviour:
   runsText: {fileID: 0}
   deathsText: {fileID: 0}
   enemiesKilledText: {fileID: 0}
+  exitButton: {fileID: 0}
   statsText: {fileID: 0}
   items: {fileID: 0}
 --- !u!1 &2186060037575928470
@@ -15414,6 +15415,7 @@ MonoBehaviour:
   defaultEventSystem: {fileID: 0}
   playerEventSystem: {fileID: 0}
   deleteGame: 1
+  fromMenu: 0
 --- !u!224 &5137365116952085292
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17641,6 +17643,7 @@ MonoBehaviour:
   defaultEventSystem: {fileID: 0}
   playerEventSystem: {fileID: 0}
   deleteGame: 1
+  fromMenu: 0
 --- !u!4 &6546858893256835556
 Transform:
   m_ObjectHideFlags: 0
@@ -19799,16 +19802,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8270280a76abb5e4f882e5f95904aa4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fakeAdresseables: {fileID: 0}
   stupidButCoolStats:
     runs: 0
     deaths: 0
     enemiesKilled: 0
+    enemiesDiscovered: 0
+    bossesDiscovered: 0
+    totalEnemies: 0
+    totalBosses: 0
     itemsUnlocked: 0
     runTime: 0
   seed: 
   newRun: 0
   currentGameData:
     seed: null
+    gameCompletePercentaje: 0
     playerStats:
       isDead: 0
       level: 0
@@ -19824,8 +19833,19 @@ MonoBehaviour:
       range: 0
       soulCoins: 0
       inventory: []
-    gameCompletePercentaje: 0
+      timeElapsed: 0
+      timeElapsed2: 0
     itemsUnlocked: 
+    coolStats:
+      runs: 0
+      deaths: 0
+      enemiesKilled: 0
+      enemiesDiscovered: 0
+      bossesDiscovered: 0
+      totalEnemies: 0
+      totalBosses: 0
+      itemsUnlocked: 0
+      runTime: 0
   ids:
     id: 
   scenesFloorOne: []
@@ -20116,16 +20136,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8270280a76abb5e4f882e5f95904aa4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fakeAdresseables: {fileID: 0}
   stupidButCoolStats:
     runs: 0
     deaths: 0
     enemiesKilled: 0
+    enemiesDiscovered: 0
+    bossesDiscovered: 0
+    totalEnemies: 0
+    totalBosses: 0
     itemsUnlocked: 0
     runTime: 0
   seed: 
   newRun: 0
   currentGameData:
     seed: null
+    gameCompletePercentaje: 0
     playerStats:
       isDead: 0
       level: 0
@@ -20141,8 +20167,19 @@ MonoBehaviour:
       range: 0
       soulCoins: 0
       inventory: []
-    gameCompletePercentaje: 0
+      timeElapsed: 0
+      timeElapsed2: 0
     itemsUnlocked: 
+    coolStats:
+      runs: 0
+      deaths: 0
+      enemiesKilled: 0
+      enemiesDiscovered: 0
+      bossesDiscovered: 0
+      totalEnemies: 0
+      totalBosses: 0
+      itemsUnlocked: 0
+      runTime: 0
   ids:
     id: 
   scenesFloorOne: []
