@@ -10,8 +10,8 @@ using UnityEngine.Rendering;
 
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.AddressableAssets.Settings;
-using UnityEditor.AddressableAssets;
+// using UnityEditor.AddressableAssets.Settings;
+// using UnityEditor.AddressableAssets;
 #endif
 namespace EditorTool
 {
@@ -203,27 +203,27 @@ namespace EditorTool
             PrefabUtility.UnpackPrefabInstance(parent, PrefabUnpackMode.Completely, InteractionMode.UserAction);
             #endregion
             #region MAKING_PREFAB_ADRESSEABLE
-            var settings = AddressableAssetSettingsDefaultObject.Settings;
-            string labelName = "Stage" + (GetComponent<RoomEditorUIHelper>().GetCurrentToogle());
-            settings.AddLabel(labelName, false);
+            // var settings = AddressableAssetSettingsDefaultObject.Settings;
+            // string labelName = "Stage" + (GetComponent<RoomEditorUIHelper>().GetCurrentToogle());
+            // settings.AddLabel(labelName, false);
 
 
-            string extraLabelName = GetComponent<RoomEditorUIHelper>().GetExtraLabel();
-            if (extraLabelName != "none")
-                settings.AddLabel(extraLabelName, false);
+            // string extraLabelName = GetComponent<RoomEditorUIHelper>().GetExtraLabel();
+            // if (extraLabelName != "none")
+            //     settings.AddLabel(extraLabelName, false);
 
 
-            AddressableAssetGroup g = settings.FindGroup("LevelPrefabs");
-            var guid = AssetDatabase.AssetPathToGUID(localPath);
-            var entry = settings.CreateOrMoveEntry(guid, g);
-            entry.labels.Add(labelName);
-            if (extraLabelName != "none")
-                entry.labels.Add(extraLabelName);
+            // AddressableAssetGroup g = settings.FindGroup("LevelPrefabs");
+            // var guid = AssetDatabase.AssetPathToGUID(localPath);
+            // var entry = settings.CreateOrMoveEntry(guid, g);
+            // entry.labels.Add(labelName);
+            // if (extraLabelName != "none")
+            //     entry.labels.Add(extraLabelName);
 
-            entry.address = parent.name;
-            settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entry, true);
-            AssetDatabase.SaveAssets();
-            #endregion
+            // entry.address = parent.name;
+            // settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entry, true);
+            // AssetDatabase.SaveAssets();
+            #endregion           
             #region MAKING_PREFAB_FAKEADRESSEABLE
             
             int stageNumber = GetComponent<RoomEditorUIHelper>().GetCurrentToogle();

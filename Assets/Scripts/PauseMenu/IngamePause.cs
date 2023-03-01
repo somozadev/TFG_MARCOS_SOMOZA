@@ -82,7 +82,8 @@ public class IngamePause : MonoBehaviour
         GameManager.Instance.playerEventSystem.gameObject.SetActive(false);
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(true);
         GameManager.Instance.player.gameObject.SetActive(false);
-        SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+        // SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+        SceneController.Instance.LoadScene(SceneName.MenuScene);
     }
 
     private void MuteGeneral() { soundManager.MuteGeneral(); }

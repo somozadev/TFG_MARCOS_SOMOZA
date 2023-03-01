@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abd1d236ecf5db48a780edf25543e3b, type: 3}
+  m_Name: pito
+  m_EditorClassIdentifier: 
+  stage: 0
+  special: 2
+  scenePrefab: {fileID: 4662102978954865792, guid: ee636d896c2170345852785a31cbafa4, type: 3}

@@ -8,16 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ESSENTIALS.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 1b9250beadcccaa44ab141a186d6fc8b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SaveFileScene.unity
     guid: d87a010834e23e44aa5b431fd3903056
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MenuScene.unity
     guid: 0c5a23b995b6c08498a16c8ff7a334fa
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CurrentLevelScene.unity
     guid: a6ebcf9e3ee485749ab798e3180b3711
   m_configObjects:

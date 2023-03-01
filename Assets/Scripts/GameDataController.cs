@@ -121,7 +121,7 @@ public class GameDataController : MonoBehaviour
             GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
             DataController.Instance.currentGameData = loadedGame;
             // SceneController.Instance.LoadScene(SceneName.MenuScene);
-            SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene,true);
+            // SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene,true);
         }
     }
 
@@ -134,7 +134,7 @@ public class GameData
     public float gameCompletePercentaje;  //!falta hacer este sistema
     public PlayerStats playerStats;       // se actualiza si hay una current run en proceso, donde guarda las stats actuales. 
     public List<bool> itemsUnlocked; //!falta hacer este sistema
-    public StupidButCoolStats coolStats; //ya se actualiza, en DataControler.instance.UpdateStupidButCoolGameStats(). llamada on death event player.
+    public DataController.StupidButCoolStats coolStats; //ya se actualiza, en DataControler.instance.UpdateStupidButCoolGameStats(). llamada on death event player.
 
 
     public GameData() {  }//seed = PlayerPrefs.GetString("seed","null");

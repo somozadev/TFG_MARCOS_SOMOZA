@@ -77,7 +77,7 @@ public class PressToStart : MonoBehaviour
                 Debug.LogWarning("A BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
                 // SceneController.Instance.LoadScene(SceneName.SaveFileScene);
-                SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
+                // SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
             }
         }
         else
@@ -90,7 +90,7 @@ public class PressToStart : MonoBehaviour
                 Debug.LogWarning("SPACE BUTTON PRESSED STARTING GAME");
                 //TRIGGER START SCENE}
 
-                SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
+                SceneController.Instance.LoadScene(SceneName.MenuScene);//, true);//SceneController.Instance.LoadAdresseableScene(SceneName.SaveFileScene, true);
             }
 
         }

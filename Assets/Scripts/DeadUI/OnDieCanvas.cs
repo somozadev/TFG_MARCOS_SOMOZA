@@ -57,7 +57,8 @@ public class OnDieCanvas : MonoBehaviour
 
     public void Exit()
     {
-        SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+        // SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+        SceneController.Instance.LoadScene(SceneName.MenuScene);
         GameManager.Instance.player.playerMovement.enabled = true;
         GameManager.Instance.player.playerStats.CurrentHp = 100;
         GameManager.Instance.statsCanvas.AssignHp();

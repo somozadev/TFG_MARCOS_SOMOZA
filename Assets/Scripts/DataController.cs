@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
+// using UnityEngine.AddressableAssets;
+// using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
@@ -195,7 +195,7 @@ public class DataController : MonoBehaviour
         }
         LevelGroup groupLabelOne = new LevelGroup();
         scenesFloorOne = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(long.Parse(s1), groupLabelOne, 1, scenesFloorOne, lvl1_int));
+        // StartCoroutine(WaitToFillGroup(long.Parse(s1), groupLabelOne, 1, scenesFloorOne, lvl1_int));
         print("lvl1int: " + lvl1_int);
 
         List<int> lvl2_int = new List<int>();
@@ -213,7 +213,7 @@ public class DataController : MonoBehaviour
         }
         LevelGroup groupLabelTwo = new LevelGroup();
         scenesFloorTwo = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(long.Parse(s2), groupLabelTwo, 2, scenesFloorTwo, lvl2_int));
+        // StartCoroutine(WaitToFillGroup(long.Parse(s2), groupLabelTwo, 2, scenesFloorTwo, lvl2_int));
         print("lvl2int: " + lvl2_int);
 
         List<int> lvl3_int = new List<int>();
@@ -231,7 +231,7 @@ public class DataController : MonoBehaviour
         }
         LevelGroup groupLabelThree = new LevelGroup();
         scenesFloorThree = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(long.Parse(s3), groupLabelThree, 3, scenesFloorThree, lvl3_int));
+        // StartCoroutine(WaitToFillGroup(long.Parse(s3), groupLabelThree, 3, scenesFloorThree, lvl3_int));
         print("lvl3int: " + lvl3_int);
 
         List<int> lvl4_int = new List<int>();
@@ -249,7 +249,7 @@ public class DataController : MonoBehaviour
         }
         LevelGroup groupLabelFour = new LevelGroup();
         scenesFloorFour = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(long.Parse(s4), groupLabelFour, 4, scenesFloorFour, lvl4_int));
+        // StartCoroutine(WaitToFillGroup(long.Parse(s4), groupLabelFour, 4, scenesFloorFour, lvl4_int));
         print("lvl4int: " + lvl4_int);
 
         List<int> lvl5_int = new List<int>();
@@ -267,19 +267,19 @@ public class DataController : MonoBehaviour
         }
         LevelGroup groupLabelFive = new LevelGroup();
         scenesFloorFive = new List<GameObject>();
-        StartCoroutine(WaitToFillGroup(long.Parse(s5), groupLabelFive, 5, scenesFloorFive, lvl5_int));
+        // StartCoroutine(WaitToFillGroup(long.Parse(s5), groupLabelFive, 5, scenesFloorFive, lvl5_int));
         print("lvl5int: " + lvl5_int);
 
 
     }
 
-    IEnumerator WaitToFillGroup(long numberOf, LevelGroup currentGroup, int stageNumber, List<GameObject> floorGameobjects, List<int> ids)
-    {
-        yield return StartCoroutine(LoadAllAssetsByKey(numberOf, currentGroup, stageNumber));
-        DoGameobjectsFillUp(currentGroup, floorGameobjects, ids);
-        Debug.Log(currentGroup.LevelGroupScenes[0]);
+    // IEnumerator WaitToFillGroup(long numberOf, LevelGroup currentGroup, int stageNumber, List<GameObject> floorGameobjects, List<int> ids)
+    // {
+    //     // yield return StartCoroutine(LoadAllAssetsByKey(numberOf, currentGroup, stageNumber));
+    //     DoGameobjectsFillUp(currentGroup, floorGameobjects, ids);
+    //     Debug.Log(currentGroup.LevelGroupScenes[0]);
 
-    }
+    // }
     private void DoGameobjectsFillUp(LevelGroup currentGroup, List<GameObject> floorGameobjects, List<int> ids)
     {
 
@@ -330,15 +330,16 @@ public class DataController : MonoBehaviour
     ///</sumary>
     public IEnumerator LoadAllAssetsByKey(long numberOf, LevelGroup currentGroup, int stageNumber)
     {
-        AsyncOperationHandle<IList<GameObject>> loadFirsts = Addressables.LoadAssetsAsync<GameObject>("StartRoom", asset => { });
-        // AsyncOperationHandle<IList<GameObject>> loadBosses = Addressables.LoadAssetsAsync<GameObject>("BossRoom", asset => { });
-        AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + stageNumber, asset => { });
-        yield return loadFirsts;
+        //     AsyncOperationHandle<IList<GameObject>> loadFirsts = Addressables.LoadAssetsAsync<GameObject>("StartRoom", asset => { });
+        //     AsyncOperationHandle<IList<GameObject>> loadBosses = Addressables.LoadAssetsAsync<GameObject>("BossRoom", asset => { });
+        //     AsyncOperationHandle<IList<GameObject>> loadWithSingleKeyHandle = Addressables.LoadAssetsAsync<GameObject>("Stage" + stageNumber, asset => { });
+        // yield return loadFirsts;
         // yield return loadBosses;
-        yield return loadWithSingleKeyHandle;
+        // yield return loadWithSingleKeyHandle;
         // IList<GameObject> stageFirstsResult = loadFirsts.Result;
         // IList<GameObject> stageBossesResult = loadBosses.Result;
         // IList<GameObject> stageAllScenesResult = loadWithSingleKeyHandle.Result;
+
         IList<GameObject> stageAllScenesResult = fakeAdresseables.GetStagePrefabs(stageNumber);
         IList<GameObject> stageFirstsResult = fakeAdresseables.GetStageFirstPrefabs();
         // IList<GameObject> stageBossesResult = loadBosses.Result;
@@ -372,52 +373,55 @@ public class DataController : MonoBehaviour
                 firstScene.GetComponent<Room>().SetisStartingRoom = true;
                 break;
             }
+            // }
+            // foreach (GameObject boss in stageBossesResult)
+            // {
+            //     if (currentGroup.LevelGroupScenes.Contains(boss))
+            //     {
+            //         bossScene = boss;
+            //         currentGroup.LevelGroupScenes.Remove(boss);
+            //         currentGroup.LevelGroupScenes.Add(bossScene);
+            //         bossScene.GetComponent<Room>().SetIsBossRoom = true;
+            //         break;
+            //     }
+            // }
+
+            yield return null;
         }
-        // foreach (GameObject boss in stageBossesResult)
-        // {
-        //     if (currentGroup.LevelGroupScenes.Contains(boss))
-        //     {
-        //         bossScene = boss;
-        //         currentGroup.LevelGroupScenes.Remove(boss);
-        //         currentGroup.LevelGroupScenes.Add(bossScene);
-        //         bossScene.GetComponent<Room>().SetIsBossRoom = true;
-        //         break;
-        //     }
-        // }
+
+
+
     }
-
-
-
-}
-[System.Serializable]
-public class StupidButCoolStats
-{
-
-    public int runs;
-    public int deaths;
-    public int enemiesKilled;
-    public int enemiesDiscovered;
-    public int bossesDiscovered;
-    public int totalEnemies;
-    public int totalBosses;
-    public int itemsUnlocked;
-    public float runTime;
-
-    public StupidButCoolStats(int runs, int deaths, int enemiesKilled)
+    [System.Serializable]
+    public class StupidButCoolStats
     {
-        this.runs = runs;
-        this.deaths = deaths;
-        this.enemiesKilled = enemiesKilled;
+
+        public int runs;
+        public int deaths;
+        public int enemiesKilled;
+        public int enemiesDiscovered;
+        public int bossesDiscovered;
+        public int totalEnemies;
+        public int totalBosses;
+        public int itemsUnlocked;
+        public float runTime;
+
+        public StupidButCoolStats(int runs, int deaths, int enemiesKilled)
+        {
+            this.runs = runs;
+            this.deaths = deaths;
+            this.enemiesKilled = enemiesKilled;
+        }
+
+
     }
-
-
-}
-[System.Serializable]
-public class Ids
-{
-    public List<int> id = new List<int>();
-    public Ids(int id)
+    [System.Serializable]
+    public class Ids
     {
-        this.id.Add(id);
+        public List<int> id = new List<int>();
+        public Ids(int id)
+        {
+            this.id.Add(id);
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
+// using UnityEngine.AddressableAssets;
+// using UnityEngine.ResourceManagement.AsyncOperations;
 
 
 public class StageController : MonoBehaviour
@@ -25,7 +25,7 @@ public class StageController : MonoBehaviour
     [Space]
     [SerializeField] int actualStage = 1;
     [SerializeField] int actualRoom = 1;
-    [HideInInspector] [SerializeField] int numberOfRooms;
+    [HideInInspector][SerializeField] int numberOfRooms;
 
     [Header("Seed stages numbers")]
     [Space]
@@ -60,7 +60,9 @@ public class StageController : MonoBehaviour
             LoadRun(seed);
         }
 
-        GameManager.Instance.mainCamera.transform.parent.gameObject.SetActive(true);
+
+        if (GameManager.Instance.mainCamera != null)
+            GameManager.Instance.mainCamera.transform.parent.gameObject.SetActive(true);
         GameManager.Instance.defaultEventSystem.gameObject.SetActive(false);
         GameManager.Instance.sceneThemeMusicSelector.SetScene = SCENES.CurrentLevelScene;
         GameManager.Instance.sceneThemeMusicSelector.CheckTheme();
@@ -79,7 +81,8 @@ public class StageController : MonoBehaviour
         {
             //FINISHED GAME
             print("finished run");
-            SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+            // SceneController.Instance.LoadAdresseableScene(SceneName.MenuScene, true);//GameManager.Instance.ExitGame();
+            SceneController.Instance.LoadScene(SceneName.MenuScene);
             GameManager.Instance.player.playerMovement.enabled = true;
             GameManager.Instance.player.playerStats.CurrentHp = 100;
             GameManager.Instance.statsCanvas.AssignHp();
